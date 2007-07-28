@@ -1,6 +1,6 @@
 <? 
 	include "../includes/lib.php";
-	include "../includes/conf.inc";
+	include "../includes/conf.inc.php";
 	beginSession('R');
 	$idadmin=$_SESSION['YACOMASVARS']['rootid'];
 	imprimeEncabezado();
@@ -46,7 +46,7 @@
 	print '<hr>';
 
 function imprime_valoresOk($idponencia,$idponente) {
-	include "../includes/conf.inc";
+	include "../includes/conf.inc.php";
 	$userQuery = 
 	'SELECT nombrep, apellidos FROM ponente  
 		WHERE id="'.$idponente.'"';

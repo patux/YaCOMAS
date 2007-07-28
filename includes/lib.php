@@ -1,5 +1,5 @@
 <?
-include "conf.inc";
+include "conf.inc.php";
 function send_mail($myname, $myemail, $contactname, $contactemail, $subject, $message, $bcc) {
 	$headers .= "MIME-Version: 1.0\n";
 	$headers .= "Content-type: text/html; charset=iso-8859-1\n";
@@ -81,7 +81,7 @@ function showError($errmsg) {
 function imprimeEncabezado()
 {
 global $confName;
-require "header.inc";
+require "header.inc.php";
 retorno();
 alinearIzq("center"); 
 print '<img src="'.$rootpath.'/images/yacomas.png","287","91" border="0">';
@@ -95,7 +95,7 @@ retorno();
 //--------------------------------
 function imprimeEncabezadoR()
 {
-require "header.inc";
+require "header.inc.php";
 retorno();
 alinearIzq("center"); 
 print '<table border=0 width=100%>';
@@ -115,13 +115,6 @@ function muestraImagen($path,$ancho,$alto)
 {
  print ("<img src=$path width=$ancho heigth=$alto>");
 //--------------------------------
-}
-//--------------------------------
-function muestraMenu() 
-{
-include "conf.inc";
-	print '<link href=\"style.css\" rel=\"stylesheet\" type=\"text/css\">';
-	include "menu.inc";
 }
 //--------------------------------
 function alinearIzq($pos)
@@ -165,7 +158,7 @@ function aplicaEstilo()
 //--------------------------------
 function imprimePie()
 {
-	include "footer.inc";
+	include "footer.inc.php";
 }
 //--------------------------------
 //--------------------------------
@@ -224,18 +217,7 @@ print("</table>");
 //-------------------------------
 function conectaBD()
 {
-include "db.inc";
-  if(!($link=mysql_pconnect($dbhost,$dbuser,$dbpwd)))
-   {
-    print("No se puede hacer la conexion a la Base de Datos");
-    exit();
-   }
-   mysql_select_db($dbname) or die (mysql_error());
-
-}
-function conectaBD2()
-{
-include "db2.inc";
+include "db.inc.php";
   if(!($link=mysql_pconnect($dbhost,$dbuser,$dbpwd)))
    {
     print("No se puede hacer la conexion a la Base de Datos");

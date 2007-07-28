@@ -75,18 +75,18 @@ a) Creacion de la BD.
 	
 b) Configuracion de yacomas
 	1) Base de datos
-		Editar el archivo  yacomas-0.x-alpha/includes/db.inc
+		Editar el archivo  yacomas-0.x-alpha/includes/db.inc.php
 		Cambiar las variables segun los cambios que haya hecho anteriormente:
 	
 		$dbname
 		$dbuser
 		$dbpwd
 		$dbhost
-	3) Asegurarse de que el archivo httpd.conf contenga lo siguiente como minimo:
+	2) Asegurarse de que el archivo httpd.conf contenga lo siguiente como minimo:
 		DirectoryIndex index.php
-	2) Directorio de trabajo
-		El archivo conf.inc es el arhivo principal de configuracion 
-		Editar el archivo yacomas-0.x-alpha/includes/conf.inc
+	3) Directorio de trabajo
+		El archivo conf.inc.php es el arhivo principal de configuracion 
+		Editar el archivo yacomas-0.x-alpha/includes/conf.inc.php
 	
 		Cambiar el valor de la variable $rootpath para llegar a yacomas
 		Yacomas funcionara sin cambiar absolutamente nada si sigue los siguientes pasos
@@ -102,12 +102,17 @@ b) Configuracion de yacomas
 		Esto indica que yacomas se encuentra en:
 		/var/www/htdocs/yacomas-0.2_alpha
 
-		p.ej: includes/conf.inc
+		p.ej: includes/conf.inc.php
 		---------
 		$rootpath=/yacomas-0.x_alpha
 		cd /var/www/htdocs
 		tar -xvzf yacomas-0.x_alpha.tar.gz 
 		yacomas-0.x_alpha
+       4) Agregando el servidor smtp que utilizara yacomas 
+                Modificar la direccion de smtp en el archivo yacomas-0.x-alpha/includes/conf.inc.php
+                la linea que dice:
+                $smtp="your_smpt_name"; reemplaze your_smtp_name por la direccion de su smtp 
+                 
 		 
 
 c) Inicio y comenzar a trabajar con yacomas

@@ -1,5 +1,5 @@
 <?
-include "conf.inc";
+include "conf.inc.php";
 
 print '
 </td></tr></table><br><br>

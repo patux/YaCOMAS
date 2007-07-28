@@ -1,5 +1,5 @@
 <?php
-include "../includes/conf.inc";
+include "../includes/conf.inc.php";
 include "../includes/lib.php";
 beginSession('A');
 $idasistente=$_SESSION['YACOMASVARS']['asiid'];

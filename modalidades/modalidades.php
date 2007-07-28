@@ -1,6 +1,6 @@
 <?php
 include("../includes/lib.php");
-include("../includes/conf.inc");
+include("../includes/conf.inc.php");
 imprimeEncabezado();
 aplicaEstilo();
 imprimeCajaTop('100','Modalidades');

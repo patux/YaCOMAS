@@ -1,6 +1,6 @@
 <? 
 	include "../includes/lib.php";
-	include "../includes/conf.inc";
+	include "../includes/conf.inc.php";
 	beginSession('R');
 	imprimeEncabezado();
 	aplicaEstilo();
@@ -21,7 +21,7 @@
 	$link=conectaBD();
 
 function imprime_valoresOk($idponente,$idponencia){
-	include "../includes/conf.inc";
+	include "../includes/conf.inc.php";
 
 	$userQuery = 
 	'SELECT nombrep, apellidos FROM ponente  

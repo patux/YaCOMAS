@@ -1,5 +1,5 @@
 <?
-	include "includes/conf.inc";
+	include "includes/conf.inc.php";
         include "includes/lib.php";
 	imprimeEncabezado();
 	imprimeCajaTop("100","Registro");

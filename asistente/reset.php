@@ -1,6 +1,6 @@
 <?
 	include "../includes/lib.php";
-	include "../includes/conf.inc";
+	include "../includes/conf.inc.php";
 /*	Debes tener PEAR instalado http://pear.php.net
 	y el modulo basico de Mail
 	http://pear.php.net/package/Mail/download

@@ -1,6 +1,6 @@
 <? 
 	include "../includes/lib.php";
-	include "../includes/conf.inc";
+	include "../includes/conf.inc.php";
 	imprimeEncabezado();
 	aplicaEstilo();
 	imprimeCajaTop("100","Registro de Ponentes");
@@ -29,7 +29,7 @@ if (!isset($_POST['submit']))
 }
 
 function imprime_valoresOk() {
-	include "../includes/conf.inc";
+	include "../includes/conf.inc.php";
 
     print '
      		<table width=100%>

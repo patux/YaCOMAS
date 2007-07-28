@@ -1,6 +1,6 @@
 <? 
 	include "../includes/lib.php";
-	include "../includes/conf.inc";
+	include "../includes/conf.inc.php";
 	beginSession('R');
 	$idadmin=$_SESSION['YACOMASVARS']['rootid'];
 	$idfecha=$_GET['idfecha'];
@@ -11,7 +11,7 @@
 	$link=conectaBD();
 
 function imprime_valoresOk() {
-	include "../includes/conf.inc";
+	include "../includes/conf.inc.php";
     print '
      		<table width=100%>
 		

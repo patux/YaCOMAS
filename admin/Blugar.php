@@ -1,6 +1,6 @@
 <? 
 	include "../includes/lib.php";
-	include "../includes/conf.inc";
+	include "../includes/conf.inc.php";
 	beginSession('R');
 	imprimeEncabezado();
 	aplicaEstilo();
@@ -14,7 +14,7 @@
 	$link=conectaBD();
 
 function imprime_valoresOk($idlugar,$regresa) {
-	include "../includes/conf.inc";
+	include "../includes/conf.inc.php";
 
 $link=conectaBD();
 

@@ -1,4 +1,8 @@
-
+aug 06 2005
+        * A bug has appeared, it let anybody who know where are the configuration files to see his content
+        * Fixed with a little sheel script called yacomas-0.3.1_alpha-patch-20050806.sh
+        * A new version of yacomas patched is released
+        * Thanks to Exal for make me realize that
 nov 24 2004
 	* Yacomas 0.3_alpha released
 	* Tutorials implemented

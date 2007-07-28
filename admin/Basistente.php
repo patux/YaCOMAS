@@ -1,6 +1,6 @@
 <? 
 	include "../includes/lib.php";
-	include "../includes/conf.inc";
+	include "../includes/conf.inc.php";
 	beginSession('R');
 	imprimeEncabezado();
 	aplicaEstilo();
@@ -12,7 +12,7 @@
 	$link=conectaBD();
 
 function imprime_valoresOk($idasistente) {
-	include "../includes/conf.inc";
+	include "../includes/conf.inc.php";
 
 $link=conectaBD();
 $userQuery = 'SELECT * FROM asistente WHERE id="'.$idasistente.'"';

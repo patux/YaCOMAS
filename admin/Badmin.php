@@ -1,6 +1,6 @@
 <? 
 	include "../includes/lib.php";
-	include "../includes/conf.inc";
+	include "../includes/conf.inc.php";
 	beginSession('R');
 	imprimeEncabezado();
 	aplicaEstilo();
@@ -10,7 +10,7 @@
 	$link=conectaBD();
 
 function imprime_valoresOk() {
-	include "../includes/conf.inc";
+	include "../includes/conf.inc.php";
 
     print '
      		<table width=100%>

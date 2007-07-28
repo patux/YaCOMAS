@@ -1,6 +1,6 @@
 <? 
 include "../includes/lib.php";
-include "../includes/conf.inc";
+include "../includes/conf.inc.php";
 beginSession('R');
 $idlugar=$_GET['idlugar'];
 $idponente=$_SESSION['YACOMASVARS']['rootid'];

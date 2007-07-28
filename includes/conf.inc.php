@@ -29,5 +29,5 @@ $color_especiales='#66ccff';
 ///////
 $costo_playera=70;
 ////
-$smtp="148.202.8.12";
+$smtp="your_smpt_name";
 ?>
