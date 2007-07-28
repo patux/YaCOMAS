@@ -190,13 +190,13 @@ if (isset ($_POST['submit']) && $_POST['submit'] == "Actualizar") {
   	if (!empty($_POST['S_passwd'])) 
 		{
   			$query = "UPDATE asistente SET login="."'".$lowlogin."',
-				 passwd="."'".md5(stripslashes($_POST['S_passwd']))."',
-				 nombrep="."'".mysql_escape_string(stripslashes($_POST['S_nombrep']))."',
-				 apellidos="."'".mysql_escape_string(stripslashes($_POST['S_apellidos']))."',
+				 passwd="."'".md5(addslashes($_POST['S_passwd']))."',
+				 nombrep="."'".mysql_real_escape_string(addslashes($_POST['S_nombrep']))."',
+				 apellidos="."'".mysql_real_escape_string(addslashes($_POST['S_apellidos']))."',
 				 sexo="."'".$_POST['C_sexo']."',
 				 mail="."'".$_POST['S_mail']."',
 				 ciudad="."'".$_POST['S_ciudad']."',
-				 org="."'".stripslashes($_POST['S_org'])."',
+				 org="."'".addslashes($_POST['S_org'])."',
 				 fecha_nac="."'".$f_nac."',
 				 id_estudios="."'".$_POST['I_id_estudios']."',
 				 id_tasistente="."'".$_POST['I_id_tasistente']."',
@@ -206,12 +206,12 @@ if (isset ($_POST['submit']) && $_POST['submit'] == "Actualizar") {
 	else
 		{
   			$query = "UPDATE asistente SET login="."'".$lowlogin."',
-				 nombrep="."'".mysql_escape_string(stripslashes($_POST['S_nombrep']))."',
-				 apellidos="."'".mysql_escape_string(stripslashes($_POST['S_apellidos']))."',
+				 nombrep="."'".mysql_real_escape_string(addslashes($_POST['S_nombrep']))."',
+				 apellidos="."'".mysql_real_escape_string(addslashes($_POST['S_apellidos']))."',
 				 sexo="."'".$_POST['C_sexo']."',
 				 mail="."'".$_POST['S_mail']."',
 				 ciudad="."'".$_POST['S_ciudad']."',
-				 org="."'".stripslashes($_POST['S_org'])."',
+				 org="."'".addslashes($_POST['S_org'])."',
 				 fecha_nac="."'".$f_nac."',
 				 id_estudios="."'".$_POST['I_id_estudios']."',
 				 id_tasistente="."'".$_POST['I_id_tasistente']."',

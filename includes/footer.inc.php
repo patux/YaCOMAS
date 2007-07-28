@@ -34,7 +34,7 @@ Powered by
 Yacomas
 </a>
 -
-<a href="mailto:yacomas@festivaldesoftwarelibre.org">Report a bug</a>
+<a href="mailto:patux@patux.net">Report a bug</a>
 <br>
 </font>
 </center>

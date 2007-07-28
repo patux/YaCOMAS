@@ -49,7 +49,7 @@ $userQueryP='	SELECT 	AI.reg_time,
 		GROUP BY AI.id_evento 
 		ORDER BY F.fecha, AI.id_evento, EO.hora';
 $userRecordsP = mysql_query($userQueryP) or err("No se pudo listar talleres del asistente".mysql_errno($userRecords));
-$msg='Hoja de registro<br><small>-- '.$p['apellidos'].' '.$p['nombrep'].' --</small><hr>';
+$msg='Hoja de registro<br><small>-- '.stripslashes($p['apellidos']).' '.stripslashes($p['nombrep']).' --</small><hr>';
 print '<p class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['asilogin'].'&nbsp;<a class="precaucion" href=signout.php>Desconectarme</a></P>';
 imprimeCajaTop("100",$msg);
 

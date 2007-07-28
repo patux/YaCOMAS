@@ -89,7 +89,7 @@ else { // Todas las validaciones Ok
 	{
   		$query = "INSERT INTO lugar (nombre_lug,ubicacion,cupo) VALUES (".
 		"'".$uppname."',".
-		"'".mysql_escape_string(stripslashes($_POST['S_ubicacion']))."',".
+		"'".mysql_real_escape_string(stripslashes($_POST['S_ubicacion']))."',".
 		"'".$_POST['I_cupo']."'".
 		")";
 	}
@@ -97,7 +97,7 @@ else { // Todas las validaciones Ok
 	{
 		$query = "INSERT INTO lugar (nombre_lug,ubicacion) VALUES (".
 		"'".$uppname."',".
-		"'".mysql_escape_string(stripslashes($_POST['S_ubicacion']))."'".
+		"'".mysql_real_escape_string(stripslashes($_POST['S_ubicacion']))."'".
 		")";
 	}
 //		print $query;

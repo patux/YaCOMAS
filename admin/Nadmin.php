@@ -125,9 +125,9 @@ else { // Todas las validaciones Ok
   	$query = "INSERT INTO administrador (login,passwd,nombrep,apellidos,mail,id_tadmin) VALUES (".
 		"'".$lowlogin."',".
 	        "'".md5(stripslashes($_POST['S_passwd']))."',".
-		"'".mysql_escape_string(stripslashes($_POST['S_nombrep']))."',".
-		"'".mysql_escape_string(stripslashes($_POST['S_apellidos']))."',".
-		"'".mysql_escape_string(stripslashes($_POST['S_mail']))."',".
+		"'".mysql_real_escape_string(stripslashes($_POST['S_nombrep']))."',".
+		"'".mysql_real_escape_string(stripslashes($_POST['S_apellidos']))."',".
+		"'".mysql_real_escape_string(stripslashes($_POST['S_mail']))."',".
 		"'".$_POST['I_id_tadmin']."'".
 		")";
 //		print $query;

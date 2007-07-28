@@ -89,7 +89,7 @@ else { // Todas las validaciones Ok
 		$_POST['I_cupo']=99999;
 	}
   		$query = "UPDATE lugar SET nombre_lug="."'".$uppname."',
-				   ubicacion="."'".mysql_escape_string(stripslashes($_POST['S_ubicacion']))."',
+				   ubicacion="."'".mysql_real_escape_string(stripslashes($_POST['S_ubicacion']))."',
 				   cupo="."'".$_POST['I_cupo']."'
 				   WHERE id=$idlugar";
 //		print $query;

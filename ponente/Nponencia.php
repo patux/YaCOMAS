@@ -186,10 +186,10 @@ if (isset ($_POST['submit']) && $_POST['submit'] == "Registrar") {
 	}
 	$query.= ") ".
 	"VALUES (".
-		"'".mysql_escape_string(stripslashes($_POST['S_nombreponencia']))."',".
-		"'".mysql_escape_string(stripslashes($S_trim_resumen))."',".
-		"'".mysql_escape_string(stripslashes($S_trim_reqtecnicos))."',".
-		"'".mysql_escape_string(stripslashes($S_trim_reqasistente))."',".
+		"'".mysql_real_escape_string(addslashes($_POST['S_nombreponencia']))."',".
+		"'".mysql_real_escape_string(addslashes($S_trim_resumen))."',".
+		"'".mysql_real_escape_string(addslashes($S_trim_reqtecnicos))."',".
+		"'".mysql_real_escape_string(addslashes($S_trim_reqasistente))."',".
 		"'".$_POST['I_id_nivel']."',".
 		"'".$_POST['I_duracion']."',".
 		"'".$date."',".

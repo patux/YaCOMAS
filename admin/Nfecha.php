@@ -71,7 +71,7 @@ else { // Todas las validaciones Ok
 
   		$query = "INSERT INTO fecha_evento (fecha,descr) VALUES (".
 		"'".$f_evento."',".
-		"'".mysql_escape_string(stripslashes($_POST['S_descr']))."'".
+		"'".mysql_real_escape_string(stripslashes($_POST['S_descr']))."'".
 		")";
 //		print $query;
 		$result = mysql_query($query) or err("No se puede insertar los datos".mysql_errno($result));

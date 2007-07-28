@@ -9,7 +9,7 @@ $userQuery = 'SELECT nombrep FROM asistente
 		WHERE id="'.$idasistente.'"';
 	$userRecords = mysql_query($userQuery) or err("No se pudo checar el asistente".mysql_errno($userRecords));
 	$p = mysql_fetch_array($userRecords);
-	$asistente_name=$p['nombrep'];
+	$asistente_name=stripslashes($p['nombrep']);
 
 $fechaQueryE='SELECT * FROM fecha_evento ORDER BY fecha';
 $fechaRecords = mysql_query($fechaQueryE) or err("No se pudo listar fechas de eventos ".mysql_errno($fechaRecords));
@@ -17,7 +17,7 @@ $fechaRecords = mysql_query($fechaQueryE) or err("No se pudo listar fechas de ev
 imprimeEncabezado();
 
 print '<p class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['asilogin'].'&nbsp;<a class="precaucion" href=signout.php>Desconectarme</a></P>';
-$msg="Listado de eventos<br><small>".$asistente_name." Estos son tus talleres registrados</small>";
+$msg="Listado de eventos<br><small>".stripslashes($asistente_name)." Estos son tus talleres registrados</small>";
 
 imprimeCajaTop("100",$msg);
 

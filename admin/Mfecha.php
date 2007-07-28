@@ -76,7 +76,7 @@ else { // Todas las validaciones Ok
 
 // Funcion comentada para no agregar los datos de prueba, una vez que este en produccion hay que descomentarla
   		$query = "UPDATE fecha_evento SET fecha="."'".$f_evento."',
-				   descr="."'".mysql_escape_string(stripslashes($_POST['S_descr']))."'
+				   descr="."'".mysql_real_escape_string(stripslashes($_POST['S_descr']))."'
 				   WHERE id=$idfecha";
 //		print $query;
 		$result = mysql_query($query) or err("No se puede insertar los datos".mysql_errno($result));

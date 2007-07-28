@@ -61,6 +61,9 @@ $color_especiales='limegreen';
 ///////
 // The mail that should be used for send emails IP or domain name is valid
 $smtp="your.smpt.domain";
+// This constant will be used to enable or disable the feature to send mails(spam?) patux@patux.net
+define (SEND_MAIL,0); // Disabled by default  (0 Disable, 1 Enable)
+
 /******
  * CONSTANTES DE ENTORNO
  */

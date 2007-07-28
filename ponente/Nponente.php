@@ -117,7 +117,7 @@ function imprime_valoresOk() {
 	print '	
 		</td>
 		</tr>
-		
+		a
 		<tr>
 		<td class="name">T&iacute;tulo: * </td>
 		<td class="resultado">
@@ -229,7 +229,7 @@ if ($_POST['submit'] == "Registrarme") {
   }
   // Si todo esta bien vamos a darlo de alta
   else { // Todas las validaciones Ok 
- 	 // vamos a darlo de alta
+ 	 // vamos a darlo de altaa
 
 // Funcion comentada para no agregar los datos de prueba, una vez que este en produccion hay que descomentarla
 
@@ -238,17 +238,17 @@ if ($_POST['submit'] == "Registrarme") {
   	$query = "INSERT INTO ponente (login,passwd,nombrep,apellidos,sexo,mail,ciudad,org,titulo,resume,domicilio,telefono,fecha_nac,reg_time,id_estudios,id_estado) 
 	VALUES (".
 		"'".$lowlogin."',".
-	        "'".md5(stripslashes($_POST['S_passwd']))."',".
-		"'".mysql_escape_string(stripslashes($_POST['S_nombrep']))."',".
-		"'".mysql_escape_string(stripslashes($_POST['S_apellidos']))."',".
+	        "'".md5(addslashes($_POST['S_passwd']))."',".
+		"'".mysql_real_escape_string(stripslashes($_POST['S_nombrep']))."',".
+		"'".mysql_real_escape_string(stripslashes($_POST['S_apellidos']))."',".
 		"'".$_POST['C_sexo']."',".
 		"'".$_POST['S_mail']."',".
 		"'".$_POST['S_ciudad']."',".
-		"'".stripslashes($_POST['S_org'])."',".
-		"'".stripslashes($_POST['S_titulo'])."',".
-		"'".stripslashes($_POST['S_resume'])."',".
-		"'".stripslashes($_POST['S_domicilio'])."',".
-		"'".stripslashes($_POST['S_telefono'])."',".
+		"'".addslashes($_POST['S_org'])."',".
+		"'".addslashes($_POST['S_titulo'])."',".
+		"'".addslashes($_POST['S_resume'])."',".
+		"'".addslashes($_POST['S_domicilio'])."',".
+		"'".addslashes($_POST['S_telefono'])."',".
 		"'".$f_nac."',".
 		"'".$date."',".
 		"'".$_POST['I_id_estudios']."',".
@@ -276,10 +276,16 @@ if ($_POST['submit'] == "Registrarme") {
 	$params["host"] = $smtp; 
 	$params["port"] = "25";
 	$params["auth"] = false;
-	// Create the mail object using the Mail::factory method
-	$mail_object =& Mail::factory("smtp", $params);
-	
-	$mail_object->send($recipients, $headers, $message);
+    // Added a verification to check if SEND_MAIL constant is enable patux@patux.net
+    // TODO:
+    // We need to wrap a function in include/lib.php to send emails in a generic way
+    // This function must validate if SEND_MAIL is enable or disable
+    if (SEND_MAIL == 1) // If is enable we will send the mail
+    {
+	    // Create the mail object using the Mail::factory method
+	    $mail_object =& Mail::factory("smtp", $params);
+	    $mail_object->send($recipients, $headers, $message);
+    }
  	print '	Gracias por darte de alta, ahora ya podras accesar a tu cuenta.<br>
 		Los datos de tu usuario y password han sido enviados al correo que registraste';
 retorno();

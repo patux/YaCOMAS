@@ -87,10 +87,17 @@ $conference_link
 	$params["host"] = $smtp; 
 	$params["port"] = "25";
 	$params["auth"] = false;
-	// Create the mail object using the Mail::factory method
     if (isset($additional)) {
-	    $mail_object =& Mail::factory("smtp", $params);
-	    $mail_object->send($recipients, $headers, $message);
+        // Added a verification to check if SEND_MAIL constant is enable patux@patux.net
+        // TODO:
+        // We need to wrap a function in include/lib.php to send emails in a generic way
+        // This function must validate if SEND_MAIL is enable or disable
+        if (SEND_MAIL == 1) // If is enable we will send the mail
+        {
+	        // Create the mail object using the Mail::factory method
+	        $mail_object =& Mail::factory("smtp", $params);
+	        $mail_object->send($recipients, $headers, $message);
+        }
     }
 	$regresar='Location: '.$regresa;
 	header($regresar);

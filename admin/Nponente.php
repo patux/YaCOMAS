@@ -217,8 +217,8 @@ if ($_POST['submit'] == "Registrar") {
 	VALUES (".
 		"'".$lowlogin."',".
 	        "'".md5(stripslashes($_POST['S_passwd']))."',".
-		"'".mysql_escape_string(stripslashes($_POST['S_nombrep']))."',".
-		"'".mysql_escape_string(stripslashes($_POST['S_apellidos']))."',".
+		"'".mysql_real_escape_string(stripslashes($_POST['S_nombrep']))."',".
+		"'".mysql_real_escape_string(stripslashes($_POST['S_apellidos']))."',".
 		"'".$_POST['C_sexo']."',".
 		"'".$_POST['S_mail']."',".
 		"'".$_POST['S_ciudad']."',".

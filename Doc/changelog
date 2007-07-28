@@ -1,7 +1,18 @@
+feb 8 2007
+	Geronimo Orozco patux@patux.net
+	* Add SEND_MAIL flag 
+	* Modify send mail to use SEND_MAIL flag 
+	* Change mysql_escape_string by mysql_real_espace_string
+
+feb 7 2007
+	Ivan Alfredo Zenteno Aguilar 	k001.operator@gmail.com
+	* Verify addslashes and stripslashes in a correct way
+
 aug 14 2006
 	* Geronimo Orozco
-        * Add mail automated notification in admin/act_ponencia.php
+	* Add mail automated notification in admin/act_ponencia.php
 	* Fixed bug that switched values in resume/reqteq
+
 nov 27 2005
 	Geronimo Orozco <patux@glo.org.mx>
 	* Add global variable configurations:

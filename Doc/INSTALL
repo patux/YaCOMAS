@@ -112,7 +112,6 @@ b) Configuracion de yacomas
                 Modificar la direccion de smtp en el archivo yacomas-0.x-alpha/includes/conf.inc.php
                 la linea que dice:
                 $smtp="your_smpt_name"; reemplaze your_smtp_name por la direccion de su smtp 
-                 
 		 
 
 c) Inicio y comenzar a trabajar con yacomas

@@ -107,16 +107,16 @@ else { // Todas las validaciones Ok
 		{
   			$query = "UPDATE administrador SET login="."'".$lowlogin."',
 				   passwd="."'".md5(stripslashes($_POST['S_passwd']))."',
-				   nombrep="."'".mysql_escape_string(stripslashes($_POST['S_nombrep']))."',
-				   apellidos="."'".mysql_escape_string(stripslashes($_POST['S_apellidos']))."',
+				   nombrep="."'".mysql_real_escape_string(stripslashes($_POST['S_nombrep']))."',
+				   apellidos="."'".mysql_real_escape_string(stripslashes($_POST['S_apellidos']))."',
 				   mail="."'".$_POST['S_mail']."'
 				   WHERE id="."'".$idadmin."'";
 		}
 	else 
 		{
   			$query = "UPDATE administrador SET login="."'".$lowlogin."',
-				   nombrep="."'".mysql_escape_string(stripslashes($_POST['S_nombrep']))."',
-				   apellidos="."'".mysql_escape_string(stripslashes($_POST['S_apellidos']))."',
+				   nombrep="."'".mysql_real_escape_string(stripslashes($_POST['S_nombrep']))."',
+				   apellidos="."'".mysql_real_escape_string(stripslashes($_POST['S_apellidos']))."',
 				   mail="."'".$_POST['S_mail']."'
 				   WHERE id="."'".$idadmin."'";
 		}

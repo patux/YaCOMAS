@@ -163,10 +163,10 @@ if (isset($_POST['submit']) && $_POST['submit'] == "Actualizar") {
 // Funcion comentada para no agregar los datos de prueba, una vez que este en produccion hay que descomentarla
 
     $fichero=$_FILES["fichero"];
-  	$query = "UPDATE  propuesta SET nombre="."'".mysql_escape_string(stripslashes($_POST['S_nombreponencia']))."',
-				    resumen="."'".mysql_escape_string(stripslashes($S_trim_resumen))."',
-				    reqtecnicos="."'".mysql_escape_string(stripslashes($S_trim_reqtecnicos))."',
-				    reqasistente="."'".mysql_escape_string(stripslashes($S_trim_reqasistente))."',
+  	$query = "UPDATE  propuesta SET nombre="."'".mysql_real_escape_string(stripslashes($_POST['S_nombreponencia']))."',
+				    resumen="."'".mysql_real_escape_string(stripslashes($S_trim_resumen))."',
+				    reqtecnicos="."'".mysql_real_escape_string(stripslashes($S_trim_reqtecnicos))."',
+				    reqasistente="."'".mysql_real_escape_string(stripslashes($S_trim_reqasistente))."',
 				    id_nivel ="."'".$_POST['I_id_nivel']."',
 				    id_prop_tipo="."'".$_POST['I_id_tipo']."',
 				    duracion="."'".$_POST['I_duracion']."',

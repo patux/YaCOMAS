@@ -9,8 +9,8 @@ $userQuery = 'SELECT nombrep FROM asistente
 		WHERE id="'.$idasistente.'"';
 $userRecords = mysql_query($userQuery) or err("No se pudo checar el asistente".mysql_errno($userRecords));
 $p = mysql_fetch_array($userRecords);
-$asistente_name=$p['nombrep'];
-$msg="<br><small>".$asistente_name." Solo puedes tener <br>".$max_inscripcionTA." inscripciones a talleres maximo y <br>".$max_inscripcionTU." inscripciones a tutoriales maximo</small>";
+$asistente_name=stripslashes($p['nombrep']);
+$msg="<br><small>".stripslashes($asistente_name)." Solo puedes tener <br>".$max_inscripcionTA." inscripciones a talleres maximo y <br>".$max_inscripcionTU." inscripciones a tutoriales maximo</small>";
 
 imprimeEncabezado();
 
