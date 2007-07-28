@@ -1,0 +1,61 @@
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+==========================================================================
+===== Yacomas (Yet another conference management system) =================
+==========================================================================
+Yacomas is development by Geronimo Orozco Martinez (patux).
+patux@glo.org.mx
+
+Yacomas is made to help people involved in the organization of congresses or similar events.
+Yacomas is divided in three basic modules.
+-- Administration module
+-- Ponente module 
+-- Asistente module 
+
+Yacomas is capable to management the flow of information that a congress need to work.
+starting with register of conferencistas, register of propossals, evaluation of proposals
+by the admins, register,modify,deleting of dates, and places to make workshops or conferences
+inside of the congress. Register and control of propossals with status of Accepted in 
+specific places and dates. 
+Register and control of the Asistente to the congress and workshops inscriptions made by the
+each Asistente.
+--------------------------------------------------------------------------------------
+This project is based from the original comas project developed by Consol developer team
+Gunnar &  Mig for more references http://consol.org.mx
+
+
+SPANISH:
+==========================================================================
+===== Yacomas (Todavia otro sistema administrador de conferencias) =======
+===== version 0.1                                                  =======
+==========================================================================
+Yacomas es desarrollado por Geronimo Orozco martinez (patux).
+patux@glo.org.mx
+
+El sistema esta dividido en 3 partes basicas:
+
+-- Modulo de Administracion 
+-- Modulo de Ponentes
+-- Modulo de asistentes
+
+Este sistema es capaz de controlar el flujo de informacion desde el registro del ponente,registro de propuestas 
+de ponencias por parte del ponente, evaluacion de las mismas ponencias por parte de Administradores 
+(evaluadores,totales y parciales). ABC de fechas y lugares o espacios para realizar los talleres y conferencias
+para el congreso. Programacion de los eventos (propuestas aceptadas por parte de los administradores) en 
+los lugares y fechas designados. Y control de los  asistentes al congreso y registro de los talleres inscritos por 
+parte de cada uno de los asistentes.
+--------------------------------------------------------------------------------------
+Este proyecto esta basado en el proyecto comas desarrollado por el equipo de desarrollo del Consol
+Gunnar & Mig para mas informacion http://consol.org.mx

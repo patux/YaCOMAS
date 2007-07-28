@@ -1,0 +1,263 @@
+body {
+	font: 12px Arial, Helvetica, sans-serif;
+}
+
+
+
+#top #cintilla {
+	color: #fff;
+	font-size: 10px;
+}
+
+#top #cintilla a {
+	color: #fff;
+}
+
+#bar {
+	background: #ffffff url("images/bar.png") no-repeat;
+	min-height: 300px;
+	top: 137px;
+	left: 570px;
+	width: 190px;
+	padding-top: 27px;
+	padding-left: 12px;
+}
+
+#bar2 {
+	min-height: 300px;
+	top: 137px;
+	left: 570px;
+	width: 190px;
+	padding-top: 27px;
+	padding-left: 12px;
+}
+
+
+/* menu stuff */
+
+#opmtitle
+{
+	color:#333;
+	font-size: 12px;
+}
+
+#opmtitle a 
+{
+	color: #333;
+	text-decoration: none;
+	font-size: 12px;
+}
+
+#opmtitle a:hover {
+	color: #f90;
+	border: 0px;
+}
+
+#opm {
+	max-width: 155px;
+	color: #666;
+	padding: 2px;
+	border: 1px;
+	font-size: 12px;
+	padding-left: 10px; 
+}
+
+#opm:hover {
+	background: #fafafa; 
+	border: 1px solid #ddd;
+	color: #000;
+}
+
+#opm:hover a {
+	color: #000;
+	border:0px;
+}
+                                                                                                                                                             
+#opm a {
+	text-decoration: none;
+	color: #666;
+	border:0px;
+	font-size: 10px;
+}
+
+#opm a:hover {
+	color: #000;
+}
+
+#seccion {
+	margin-bottom: 10px;
+}
+
+#seccion #titulo {
+	background: #fff url(../images/bullet.png) no-repeat;
+	border-bottom: 1px dotted #999;
+	display: block;
+	width: 235px;
+	color: #666;
+	font-size: 16px;
+	padding-left: 14px;
+	margin-bottom: 10px;
+}
+
+#seccion ul {
+	padding: 0px;
+	margin: 0px;
+}
+
+#seccion li {
+	list-style-type: none; 
+	background: #fff url(../images/minibullet.png) no-repeat;
+	padding-left: 12px;
+	font-size: 12px;
+}
+
+
+/* form stuff */
+input {
+	background-color:#fff;
+	color: #555;
+	padding: 2px;
+}
+
+input[type="button"], input[type="submit"]  {
+        background-color: #f7f7f7;
+        color: #000;
+        border: 1px solid #999;
+        border-top: 1px solid #ddd;
+        border-left: 1px solid #ddd;
+        font-weight: bold;
+        margin-left: 2px;
+        margin-right: 2px;
+}
+                                                                                                                                                             
+input[type="button"]:hover, input[type="submit"]:hover  {
+        background-color: #fff;
+        color: #000;
+}
+                                                                                                                                                             
+input[type="button"]:active, input[type="submit"]:active {
+        background-color: #eee;
+        color: #000;
+	border: 1px solid #999;
+}
+
+
+
+input[type="text"], input[type="password"], textarea { 
+	background-color: #fafafa;
+	border: 1px solid #ddd;
+        border-top: 1px solid #999;
+        border-left: 1px solid #999;
+	padding:3px;
+}
+
+input[type="text"]:focus, input[type="password"]:focus, textarea:focus	{ 
+	background-color: #fff; 
+	border: 1px solid #666;
+}
+
+textarea {
+	width: inherit;
+}
+
+/* comas stuff */
+
+#container #comas {
+	padding-left: 30px;
+	padding-right: 30px;
+	width: 730px;
+}
+
+p.yacomas_error {        
+	font-weight: bold;
+	text-align: center;
+	color: red;
+}
+
+p.yacomas_msg {
+	font-weight:bold;
+	text-align: center;
+}
+
+table.name {        
+	width: 30%;
+}
+
+td.input {        
+	width: 55%;
+}
+
+td.error {
+	width: 20%;
+}
+td.resultado {
+	width:55%;
+	color:blue;
+}
+
+#none {
+	text-decoration: none;
+	border: 0px;
+	margin: 0px;
+	padding: 0px;
+}
+
+a#none:hover {
+	text-decoration: none;
+}
+
+tr.verde td {
+	background: #8FBC8F;
+}
+
+tr.rojo td {
+	background: #e57272;
+}
+a.azul {
+	color: #0066cc;
+	text-decoration: none;
+}
+
+a.azul:hover {
+	color: #003333;
+	border-bottom: 1px dotted #3da8cc;
+}
+a.rojo {
+	color: #FF0000;
+	text-decoration: none;
+}
+
+a.rojo:hover {
+	color: #CC0000;
+	border-bottom: 1px dotted #3da8cc;
+}
+a.verde {
+	color: #006600;
+	text-decoration: none;
+}
+
+a.verde:hover {
+	color: #336633;
+	border-bottom: 1px dotted #3da8cc;
+}
+
+a.boton {
+	color: #000000;
+	text-decoration: none;
+        background-color: #f7f7f7;
+        font-weight: bold;
+}
+
+a.boton:hover {
+	color: #000000;
+	border-bottom: 1px dotted #3da8cc;
+	background: #fff;
+}
+
+H4  { text-align: right }
+p.yacomas_login{
+	font-weight:bold;
+	text-align: right;
+	margin-top: 0;
+	margin-bottom: 0;
+}

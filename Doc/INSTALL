@@ -1,0 +1,95 @@
+Yacomas version 0.1-alpha
+-------------------
+ENGLISH
+-------------------
+Yacomas is development by Geronimo Orozco Martinez (patux).
+
+Yacomas is made to help people involved in the organization of conference or similar events.
+Yacomas is divided in three basic modules.
+-- Administration module
+-- Speaker module 
+-- Audience module 
+
+Yacomas is capable to management the flow of information that a conference need to work.
+starting with register of conferencistas, register of propossals, evaluation of proposals
+by the admins, register,modify,deleting of dates, and places to make workshops or conferences
+inside of the conference. Register and control of propossals with status of Accepted in 
+specific places and dates. 
+Register and control of the Audience to the conference and workshops inscriptions made by 
+each person.
+--------------------------------------------------------------------------------------
+This project is based from the original comas project developed by Consol developer team
+Gunnar &  Mig for more references http://consol.org.mx
+-------------------
+SPANISH
+-------------------
+Yacomas es desarrollado por Geronimo Orozco Martinez (patux).
+
+El sistema esta dividido en 3 partes basicas:
+
+-- Modulo de Administracion 
+-- Modulo de Ponentes
+-- Modulo de asistentes
+
+Este sistema es capaz de controlar el flujo de informacion desde el registro del ponente,registro de propuestas 
+de ponencias por parte del ponente, evaluacion de las mismas ponencias por parte de Administradores 
+(evaluadores,totales y parciales). ABC de fechas y lugares o espacios para realizar los talleres y conferencias
+para el congreso. Programacion de los eventos (propuestas aceptadas por parte de los administradores) en 
+los lugares y fechas designados. Y control de los  asistentes al congreso y registro de los talleres inscritos por 
+parte de cada uno de los asistentes.
+------------------------------------
+
+
+INSTALACION:
+------------
+
+Descomprimir yacomas-0.1-alpha.tar.gz en un directorio donde apache tenga alcance: ej. /var/www/htdocs/
+$ tar -xvzf yacomas-0.1-alpha.tar.gz 
+.
+.
+a) Creacion de la BD.
+	Entrar al directorio Yacomas_reference/database/
+	Editar el archivo create_fsl.sql
+	Cambiar segun sus necesidades los siguientes campos:
+	
+	yacomas_db
+	yacomas_user
+	yacomas_pwd
+	yacomas_host
+
+b) Configuracion de yacomas
+	1) Base de datos
+		Editar el archivo  yacomas-0.1-alpha/includes/db.inc
+		Cambiar las variables segun los cambios que haya hecho anteriormente:
+	
+		$dbname
+		$dbuser
+		$dbpwd
+		$dbhost
+	2) Directorio de trabajo
+		El archivo conf.inc es el arhivo principal de configuracion 
+		Editar el archivo yacomas-0.1-alpha/includes/conf.inc
+	
+		Cambiar el valor de la variable $rootpath para llegar a yacomas
+		Yacomas funcionara sin cambiar absolutamente nada si sigue los siguientes pasos
+		p.ej:
+		cd /var/www/htdocs
+		tar -xvzf yacomas-0.1_alpha.tar.gz 
+		yacomas-0.1_alpha
+		 
+
+c) Inicio y comenzar a trabajar con yacomas
+
+Abrir el navegador y abrir la sig. direccion:
+
+http://localhost/yacomas-0.1-alpha/
+
+Para entrar al modulo de administracion entrar a la siguiente direccion:
+
+http://localhost/yacomas-0.1-alpha/admin
+
+Admin user: admin
+Admin pass: admin
+
+==========
+$Id: INSTALL,v 0.1-alpha Tue May 25 12:12:19 CDT 2004 patux Exp $

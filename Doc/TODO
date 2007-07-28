@@ -1,0 +1,18 @@
+Yacomas TODO:
+--------------
+
+1) Change the way that yacomas keep the control of events register to avoid events get mixed betwen hours, days and places.
+   The problem is similar to asistants register to workshops We can re-use a similar code used in Ltalleres.php inside 
+   of the asistants modules and drop the table evento_ocupa
+
+* Implement e-mail messages to implement comunication between conferencist-admins & asistente-admin
+* Program documentation
+* Lot of optimizing 
+* Lot of debugging 
+* Lot of test
+* Implement multi language support ( maybe with another tables?)
+* User Documentation
+* User Manual
+* Make the programers document the code they have written 
+* Maybe software reingeneering of some tables ?
+* Anything else?
