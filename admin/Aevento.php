@@ -14,7 +14,7 @@ aplicaEstilo();
 //
 $userQueryP = 'SELECT * FROM propuesta WHERE id_status=5 ORDER BY id_ponente';
 $userRecordsP = mysql_query($userQueryP) or err("No se pudo listar ponencias".mysql_errno($userRecords));
-print '<p class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['rootlogin'].'&nbsp;<a class="rojo" href=signout.php>Desconectarme</a></P>';
+print '<p class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['rootlogin'].'&nbsp;<a class="precaucion" href=signout.php>Desconectarme</a></P>';
 imprimeCajaTop("100","Listado de ponencias aceptadas y listas para ser programadas");
 
 // Inicio datos de Ponencias
@@ -44,15 +44,16 @@ print '
 		$query = 'SELECT id,nombrep,apellidos FROM ponente WHERE id="'.$fila['id_ponente'].'"';
 		$result=mysql_query($query);
 	 	$fstatus=mysql_fetch_array($result);
-		print '<br><small><a class="rojo" href="Vponente.php?vopc='.$fstatus['id'].' '.$_SERVER['REQUEST_URI'].'">'.$fstatus['nombrep'].' '.$fstatus['apellidos'].'</small></a>';
+		print '<br><small><a class="ponente" href="Vponente.php?vopc='.$fstatus['id'].' '.$_SERVER['REQUEST_URI'].'">'.$fstatus['nombrep'].' '.$fstatus['apellidos'].'</small></a>';
 		mysql_free_result($result);
 		
 	
 		print '</td><td bgcolor='.$bgcolor.'>';
-		if ($fila['tpropuesta']=="C")
-		    echo "Conferencia";
-		else
-		    echo "Taller";
+		$query = 'SELECT descr FROM prop_tipo WHERE id="'.$fila['id_prop_tipo'].'"';
+		$result=mysql_query($query);
+	 	$ftipo=mysql_fetch_array($result);
+		print $ftipo['descr'];
+		mysql_free_result($result);
 		
 		
 		// Una vez que la ponencia fue aceptada (id 5)
@@ -68,7 +69,7 @@ print '
 	retorno();
 	retorno();
 	print '<center>
-	<input type="button" value="Volver al menu" onClick=location.href="'.$rootpath.'/admin/menuadmin.php#eventos">
+	<input type="button" value="Volver al menu" onClick=location.href="'.$fslpath.$rootpath.'/admin/menuadmin.php#eventos">
 	</center>';
 imprimeCajaBottom();
 imprimePie();

@@ -26,8 +26,8 @@ if (isset ($_POST['submit']) && ($_POST['submit'] == "Iniciar")) {
       	$p = mysql_fetch_array($userRecords);
       	//Checar el password
        	if ($p['passwd'] != substr(md5($_POST['S_passwd']),0,32)) {
-        	$errmsg =  ' <span class="err">Usuario y/o Login incorrectos. 
-	       	Por favor intente de nuevo o <a href="reset.php">Presiona aqui para resetear tu password</a>.</span>
+        	$errmsg =  ' <span class="err">Usuario y/o password incorrectos. 
+	       	Por favor intente de nuevo o <a href="reset.php"><br>Presiona aqui para resetear tu password</a>.</span>
 	       	<p><br>';
 	}
 	else {  # We have a winner!
@@ -51,8 +51,6 @@ if (isset ($_POST['submit']) && ($_POST['submit'] == "Iniciar")) {
 imprimeEncabezado();
 aplicaEstilo();
 imprimeCajaTop("50","Inicio de Sesion Asistente");
-
-
 if (!empty($errmsg)) {
         print $errmsg;
 }

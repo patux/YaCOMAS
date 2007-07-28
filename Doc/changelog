@@ -1,10 +1,20 @@
 
-may 24 2004 
-	* Yacomas 0.1_alpha is released by Geronimo Orozco
+nov 24 2004
+	* Yacomas 0.3_alpha released
+	* Tutorials implemented
+	* Workshops, Tutorials inscription control implemented	
+	* Preliminar program implemented
+	* More admin modules
+	* Poll system implemented (at least in tables and in the asistente menu)
+	* Email notificacion of new account
+	* Password recovery implemented
+	* Some logic bugs fixed 
+	* Lot of new code
+
 jun 04 2004
-	  Yacomas 0.2_alpha released 
+	* Yacomas 0.2_alpha released 
 	* Variable Inicialization implemented in each file
-	* Some logic bug's fixed
+	* Some logic bugs fixed
 	  some files had logic erros with sessions, some others had errors with querys and incorrect use of columns
 	  array variables fixed
 	  A lot of files had incorrect assignment of variable names
@@ -12,3 +22,6 @@ jun 04 2004
 	  This is why a lot of Notice warinings apeared. PHP get colum as a constant instead of variable 
 	* Implementation of $_GET['variable'] instead of $variable in calls with parameters to files
 	  Now we can use register_globals = Off  in php.ini file
+
+may 24 2004 
+	* Yacomas 0.1_alpha is released by Geronimo Orozco

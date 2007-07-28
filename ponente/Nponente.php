@@ -1,6 +1,11 @@
 <? 
 	include "../includes/lib.php";
 	include "../includes/conf.inc";
+/*	Debes tener PEAR instalado http://pear.php.net
+	y el modulo basico de Mail
+	http://pear.php.net/package/Mail/download
+*/
+	include "Mail.php";
 	imprimeEncabezado();
 	aplicaEstilo();
 	imprimeCajaTop("100","Registro de Ponentes");
@@ -27,7 +32,6 @@ if (!isset($_POST['submit']))
 // Inicializacion de variables
 	$_POST['submit']='';
 	$_POST['S_login']='';
-	$_POST['_passwd']='';
 	$_POST['S_nombrep']='';
 	$_POST['S_apellidos']='';
 	$_POST['S_mail']=''; 
@@ -250,12 +254,41 @@ if ($_POST['submit'] == "Registrarme") {
 		"'".$_POST['I_id_estudios']."',".
 		"'".$_POST['I_id_estado']."'".
 		")";
-	//	print $query;
+		//print $query;
 		$result = mysql_query($query) or err("No se puede insertar los datos".mysql_errno($result));
- 	print '	Gracias por darte de alta, ahora ya podras accesar a tu cuenta.
+	/////////////////////
+	// Envia el correo:
+	/////////////////////
+	$user=$_POST['S_login']; 
+	$passwd_user = $_POST['S_passwd']; 
+	$mail_user = $_POST['S_mail'];
+	$recipients = $mail_user;
+
+	$headers["From"]    = "staff@yacomas.org.mx";
+	$headers["To"]      = $mail_user;
+	$headers["Subject"] = "Registro de ponente";
+	$message = "";
+	$message .= "Te has registrado como posible ponente al EVENTO\n";
+	$message .= "Usuario: $user\n";
+	$message .= "Contrasenia: $passwd_user\n\n";
+	$message .= "---------------------------------------\n";
+	$params["host"] = $smtp; 
+	$params["port"] = "25";
+	$params["auth"] = false;
+	// Create the mail object using the Mail::factory method
+	// $mail_object =& Mail::factory("smtp", $params);
+	
+	// $mail_object->send($recipients, $headers, $message);
+ 	print '	Gracias por darte de alta, ahora ya podras accesar a tu cuenta.<br>
+		Los datos de tu usuario y password han sido enviados al correo que registraste';
+retorno();
+	print ' Por razones de seguridad desabilitamos el envio de correo en la version de demo';
+retorno();
+	print 	'<p class="yacomas_msg">Es posible que algunos servidores de correo registren el correo como correo no deseado  o spam y no se encuentre en su carpeta INBOX</p>';
+	print '
  		<p>
 		 Si tienes preguntas o no sirve adecuadamente la pagina, por favor contacta al 
-		 <a href="mailto:patux@glo.org.mx">FSL Developer team</a><br><br>';
+		 <a href="mailto:patux@glo.org.mx">YACOMAS Developer team</a><br><br>';
 
  	imprime_valoresOk();
  	imprimeCajaBottom(); 
@@ -500,8 +533,7 @@ if ($_POST['submit'] == "Registrarme") {
 		
 		<tr>
 		<td class="name">Resumen Curricular:  </td>
-		<td class="input"><textarea name="S_resume" cols=60 rows=15> 
-		'.stripslashes($_POST[S_resume]).'</textarea></td>
+		<td class="input"><textarea name="S_resume" cols=60 rows=15>'.stripslashes($_POST[S_resume]).'</textarea></td>
 		</tr>
 		</table>
 		<br>

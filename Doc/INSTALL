@@ -1,4 +1,4 @@
-Yacomas version 0.1-alpha
+Yacomas version 0.3-alpha
 -------------------
 ENGLISH
 -------------------
@@ -39,17 +39,20 @@ los lugares y fechas designados. Y control de los  asistentes al congreso y regi
 parte de cada uno de los asistentes.
 ------------------------------------
 
-PREREQUISITOS
+DEPENDENCIAS
 -------------
 
-* Servidor Apache con soporte para PHP
-* Servidor MySQL 
-* PHP con soporte para MySQL
+* Apache http://apache.org
+* MySQL http://mysql.com 
+* PHP  http://php.net
+* PEAR http://pear.php.net
+   PEAR::Mail http://pear.php.net/package/Mail 
 
 INSTALACION:
 ------------
 
-Descomprimir yacomas-0.1-alpha.tar.gz en un directorio donde apache tenga alcance: ej. /var/www/htdocs/
+Descomprimir yacomas-0.x_alpha.tar.gz en un directorio donde apache tenga alcance: 
+ej. /var/www/htdocs/
 $ tar -xvzf yacomas-0.1-alpha.tar.gz 
 .
 .
@@ -71,7 +74,7 @@ a) Creacion de la BD.
 	
 b) Configuracion de yacomas
 	1) Base de datos
-		Editar el archivo  yacomas-0.1-alpha/includes/db.inc
+		Editar el archivo  yacomas-0.x-alpha/includes/db.inc
 		Cambiar las variables segun los cambios que haya hecho anteriormente:
 	
 		$dbname
@@ -82,11 +85,13 @@ b) Configuracion de yacomas
 		DirectoryIndex index.php
 	2) Directorio de trabajo
 		El archivo conf.inc es el arhivo principal de configuracion 
-		Editar el archivo yacomas-0.1-alpha/includes/conf.inc
+		Editar el archivo yacomas-0.x-alpha/includes/conf.inc
 	
 		Cambiar el valor de la variable $rootpath para llegar a yacomas
 		Yacomas funcionara sin cambiar absolutamente nada si sigue los siguientes pasos
-		La variable $rootpath hace referencia a partir de la variable DocumentRoot de apache
+		La variable $fslpath es usada para diferenciar el sitio web donde corremos Yacomas (Usualmente se deja vacia)
+		La variable $rootpath hace referencia a el lugar donde tendremos yacomas y hace referencia a partir de la variable DocumentRoot de apache
+
 		Es decir que si tenemos lo siguiente:
 		
 		DocumentRoot = /var/www/htdocs en http.conf
@@ -96,26 +101,26 @@ b) Configuracion de yacomas
 		Esto indica que yacomas se encuentra en:
 		/var/www/htdocs/yacomas-0.2_alpha
 
-		p.ej:
-		conf.inc tendria la variable $rootpath de la siguiente manera:
-		$rootpath=/yacomas-0.2_alpha
+		p.ej: includes/conf.inc
+		---------
+		$rootpath=/yacomas-0.x_alpha
 		cd /var/www/htdocs
-		tar -xvzf yacomas-0.2_alpha.tar.gz 
-		yacomas-0.2_alpha
+		tar -xvzf yacomas-0.x_alpha.tar.gz 
+		yacomas-0.x_alpha
 		 
 
 c) Inicio y comenzar a trabajar con yacomas
 
 Abrir el navegador y abrir la sig. direccion:
 
-http://localhost/yacomas-0.2-alpha/
+http://localhost/yacomas-0.x-alpha/
 
 Para entrar al modulo de administracion entrar a la siguiente direccion:
 
-http://localhost/yacomas-0.2-alpha/admin
+http://localhost/yacomas-0.x-alpha/admin
 
 Admin user: admin
 Admin pass: admin
 
 ==========
-$Id: INSTALL,v 0.2-alpha Fri Jun  4 10:33:28 CDT 2004 patux Exp $
+$Id: INSTALL,v 0.3-alpha Thu Nov 25 16:38:13 CST 2004 patux Exp $

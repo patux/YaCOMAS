@@ -6,7 +6,7 @@
 	$idlugar=$_GET['idlugar'];
 	imprimeEncabezado();
 	aplicaEstilo();
-	print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['rootlogin'].'&nbsp;<a class="rojo" href=signout.php>Desconectarme</a></P>';
+	print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['rootlogin'].'&nbsp;<a class="precaucion" href=signout.php>Desconectarme</a></P>';
 	imprimeCajaTop("100","Modificar lugares para para ponencias");
 	$link=conectaBD();
 
@@ -17,7 +17,7 @@ function imprime_valoresOk() {
 		<tr>
 		<td class="name">Nombre: * </td>
 		<td class="resultado">
-		'.$_POST['S_nombre_lug'].'
+		'.strtoupper($_POST['S_nombre_lug']).'
 		</td>
 		</tr>
 
@@ -38,7 +38,7 @@ function imprime_valoresOk() {
 		</table>
 		<br>
 		<center>
-		<input type="button" value="Volver al Listado" onClick=location.href="'.$rootpath.'/admin/admin.php?opc=5">
+		<input type="button" value="Volver al Listado" onClick=location.href="'.$fslpath.$rootpath.'/admin/admin.php?opc=5">
 		</center>';
 
 }
@@ -56,15 +56,15 @@ if (isset ($_POST['submit']) && $_POST['submit'] == "Actualizar") {
 	{
 		$errmsg .= "<li>El cupo del lugar no debe sobrepasar ".$limite;
 	}
-	elseif ($_POST['I_cupo'] < 10) 
+	elseif ($_POST['I_cupo'] < 5 ) 
 	{
-		$errmsg .= "<li>El cupo del lugar no debe ser menor a 1";
+		$errmsg .= "<li>El cupo del lugar no debe ser menor a 5";
 	}
   }
   // Si no hay errores verifica que el lugar no este ya dado de alta en la tabla
   if (empty($errmsg)) {
-      $lowname= strtolower($_POST['S_nombre_lug']);
-      $userQuery = 'SELECT * FROM lugar WHERE nombre_lug="'.$lowname.'"';
+      $uppname= strtoupper($_POST['S_nombre_lug']);
+      $userQuery = 'SELECT * FROM lugar WHERE nombre_lug="'.$uppname.'"';
       $userRecords = mysql_query($userQuery) or err("No se pudo checar el login".mysql_errno($userRecords));
       if (mysql_num_rows($userRecords) != 0) {
       	$p = mysql_fetch_array($userRecords);
@@ -88,7 +88,7 @@ else { // Todas las validaciones Ok
 	{
 		$_POST['I_cupo']=99999;
 	}
-  		$query = "UPDATE lugar SET nombre_lug="."'".$lowname."',
+  		$query = "UPDATE lugar SET nombre_lug="."'".$uppname."',
 				   ubicacion="."'".mysql_escape_string(stripslashes($_POST['S_ubicacion']))."',
 				   cupo="."'".$_POST['I_cupo']."'
 				   WHERE id=$idlugar";
@@ -97,7 +97,7 @@ else { // Todas las validaciones Ok
  	print '	Lugar para evento actualizado,
  		<p>
 		 Si tienes preguntas o no sirve adecuadamente la pagina, por favor contacta al 
-		 <a href="mailto:patux@glo.org.mx">FSL Developer team</a><br><br>';
+		 <a href="mailto:patux@glo.org.mx">YACOMAS Developer team</a><br><br>';
 
  	imprime_valoresOk();
  	imprimeCajaBottom(); 
@@ -150,7 +150,7 @@ else {
 				<td class="input">
 				<select name="I_cupo">';
 
-				for ($Icupo=$limite;$Icupo>=10;$Icupo--){
+				for ($Icupo=$limite;$Icupo>=5;$Icupo--){
 					printf ("<option value=%02d",$Icupo);
 						if ($_POST['I_cupo']==$Icupo)
 						echo " selected";
@@ -168,7 +168,7 @@ else {
 		<br>
 		<center>
 		<input type="submit" name="submit" value="Actualizar">&nbsp;&nbsp;
-		<input type="button" value="Cancelar" onClick=location.href="'.$rootpath.'/admin/admin.php?opc=5">
+		<input type="button" value="Cancelar" onClick=location.href="'.$fslpath.$rootpath.'/admin/admin.php?opc=5">
 		</center>
 		</form>';
 

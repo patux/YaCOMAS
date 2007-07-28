@@ -5,7 +5,7 @@
 	$idadmin=$_SESSION['YACOMASVARS']['rootid'];
 	imprimeEncabezado();
 	aplicaEstilo();
-	print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['rootlogin'].'&nbsp;<a class="rojo" href=signout.php>Desconectarme</a></P>';
+	print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['rootlogin'].'&nbsp;<a class="precaucion" href=signout.php>Desconectarme</a></P>';
 	imprimeCajaTop("100","Registro de Lugares para ponencias");
 	$link=conectaBD();
 
@@ -16,7 +16,7 @@ function imprime_valoresOk() {
 		<tr>
 		<td class="name">Nombre: * </td>
 		<td class="resultado">
-		'.$_POST['S_nombre_lug'].'
+		'.strtoupper($_POST['S_nombre_lug']).'
 		</td>
 		</tr>
 
@@ -37,7 +37,7 @@ function imprime_valoresOk() {
 		</table>
 		<br>
 		<center>
-		<input type="button" value="Volver al Menu" onClick=location.href="'.$rootpath.'/admin/menuadmin.php#lugares">
+		<input type="button" value="Volver al Menu" onClick=location.href="'.$fslpath.$rootpath.'/admin/menuadmin.php#lugares">
 		</center>';
 
 }
@@ -61,15 +61,15 @@ if (isset ($_POST['submit']) && $_POST['submit'] == "Registrar") {
 	{
 		$errmsg .= "<li>El cupo del lugar no debe sobrepasar ".$limite;
 	}
-	elseif ($_POST['I_cupo'] < 10) 
+	elseif ($_POST['I_cupo'] < 5) 
 	{
-		$errmsg .= "<li>El cupo del lugar no debe ser menor a 1";
+		$errmsg .= "<li>El cupo del lugar no debe ser menor a 5";
 	}
   }
   // Si no hay errores verifica que el lugar no este ya dado de alta en la tabla
   if (empty($errmsg)) {
-      $lowname= strtolower($_POST['S_nombre_lug']);
-      $userQuery = 'SELECT * FROM lugar WHERE nombre_lug="'.$lowname.'"';
+      $uppname= strtoupper($_POST['S_nombre_lug']);
+      $userQuery = 'SELECT * FROM lugar WHERE nombre_lug="'.$uppname.'"';
       $userRecords = mysql_query($userQuery) or err("No se pudo checar el login".mysql_errno($userRecords));
       if (mysql_num_rows($userRecords) != 0) {
         $errmsg .= "<li>El nombre del lugar que elegiste ya ha sido dado de alta; por favor elige otro";
@@ -88,7 +88,7 @@ else { // Todas las validaciones Ok
 	if (!empty($_POST['I_cupo'])) 
 	{
   		$query = "INSERT INTO lugar (nombre_lug,ubicacion,cupo) VALUES (".
-		"'".$lowname."',".
+		"'".$uppname."',".
 		"'".mysql_escape_string(stripslashes($_POST['S_ubicacion']))."',".
 		"'".$_POST['I_cupo']."'".
 		")";
@@ -96,7 +96,7 @@ else { // Todas las validaciones Ok
   	else
 	{
 		$query = "INSERT INTO lugar (nombre_lug,ubicacion) VALUES (".
-		"'".$lowname."',".
+		"'".$uppname."',".
 		"'".mysql_escape_string(stripslashes($_POST['S_ubicacion']))."'".
 		")";
 	}
@@ -105,7 +105,7 @@ else { // Todas las validaciones Ok
  	print '	Lugar para evento agregado, ahora ya podra asignarlo a cualquier propuesta aceptada.
  		<p>
 		 Si tienes preguntas o no sirve adecuadamente la pagina, por favor contacta al 
-		 <a href="mailto:patux@glo.org.mx">FSL Developer team</a><br><br>';
+		 <a href="mailto:patux@glo.org.mx">YACOMAS Developer team</a><br><br>';
 
  	imprime_valoresOk();
  	imprimeCajaBottom(); 
@@ -152,7 +152,7 @@ else { // Todas las validaciones Ok
 			echo " selected";
 	print '
 		></option>';
-		for ($Icupo=$limite;$Icupo>=10;$Icupo--){
+		for ($Icupo=$limite;$Icupo>=5;$Icupo--){
 			printf ("<option value=%02d",$Icupo);
 			if ($_POST['I_cupo']==$Icupo)
 				echo " selected";
@@ -170,7 +170,7 @@ else { // Todas las validaciones Ok
 		<br>
 		<center>
 		<input type="submit" name="submit" value="Registrar">&nbsp;&nbsp;
-		<input type="button" value="Cancelar" onClick=location.href="'.$rootpath.'/admin/menuadmin.php#lugares">
+		<input type="button" value="Cancelar" onClick=location.href="'.$fslpath.$rootpath.'/admin/menuadmin.php#lugares">
 		</center>
 		</form>';
 

@@ -10,7 +10,7 @@
 	$idponencia=$tok;
 	$tok = strtok (" ");
 
-	print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['rootlogin'].'&nbsp;<a class="rojo" href=signout.php>Desconectarme</a></P>';
+	print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['rootlogin'].'&nbsp;<a class="precaucion" href=signout.php>Desconectarme</a></P>';
 	imprimeCajaTop("100","Cancelar Ponencia");
 	print '<p class="yacomas_error">
 	Esta accion liberara el espacio ocupado en el programa por este evento y le asignara el status de Cancelada
@@ -39,7 +39,7 @@ function imprime_valoresOk($idponente,$idponencia){
 	$registro['S_resumen']=$p['resumen'];
 	$registro['S_reqtecnicos']=$p['reqtecnicos'];
 	$registro['S_reqasistente']=$p['reqasistente'];
-	$registro['C_tpropuesta']=$p['tpropuesta'];
+	$registro['I_id_prop_tipo']=$p['id_prop_tipo'];
 	$registro['I_duracion']=$p['duracion'];
 	$registro['I_id_orientacion']=$p['id_orientacion'];
 	$registro['I_id_status']=$p['id_status'];
@@ -48,7 +48,7 @@ function imprime_valoresOk($idponente,$idponencia){
 	$registro['I_id_administrador']=$p['id_administrador'];
 	
 	$msg='Ponencia de: <small>'.$ponente_name.'</small>';
-	print '<center><H3>'.$msg.'<center></H3>';
+	print '<center><H3>'.$msg.'</center></H3>';
     print '
      		<table width=100%>
 		<tr>
@@ -77,12 +77,14 @@ function imprime_valoresOk($idponente,$idponencia){
 		<td class="name">Tipo de Propuesta: * </td>
 		<td class="resultado">';
 		
-		if ($registro['C_tpropuesta']=="C")
-		    echo "Conferencia";
-		else
-		    echo "Taller";
-		    
-	print '
+		$query = 'SELECT * FROM prop_tipo WHERE id="'.$registro['I_id_prop_tipo'].'"';
+		$result=mysql_query($query);
+	 	while($fila=mysql_fetch_array($result)) {
+			printf ("%s",$fila["descr"]);
+  		}
+		mysql_free_result($result);
+
+	print '	
 		</td>
 		</tr>
 
@@ -205,8 +207,8 @@ function imprime_valoresOk($idponente,$idponencia){
 		<tr>
 		<td class="name">Hora: * </td>
 		<td class="resultado">';
-		$hfin=$detalle_EO['hora'] + $registro['I_duracion'];		
-		print $detalle_EO['hora'].':00 - '.$hfin.':00';
+		$hfin=$detalle_EO['hora'] + $registro['I_duracion']-1;		
+		print $detalle_EO['hora'].':00 - '.$hfin.':50';
 	print '
 		</td>
 		</tr>';
@@ -297,9 +299,9 @@ if (isset ($_POST['submit']) && $_POST['submit'] == "Cancelar") {
 		</p>
  		<p>
 		 Si tienes preguntas o no sirve adecuadamente la pagina, por favor contacta al 
-		 <a href="mailto:patux@glo.org.mx">FSL Developer team</a><br><br>
+		 <a href="mailto:patux@glo.org.mx">YACOMAS Developer team</a><br><br>
 		 <center>
-		 <input type="button" value="Volver a listado" onClick=location.href="'.$rootpath.'/admin/admin.php?opc=9">
+		 <input type="button" value="Volver a listado" onClick=location.href="'.$fslpath.$rootpath.'/admin/admin.php?opc=9">
 		 </center>';
 	
  	imprimeCajaBottom(); 
@@ -317,7 +319,7 @@ if (isset ($_POST['submit']) && $_POST['submit'] == "Cancelar") {
 	print'<center>
 		<FORM method="POST" action="'.$_SERVER['REQUEST_URI'].'">
 		<input type="submit" name="submit" value="Cancelar">&nbsp;&nbsp;
-		<input type="button" value="Volver" onClick=location.href="'.$rootpath.'/admin/admin.php?opc=9">
+		<input type="button" value="Volver" onClick=location.href="'.$fslpath.$rootpath.'/admin/admin.php?opc=9">
 		</center>
 		</form>';
 

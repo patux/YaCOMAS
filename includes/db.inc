@@ -1,6 +1,6 @@
 <?
-$dbname='yacomas_db';
-$dbuser='yacomas_user';
-$dbpwd='yacomas_pwd';
+$dbname='yacomas3_db';
+$dbuser='yacomas3_user';
+$dbpwd='yacomas3_pwd';
 $dbhost='localhost';
 ?>

@@ -5,7 +5,7 @@
 	imprimeEncabezado();
 	aplicaEstilo();
 	$idasistente=$_GET['idasistente'];
-	print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['rootlogin'].'&nbsp;<a class="rojo" href=signout.php>Desconectarme</a></P>';
+	print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['rootlogin'].'&nbsp;<a class="precaucion" href=signout.php>Desconectarme</a></P>';
 	imprimeCajaTop("100","Eliminar Asistente");
 	print '<p class="yacomas_error">Esta accion eliminara el asistente y todas sus inscripciones a talleres</p>';
 	print '<hr>';
@@ -156,8 +156,8 @@ print '
 		print '</td><td bgcolor='.$bgcolor.'>'.$fila["orientacion"];
 		print '</td><td bgcolor='.$bgcolor.'>'.$fila["fecha"];
 		print '</td><td bgcolor='.$bgcolor.'>'.$fila["hora"].':00 - ';
-		$hfin=$fila["hora"]+$fila["duracion"];
-		print $hfin.':00';
+		$hfin=$fila["hora"]+$fila["duracion"]-1;
+		print $hfin.':50';
 		print '</td><td bgcolor='.$bgcolor.'>'.$fila["nombre_lug"];
 		print '</td></tr>';
 	}
@@ -187,9 +187,9 @@ if (isset($_POST['submit']) && $_POST['submit'] == "Eliminar") {
 		<p class="yacomas_msg">Los espacios que ocupaba en los talleres a los que estaba inscrito han sido liberados </p>
  		<p>
 		 Si tienes preguntas o no sirve adecuadamente la pagina, por favor contacta al 
-		 <a href="mailto:patux@glo.org.mx">FSL Developer team</a><br><br>
+		 <a href="mailto:patux@glo.org.mx">YACOMAS Developer team</a><br><br>
 		 <center>
-		 <input type="button" value="Volver a listado" onClick=location.href="'.$rootpath.'/admin/admin.php?opc=13">
+		 <input type="button" value="Volver a listado" onClick=location.href="'.$fslpath.$rootpath.'/admin/admin.php?opc=13">
 		 </center>';
 	
  	imprimeCajaBottom(); 
@@ -207,7 +207,7 @@ if (isset($_POST['submit']) && $_POST['submit'] == "Eliminar") {
 	print'<center>
 		<FORM method="POST" action="'.$_SERVER['REQUEST_URI'].'">
 		<input type="submit" name="submit" value="Eliminar">&nbsp;&nbsp;
-		<input type="button" value="Cancelar" onClick=location.href="'.$rootpath.'/admin/admin.php?opc=13">
+		<input type="button" value="Cancelar" onClick=location.href="'.$fslpath.$rootpath.'/admin/admin.php?opc=13">
 		</center>
 		</form>';
 

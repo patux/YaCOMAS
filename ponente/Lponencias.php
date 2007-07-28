@@ -14,10 +14,15 @@ $p = mysql_fetch_array($userRecords);
 // Seleccionamos todos los que no esten eliminados
 // Tal vez podriamos mejorar esta cosa para no depender directamente de que el status siempre sea dado en el codigo
 //
-$userQueryP = 'SELECT * FROM propuesta WHERE id_ponente="'.$idponente.'" AND id_status!=7';
+$userQueryP = '	SELECT 	P.id,P.id_ponente,P.nombre,P.id_status, PT.descr 
+		FROM 	propuesta AS P,
+			prop_tipo AS PT
+		WHERE 	P.id_ponente="'.$idponente.'" AND 
+			P.id_prop_tipo=PT.id AND
+			P.id_status!=7';
 $userRecordsP = mysql_query($userQueryP) or err("No se pudo listar ponencias".mysql_errno($userRecords));
 $msg='Propuestas de '.$p['nombrep'].' '.$p['apellidos'].'<hr>';
-print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['ponlogin'].'&nbsp;<a class="rojo" href=signout.php>Desconectarme</a></P>';
+print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['ponlogin'].'&nbsp;<a class="precaucion" href=signout.php>Desconectarme</a></P>';
 imprimeCajaTop("100",$msg);
 print '
 	<table border=0 align=center width=100%>
@@ -46,10 +51,7 @@ print '
 		
 	
 		print '</td><td bgcolor='.$bgcolor.'>';
-		if ($fila['tpropuesta']=="C")
-		    echo "Conferencia";
-		else
-		    echo "Taller";
+		echo $fila['descr'];
 		
 		print '</td><td bgcolor='.$bgcolor.'>';
 		$query = 'SELECT descr FROM prop_status WHERE id="'.$fila['id_status'].'"';
@@ -62,7 +64,7 @@ print '
 		// El ponente solo puede cancelar propeustas no borradas,canceladas,aceptadas o programadas
 		if ($fila['id_status'] < 5) { 
 			print '<td width=50 bgcolor='.$bgcolor.'><a class="verde" href="Mponencia.php?idponencia='.$fila['id'].'">Modificar</td>';
-			print '<td width=50 bgcolor='.$bgcolor.'><a class="rojo" href="BCponencia.php?vopc='.$fila['id'].' 7">Eliminar</td>';
+			print '<td width=50 bgcolor='.$bgcolor.'><a class="precaucion" href="BCponencia.php?vopc='.$fila['id'].' 7">Eliminar</td>';
 		}
 		print '</tr>';
 	}
@@ -70,7 +72,7 @@ print '
 	retorno();
 	retorno();
 	print '<center>
-	<input type="button" value="Volver al menu" onClick=location.href="'.$rootpath.'/ponente/menuponente.php">
+	<input type="button" value="Volver al menu" onClick=location.href="'.$fslpath.$rootpath.'/ponente/menuponente.php">
 	</center>';
 imprimeCajaBottom();
 imprimePie();?>

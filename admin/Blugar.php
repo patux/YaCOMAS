@@ -5,7 +5,7 @@
 	imprimeEncabezado();
 	aplicaEstilo();
 	$idlugar=$_GET['idlugar'];
-	print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['rootlogin'].'&nbsp;<a class="rojo" href=signout.php>Desconectarme</a></P>';
+	print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['rootlogin'].'&nbsp;<a class="precaucion" href=signout.php>Desconectarme</a></P>';
 	imprimeCajaTop("100","Eliminar Lugar");
 	print '<p class="yacomas_error">Esta accion eliminara el lugar y todos los eventos registrados en este lugar<br>
 	Los eventos regresaran a status de Ponencia Aceptada, las inscripciones de los asistentes al evento seran eliminadas 
@@ -46,8 +46,8 @@ while ($Ql_evento = mysql_fetch_array($lugarRecords))
 			</tr>';
 		$Qehs='
 			SELECT  E.id_propuesta, P.id_ponente, P.duracion, L.cupo, EO.id_evento, 
-				EO.hora, F.fecha, P.nombre, PO.nombrep, PO.apellidos,P.tpropuesta 
-			FROM 	ponente AS PO, propuesta AS P, 
+				EO.hora, F.fecha, P.nombre, PO.nombrep, PO.apellidos,P.id_prop_tipo, PT.descr AS prop_tipo
+			FROM 	ponente AS PO, propuesta AS P, prop_tipo AS PT, 
 				evento AS E, lugar AS L, evento_ocupa AS EO,fecha_evento AS F  
 			WHERE 
 				EO.id_lugar=L.id AND 
@@ -55,9 +55,10 @@ while ($Ql_evento = mysql_fetch_array($lugarRecords))
 				EO.id_evento=E.id AND 
 				E.id_propuesta=P.id AND 
 				P.id_ponente=PO.id AND
+				P.id_prop_tipo=PT.id AND 
 				L.id='.$idlugar.'
-				GROUP BY id_evento 
-				ORDER BY F.fecha,EO.hora'; 
+			GROUP BY id_evento 
+			ORDER BY F.fecha,EO.hora'; 
 		$eventoRecords= mysql_query($Qehs) or err("No se pudo listar eventos de este lugar".mysql_errno($eventoRecords));
 		$color=1;
 		while ($Qf_event= mysql_fetch_array($eventoRecords))
@@ -74,13 +75,13 @@ while ($Ql_evento = mysql_fetch_array($lugarRecords))
 			}
 			print '<td bgcolor='.$bgcolor.'><a class="azul" href="Vponencia.php?vopc='.$Qf_event['id_ponente'].' '.$Qf_event['id_propuesta'].' '.$regresa.'">'.$Qf_event["nombre"].'</a>';
 			retorno();
-			print '<small><a class="rojo" href="Vponente.php?vopc='.$Qf_event['id_ponente'].' '.$regresa.'">'.$Qf_event["nombrep"].' '.$Qf_event["apellidos"].'</a></small>';
+			print '<small><a class="ponente" href="Vponente.php?vopc='.$Qf_event['id_ponente'].' '.$regresa.'">'.$Qf_event["nombrep"].' '.$Qf_event["apellidos"].'</a></small>';
 			print '</td><td bgcolor='.$bgcolor.'>'.$Qf_event["fecha"];
 			print '</td><td bgcolor='.$bgcolor.'>'.$Qf_event["hora"].':00 - ';
-			$hfin=$Qf_event["hora"]+$Qf_event["duracion"];
-			print $hfin.':00';
+			$hfin=$Qf_event["hora"]+$Qf_event["duracion"]-1;
+			print $hfin.':50';
 			print '</td><td bgcolor='.$bgcolor.'>';
-			if ($Qf_event['tpropuesta']=="T")
+			if ($Qf_event['id_prop_tipo']>=50 && $Qf_event['id_prop_tipo'] < 100)
 			{
 				// Checamos cuanta gente esta inscrita a este taller 
 				// Para sacar el total de espacios disponibles todavia para el taller
@@ -179,9 +180,9 @@ if (isset($_POST['submit']) && $_POST['submit'] == "Eliminar") {
 		</p>
  		<p>
 		 Si tienes preguntas o no sirve adecuadamente la pagina, por favor contacta al 
-		 <a href="mailto:patux@glo.org.mx">FSL Developer team</a><br><br>
+		 <a href="mailto:patux@glo.org.mx">YACOMAS Developer team</a><br><br>
 		 <center>
-		 <input type="button" value="Volver a listado" onClick=location.href="'.$rootpath.'/admin/admin.php?opc=5">
+		 <input type="button" value="Volver a listado" onClick=location.href="'.$fslpath.$rootpath.'/admin/admin.php?opc=5">
 		 </center>';
 	
  	imprimeCajaBottom(); 
@@ -199,7 +200,7 @@ if (isset($_POST['submit']) && $_POST['submit'] == "Eliminar") {
 	print'<center>
 		<FORM method="POST" action="'.$_SERVER['REQUEST_URI'].'">
 		<input type="submit" name="submit" value="Eliminar">&nbsp;&nbsp;
-		<input type="button" value="Cancelar" onClick=location.href="'.$rootpath.'/admin/admin.php?opc=5">
+		<input type="button" value="Cancelar" onClick=location.href="'.$fslpath.$rootpath.'/admin/admin.php?opc=5">
 		</center>
 		</form>';
 

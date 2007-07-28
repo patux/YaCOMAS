@@ -32,6 +32,7 @@ $userQueryP='	SELECT 	AI.reg_time,
 			O.descr AS orientacion, 
 			EO.hora, 
 			P.duracion, 
+			PT.descr AS prop_tipo,
 			L.nombre_lug 
 		FROM 	fecha_evento AS F, 
 			ponente AS PO, 
@@ -41,6 +42,7 @@ $userQueryP='	SELECT 	AI.reg_time,
 			evento AS E, 
 			propuesta AS P, 
 			evento_ocupa AS EO, 
+			prop_tipo AS PT,
 			prop_nivel AS N  
 		WHERE 	EO.id_fecha=F.id AND 
 			AI.id_evento=E.id AND 
@@ -50,12 +52,13 @@ $userQueryP='	SELECT 	AI.reg_time,
 			EO.id_lugar=L.id AND 
 			P.id_ponente=PO.id AND 
 			P.id_nivel=N.id AND 
+			P.id_prop_tipo=PT.id AND
 			AI.id_asistente="'.$idasistente.'" 
 		GROUP BY AI.id_evento 
 		ORDER BY F.fecha, EO.hora';
 $userRecordsP = mysql_query($userQueryP) or err("No se pudo listar talleres del asistente".mysql_errno($userRecords));
 $msg='Datos de asistente <br><small>-- '.$p['nombrep'].' '.$p['apellidos'].' --</small><hr>';
-print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['rootlogin'].'&nbsp;<a class="rojo" href=signout.php>Desconectarme</a></P>';
+print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['rootlogin'].'&nbsp;<a class="precaucion" href=signout.php>Desconectarme</a></P>';
 imprimeCajaTop("100",$msg);
 
 // Inicio datos de Ponencias
@@ -104,6 +107,21 @@ imprimeCajaTop("100",$msg);
 		</tr>
 		
 		<tr>
+		<td class="name">Tipo Asistente:  </td>
+		<td class="resultado">';
+		
+		$query = 'SELECT * FROM tasistente WHERE id="'.$p['id_tasistente'].'"';
+		$result=mysql_query($query);
+	 	while($fila=mysql_fetch_array($result)) {
+			printf ("%s",$fila["descr"]);
+  		}
+		mysql_free_result($result);
+
+	print '	
+		</td>
+		</tr>
+		
+		<tr>
 		<td class="name">Ciudad: </td>
 		<td class="resultado">
 		'.$p['ciudad'].'
@@ -137,11 +155,11 @@ imprimeCajaTop("100",$msg);
 		<hr>';
 // Fin datos de usuario
 // Inicio datos de Talleres inscritos 
-print '<p class="yacomas_error">Talleres Inscritos</p>';
+print '<p class="yacomas_error">Talleres y/o Tutoriales Inscritos</p>';
 print '
 	<table border=0 align=center width=100%>
 	<tr>
-	<td bgcolor='.$colortitle.'><b>Taller</b></td>
+	<td bgcolor='.$colortitle.'><b>Taller/Tutorial</b></td>
 	<td bgcolor='.$colortitle.'><b>Orientacion</b></td>
 	<td bgcolor='.$colortitle.'><b>Fecha</b></td>
 	<td bgcolor='.$colortitle.'><b>Hora</b></td>
@@ -164,12 +182,13 @@ print '
 		}
 		print '<tr>';
 		print '</td><td bgcolor='.$bgcolor.'>'.$fila["taller"];
+		print '<small> ('.$fila["prop_tipo"].')</small>';
 		print '<br><small>'.$fila["nombrep"].' '.$fila["apellidos"].'</small>';
 		print '</td><td bgcolor='.$bgcolor.'>'.$fila["orientacion"];
 		print '</td><td bgcolor='.$bgcolor.'>'.$fila["fecha"];
 		print '</td><td bgcolor='.$bgcolor.'>'.$fila["hora"].':00 - ';
-		$hfin=$fila["hora"]+$fila["duracion"];
-		print $hfin.':00';
+		$hfin=$fila["hora"]+$fila["duracion"]-1;
+		print $hfin.':50';
 		print '</td><td bgcolor='.$bgcolor.'>'.$fila["nombre_lug"];
 		print '</td><td bgcolor='.$bgcolor.'>'.$fila["reg_time"];
 		print '</td></tr>';

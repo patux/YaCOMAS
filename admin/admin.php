@@ -29,6 +29,16 @@
 				break;
 			case 13: include "Lasistentes.php";
 				break;
+			case 15: include "RAsistencia.php";
+				break;
+			case 16: include "Nponente.php";
+				break;
+			case 17: include "Nponencia.php";
+				break;
+			case 18: include "RAsistente.php";
+				break;
+			case 19: include "BajaAsistenteTaller.php";
+				break;
 			default: include "signin.php";
 				break;
 		}	

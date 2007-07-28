@@ -4,7 +4,8 @@
 	beginSession('P');
 	imprimeEncabezado();
 	aplicaEstilo();
-	print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['ponlogin'].'&nbsp;<a class="rojo" href=signout.php>Desconectarme</a></P>';
+  	$idponente=$_SESSION['YACOMASVARS']['ponid'];
+	print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['ponlogin'].'&nbsp;<a class="precaucion" href=signout.php>Desconectarme</a></P>';
 
 	$link=conectaBD();
 	
@@ -49,19 +50,22 @@ function imprime_valoresOk() {
 	print '	
 		</td>
 		</tr>
-
+		
 		<tr>
 		<td class="name">Tipo de Propuesta: * </td>
 		<td class="resultado">';
 		
-		if ($_POST['C_tpropuesta']=="C")
-		    echo "Conferencia";
-		else
-		    echo "Taller";
-		    
-	print '
+		$query = 'SELECT * FROM prop_tipo WHERE id="'.$_POST['I_id_tipo'].'"';
+		$result=mysql_query($query);
+	 	while($fila=mysql_fetch_array($result)) {
+			printf ("%s",$fila["descr"]);
+  		}
+		mysql_free_result($result);
+
+	print '	
 		</td>
 		</tr>
+
 
 		<tr>
 		<td class="name">Orientacion: * </td>
@@ -103,9 +107,9 @@ if (isset ($_POST['submit']) && $_POST['submit'] == "Aceptar") {
   # do some basic error checking
   // Si todo esta bien vamos a borrar el registro 
   	if ($action!=7)
-  		$query = "UPDATE propuesta SET id_status='$action' WHERE id="."'".$ponencia."'"; 
+  		$query = "UPDATE propuesta SET id_status='$action' WHERE id="."'".$ponencia."' AND id_ponente='".$idponente."'"; 
 	else    
-		$query = 'DELETE FROM propuesta WHERE id='.$ponencia;
+		$query = 'DELETE FROM propuesta WHERE id='.$ponencia.' AND id_ponente="'.$idponente.'"';
 		// Para debugear querys
 		//print $query;
 		//
@@ -113,9 +117,9 @@ if (isset ($_POST['submit']) && $_POST['submit'] == "Aceptar") {
  	print '	Tu propuesta ha sido '.$verbo2.'
  		<p>
 		 Si tienes preguntas o no sirve adecuadamente la pagina, por favor contacta al 
-		 <a href="mailto:patux@glo.org.mx">FSL Developer team</a><br><br>
+		 <a href="mailto:patux@glo.org.mx">YACOMAS Developer team</a><br><br>
 		 <center>
-		 <input type="button" value="Volver a listado" onClick=location.href="'.$rootpath.'/ponente/ponente.php?opc=2">
+		 <input type="button" value="Volver a listado" onClick=location.href="'.$fslpath.$rootpath.'/ponente/ponente.php?opc=2">
 		 </center>';
 
  	imprimeCajaBottom(); 
@@ -130,13 +134,13 @@ if (isset ($_POST['submit']) && $_POST['submit'] == "Aceptar") {
 // o para corregir datos que ya hayamos tratado de introducir
 else {
 	$userQuery = 
-	'SELECT nombre, resumen, id_nivel, tpropuesta, duracion, id_status, id_orientacion FROM propuesta WHERE id="'.$ponencia.'"';
+	'SELECT nombre, resumen, id_nivel, id_prop_tipo, duracion, id_status, id_orientacion FROM propuesta WHERE id="'.$ponencia.'" AND id_ponente="'.$idponente.'"';
 	$userRecords = mysql_query($userQuery) or err("No se pudo checar la propuesta".mysql_errno($userRecords));
 	$p = mysql_fetch_array($userRecords);
 	$_POST['S_nombreponencia']=$p['nombre'];
 	$_POST['I_id_nivel']=$p['id_nivel'];
 	$_POST['S_resumen']=$p['resumen'];
-	$_POST['C_tpropuesta']=$p['tpropuesta'];
+	$_POST['I_id_tipo']=$p['id_prop_tipo'];
 	$_POST['I_duracion']=$p['duracion'];
 	$_POST['I_id_orientacion']=$p['id_orientacion'];
 }
@@ -144,7 +148,7 @@ else {
 	print'<center>
 		<FORM method="POST" action="'.$_SERVER['REQUEST_URI'].'">
 		<input type="submit" name="submit" value="Aceptar">&nbsp;&nbsp;
-		<input type="button" value="Volver al Listado" onClick=location.href="'.$rootpath.'/ponente/ponente.php?opc=2">
+		<input type="button" value="Volver al Listado" onClick=location.href="'.$fslpath.$rootpath.'/ponente/ponente.php?opc=2">
 		</center>
 		</form>';
 

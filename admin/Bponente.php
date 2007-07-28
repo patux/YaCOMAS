@@ -4,7 +4,7 @@
 	beginSession('R');
 	imprimeEncabezado();
 	aplicaEstilo();
-	print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['rootlogin'].'&nbsp;<a class="rojo" href=signout.php>Desconectarme</a></P>';
+	print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['rootlogin'].'&nbsp;<a class="precaucion" href=signout.php>Desconectarme</a></P>';
 	imprimeCajaTop("100","Eliminar Ponente");
 	print '<p class="yacomas_error">
 	Esta accion eliminara el ponente y todos sus Ponencias/Eventos registrados 
@@ -169,10 +169,11 @@ print '
 		<td bgcolor='.$bgcolor.'><a class="azul" href="Vponencia.php?vopc='.$idponente.' '.$fila['id'].' '.$regresa.'">'.$fila["nombre"].'</a>';
 	
 		print '</td><td bgcolor='.$bgcolor.'>';
-		if ($fila['tpropuesta']=="C")
-		    echo "Conferencia";
-		else
-		    echo "Taller";
+		$query = 'SELECT descr FROM prop_tipo WHERE id="'.$fila['id_prop_tipo'].'"';
+		$result=mysql_query($query);
+	 	$fstatus=mysql_fetch_array($result);
+		print $fstatus['descr'];
+		mysql_free_result($result);
 		
 		print '</td><td bgcolor='.$bgcolor.'>';
 		$query = 'SELECT descr FROM prop_status WHERE id="'.$fila['id_status'].'"';
@@ -261,9 +262,9 @@ if (isset ($_POST['submit']) && $_POST['submit'] == "Eliminar") {
 		</p>
  		<p>
 		 Si tienes preguntas o no sirve adecuadamente la pagina, por favor contacta al 
-		 <a href="mailto:patux@glo.org.mx">FSL Developer team</a><br><br>
+		 <a href="mailto:patux@glo.org.mx">YACOMAS Developer team</a><br><br>
 		 <center>
-		 <input type="button" value="Volver a listado" onClick=location.href="'.$rootpath.'/admin/admin.php?opc=6">
+		 <input type="button" value="Volver a listado" onClick=location.href="'.$fslpath.$rootpath.'/admin/admin.php?opc=6">
 		 </center>';
 	
  	imprimeCajaBottom(); 
@@ -281,7 +282,7 @@ if (isset ($_POST['submit']) && $_POST['submit'] == "Eliminar") {
 	print'<center>
 		<FORM method="POST" action="'.$_SERVER['REQUEST_URI'].'">
 		<input type="submit" name="submit" value="Eliminar">&nbsp;&nbsp;
-		<input type="button" value="Cancelar" onClick=location.href="'.$rootpath.'/admin/admin.php?opc=6">
+		<input type="button" value="Cancelar" onClick=location.href="'.$fslpath.$rootpath.'/admin/admin.php?opc=6">
 		</center>
 		</form>';
 

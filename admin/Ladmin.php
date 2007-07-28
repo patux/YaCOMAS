@@ -6,9 +6,9 @@ imprimeEncabezado();
 aplicaEstilo();
 $link=conectaBD();
 $idadmin=$_SESSION['YACOMASVARS']['rootid'];
-$userQueryP = 'SELECT * FROM administrador WHERE id!="'.$idadmin.'" ORDER BY id';
+$userQueryP = 'SELECT * FROM administrador WHERE id!="'.$idadmin.'" AND id!="1" ORDER BY id';
 $userRecordsP = mysql_query($userQueryP) or err("No se pudo listar administradores".mysql_errno($userRecords));
-print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['rootlogin'].'&nbsp;<a class="rojo" href=signout.php>Desconectarme</a></P>';
+print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['rootlogin'].'&nbsp;<a class="precaucion" href=signout.php>Desconectarme</a></P>';
 imprimeCajaTop("100","Listado de administradores");
 print '
 	<table border=0 align=center width=100%>
@@ -43,7 +43,7 @@ print '
 		print $ftadmin['descr'];
 		mysql_free_result($result);
 		
-		print '</td><td bgcolor='.$bgcolor.'><a class="rojo" href="Badmin.php?admin='.$fila['id'].'">Eliminar</td>';
+		print '</td><td bgcolor='.$bgcolor.'><a class="precaucion" href="Badmin.php?admin='.$fila['id'].'">Eliminar</td>';
 		print '</tr><tr><td>'; 
 		$QSquery = 'SELECT * FROM tadmin ORDER BY ID'; 
 		$resultQS=mysql_query($QSquery);
@@ -59,7 +59,7 @@ print '
 	retorno();
 	retorno();
 	print '<center>
-	<input type="button" value="Volver al menu" onClick=location.href="'.$rootpath.'/admin/menuadmin.php">
+	<input type="button" value="Volver al menu" onClick=location.href="'.$fslpath.$rootpath.'/admin/menuadmin.php">
 	</center>';
 imprimeCajaBottom();
 imprimePie();?>

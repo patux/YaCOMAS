@@ -5,7 +5,7 @@
 	$idadmin=$_SESSION['YACOMASVARS']['rootid'];
 	imprimeEncabezado();
 	aplicaEstilo();
-	print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['rootlogin'].'&nbsp;<a class="rojo" href=signout.php>Desconectarme</a></P>';
+	print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['rootlogin'].'&nbsp;<a class="precaucion" href=signout.php>Desconectarme</a></P>';
 	$tok = strtok ($_GET['pevento']," ");
 	$idponencia=$tok;
 	$tok = strtok (" ");
@@ -34,7 +34,7 @@
 	$registro['S_resumen']=$p['resumen'];
 	$registro['S_reqtecnicos']=$p['reqtecnicos'];
 	$registro['S_reqasistente']=$p['reqasistente'];
-	$registro['C_tpropuesta']=$p['tpropuesta'];
+	$registro['I_id_tipo']=$p['id_prop_tipo'];
 	$registro['I_duracion']=$p['duracion'];
 	$registro['I_id_orientacion']=$p['id_orientacion'];
 	$registro['I_id_status']=$p['id_status'];
@@ -63,7 +63,7 @@ function imprime_valoresOk($idponencia,$idponente) {
 	$registro['S_resumen']=$p['resumen'];
 	$registro['S_reqtecnicos']=$p['reqtecnicos'];
 	$registro['S_reqasistente']=$p['reqasistente'];
-	$registro['C_tpropuesta']=$p['tpropuesta'];
+	$registro['I_id_tipo']=$p['id_prop_tipo'];
 	$registro['I_duracion']=$p['duracion'];
 	$registro['I_id_orientacion']=$p['id_orientacion'];
 	$registro['I_id_status']=$p['id_status'];
@@ -94,16 +94,19 @@ function imprime_valoresOk($idponencia,$idponente) {
 		</td>
 		</tr>
 
+
 		<tr>
 		<td class="name">Tipo de Propuesta: </td>
 		<td class="resultado">';
 		
-		if ($registro['C_tpropuesta']=="C")
-		    echo "Conferencia";
-		else
-		    echo "Taller";
-		    
-	print '
+		$query = 'SELECT * FROM prop_tipo WHERE id="'.$registro['I_id_tipo'].'"';
+		$result=mysql_query($query);
+	 	while($fila=mysql_fetch_array($result)) {
+			printf ("%s",$fila["descr"]);
+  		}
+		mysql_free_result($result);
+
+	print '	
 		</td>
 		</tr>
 
@@ -173,7 +176,7 @@ function imprime_valoresOk($idponencia,$idponente) {
 		
 		</table>
 		<center>
-		<input type="button" value="Volver al Listado" onClick=location.href="'.$rootpath.'/admin/admin.php?opc=8">
+		<input type="button" value="Volver al Listado" onClick=location.href="'.$fslpath.$rootpath.'/admin/admin.php?opc=8">
 		</center>';
 
 }
@@ -269,7 +272,7 @@ else { // Todas las validaciones Ok
  	print '	Evento agregado, ahora ya estara disponible para que los asistentes se inscriban (en caso de ser un taller).
  		<p>
 		 Si tienes preguntas o no sirve adecuadamente la pagina, por favor contacta al 
-		 <a href="mailto:patux@glo.org.mx">FSL Developer team</a><br><br>';
+		 <a href="mailto:patux@glo.org.mx">YACOMAS Developer team</a><br><br>';
 
  	imprime_valoresOk($idponencia,$idponente);
  	imprimeCajaBottom(); 
@@ -320,15 +323,17 @@ else { // Todas las validaciones Ok
 		<td class="name">Tipo de Propuesta: </td>
 		<td class="resultado">';
 		
-		if ($registro['C_tpropuesta']=="C")
-		    echo "Conferencia";
-		else
-		    echo "Taller";
-		    
-	print '
+		$query = 'SELECT * FROM prop_tipo WHERE id="'.$registro['I_id_tipo'].'"';
+		$result=mysql_query($query);
+	 	while($fila=mysql_fetch_array($result)) {
+			printf ("%s",$fila["descr"]);
+  		}
+		mysql_free_result($result);
+
+	print '	
 		</td>
 		</tr>
-
+		
 		<tr>
 		<td class="name">Orientacion: </td>
 		<td class="resultado">';
@@ -392,7 +397,7 @@ else { // Todas las validaciones Ok
 	print '
 		></option>';
 		
-		if ($registro['C_tpropuesta']=="C")
+		if ($registro['I_id_tipo'] < 50 || $registro['I_id_tipo'] >=100)
 			$result=mysql_query("select * from lugar where cupo=99999 order by id");
 		else 
 			$result=mysql_query("select * from lugar where cupo!=99999 order by id");
@@ -436,7 +441,7 @@ else { // Todas las validaciones Ok
 		<br>
 		<center>
 		<input type="submit" name="submit" value="Registrar">&nbsp;&nbsp;
-		<input type="button" value="Cancelar" onClick=location.href="'.$rootpath.'/admin/admin.php?opc=8">
+		<input type="button" value="Cancelar" onClick=location.href="'.$fslpath.$rootpath.'/admin/admin.php?opc=8">
 		</center>
 		</form>';
 

@@ -3,7 +3,7 @@
 	include "../includes/conf.inc";
 	imprimeEncabezado();
 	aplicaEstilo();
-	imprimeCajaTop("100","Lista preliminar de ponencias");
+	imprimeCajaTop("100","Lista de propuestas enviadas");
 	print '<hr>';
 
 $link=conectaBD();
@@ -24,19 +24,22 @@ mysql_free_result($resultQS);
 //
 $userQueryP ='	SELECT 	P.id AS id_ponencia, 
 			P.nombre AS ponencia,
-			P.tpropuesta, 
+			P.id_prop_tipo, 
 			P.id_ponente, 
 			PO.nombrep, 
 			PO.apellidos, 
+			PT.descr AS prop_tipo,
 			S.descr AS status 
 		FROM 	propuesta AS P, 
 			ponente AS PO, 
-			prop_status AS S 
+			prop_status AS S,
+			prop_tipo AS PT
 		WHERE 	P.id_ponente=PO.id AND 
 			P.id_status=S.id AND 
+			P.id_prop_tipo=PT.id AND
 			id_status != 7 
-		ORDER BY P.tpropuesta,P.id_ponente,P.reg_time';
-$userRecordsP = mysql_query($userQueryP) or err("No se pudo listar propuestas".mysql_errno($userRecords));
+		ORDER BY P.id_prop_tipo,P.id_ponente,P.reg_time';
+$userRecordsP = mysql_query($userQueryP) or err("No se pudo listar propuestas".mysql_errno($userRecordsP));
 // Inicio datos de Ponencias
 print '
 	<table border=0 align=center width=100%>
@@ -61,15 +64,11 @@ print '
 		}
 		print '<tr>
 		<td bgcolor='.$bgcolor.'><a class="azul" href="Vponencia.php?vopc='.$fila['id_ponente'].' '.$fila['id_ponencia'].' '.$_SERVER['REQUEST_URI'].'">'.$fila["ponencia"].'</a>';
-		print '<br><small><a class="rojo" href="Vponente.php?vopc='.$fila['id_ponente'].' '.$_SERVER['REQUEST_URI'].'">'.$fila['nombrep'].' '.$fila['apellidos'].'</a></small>';
+		print '<br><small><a class="ponente" href="Vponente.php?vopc='.$fila['id_ponente'].' '.$_SERVER['REQUEST_URI'].'">'.$fila['nombrep'].' '.$fila['apellidos'].'</a></small>';
 		
 	
 		print '</td><td bgcolor='.$bgcolor.'>';
-		if ($fila['tpropuesta']=="C")
-		    echo "Conferencia";
-		else
-		    echo "Taller";
-		
+		print $fila['prop_tipo'];
 		print '</td><td bgcolor='.$bgcolor.'>';
 		print '<small>'.$fila['status'].'</small>';
 	
@@ -83,9 +82,10 @@ print '
 	print '</table>';
 	retorno();
 	retorno();
-	print '<center>
+/*	print '<center>
 	<input type="button" value="Continuar" onClick=location.href="../">
 	</center>';
+*/
 	imprimeCajaBottom(); 
 	imprimePie(); 
 ?>

@@ -22,7 +22,7 @@ $msg='Datos de ponente <br><small>-- '.$p['nombrep'].' '.$p['apellidos'].' --</s
 imprimeCajaTop("100",$msg);
 
 // Inicio datos de Ponencias
-    print '
+/*    print '
      		<table width=100%>
 		<tr>
 		<td class="name">Resumen Curricular: </td>
@@ -32,6 +32,17 @@ imprimeCajaTop("100",$msg);
 		</tr>
 
 		</table>';
+*/
+	print '<center><b> Resumen Curricular </b></center>
+		<br><br>
+		<table width=100%>
+		<tr>
+		<td align=justify class="resultado">
+		'.$p['resume'].'
+		</td>
+		</tr>
+		</table>
+		';
 	retorno();
 	retorno();
 	print '<center>

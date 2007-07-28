@@ -9,5 +9,9 @@
 				break;
 			case 4: include "Ltalleres-reg.php";
 				break;
+			case 5: include "encuesta.php";
+				break;
+			case 6: include "HojaRegistro.php";
+				break;
 		}	
 ?>

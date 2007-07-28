@@ -22,18 +22,21 @@ mysql_free_result($resultQS);
 // Seleccionamos todos los que no esten eliminados ni esten programados
 // Tal vez podriamos mejorar esta cosa para no depender directamente de que el status siempre sea dado en el codigo
 //
-$userQueryP ='	SELECT 	P.id AS id_ponencia, P.nombre AS ponencia,P.tpropuesta, 
-			P.id_ponente, PO.nombrep, PO.apellidos, S.descr AS status, P.id_status 
+$userQueryP ='	SELECT 	P.id AS id_ponencia, P.nombre AS ponencia,PT.descr AS prop_tipo, 
+			P.id_ponente, PO.nombrep, PO.apellidos, S.descr AS status, P.id_status,
+			P.id_administrador
 		FROM 	propuesta AS P, 
 			ponente AS PO, 
-			prop_status AS S 
+			prop_status AS S, 
+			prop_tipo AS PT
 		WHERE 	P.id_ponente=PO.id AND 
 			P.id_status=S.id AND 
+			P.id_prop_tipo=PT.id AND
 			id_status < 7 
 		ORDER BY P.id_ponente,P.reg_time';
 
-$userRecordsP = mysql_query($userQueryP) or err("No se pudo listar ponencias".mysql_errno($userRecords));
-print '<p class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['rootlogin'].'&nbsp;<a class="rojo" href=signout.php>Desconectarme</a></P>';
+$userRecordsP = mysql_query($userQueryP) or err("No se pudo listar ponencias".mysql_errno($userRecordsP));
+print '<p class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['rootlogin'].'&nbsp;<a class="precaucion" href=signout.php>Desconectarme</a></P>';
 imprimeCajaTop("100","Listado de ponencias");
 
 // Inicio datos de Ponencias
@@ -42,6 +45,7 @@ print '
 	<tr>
 	<td bgcolor='.$colortitle.'><b>Ponencia</b></td><td bgcolor='.$colortitle.'><b>Tipo</b>
 	</td><td bgcolor='.$colortitle.'><b>Status</b></td>
+	</td><td bgcolor='.$colortitle.'><b>Asignado</b></td>
 	</td><td bgcolor='.$colortitle.'><b>&nbsp;</b></td>
 	</tr>';
 	
@@ -61,14 +65,11 @@ print '
 		}
 		print '<tr>
 		<td bgcolor='.$bgcolor.'><a class="azul" href="Vponencia.php?vopc='.$fila['id_ponente'].' '.$fila['id_ponencia'].' '.$_SERVER['REQUEST_URI'].'">'.$fila["ponencia"].'</a>';
-		print '<br><small><a class="rojo" href="Vponente.php?vopc='.$fila['id_ponente'].' '.$_SERVER['REQUEST_URI'].'">'.$fila['nombrep'].' '.$fila['apellidos'].'</a></small>';
+		print '<br><small><a class="ponente" href="Vponente.php?vopc='.$fila['id_ponente'].' '.$_SERVER['REQUEST_URI'].'">'.$fila['nombrep'].' '.$fila['apellidos'].'</a></small>';
 		
 	
 		print '</td><td bgcolor='.$bgcolor.'>';
-		if ($fila['tpropuesta']=="C")
-		    echo "Conferencia";
-		else
-		    echo "Taller";
+		print '<small>'.$fila['prop_tipo'].'</small>';
 		
 		print '</td><td bgcolor='.$bgcolor.'>';
 		print '<small>'.$fila['status'].'</small>';
@@ -76,9 +77,20 @@ print '
 		// Una vez que la ponencia fue aceptada (id 5)
 		// La ponencia no se le puede modificar el status ni eliminar 
 		// A menos que sea el administrador principal 
+		if ($fila['id_administrador'] !=0) 
+		{
+			$userQueryA ='SELECT login FROM administrador WHERE id="'.$fila['id_administrador'].'"';
+			$userRecordsA = mysql_query($userQueryA) or err("No se ver admin".mysql_errno($userRecordsA));
+			$ponente=mysql_fetch_array($userRecordsA);
+			print '</td><td bgcolor='.$bgcolor.'>'.$ponente['login'].'</td>';
+			mysql_free_result($userRecordsA);
+		}
+		else 
+			print '</td><td bgcolor='.$bgcolor.'>Ninguno</td>';
+			
 		if ($fila['id_status'] != 5 || $_SESSION['YACOMASVARS']['rootlevel']==1 ) 
 		{
-			print '</td><td bgcolor='.$bgcolor.'><small><a class="rojo" href="act_ponencia.php?vact='.$fila['id_ponencia'].' 7 '.$_SERVER['REQUEST_URI'].'" onMouseOver="window.status=\'Eliminar ponencia\';return true" onFocus="window.status=\'Eliminar ponencia\';return true" onMouseOut="window.status=\'\';return true">Eliminar</a>';
+			print '</td><td bgcolor='.$bgcolor.'><small><a class="precaucion" href="act_ponencia.php?vact='.$fila['id_ponencia'].' 7 '.$_SERVER['REQUEST_URI'].'" onMouseOver="window.status=\'Eliminar ponencia\';return true" onFocus="window.status=\'Eliminar ponencia\';return true" onMouseOut="window.status=\'\';return true">Eliminar</a>';
 			print '</td></tr><tr><td>'; 
 		
 			print '<small>';
@@ -97,7 +109,7 @@ print '
 	retorno();
 	retorno();
 	print '<center>
-	<input type="button" value="Volver al menu" onClick=location.href="'.$rootpath.'/admin/menuadmin.php#ponencias">
+	<input type="button" value="Volver al menu" onClick=location.href="'.$fslpath.$rootpath.'/admin/menuadmin.php#ponencias">
 	</center>';
 imprimeCajaBottom();
 imprimePie();

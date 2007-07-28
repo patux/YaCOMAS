@@ -6,7 +6,7 @@
 	$idfecha=$_GET['idfecha'];
 	imprimeEncabezado();
 	aplicaEstilo();
-	print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['rootlogin'].'&nbsp;<a class="rojo" href=signout.php>Desconectarme</a></P>';
+	print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['rootlogin'].'&nbsp;<a class="precaucion" href=signout.php>Desconectarme</a></P>';
 	imprimeCajaTop("100","Modificar lugares para para ponencias");
 	$link=conectaBD();
 
@@ -32,7 +32,7 @@ function imprime_valoresOk() {
 		</table>
 		<br>
 		<center>
-		<input type="button" value="Volver al Listado" onClick=location.href="'.$rootpath.'/admin/admin.php?opc=12">
+		<input type="button" value="Volver al Listado" onClick=location.href="'.$fslpath.$rootpath.'/admin/admin.php?opc=12">
 		</center>';
 
 }
@@ -83,7 +83,7 @@ else { // Todas las validaciones Ok
  	print '	Fecha para evento actualizada,
  		<p>
 		 Si tienes preguntas o no sirve adecuadamente la pagina, por favor contacta al 
-		 <a href="mailto:patux@glo.org.mx">FSL Developer team</a><br><br>';
+		 <a href="mailto:patux@glo.org.mx">YACOMAS Developer team</a><br><br>';
 
  	imprime_valoresOk();
  	imprimeCajaBottom(); 
@@ -188,7 +188,7 @@ else {
 		<br>
 		<center>
 		<input type="submit" name="submit" value="Actualizar">&nbsp;&nbsp;
-		<input type="button" value="Cancelar" onClick=location.href="'.$rootpath.'/admin/admin.php?opc=12">
+		<input type="button" value="Cancelar" onClick=location.href="'.$fslpath.$rootpath.'/admin/admin.php?opc=12">
 		</center>
 		</form>';
 

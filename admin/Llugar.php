@@ -8,7 +8,7 @@ $link=conectaBD();
 $idadmin=$_SESSION['YACOMASVARS']['rootid'];
 $userQueryL = 'SELECT * FROM lugar ORDER BY id';
 $userRecordsL = mysql_query($userQueryL) or err("No se pudo listar lugares".mysql_errno($userRecordsL));
-print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['rootlogin'].'&nbsp;<a class="rojo" href=signout.php>Desconectarme</a></P>';
+print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['rootlogin'].'&nbsp;<a class="precaucion" href=signout.php>Desconectarme</a></P>';
 imprimeCajaTop("100","Listado de lugares para eventos");
 print'
 	<table border=0 align=center width=100%>
@@ -42,7 +42,7 @@ print'
 		
 		if ($_SESSION['YACOMASVARS']['rootlevel']==1 ) 
 		{
-			print '</td><td bgcolor='.$bgcolor.'><small><a class="rojo" href="Blugar.php?idlugar='.$fila['id'].'" onMouseOver="window.status=\'Eliminar lugar\';return true" onFocus="window.status=\'Eliminar lugar\';return true" onMouseOut="window.status=\'\';return true">Eliminar</a>';
+			print '</td><td bgcolor='.$bgcolor.'><small><a class="precaucion" href="Blugar.php?idlugar='.$fila['id'].'" onMouseOver="window.status=\'Eliminar lugar\';return true" onFocus="window.status=\'Eliminar lugar\';return true" onMouseOut="window.status=\'\';return true">Eliminar</a>';
 		}
 			print '</td></tr><tr><td>'; 
 		print '</tr>';
@@ -51,7 +51,7 @@ print'
 	retorno();
 	retorno();
 	print '<center>
-	<input type="button" value="Volver al menu" onClick=location.href="'.$rootpath.'/admin/menuadmin.php#lugares">
+	<input type="button" value="Volver al menu" onClick=location.href="'.$fslpath.$rootpath.'/admin/menuadmin.php#lugares">
 	</center>';
 imprimeCajaBottom();
 imprimePie();?>

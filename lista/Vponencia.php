@@ -31,7 +31,7 @@
 	$registro['S_resumen']=$p['resumen'];
 	$registro['S_reqtecnicos']=$p['reqtecnicos'];
 	$registro['S_reqasistente']=$p['reqasistente'];
-	$registro['C_tpropuesta']=$p['tpropuesta'];
+	$registro['I_id_tipo']=$p['id_prop_tipo'];
 	$registro['I_duracion']=$p['duracion'];
 	$registro['I_id_orientacion']=$p['id_orientacion'];
 	$registro['I_id_status']=$p['id_status'];
@@ -64,19 +64,22 @@
 	print '	
 		</td>
 		</tr>
-
+		
 		<tr>
 		<td class="name">Tipo de Propuesta: * </td>
 		<td class="resultado">';
 		
-		if ($registro['C_tpropuesta']=="C")
-		    echo "Conferencia";
-		else
-		    echo "Taller";
-		    
-	print '
+		$query = 'SELECT * FROM prop_tipo WHERE id="'.$registro['I_id_tipo'].'"';
+		$result=mysql_query($query);
+	 	while($fila=mysql_fetch_array($result)) {
+			printf ("%s",$fila["descr"]);
+  		}
+		mysql_free_result($result);
+
+	print '	
 		</td>
 		</tr>
+
 
 		<tr>
 		<td class="name">Orientacion: * </td>
@@ -161,8 +164,8 @@
 		<tr>
 		<td class="name">Hora: * </td>
 		<td class="resultado">';
-		$hfin=$detalle_EO['hora'] + $registro['I_duracion'];		
-		print $detalle_EO['hora'].':00 - '.$hfin.':00';
+		$hfin=$detalle_EO['hora'] + $registro['I_duracion']-1;		
+		print $detalle_EO['hora'].':00 - '.$hfin.':50';
 	print '
 		</td>
 		</tr>';

@@ -23,10 +23,13 @@ $p = mysql_fetch_array($userRecords);
 // Seleccionamos todos los que no esten eliminados
 // Tal vez podriamos mejorar esta cosa para no depender directamente de que el status siempre sea dado en el codigo
 //
-$userQueryP = 'SELECT * FROM propuesta WHERE id_ponente="'.$idponente.'" AND id_status!=7';
+$userQueryP = '	SELECT 	* 
+		FROM 	propuesta 
+		WHERE 	id_ponente="'.$idponente.'" AND 
+			id_status!=7';
 $userRecordsP = mysql_query($userQueryP) or err("No se pudo listar ponencias".mysql_errno($userRecords));
 $msg='Datos de ponente <br><small>-- '.$p['nombrep'].' '.$p['apellidos'].' --</small><hr>';
-print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['rootlogin'].'&nbsp;<a class="rojo" href=signout.php>Desconectarme</a></P>';
+print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['rootlogin'].'&nbsp;<a class="precaucion" href=signout.php>Desconectarme</a></P>';
 imprimeCajaTop("100",$msg);
 
 // Inicio datos de Ponencias
@@ -161,10 +164,11 @@ print '
 		<td bgcolor='.$bgcolor.'><a class="azul" href="Vponencia.php?vopc='.$idponente.' '.$fila['id'].' '.$_SERVER['REQUEST_URI'].'">'.$fila["nombre"].'</a>';
 	
 		print '</td><td bgcolor='.$bgcolor.'>';
-		if ($fila['tpropuesta']=="C")
-		    echo "Conferencia";
-		else
-		    echo "Taller";
+		$query = 'SELECT descr FROM prop_tipo WHERE id="'.$fila['id_prop_tipo'].'"';
+		$result=mysql_query($query);
+	 	$fstatus=mysql_fetch_array($result);
+		print $fstatus['descr'];
+		mysql_free_result($result);
 		
 		print '</td><td bgcolor='.$bgcolor.'>';
 		$query = 'SELECT descr FROM prop_status WHERE id="'.$fila['id_status'].'"';

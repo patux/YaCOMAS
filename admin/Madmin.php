@@ -5,7 +5,7 @@
 	$idadmin=$_SESSION['YACOMASVARS']['rootid'];
 	imprimeEncabezado();
 	aplicaEstilo();
-	print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['rootlogin'].'&nbsp;<a class="rojo" href=signout.php>Desconectarme</a></P>';
+	print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['rootlogin'].'&nbsp;<a class="precaucion" href=signout.php>Desconectarme</a></P>';
 	imprimeCajaTop("100","Modificar Datos de Administrador");
 	$link=conectaBD();
 
@@ -44,7 +44,7 @@ function imprime_valoresOk() {
 		</table>
 		<br>
 		<center>
-		<input type="button" value="Volver al Menu" onClick=location.href="'.$rootpath.'/admin/menuadmin.php#admin">
+		<input type="button" value="Volver al Menu" onClick=location.href="'.$fslpath.$rootpath.'/admin/menuadmin.php#admin">
 		</center>';
 
 }
@@ -126,7 +126,7 @@ else { // Todas las validaciones Ok
  	print '	Administrador modificado.
  		<p>
 		 Si tienes preguntas o no sirve adecuadamente la pagina, por favor contacta al 
-		 <a href="mailto:patux@glo.org.mx">FSL Developer team</a><br><br>';
+		 <a href="mailto:patux@glo.org.mx">YACOMAS Developer team</a><br><br>';
 
  	imprime_valoresOk();
  	imprimeCajaBottom(); 
@@ -159,8 +159,8 @@ else {
 		<td class="name">Administrador Login: * </td>
 		<td class="input">
 		<input TYPE="text" name="S_login" size="15"';
-//		if ($idadmin==1)
-//			print 'readonly ';
+		if ($idadmin==1)
+			print 'readonly ';
 		print 'value="'.$_POST['S_login'].'"></td>
 		<td> 4 a 15 caracteres
 		</td>
@@ -170,8 +170,8 @@ else {
 		<td class="name">Contraseña: * </td>
 		<td class="input">
 		<input type="password" name="S_passwd" size="15"'; 
-//		if ($idadmin==1)
-//			print 'readonly ';
+		if ($idadmin==1)
+			print 'readonly ';
 		print 'value=""></td>
 		<td> 6 a 15 caracteres
 		</td>
@@ -181,8 +181,8 @@ else {
 		<td class="name">Confirmación de Contraseña: * </td>
 		<td class="input">
 		<input type="password" name="S_passwd2" size="15"'; 
-//		if ($idadmin==1)
-//			print 'readonly ';
+		if ($idadmin==1)
+			print 'readonly ';
 		print 'value=""></td>
 		<td> 
 		</td>
@@ -217,7 +217,7 @@ else {
 		<br>
 		<center>
 		<input type="submit" name="submit" value="Modificar">&nbsp;&nbsp;
-		<input type="button" value="Cancelar" onClick=location.href="'.$rootpath.'/admin/menuadmin.php#admin">
+		<input type="button" value="Cancelar" onClick=location.href="'.$fslpath.$rootpath.'/admin/menuadmin.php#admin">
 		</center>
 		</form>';
 

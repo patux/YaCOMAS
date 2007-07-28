@@ -25,13 +25,13 @@ $tallerQuery='
 	EO.id_fecha=F.id AND 
 	EO.id_lugar=L.id AND 
 	E.id='.$idevento.' 
-	GROUP BY E.id ORDER BY F.fecha, EO.hora';
+	ORDER BY F.fecha, EO.hora ASC LIMIT 1';
 
 $taller_record= mysql_query($tallerQuery) or err("No se pudo listar Asistentes".mysql_errno($taller_record));
 $filaT= mysql_fetch_array($taller_record);
-$hfin=$filaT["hora"]+$filaT["duracion"];
+$hfin=$filaT["hora"]+$filaT["duracion"]-1;
 $msg="Taller: ".$filaT['taller']."<br><small>
-Fecha: ".$filaT['fecha']."<br><small>".$filaT['hora'].":00 - ".$hfin.":00<br>Lugar: ".$filaT['lugar']."</small>";
+".strftime_caste("%A %d de %B",strtotime($filaT['fecha']))."<br><small>".$filaT['hora'].":00 - ".$hfin.":50<br>Lugar: ".$filaT['lugar']."</small>";
 mysql_free_result($taller_record);
 $userQueryA =' 
  	SELECT 	I.id_asistente, I.reg_time, A.nombrep, A.apellidos, E.descr as estado, ES.descr AS estudios
@@ -46,7 +46,7 @@ $userQueryA ='
  		I.id_asistente
  	ORDER BY I.reg_time, I.id_asistente';
 $userRecordsA = mysql_query($userQueryA) or err("No se pudo listar Asistentes".mysql_errno($userRecordsA));
-print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['rootlogin'].'&nbsp;<a class="rojo" href=signout.php>Desconectarme</a></P>';
+print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['rootlogin'].'&nbsp;<a class="precaucion" href=signout.php>Desconectarme</a></P>';
 imprimeCajaTop("100",$msg);
 print'
 	<table border=0 align=center width=100%>
@@ -79,7 +79,7 @@ print'
 		print '</td><td bgcolor='.$bgcolor.'>'.$fila['estudios'];
 		print '</td><td bgcolor='.$bgcolor.'>'.$fila['reg_time'].'</td>';
 		if ($_SESSION['YACOMASVARS']['rootlevel']==1)
-			print '<td bgcolor='.$bgcolor.'><a class="rojo" href="Basistente.php?idasistente='.$fila['id_asistente'].'">Eliminar</td>';
+			print '<td bgcolor='.$bgcolor.'><a class="precaucion" href="Basistente.php?idasistente='.$fila['id_asistente'].'">Eliminar</td>';
 		print '</tr>';
 	}
 	print '</table>';

@@ -8,7 +8,7 @@ $link=conectaBD();
 $idadmin=$_SESSION['YACOMASVARS']['rootid'];
 $userQueryP = 'SELECT * FROM config';
 $userRecordsP = mysql_query($userQueryP) or err("No se pudo listar configuracion".mysql_errno($userRecords));
-print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['rootlogin'].'&nbsp;<a class="rojo" href=signout.php>Desconectarme</a></P>';
+print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['rootlogin'].'&nbsp;<a class="precaucion" href=signout.php>Desconectarme</a></P>';
 imprimeCajaTop("100","Configuracion de Yacomas");
 print '
 	<table border=0 align=center width=100%>
@@ -36,7 +36,7 @@ print '
 		{
 			print "Abierto";
 			print '<td bgcolor='.$bgcolor.'>';
-			print '<a class="rojo" href="act_conf.php?vconf='.$fila['id'].' 0" onMouseOver="window.status=\'Cerrar\';return true" onFocus="window.status=\'Cerrar\';return true" onMouseOut="window.status=\'\';return true">Cerrar</a>';
+			print '<a class="precaucion" href="act_conf.php?vconf='.$fila['id'].' 0" onMouseOver="window.status=\'Cerrar\';return true" onFocus="window.status=\'Cerrar\';return true" onMouseOut="window.status=\'\';return true">Cerrar</a>';
 		}
 		else
 		{
@@ -49,7 +49,7 @@ print '
 	retorno();
 	retorno();
 	print '<center>
-	<input type="button" value="Volver al menu" onClick=location.href="'.$rootpath.'/admin/menuadmin.php">
+	<input type="button" value="Volver al menu" onClick=location.href="'.$fslpath.$rootpath.'/admin/menuadmin.php">
 	</center>';
 imprimeCajaBottom();
 imprimePie();?>

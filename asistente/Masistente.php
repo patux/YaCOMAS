@@ -5,8 +5,8 @@
 	$idasistente=$_SESSION['YACOMASVARS']['asiid'];
 	imprimeEncabezado();
 	aplicaEstilo();
-	print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['asilogin'].'&nbsp;<a class="rojo" href=signout.php>Desconectarme</a></P>';
-	imprimeCajaTop("100","Modificar Informacion de Ponentes");
+	print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['asilogin'].'&nbsp;<a class="precaucion" href=signout.php>Desconectarme</a></P>';
+	imprimeCajaTop("100","Modificar Informacion de Asistentes");
 	$link=conectaBD();
 
 function imprime_valoresOk() {
@@ -124,7 +124,7 @@ function imprime_valoresOk() {
 		</table>
 		<br>
 		<center>
-		<input type="button" value="Volver al menu" onClick=location.href="'.$rootpath.'/asistente/menuasistente.php">
+		<input type="button" value="Volver al menu" onClick=location.href="'.$fslpath.$rootpath.'/asistente/menuasistente.php">
 		</center>';
 
 }
@@ -224,7 +224,7 @@ if (isset ($_POST['submit']) && $_POST['submit'] == "Actualizar") {
  	print $_POST['S_nombrep'].' Has actualizado tus datos .
  		<p>
 		 Si tienes preguntas o no sirve adecuadamente la pagina, por favor contacta al 
-		 <a href="mailto:patux@glo.org.mx">FSL Developer team</a><br><br>';
+		 <a href="mailto:patux@glo.org.mx">YACOMAS Developer team</a><br><br>';
 
  	imprime_valoresOk();
  	imprimeCajaBottom(); 
@@ -497,7 +497,7 @@ print'
 		<br>
 		<center>
 		<input type="submit" name="submit" value="Actualizar">&nbsp;&nbsp;
-		<input type="button" value="Volver al Menu" onClick=location.href="'.$rootpath.'/asistente/menuasistente.php">
+		<input type="button" value="Volver al Menu" onClick=location.href="'.$fslpath.$rootpath.'/asistente/menuasistente.php">
 		</center>
 		</form>';
 

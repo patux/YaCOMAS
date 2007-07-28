@@ -6,18 +6,18 @@
 	aplicaEstilo();
 	$idponente=$_SESSION['YACOMASVARS']['ponid'];
 	$idponencia=$_GET['idponencia'];
-	print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['ponlogin'].'&nbsp;<a class="rojo" href=signout.php>Desconectarme</a></P>';
+	print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['ponlogin'].'&nbsp;<a class="precaucion" href=signout.php>Desconectarme</a></P>';
 
 	$link=conectaBD();
-	$userQuery = 
-	'SELECT nombrep, apellidos FROM ponente  
-		WHERE id="'.$idponente.'"';
+	$userQuery = '	SELECT nombrep, apellidos FROM ponente  
+			WHERE id="'.$idponente.'"';
 	$userRecords = mysql_query($userQuery) or err("No se pudo checar el ponente".mysql_errno($userRecords));
 	$p = mysql_fetch_array($userRecords);
 	$ponente_name=$p['nombrep'].' '.$p['apellidos'];
-	$userQuery =
-	'SELECT * FROM propuesta 
-		WHERE id="'.$idponencia.'" AND id_ponente="'.$idponente.'"';
+	$userQuery ='	SELECT 	* 
+			FROM 	propuesta 
+			WHERE 	id="'.$idponencia.'" AND 
+				id_ponente="'.$idponente.'"';
 	$userRecords = mysql_query($userQuery) or err("No se pudo checar la propuesta".mysql_errno($userRecords));
 	$p = mysql_fetch_array($userRecords);
 	$registro['S_nombreponencia']=$p['nombre'];
@@ -25,11 +25,11 @@
 	$registro['S_resumen']=$p['resumen'];
 	$registro['S_reqtecnicos']=$p['reqtecnicos'];
 	$registro['S_reqasistente']=$p['reqasistente'];
-	$registro['C_tpropuesta']=$p['tpropuesta'];
 	$registro['I_duracion']=$p['duracion'];
 	$registro['I_id_orientacion']=$p['id_orientacion'];
 	$registro['I_id_status']=$p['id_status'];
 	$registro['I_id_administrador']=$p['id_administrador'];
+	$registro['I_id_tipo']=$p['id_prop_tipo'];
 
 	
 	$msg='Propuesta de: <small>'.$ponente_name.'</small>';
@@ -58,19 +58,22 @@
 	print '	
 		</td>
 		</tr>
-
+		
 		<tr>
-		<td class="name">Tipo de Propuesta: * </td>
+		<td class="name">Tipo Propuesta: * </td>
 		<td class="resultado">';
 		
-		if ($registro['C_tpropuesta']=="C")
-		    echo "Conferencia";
-		else
-		    echo "Taller";
-		    
-	print '
+		$query = 'SELECT * FROM prop_tipo WHERE id="'.$registro['I_id_tipo'].'"';
+		$result=mysql_query($query);
+	 	while($fila=mysql_fetch_array($result)) {
+			printf ("%s",$fila["descr"]);
+  		}
+		mysql_free_result($result);
+
+	print '	
 		</td>
 		</tr>
+
 
 		<tr>
 		<td class="name">Orientacion: * </td>
@@ -175,8 +178,8 @@
 		<tr>
 		<td class="name">Hora: * </td>
 		<td class="resultado">';
-		$hfin=$detalle_EO['hora'] + $registro['I_duracion'];		
-		print $detalle_EO['hora'].':00 - '.$hfin.':00';
+		$hfin=$detalle_EO['hora'] + $registro['I_duracion']-1;		
+		print $detalle_EO['hora'].':00 - '.$hfin.':50';
 		
 	print '	
 		</td>
@@ -214,7 +217,7 @@
 		</table>
 		<br>
 		<center>
-		<input type="button" value="Volver al listado" onClick=location.href="'.$rootpath.'/ponente/ponente.php?opc=2">
+		<input type="button" value="Volver al listado" onClick=location.href="'.$fslpath.$rootpath.'/ponente/ponente.php?opc=2">
 		</center>';
 
 imprimeCajaBottom(); 

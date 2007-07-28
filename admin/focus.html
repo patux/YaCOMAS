@@ -1,0 +1,49 @@
+
+<!-- THREE STEPS TO INSTALL FIELD FOCUS:
+
+  1.  Copy the coding into the HEAD of your HTML document
+    2.  Add the onLoad event handler into the BODY tag
+      3.  Put the last coding into the BODY of your HTML document  -->
+
+      <!-- STEP ONE: Paste this code into the HEAD of your HTML document  -->
+
+      <HEAD>
+
+      <SCRIPT LANGUAGE="JavaScript">
+
+      <!-- This script and many more are available free online at -->
+      <!-- The JavaScript Source!! http://javascript.internet.com -->
+      <!-- John Munn  (jrmunn@home.com) -->
+
+      <!-- Begin
+       function putFocus(formInst, elementInst) {
+         if (document.forms.length > 0) {
+	    document.forms[formInst].elements[elementInst].focus();
+	      }
+	       }
+	       // The second number in the "onLoad" command in the body
+	       // tag determines the form's focus. Counting starts with '0'
+	       //  End -->
+	       </script>
+
+	       </HEAD>
+
+	       <!-- STEP TWO: Insert the onLoad event handler into your BODY tag  -->
+
+	       <BODY onLoad="putFocus(0,1);">
+
+	       <!-- STEP THREE: Copy this code into the BODY of your HTML document  -->
+
+	       <div align="center">
+	       <form method="post" name="bogus" id="bogus-form">
+	       <input type="text" name="bogus_field0" id="bogus_field0" size="20" maxlength="12"><br>
+	       <input type="text" name="bogus_field1" id="bogus_field0" size="20" maxlength="12" value="Form focus is here!"><br>
+	       <input type="text" name="bogus_field2" id="bogus_field0" size="20" maxlength="12">
+	       </div>
+
+	       <p><center>
+	       <font face="arial, helvetica" size"-2">Free JavaScripts provided<br>
+	       by <a href="http://javascriptsource.com">The JavaScript Source</a></font>
+	       </center><p>
+
+	       <!-- Script Size:  1.51 KB -->

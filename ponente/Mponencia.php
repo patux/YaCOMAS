@@ -6,7 +6,7 @@
 	aplicaEstilo();
   	$idponente=$_SESSION['YACOMASVARS']['ponid'];
 	$idponencia=$_GET['idponencia'];
-	print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['ponlogin'].'&nbsp;<a class="rojo" href=signout.php>Desconectarme</a></P>';
+	print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['ponlogin'].'&nbsp;<a class="precaucion" href=signout.php>Desconectarme</a></P>';
 	imprimeCajaTop("100","Modificar propuesta");
 	print '<hr>';
 	$link=conectaBD();
@@ -22,6 +22,22 @@ function imprime_valoresOk() {
 		'.$_POST['S_nombreponencia'].'
 		</td>
 		</tr>
+		
+		<tr>
+		<td class="name">Orientacion: * </td>
+		<td class="resultado">';
+		
+		$query = 'SELECT * FROM orientacion WHERE id="'.$_POST['I_id_orientacion'].'"';
+		$result=mysql_query($query);
+	 	while($fila=mysql_fetch_array($result)) {
+			printf ("%s",$fila["descr"]);
+  		}
+		mysql_free_result($result);
+
+	print '	
+		</td>
+		</tr>
+		
 
 		<tr>
 		<td class="name">Nivel: * </td>
@@ -42,20 +58,7 @@ function imprime_valoresOk() {
 		<td class="name">Tipo de Propuesta: * </td>
 		<td class="resultado">';
 		
-		if ($_POST['C_tpropuesta']=="C")
-		    echo "Conferencia";
-		else
-		    echo "Taller";
-		    
-	print '
-		</td>
-		</tr>
-
-		<tr>
-		<td class="name">Orientacion: * </td>
-		<td class="resultado">';
-		
-		$query = 'SELECT * FROM orientacion WHERE id="'.$_POST['I_id_orientacion'].'"';
+		$query = 'SELECT * FROM prop_tipo WHERE id="'.$_POST['I_id_tipo'].'"';
 		$result=mysql_query($query);
 	 	while($fila=mysql_fetch_array($result)) {
 			printf ("%s",$fila["descr"]);
@@ -65,7 +68,7 @@ function imprime_valoresOk() {
 	print '	
 		</td>
 		</tr>
-		
+
 		<tr>
 		<td class="name">Duracion: * </td>
 		<td class="resultado">';
@@ -98,7 +101,7 @@ function imprime_valoresOk() {
 		</table>
 		<br>
 		<center>
-		<input type="button" value="Volver a listado" onClick=location.href="'.$rootpath.'/ponente/ponente.php?opc=2">
+		<input type="button" value="Volver a listado" onClick=location.href="'.$fslpath.$rootpath.'/ponente/ponente.php?opc=2">
 		</center>';
 
 }
@@ -110,12 +113,12 @@ if (isset($_POST['submit']) && $_POST['submit'] == "Actualizar") {
   // Variables para restableser los valores de tipod de propuesta y duracion
   // Dado que la propuesta ya que el status esta en Aceptada/Por Aceptar/Cancelada/Rechazada
   // Es necesario no mover los valores que tenian cuando cambio el status al modificar una propuesta en esos status
-  $userQuery = 'SELECT * FROM propuesta WHERE id="'.$idponencia.'"';
+  $userQuery = 'SELECT * FROM propuesta WHERE id="'.$idponencia.'" AND id_ponente="'.$idponente.'"';
   $userRecords = mysql_query($userQuery) or err("No se pudo checar las ponencia ".mysql_errno($userRecords));
   $p = mysql_fetch_array($userRecords);
-  if ($p['id_status'] >=2 )
+  if ($p['id_status'] > 2 )
   {
-  	$_POST['C_tpropuesta']=$p['tpropuesta'];
+  	$_POST['I_id_tipo']=$p['id_prop_tipo'];
 	$_POST['I_duracion']=$p['duracion'];
   }
   // Verificar si todos los campos obligatorios no estan vacios
@@ -123,13 +126,13 @@ if (isset($_POST['submit']) && $_POST['submit'] == "Actualizar") {
   $S_trim_reqtecnicos=trim($_POST['S_reqtecnicos']);
   $S_trim_reqasistente=trim($_POST['S_reqasistente']);
   if (empty($_POST['S_nombreponencia']) || empty($S_trim_resumen) ||
-    	empty($_POST['C_tpropuesta']) || empty($_POST['I_id_orientacion']) || 
+    	empty($_POST['I_id_tipo']) || empty($_POST['I_id_orientacion']) || 
 	empty($_POST['I_duracion'])) { 
 	$errmsg .= "<li>Verifica que los datos obligatorios los hayas introducido correctamente </li>";
   }
-  if (($_POST['I_duracion'] > 2) && ($_POST['C_tpropuesta']=="C"))
+  if (($_POST['I_duracion'] > 2) && ($_POST['I_id_tipo'] < 50))
   {
-  	$errmsg .= "<li>No puedes registrar una conferencia mayor de 2 horas";
+  	$errmsg .= "<li>Solo los talleres y tutoriales pueden ser de mas de 2 horas";
   }
   // Verifica que la ponencia no este dada de alta
   if (empty($errmsg)) {
@@ -139,7 +142,7 @@ if (isset($_POST['submit']) && $_POST['submit'] == "Actualizar") {
       	if (mysql_num_rows($userRecords) != 0) {
 		if ($p['id'] != $idponencia) 
 		{ 
-			print $p['id'].' '.$ponencia;
+			//print $p['id'].' '.$ponencia;
   			$p = mysql_fetch_array($userRecords);
         		$errmsg .= "<li>El nombre que elegiste para la ponencia ya lo has dado de alta";
 		}
@@ -160,10 +163,10 @@ if (isset($_POST['submit']) && $_POST['submit'] == "Actualizar") {
 				    reqtecnicos="."'".mysql_escape_string(stripslashes($S_trim_reqtecnicos))."',
 				    reqasistente="."'".mysql_escape_string(stripslashes($S_trim_reqasistente))."',
 				    id_nivel ="."'".$_POST['I_id_nivel']."',
-				    tpropuesta="."'".$_POST['C_tpropuesta']."',
+				    id_prop_tipo="."'".$_POST['I_id_tipo']."',
 				    duracion="."'".$_POST['I_duracion']."',
 				    id_orientacion="."'".$_POST['I_id_orientacion']."'
-				    WHERE id="."'".$idponencia."'";
+				    WHERE id="."'".$idponencia."' AND id_ponente='".$idponente."'";
 		// Para debugear querys
 		//print $query;
 		//
@@ -171,7 +174,7 @@ if (isset($_POST['submit']) && $_POST['submit'] == "Actualizar") {
  	print '	Tu propuesta de ponencia ha sido actualizada .
  		<p>
 		 Si tienes preguntas o no sirve adecuadamente la pagina, por favor contacta al 
-		 <a href="mailto:patux@glo.org.mx">FSL Developer team</a><br><br>';
+		 <a href="mailto:patux@glo.org.mx">YACOMAS Developer team</a><br><br>';
 
  	imprime_valoresOk();
  	imprimeCajaBottom(); 
@@ -187,7 +190,7 @@ if (isset($_POST['submit']) && $_POST['submit'] == "Actualizar") {
 // o para corregir datos que ya hayamos tratado de introducir
 else {
 	$userQuery = 
-	'SELECT nombre, resumen, id_nivel, tpropuesta, duracion, id_status, id_orientacion FROM propuesta WHERE id="'.$idponencia.'"';
+	'SELECT nombre, resumen, reqtecnicos, reqasistente, id_nivel, id_prop_tipo, duracion, id_status, id_orientacion FROM propuesta WHERE id="'.$idponencia.'" AND id_ponente="'.$idponente.'"';
 	$userRecords = mysql_query($userQuery) or err("No se pudo checar la propuesta".mysql_errno($userRecords));
 	$p = mysql_fetch_array($userRecords);
 	$_POST['S_nombreponencia']=$p['nombre'];
@@ -197,11 +200,11 @@ else {
 		$_POST['S_reqtecnicos']=$p['reqtecnicos'];
 	else 
 		$_POST['S_reqtecnicos']='';
-	if (isset ($_POST['S_reqasistente']))
+	if (isset ($p['reqasistente']))
 		$_POST['S_reqasistente']=$p['reqasistente'];
 	else 
 		$_POST['S_reqasistente']='';
-	$_POST['C_tpropuesta']=$p['tpropuesta'];
+	$_POST['I_id_tipo']=$p['id_prop_tipo'];
 	$_POST['I_duracion']=$p['duracion'];
 	$_POST['I_id_orientacion']=$p['id_orientacion'];
 	//mysql_free_result($p);
@@ -214,8 +217,34 @@ else {
 
 		<td class="name">Nombre de Ponencia: * </td>
 		<td class="input">
-		<input TYPE="text" name="S_nombreponencia" size="50" 
+		<input TYPE="text" name="S_nombreponencia" size="50" maxlength="150" 
 		value="'.$_POST['S_nombreponencia'].'"></td>
+		</tr>
+		
+		<tr>
+		<td class="name">Orientacion : * </td>
+		<td class="input">
+		<select name="I_id_orientacion">
+		<option name="unset" value="0"';
+		if (empty($_POST['I_id_orientacion'])) 
+			echo " selected";
+	print '
+		></option>';
+	
+		$result=mysql_query("select * from orientacion order by id");
+	 	while($fila=mysql_fetch_array($result)) {
+			
+			print '<option value='.$fila["id"];
+			if ($_POST['I_id_orientacion']==$fila["id"])
+				echo " selected";
+			print '>'.$fila["descr"].'</option>';
+  		}
+		mysql_free_result($result);
+		
+
+	print '	
+		</select>
+		</td>
 		</tr>
 		
 		<tr>
@@ -247,60 +276,29 @@ else {
 		{
 			print'	
 				<tr>
-				<td class="name">Tipo de propuesta: * </td>
+				<td class="name">Tipo de Propuesta: * </td>
 				<td class="input">
-				<select name="C_tpropuesta">
-				<option name="unset" value="" ';
-		
-				if (empty($_POST['C_tpropuesta'])) 
-					echo "selected";
-		
+				<select name="I_id_tipo">
+				<option name="unset" value="0"';
+				if (empty($_POST['I_id_tipo'])) 
+					echo " selected";
 			print '
-				></option>"
-				<option value="C"';
-				if ($_POST['C_tpropuesta']=="C")
-					echo "selected";
+				></option>';
 	
-			print '
-				>Conferencia</option>"
-				<option value="T"';
-				if ($_POST['C_tpropuesta']=="T") 
-					echo "selected";
-			print '
-				>Taller</option>"
+				$result=mysql_query("select * from prop_tipo WHERE id < 100 order by id");
+	 			while($fila=mysql_fetch_array($result)) {
+			
+					print '<option value='.$fila["id"];
+					if ($_POST['I_id_tipo']==$fila["id"])
+						echo " selected";
+					print '>'.$fila["descr"].'</option>';
+  				}
+				mysql_free_result($result);
+
+			print '	
 				</select>
 				</td>
 				</tr>';
-		}
-	print '
-		<tr>
-		<td class="name">Orientacion : * </td>
-		<td class="input">
-		<select name="I_id_orientacion">
-		<option name="unset" value="0"';
-		if (empty($_POST['I_id_orientacion'])) 
-			echo " selected";
-	print '
-		></option>';
-	
-		$result=mysql_query("select * from orientacion order by id");
-	 	while($fila=mysql_fetch_array($result)) {
-			
-			print '<option value='.$fila["id"];
-			if ($_POST['I_id_orientacion']==$fila["id"])
-				echo " selected";
-			print '>'.$fila["descr"].'</option>';
-  		}
-		mysql_free_result($result);
-		
-
-	print '	
-		</select>
-		</td>
-		</tr>';
-		
-		if ($p['id_status'] <=2 ) 
-		{
 			print '
 				<tr>
 				<td class="name">Duracion (hrs): * </td>
@@ -326,27 +324,24 @@ else {
 	print '
 		<tr>
 		<td class="name">Resumen: *</td>
-		<td class="input"><textarea name="S_resumen" cols=60 rows=15> 
-		'.stripslashes($_POST['S_resumen']).'</textarea></td>
+		<td class="input"><textarea name="S_resumen" cols=60 rows=15>'.stripslashes($_POST['S_resumen']).'</textarea></td>
 		</tr>
 		
 		<tr>
 		<td class="name">Requisitos tecnicos de la ponencia:<br><small>(Estos son los requisitos que Ud. necesita para impartirla)</small> </td>
-		<td class="input"><textarea tabindex=0 rows=5 name="S_reqtecnicos" cols=60 rows=15> 
-		'.stripslashes($_POST['S_reqtecnicos']).'</textarea></td>
+		<td class="input"><textarea name="S_reqtecnicos" cols=60 rows=5>'.stripslashes($_POST['S_reqtecnicos']).'</textarea></td>
 		</tr>
 		
 		<tr>
 		<td class="name">Prerequisitos para el asistente: *</td>
-		<td class="input"><textarea tabindex=0 rows=5 name="S_reqasistente" cols=60 rows=15> 
-		'.stripslashes($_POST['S_reqasistente']).'</textarea></td>
+		<td class="input"><textarea name="S_reqasistente" cols=60 rows=5>'.stripslashes($_POST['S_reqasistente']).'</textarea></td>
 		</tr>
 		
 		<br>
 		</table>
 		<center>
 		<input type="submit" name="submit" value="Actualizar">&nbsp;&nbsp;
-		<input type="button" value="Cancelar" onClick=location.href="'.$rootpath.'/ponente/ponente.php?opc=2">
+		<input type="button" value="Cancelar" onClick=location.href="'.$fslpath.$rootpath.'/ponente/ponente.php?opc=2">
 		</center>
 		</form>';
 

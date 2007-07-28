@@ -11,7 +11,7 @@ $fechaRecords = mysql_query($fechaQueryE) or err("No se pudo listar fechas de ev
 
 imprimeEncabezado();
 aplicaEstilo();
-print '<p class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['asilogin'].'&nbsp;<a class="rojo" href=signout.php>Desconectarme</a></P>';
+print '<p class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['asilogin'].'&nbsp;<a class="precaucion" href=signout.php>Desconectarme</a></P>';
 $msg="Listado de eventos<br>";
 
 imprimeCajaTop("100",$msg);
@@ -21,7 +21,7 @@ print '<FORM method="POST" action="'.$_SERVER['REQUEST_URI'].'">';
 while ($Qf_evento = mysql_fetch_array($fechaRecords))
 	{
 		print '<center>';
-		print '<H1>'.$Qf_evento['fecha'].'</H1>';
+		print '<H1>'.strftime_caste("%A %d de %B",strtotime($Qf_evento['fecha'])).'</H1>';
 		if (!empty($Qf_evento['descr']))
 			print '<H3> Dia de: '.$Qf_evento['descr'].'</H3>';
 		print '</center>';
@@ -36,21 +36,25 @@ while ($Qf_evento = mysql_fetch_array($fechaRecords))
 			</td><td bgcolor='.$colortitle.'><b>Disp</b></td>
 			</tr>';
 		$Qehs= 'SELECT 	EO.id_lugar, L.cupo, EO.id_fecha, EO.id_evento, E.id_propuesta, 
-				P.nombre, O.descr, P.tpropuesta, EO.hora, P.duracion, P.id_ponente, 
-				PO.nombrep, PO.apellidos, L.nombre_lug 
+				P.nombre, O.descr, P.id_prop_tipo, PT.descr AS prop_tipo,  EO.hora, 
+				P.duracion, P.id_ponente, PO.nombrep, PO.apellidos, L.nombre_lug,PO.org,ES.descr 				 AS nestado 
 			FROM 	evento AS E, 
 				propuesta AS P, 
 				evento_ocupa AS EO, 
 				ponente AS PO, 
 				lugar AS L, 
-				orientacion AS O 
+				prop_tipo AS PT,
+				orientacion AS O, 
+				estado AS ES
 			WHERE 	E.id_propuesta=P.id AND 
 				E.id=EO.id_evento AND 
 				P.id_ponente=PO.id AND 
 				EO.id_lugar=L.id AND 
 				P.id_orientacion=O.id AND
+				P.id_prop_tipo=PT.id AND
+				PO.id_estado=ES.id AND
 				EO.id_fecha="'.$Qf_evento['id'].'" 
-			GROUP BY id_evento 
+			GROUP BY E.id
 			ORDER BY EO.id_fecha,EO.hora';
 		$eventoRecords= mysql_query($Qehs) or err("No se pudo listar eventos de esta fecha".mysql_errno($eventoRecords));
 		$color=1;
@@ -66,21 +70,30 @@ while ($Qf_evento = mysql_fetch_array($fechaRecords))
 				$bgcolor=$color_renglon2;
 				$color=1;
 			}
+		// El registro 101 de la tabla prop_tipo
+		// Es un registro que agregaron los organizadores del FSL
+		// Llamado Evento especial organizadores
+		// El registro que eligieron 101 .. 
+		// Puede ser otro.. si se desea
+			if ($Qf_event['id_prop_tipo']==101){
+				$bgcolor=$color_especiales;
+				if ($color==1)
+					$color==2;
+				else
+					$color=1;
+				}
 			print '<td bgcolor='.$bgcolor.'><a class="azul" href="Vponencia.php?vopc='.$Qf_event['id_ponente'].' '.$Qf_event['id_propuesta'].' '.$_SERVER['REQUEST_URI'].'">'.$Qf_event['nombre'].'</a>';
 			retorno();
-			print '<small><a class="rojo" href="Vponente.php?vopc='.$Qf_event['id_ponente'].' '.$_SERVER['REQUEST_URI'].'">'.$Qf_event['nombrep'].' '.$Qf_event['apellidos'].'</a></small>';
-			print '</td><td bgcolor='.$bgcolor.'>';
-			if ($Qf_event['tpropuesta']=="C")
-		    		echo "Conferencia";
-			else
-		    		echo "Taller";
+			print '<small><a class="ponente" href="Vponente.php?vopc='.$Qf_event['id_ponente'].' '.$_SERVER['REQUEST_URI'].'">'.$Qf_event['nombrep'].' '.$Qf_event['apellidos'].'</a></small>';
+			print '<br>'.$Qf_event["org"].'<br>'.$Qf_event["nestado"].'</small>';
+			print '</td><td bgcolor='.$bgcolor.'>'.$Qf_event["prop_tipo"];
 			print '</td><td bgcolor='.$bgcolor.'>'.$Qf_event["descr"];
 			print '</td><td bgcolor='.$bgcolor.'>'.$Qf_event["hora"].':00 - ';
-			$hfin=$Qf_event["hora"]+$Qf_event["duracion"];
-			print $hfin.':00';
+			$hfin=$Qf_event["hora"]+$Qf_event["duracion"]-1;
+			print $hfin.':50';
 			print '</td><td bgcolor='.$bgcolor.'>'.$Qf_event["nombre_lug"];
 			print '</td><td bgcolor='.$bgcolor.'>';
-			if ($Qf_event['tpropuesta']=="T")
+			if ($Qf_event['id_prop_tipo'] >=50 && $Qf_event['id_prop_tipo'] < 100)
 			{
 				// Checamos cuanta gente esta inscrita a este taller 
 				// Para sacar el total de espacios disponibles todavia para el taller
@@ -102,7 +115,7 @@ while ($Qf_evento = mysql_fetch_array($fechaRecords))
 	retorno();
 	retorno();
 	print '<center>';
-	print '<input type="button" value="Volver al menu" onClick=location.href="'.$rootpath.'/asistente/menuasistente.php">
+	print '<input type="button" value="Volver al menu" onClick=location.href="'.$fslpath.$rootpath.'/asistente/menuasistente.php">
 	</center>';
 imprimeCajaBottom();
 imprimePie();

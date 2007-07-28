@@ -23,19 +23,21 @@ mysql_free_result($resultQS);
 // Tal vez podriamos mejorar esta cosa para no depender directamente de que el status siempre sea dado en el codigo
 //
 $userQueryP = 'SELECT 	P.act_time, A.login, P.id AS id_ponencia, P.nombre AS ponencia,
-			P.tpropuesta, P.id_ponente, PO.nombrep, S.descr AS status 
+			P.id_prop_tipo, PT.descr,P.id_ponente, PO.nombrep, S.descr AS status 
 		FROM 	administrador AS A, 
 			propuesta AS P, 
 			ponente AS PO, 
-			prop_status AS S 
+			prop_status AS S, 
+			prop_tipo AS PT
 		WHERE 	P.id_administrador=A.id AND 
 			P.id_ponente=PO.id AND 
 			P.id_status=S.id AND 
+			P.id_prop_tipo=PT.id AND
 			id_status=7 
 		ORDER BY P.id_ponente,P.act_time';
 
 $userRecordsP = mysql_query($userQueryP) or err("No se pudo listar ponencias".mysql_errno($userRecords));
-print '<p class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['rootlogin'].'&nbsp;<a class="rojo" href=signout.php>Desconectarme</a></P>';
+print '<p class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['rootlogin'].'&nbsp;<a class="precaucion" href=signout.php>Desconectarme</a></P>';
 imprimeCajaTop("100","Listado de ponencias eliminadas");
 
 // Inicio datos de Ponencias
@@ -67,11 +69,7 @@ print '
 
 		print '</td><td bgcolor='.$bgcolor.'>'.$fila['act_time'];
 	
-		print '</td><td bgcolor='.$bgcolor.'>';
-		if ($fila['tpropuesta']=="C")
-		    echo "Conferencia";
-		else
-		    echo "Taller";
+		print '</td><td bgcolor='.$bgcolor.'>'.$fila['descr'];
 		print '</td><td bgcolor='.$bgcolor.'>';
 		
 		print '<a class="azul" href="Vponente.php?vopc='.$fila['id_ponente'].' '.$_SERVER['REQUEST_URI'].'">'.$fila['nombrep'].'</a>';
@@ -92,7 +90,7 @@ print '
 	retorno();
 	retorno();
 	print '<center>
-	<input type="button" value="Volver al menu" onClick=location.href="'.$rootpath.'/admin/menuadmin.php#admin">
+	<input type="button" value="Volver al menu" onClick=location.href="'.$fslpath.$rootpath.'/admin/menuadmin.php#admin">
 	</center>';
 imprimeCajaBottom();
 imprimePie();

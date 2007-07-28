@@ -10,7 +10,7 @@ print '
         <meta HTTP-EQUIV="Content-Language" CONTENT="ES">
         <meta HTTP-EQUIV="Content-Type" content="text/html; charset=ISO-8859-1">
         <meta NAME="description" CONTENT="Yacomas (Yet Another Conference Management System)">
-        <meta NAME="keywords" CONTENT="yacomas,festival,software,libre,software libre,festival de software libre,2004,FSL,linux,gnu,gpl,openbsd,freebsd,netbsd,gnu/linux">
+        <meta NAME="keywords" CONTENT="YACOMAS,yacomas,festival,software,libre,software libre,festival de software libre,2004,FSL,linux,gnu,gpl,openbsd,freebsd,netbsd,gnu/linux">
         <meta NAME="author" CONTENT="Patux)">
         <meta NAME="copyright" CONTENT="Copyrigth Geronimo Orozco (Patux)">
         <meta NAME="audience" CONTENT="All">
@@ -25,14 +25,25 @@ print '
 
 <link rel="stylesheet" href="'.$rootpath.'/style1.css" type="text/css">
 
-<body bgcolor="#ffffff" link="#a6a141">';
+';
+//print ' <body bgcolor="#f1f8ff" link="#a6a141"> ';
+print ' <body onLoad="putFocus(0,0);" bgcolor="#d2e0ee" link="#a6a141"> ';
 
-/*
+/*print '
 <div id="top" onClick="javascript:window.location=index.php;">
         <div id="cintilla">
-        <script src="http://consol.org.mx/cintilla?tema=simple&limite=5" type="text/javascript"></script>
+	<script src="
+	http://cintilla.rednacional.org.mx/cintilla?tema=simple&limite=5
+	">
+	</script>
+	<noscript>
+        	<a href="http://www.rnsl.org">RNSL</a>
+	</noscript>
         </div>
-</div>'; 
+</div>
+'; 
+*/
+/*
 <script language=JavaScript>
 <!--
 
