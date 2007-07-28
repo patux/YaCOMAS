@@ -17,28 +17,28 @@ function imprime_valoresOk() {
 		<tr>
 		<td class="name">Nombre de Usuario: * </td>
 		<td class="resultado">
-		'.$_POST[S_login].'
+		'.$_POST['S_login'].'
 		</td>
 		</tr>
 
 		<tr>
 		<td class="name">Nombre(s): * </td>
 		<td class="resultado">
-		'.stripslashes($_POST[S_nombrep]).'
+		'.stripslashes($_POST['S_nombrep']).'
 		</td>
 		</tr>
 
 		<tr>
 		<td class="name">Apellidos: * </td>
 		<td class="resultado">
-		'.stripslashes($_POST[S_apellidos]).'
+		'.stripslashes($_POST['S_apellidos']).'
 		</td>
 		</tr>
 
 		<tr>
 		<td class="name">Correo Electrónico: *</td>
 		<td class="resultado">
-		'.$_POST[S_mail].'
+		'.$_POST['S_mail'].'
 		</td>
 		</tr>
 
@@ -46,7 +46,7 @@ function imprime_valoresOk() {
 		<td class="name">Sexo: * </td>
 		<td class="resultado">';
 		
-		if ($_POST[C_sexo]=="M")
+		if ($_POST['C_sexo']=="M")
 		    echo "Masculino";
 		else
 		    echo "Femenino";
@@ -58,7 +58,7 @@ function imprime_valoresOk() {
 		<tr>
 		<td class="name">Organización: </td>
 		<td class="resultado">
-		'.stripslashes($_POST[S_org]).'
+		'.stripslashes($_POST['S_org']).'
 		</td>
 		</tr>
 
@@ -66,7 +66,7 @@ function imprime_valoresOk() {
 		<td class="name">Estudios: * </td>
 		<td class="resultado">';
 		
-		$query = 'SELECT * FROM estudios WHERE id="'.$_POST[I_id_estudios].'"';
+		$query = 'SELECT * FROM estudios WHERE id="'.$_POST['I_id_estudios'].'"';
 		$result=mysql_query($query);
 	 	while($fila=mysql_fetch_array($result)) {
 			printf ("%s",$fila["descr"]);
@@ -80,28 +80,28 @@ function imprime_valoresOk() {
 		<tr>
 		<td class="name">Titulo: * </td>
 		<td class="resultado">
-		'.stripslashes($_POST[S_titulo]).'
+		'.stripslashes($_POST['S_titulo']).'
 		</td>
 		</tr>
 
 		<tr>
 		<td class="name">Domicilio: </td>
 		<td class="resultado">
-		'.$_POST[S_domicilio].'
+		'.$_POST['S_domicilio'].'
 		</td>
 		</tr>
 
 		<tr>
 		<td class="name">Telefono: </td>
 		<td class="resultado">
-		'.chunk_split ($_POST[S_telefono], 2).'
+		'.chunk_split ($_POST['S_telefono'], 2).'
 		</td>
 		</tr>
 
 		<tr>
 		<td class="name">Ciudad: </td>
 		<td class="resultado">
-		'.$_POST[S_ciudad].'
+		'.$_POST['S_ciudad'].'
 		</td>
 		</tr>
 
@@ -109,7 +109,7 @@ function imprime_valoresOk() {
 		<td class="name">Estado: * </td>
 		<td class="resultado">';
 		
-		$query= "select * from estado where id='".$_POST[I_id_estado]."'";
+		$query= "select * from estado where id='".$_POST['I_id_estado']."'";
 		$result=mysql_query($query);
  		while($fila=mysql_fetch_array($result)) {
 			printf ("%s",$fila["descr"]);
@@ -122,7 +122,7 @@ function imprime_valoresOk() {
 		<tr>
 		<td class="name">Fecha de Nacimiento: </td>
 		<td class="resultado">';
-		printf ("%02d-%02d-%04d",$_POST[I_b_day],$_POST[I_b_month],$_POST[I_b_year]);
+		printf ("%02d-%02d-%04d",$_POST['I_b_day'],$_POST['I_b_month'],$_POST['I_b_year']);
 	print '	
 		</td>
 		</tr>
@@ -130,7 +130,7 @@ function imprime_valoresOk() {
 		<tr>
 		<td class="name">Resumen Curricular: </td>
 		<td class="resultado">
-		'.$_POST[S_resume].'
+		'.$_POST['S_resume'].'
 		</td>
 		</tr>
 
@@ -143,7 +143,7 @@ function imprime_valoresOk() {
 }
 // Si la forma ya ha sido enviada checamos cada uno de los valores
 // para poder autorizar la insercion del registro
-if ($_POST['submit'] == "Actualizar") {
+if (isset ($_POST['submit']) && $_POST['submit'] == "Actualizar") {
   # do some basic error checking
   $errmsg = "";
   // Verificar si todos los campos obligatorios no estan vacios
@@ -196,7 +196,7 @@ if ($_POST['submit'] == "Actualizar") {
   // Si todo esta bien vamos a darlo de alta
   else { // Todas las validaciones Ok 
  	 // vamos a darlo de alta
-   $f_nac=$_POST[I_b_year].'-'.$_POST[I_b_month].'-'.$_POST[I_b_day];
+   $f_nac=$_POST['I_b_year'].'-'.$_POST['I_b_month'].'-'.$_POST['I_b_day'];
 
 // Funcion comentada para no agregar los datos de prueba, una vez que este en produccion hay que descomentarla
 
@@ -286,7 +286,7 @@ else {
 	$_POST['I_b_day']=$day;
 }
 print'
-		<FORM method="POST" action="'.$REQUEST_URI.'">
+		<FORM method="POST" action="'.$_SERVER['REQUEST_URI'].'">
 		<p><i>Campos marcados con un asterisco son obligatorios</i></p>
    		<p class="yacomas_msg">Si deja los campos de contraseña vacia usara contraseña actual</p>
 		<table width=100%>

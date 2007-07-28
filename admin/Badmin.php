@@ -4,7 +4,7 @@
 	beginSession('R');
 	imprimeEncabezado();
 	aplicaEstilo();
-	print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['ponlogin'].'&nbsp;<a class="rojo" href=signout.php>Desconectarme</a></P>';
+	print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['rootlogin'].'&nbsp;<a class="rojo" href=signout.php>Desconectarme</a></P>';
 	imprimeCajaTop("100","Eliminar Administrador");
 	print '<hr>';
 	$link=conectaBD();
@@ -17,28 +17,28 @@ function imprime_valoresOk() {
 		<tr>
 		<td class="name">Nombre del Administrdor: * </td>
 		<td class="resultado">
-		'.$_POST[S_login].'
+		'.$_POST['S_login'].'
 		</td>
 		</tr>
 		
 		<tr>
 		<td class="name">Nombre del Administrdor: * </td>
 		<td class="resultado">
-		'.$_POST[S_nombrep].'
+		'.$_POST['S_nombrep'].'
 		</td>
 		</tr>
 
 		<tr>
 		<td class="name">Apellidos:  </td>
 		<td class="resultado">
-		'.$_POST[S_apellidos].'
+		'.$_POST['S_apellidos'].'
 		</td>
 		</tr>
 		
 		<tr>
 		<td class="name">Mail:  </td>
 		<td class="resultado">
-		'.$_POST[S_mail].'
+		'.$_POST['S_mail'].'
 		</td>
 		</tr>
 	
@@ -48,12 +48,12 @@ function imprime_valoresOk() {
 }
 // Si la forma ya ha sido enviada checamos cada uno de los valores
 // para poder autorizar la insercion del registro
-if ($_POST['submit'] == "Eliminar") {
+if (isset($_POST['submit']) && $_POST['submit'] == "Eliminar") {
   # do some basic error checking
   // Si todo esta bien vamos a borrar el registro 
-  	$query1 = "DELETE FROM administrador WHERE id="."'".$admin."'";
-	$query2= "UPDATE propuesta SET id_administrador=1 WHERE id="."'".$admin."'";
-	$query3= "UPDATE evento SET id_administrador=1 WHERE id="."'".$admin."'";
+  	$query1 = "DELETE FROM administrador WHERE id="."'".$_GET['admin']."'";
+	$query2= "UPDATE propuesta SET id_administrador=1 WHERE id="."'".$_GET['admin']."'";
+	$query3= "UPDATE evento SET id_administrador=1 WHERE id="."'".$_GET['admin']."'";
 		// Para debugear querys
 		/* print $query1;
 		retorno();
@@ -87,7 +87,7 @@ if ($_POST['submit'] == "Eliminar") {
 // o para corregir datos que ya hayamos tratado de introducir
 else {
 	$userQuery = 
-	'SELECT login, nombrep, apellidos,mail FROM administrador WHERE id="'.$admin.'"';
+	'SELECT login, nombrep, apellidos,mail FROM administrador WHERE id="'.$_GET['admin'].'"';
 	$userRecords = mysql_query($userQuery) or err("No se pudo checar el administrador".mysql_errno($userRecords));
 	$p = mysql_fetch_array($userRecords);
 	$_POST['S_login']=$p['login'];
@@ -97,7 +97,7 @@ else {
 }
 	imprime_valoresOk();
 	print'<center>
-		<FORM method="POST" action="'.$REQUEST_URI.'">
+		<FORM method="POST" action="'.$_SERVER['REQUEST_URI'].'">
 		<input type="submit" name="submit" value="Eliminar">&nbsp;&nbsp;
 		<input type="button" value="Cancelar" onClick=location.href="'.$rootpath.'/admin/admin.php?opc=1">
 		</center>

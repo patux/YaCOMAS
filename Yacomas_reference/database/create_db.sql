@@ -10,7 +10,7 @@ USE yacomas_db;
 CREATE TABLE administrador (
   id int(10) unsigned NOT NULL auto_increment,
   login varchar(15) NOT NULL default '',
-  passwd varchar(15) NOT NULL default '',
+  passwd varchar(32) NOT NULL default '',
   nombrep varchar(50) NOT NULL default '',
   apellidos varchar(50) NOT NULL default '',
   mail varchar(100) NOT NULL default '',
@@ -25,7 +25,7 @@ CREATE TABLE administrador (
 CREATE TABLE asistente (
   id int(10) unsigned NOT NULL auto_increment,
   login varchar(15) NOT NULL default '',
-  passwd varchar(15) NOT NULL default '',
+  passwd varchar(32) NOT NULL default '',
   nombrep varchar(50) NOT NULL default '',
   apellidos varchar(50) NOT NULL default '',
   sexo char(1) NOT NULL default '',
@@ -149,7 +149,7 @@ CREATE TABLE orientacion (
 CREATE TABLE ponente (
   id int(10) unsigned NOT NULL auto_increment,
   login varchar(15) NOT NULL default '',
-  passwd varchar(15) NOT NULL default '',
+  passwd varchar(32) NOT NULL default '',
   nombrep varchar(50) NOT NULL default '',
   apellidos varchar(50) NOT NULL default '',
   sexo char(1) NOT NULL default '',

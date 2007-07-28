@@ -40,16 +40,16 @@ print '
 			$color=1;
 		}
 		print '<tr>
-		<td bgcolor='.$bgcolor.'><a class="azul" href="Vponencia.php?vopc='.$fila[id_ponente].' '.$fila[id].' '.$REQUEST_URI.'">'.$fila["nombre"].'</a>';
-		$query = 'SELECT id,nombrep,apellidos FROM ponente WHERE id="'.$fila[id_ponente].'"';
+		<td bgcolor='.$bgcolor.'><a class="azul" href="Vponencia.php?vopc='.$fila['id_ponente'].' '.$fila['id'].' '.$_SERVER['REQUEST_URI'].'">'.$fila["nombre"].'</a>';
+		$query = 'SELECT id,nombrep,apellidos FROM ponente WHERE id="'.$fila['id_ponente'].'"';
 		$result=mysql_query($query);
 	 	$fstatus=mysql_fetch_array($result);
-		print '<br><small><a class="rojo" href="Vponente.php?vopc='.$fstatus[id].' '.$REQUEST_URI.'">'.$fstatus['nombrep'].' '.$fstatus['apellidos'].'</small></a>';
+		print '<br><small><a class="rojo" href="Vponente.php?vopc='.$fstatus['id'].' '.$_SERVER['REQUEST_URI'].'">'.$fstatus['nombrep'].' '.$fstatus['apellidos'].'</small></a>';
 		mysql_free_result($result);
 		
 	
 		print '</td><td bgcolor='.$bgcolor.'>';
-		if ($fila[tpropuesta]=="C")
+		if ($fila['tpropuesta']=="C")
 		    echo "Conferencia";
 		else
 		    echo "Taller";
@@ -58,7 +58,7 @@ print '
 		// Una vez que la ponencia fue aceptada (id 5)
 		// La ponencia no se le puede modificar el status ni eliminar 
 		// A menos que sea el administrador principal 
-		print '</td><td bgcolor='.$bgcolor.'><a class="verde" href="Nevento.php?pevento='.$fila[id].' '.$fila[id_ponente].' '.$REQUEST_URI.'" onMouseOver="window.status=\'Asignar lugar\';return true" onFocus="window.status=\'Asignar lugar\';return true" onMouseOut="window.status=\'\';return true">Asignar lugar</a>';
+		print '</td><td bgcolor='.$bgcolor.'><a class="verde" href="Nevento.php?pevento='.$fila['id'].' '.$fila['id_ponente'].' '.$_SERVER['REQUEST_URI'].'" onMouseOver="window.status=\'Asignar lugar\';return true" onFocus="window.status=\'Asignar lugar\';return true" onMouseOut="window.status=\'\';return true">Asignar lugar</a>';
 		print '</td></tr>'; 
 		print '</td>';
 		print '</tr>';

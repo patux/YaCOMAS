@@ -3,7 +3,7 @@ include "../includes/lib.php";
 include "../includes/conf.inc";
 beginSession('R');
 $link=conectaBD();
-$tok = strtok ($vconf," ");
+$tok = strtok ($_GET['vconf']," ");
 $idconf=$tok;
 $tok = strtok (" ");
 $idstatus=$tok;

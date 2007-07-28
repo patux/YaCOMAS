@@ -1,7 +1,3 @@
 <?
-		switch ($opc) 
-		{
-			default: include "lista_propuestas.php";
-				break;
-		}	
+	include "lista_propuestas.php";
 ?>

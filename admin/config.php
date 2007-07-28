@@ -36,13 +36,13 @@ print '
 		{
 			print "Abierto";
 			print '<td bgcolor='.$bgcolor.'>';
-			print '<a class="rojo" href="act_conf.php?vconf='.$fila[id].' 0" onMouseOver="window.status=\'Cerrar\';return true" onFocus="window.status=\'Cerrar\';return true" onMouseOut="window.status=\'\';return true">Cerrar</a>';
+			print '<a class="rojo" href="act_conf.php?vconf='.$fila['id'].' 0" onMouseOver="window.status=\'Cerrar\';return true" onFocus="window.status=\'Cerrar\';return true" onMouseOut="window.status=\'\';return true">Cerrar</a>';
 		}
 		else
 		{
 			print "Cerrado";
 			print '<td bgcolor='.$bgcolor.'>';
-			print '<a class="verde" href="act_conf.php?vconf='.$fila[id].' 1" onMouseOver="window.status=\'Abrir\';return true" onFocus="window.status=\'Abrir\';return true" onMouseOut="window.status=\'\';return true">Abrir</a>';
+			print '<a class="verde" href="act_conf.php?vconf='.$fila['id'].' 1" onMouseOver="window.status=\'Abrir\';return true" onFocus="window.status=\'Abrir\';return true" onMouseOut="window.status=\'\';return true">Abrir</a>';
 		}
 	}
 	print '</td></tr></table>';

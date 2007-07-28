@@ -1,5 +1,6 @@
 <?
-$rootpath='/yacomas-0.1_alpha';
+global $rootpath;
+$rootpath='/yacomas-0.2_alpha';
 $adminmail='admin@myserver.com';
 // Limite de cupo de los talleres
 $limite=50;

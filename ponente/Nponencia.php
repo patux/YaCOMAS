@@ -4,8 +4,9 @@
 	beginSession('P');
 	imprimeEncabezado();
 	aplicaEstilo();
+	$idponente=$_SESSION['YACOMASVARS']['ponid'];
 	print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['ponlogin'].'&nbsp;<a class="rojo" href=signout.php>Desconectarme</a></P>';
-	imprimeCajaTop("100","Registro de Ponencias/Talleres");
+	imprimeCajaTop("100","Registro de Propuesta de Ponencias/Talleres");
 	$link=conectaBD();
 	$configQuery= 'SELECT status FROM config WHERE id=3';
 	$resultCQ=mysql_query($configQuery);
@@ -33,7 +34,7 @@ function imprime_valoresOk() {
 		<tr>
 		<td class="name">Nombre de Ponencia: * </td>
 		<td class="resultado">
-		'.$_POST[S_nombreponencia].'
+		'.$_POST['S_nombreponencia'].'
 		</td>
 		</tr>
 		
@@ -41,7 +42,7 @@ function imprime_valoresOk() {
 		<td class="name">Nivel: * </td>
 		<td class="resultado">';
 		
-		$query = 'SELECT * FROM prop_nivel WHERE id="'.$_POST[I_id_nivel].'"';
+		$query = 'SELECT * FROM prop_nivel WHERE id="'.$_POST['I_id_nivel'].'"';
 		$result=mysql_query($query);
 	 	while($fila=mysql_fetch_array($result)) {
 			printf ("%s",$fila["descr"]);
@@ -56,7 +57,7 @@ function imprime_valoresOk() {
 		<td class="name">Tipo de Propuesta: * </td>
 		<td class="resultado">';
 		
-		if ($_POST[C_tpropuesta]=="C")
+		if ($_POST['C_tpropuesta']=="C")
 		    echo "Conferencia";
 		else
 		    echo "Taller";
@@ -69,7 +70,7 @@ function imprime_valoresOk() {
 		<td class="name">Orientacion: * </td>
 		<td class="resultado">';
 		
-		$query = 'SELECT * FROM orientacion WHERE id="'.$_POST[I_id_orientacion].'"';
+		$query = 'SELECT * FROM orientacion WHERE id="'.$_POST['I_id_orientacion'].'"';
 		$result=mysql_query($query);
 	 	while($fila=mysql_fetch_array($result)) {
 			printf ("%s",$fila["descr"]);
@@ -83,7 +84,7 @@ function imprime_valoresOk() {
 		<tr>
 		<td class="name">Duracion: * </td>
 		<td class="resultado">';
-		printf ("%02d Hrs",$_POST[I_duracion]);
+		printf ("%02d Hrs",$_POST['I_duracion']);
 	print '	
 		</td>
 		</tr>
@@ -91,21 +92,21 @@ function imprime_valoresOk() {
 		<tr>
 		<td class="name">Resumen: </td>
 		<td align=justify class="resultado">
-		'.$_POST[S_resumen].'
+		'.$_POST['S_resumen'].'
 		</td>
 		</tr>
 		
 		<tr>
 		<td class="name">Requisitos tecnicos de la ponencia: </td> 
 		<td align=justify class="resultado">
-		'.$_POST[S_reqtecnicos].'
+		'.$_POST['S_reqtecnicos'].'
 		</td>
 		</tr>
 
 		<tr>
 		<td class="name">Prerequisitos del Asistente: </td>
 		<td align=justify class="resultado">
-		'.$_POST[S_reqasistente].'
+		'.$_POST['S_reqasistente'].'
 		</td>
 		</tr>
 
@@ -116,9 +117,23 @@ function imprime_valoresOk() {
 		</center>';
 
 }
+// Inicializa variables
+if (empty ($_POST['submit']))
+{
+$_POST['S_nombreponencia']='';
+$_POST['I_id_nivel']='';
+$_POST['C_tpropuesta']='';
+$_POST['I_id_orientacion']='';
+$_POST['I_duracion']='';
+$_POST['S_resumen']='';
+$_POST['S_reqtecnicos']='';
+$_POST['S_reqasistente']='';
+
+	
+}
 // Si la forma ya ha sido enviada checamos cada uno de los valores
 // para poder autorizar la insercion del registro
-if ($_POST['submit'] == "Registrar") {
+if (isset ($_POST['submit']) && $_POST['submit'] == "Registrar") {
   # do some basic error checking
   $errmsg = "";
   // Verificar si todos los campos obligatorios no estan vacios
@@ -136,7 +151,7 @@ if ($_POST['submit'] == "Registrar") {
   }
   // Verifica que la ponencia no este dada de alta
   if (empty($errmsg)) {
-      $userQuery = 'SELECT * FROM propuesta WHERE nombre="'.$S_nombreponencia.'" and id_ponente="'.$idponente.'"';
+      $userQuery = 'SELECT * FROM propuesta WHERE nombre="'.$_POST['S_nombreponencia'].'" and id_ponente="'.$idponente.'"';
       $userRecords = mysql_query($userQuery) or err("No se pudo checar las ponencia ".mysql_errno($userRecords));
       if (mysql_num_rows($userRecords) != 0) {
         $errmsg .= "<li>El nombre que elegiste para la ponencia ya lo has dado de alta";
@@ -151,7 +166,6 @@ if ($_POST['submit'] == "Registrar") {
   else { // Todas las validaciones Ok 
  	 // vamos a darlo de alta
 
-	$idponente=$_SESSION['YACOMASVARS']['ponid'];
 // Funcion comentada para no agregar los datos de prueba, una vez que este en produccion hay que descomentarla
 	
 	$date=strftime("%Y%m%d%H%M%S");
@@ -191,7 +205,7 @@ if ($_POST['submit'] == "Registrar") {
 // de lo contrario la imprimira para poder introducir los datos si es que todavia no hemos introducido nada
 // o para corregir datos que ya hayamos tratado de introducir
 	print'
-		<FORM method="POST" action="'.$REQUEST_URI.'">
+		<FORM method="POST" action="'.$_SERVER['REQUEST_URI'].'">
 		<p><i>Campos marcados con un asterisco son obligatorios</i></p>
 		<table width=100%>
 		<tr>
@@ -302,19 +316,19 @@ if ($_POST['submit'] == "Registrar") {
 		<tr>
 		<td class="name">Resumen: *</td>
 		<td class="input"><textarea tabindex=0 name="S_resumen" cols=60 rows=15> 
-		'.stripslashes($_POST[S_resumen]).'</textarea></td>
+		'.stripslashes($_POST['S_resumen']).'</textarea></td>
 		</tr>
 		
 		<tr>
 		<td class="name">Requisitos tecnicos de la ponencia:<br><small>(Estos son los requisitos que Ud. necesita para impartirla)</small> </td>
 		<td class="input"><textarea tabindex=0 rows=5 name="S_reqtecnicos" cols=60 rows=15> 
-		'.stripslashes($_POST[S_reqtecnicos]).'</textarea></td>
+		'.stripslashes($_POST['S_reqtecnicos']).'</textarea></td>
 		</tr>
 		
 		<tr>
 		<td class="name">Prerequisitos para el asistente: </td>
 		<td class="input"><textarea tabindex=0 rows=5 name="S_reqasistente" cols=60 rows=15> 
-		'.stripslashes($_POST[S_reqasistente]).'</textarea></td>
+		'.stripslashes($_POST['S_reqasistente']).'</textarea></td>
 		</tr>
 
 		</table>

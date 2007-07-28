@@ -4,19 +4,19 @@ ENGLISH
 -------------------
 Yacomas is development by Geronimo Orozco Martinez (patux).
 
-Yacomas is made to help people involved in the organization of conference or similar events.
+Yacomas is made to help people involved in the organization of conferences or similar events.
 Yacomas is divided in three basic modules.
 -- Administration module
--- Speaker module 
+-- Speakers module 
 -- Audience module 
 
 Yacomas is capable to management the flow of information that a conference need to work.
 starting with register of conferencistas, register of propossals, evaluation of proposals
 by the admins, register,modify,deleting of dates, and places to make workshops or conferences
-inside of the conference. Register and control of propossals with status of Accepted in 
+inside of the congress. Register and control of propossals with status of Accepted in 
 specific places and dates. 
-Register and control of the Audience to the conference and workshops inscriptions made by 
-each person.
+Register and control of the Audience of the conference and workshops inscriptions made by the
+each Asistente.
 --------------------------------------------------------------------------------------
 This project is based from the original comas project developed by Consol developer team
 Gunnar &  Mig for more references http://consol.org.mx
@@ -39,6 +39,12 @@ los lugares y fechas designados. Y control de los  asistentes al congreso y regi
 parte de cada uno de los asistentes.
 ------------------------------------
 
+PREREQUISITOS
+-------------
+
+* Servidor Apache con soporte para PHP
+* Servidor MySQL 
+* PHP con soporte para MySQL
 
 INSTALACION:
 ------------
@@ -49,7 +55,7 @@ $ tar -xvzf yacomas-0.1-alpha.tar.gz
 .
 a) Creacion de la BD.
 	Entrar al directorio Yacomas_reference/database/
-	Editar el archivo create_fsl.sql
+	Editar el archivo create_db.sql
 	Cambiar segun sus necesidades los siguientes campos:
 	
 	yacomas_db
@@ -57,6 +63,12 @@ a) Creacion de la BD.
 	yacomas_pwd
 	yacomas_host
 
+	Despues de esto cree la BD de la siguiente manera
+	mysql -u root -p < create_fsl.sql
+
+	el parametro -p es opcional si es que el usuario root de mysql tiene 
+	password
+	
 b) Configuracion de yacomas
 	1) Base de datos
 		Editar el archivo  yacomas-0.1-alpha/includes/db.inc
@@ -66,30 +78,44 @@ b) Configuracion de yacomas
 		$dbuser
 		$dbpwd
 		$dbhost
+	3) Asegurarse de que el archivo httpd.conf contenga lo siguiente como minimo:
+		DirectoryIndex index.php
 	2) Directorio de trabajo
 		El archivo conf.inc es el arhivo principal de configuracion 
 		Editar el archivo yacomas-0.1-alpha/includes/conf.inc
 	
 		Cambiar el valor de la variable $rootpath para llegar a yacomas
 		Yacomas funcionara sin cambiar absolutamente nada si sigue los siguientes pasos
+		La variable $rootpath hace referencia a partir de la variable DocumentRoot de apache
+		Es decir que si tenemos lo siguiente:
+		
+		DocumentRoot = /var/www/htdocs en http.conf
+		y
+		$rootpath = /yacomas-0.2_alpha
+
+		Esto indica que yacomas se encuentra en:
+		/var/www/htdocs/yacomas-0.2_alpha
+
 		p.ej:
+		conf.inc tendria la variable $rootpath de la siguiente manera:
+		$rootpath=/yacomas-0.2_alpha
 		cd /var/www/htdocs
-		tar -xvzf yacomas-0.1_alpha.tar.gz 
-		yacomas-0.1_alpha
+		tar -xvzf yacomas-0.2_alpha.tar.gz 
+		yacomas-0.2_alpha
 		 
 
 c) Inicio y comenzar a trabajar con yacomas
 
 Abrir el navegador y abrir la sig. direccion:
 
-http://localhost/yacomas-0.1-alpha/
+http://localhost/yacomas-0.2-alpha/
 
 Para entrar al modulo de administracion entrar a la siguiente direccion:
 
-http://localhost/yacomas-0.1-alpha/admin
+http://localhost/yacomas-0.2-alpha/admin
 
 Admin user: admin
 Admin pass: admin
 
 ==========
-$Id: INSTALL,v 0.1-alpha Tue May 25 12:12:19 CDT 2004 patux Exp $
+$Id: INSTALL,v 0.2-alpha Fri Jun  4 10:33:28 CDT 2004 patux Exp $

@@ -32,17 +32,17 @@ print'
 			$color=1;
 		}
 		print '<tr>
-		<td bgcolor='.$bgcolor.'><a class="verde" href="Mlugar.php?idlugar='.$fila[id].'">'.$fila['nombre_lug'].'</td>
+		<td bgcolor='.$bgcolor.'><a class="verde" href="Mlugar.php?idlugar='.$fila['id'].'">'.$fila['nombre_lug'].'</td>
 		<td bgcolor='.$bgcolor.'>'.$fila['ubicacion'].'</td>
 		<td bgcolor='.$bgcolor.'>';
 		if ($fila['cupo']!=99999)
 			print $fila['cupo'];
 		print '</td>
-		<td bgcolor='.$bgcolor.'><a class="azul" href="Leventos-lugar.php?idlugar='.$fila[id].'">Eventos registrados</td>';
+		<td bgcolor='.$bgcolor.'><a class="azul" href="Leventos-lugar.php?idlugar='.$fila['id'].'">Eventos registrados</td>';
 		
 		if ($_SESSION['YACOMASVARS']['rootlevel']==1 ) 
 		{
-			print '</td><td bgcolor='.$bgcolor.'><small><a class="rojo" href="Blugar.php?idlugar='.$fila[id].'" onMouseOver="window.status=\'Eliminar lugar\';return true" onFocus="window.status=\'Eliminar lugar\';return true" onMouseOut="window.status=\'\';return true">Eliminar</a>';
+			print '</td><td bgcolor='.$bgcolor.'><small><a class="rojo" href="Blugar.php?idlugar='.$fila['id'].'" onMouseOver="window.status=\'Eliminar lugar\';return true" onFocus="window.status=\'Eliminar lugar\';return true" onMouseOut="window.status=\'\';return true">Eliminar</a>';
 		}
 			print '</td></tr><tr><td>'; 
 		print '</tr>';

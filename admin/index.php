@@ -1,7 +1,3 @@
 <?
-		switch ($opc) 
-		{
-			default: include "signin.php";
-				break;
-		}	
+	include "signin.php";
 ?>

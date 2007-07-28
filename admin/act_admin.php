@@ -3,7 +3,7 @@ include "../includes/lib.php";
 include "../includes/conf.inc";
 beginSession('R');
 $link=conectaBD();
-	$tok = strtok ($vact," ");
+	$tok = strtok ($_GET['vact']," ");
 	$idadmin=$tok;
 	$tok = strtok (" ");
 	$idtadmin=$tok;

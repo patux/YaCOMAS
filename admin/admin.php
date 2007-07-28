@@ -1,5 +1,5 @@
 <?
-		switch ($opc) 
+		switch ($_GET['opc']) 
 		{
 			case 'C': include "config.php";
 				break;

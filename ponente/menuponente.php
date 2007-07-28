@@ -15,8 +15,8 @@ imprimeCajaTop("100",$msg);
 print '<hr>';
 retorno();
 print '<font size=+1 color=#000000 face=arial>
-<a href="ponente.php?opc=1">Enviar ponencia</a> <br><br>
-<a href="ponente.php?opc=2">Listar ponencias enviadas</a> <br><br>
+<a href="ponente.php?opc=1">Enviar propuesta de ponencia</a> <br><br>
+<a href="ponente.php?opc=2">Listar propuestas enviadas</a> <br><br>
 <a href="ponente.php?opc=3">Modificar mis datos</a> <br><br>
 </font>';
 

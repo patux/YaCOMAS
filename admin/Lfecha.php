@@ -33,13 +33,13 @@ print'
 			$color=1;
 		}
 		print '<tr>
-		<td bgcolor='.$bgcolor.'><a class="verde" href="Mfecha.php?idfecha='.$fila[id].'">'.$fila['fecha'].'</td>
+		<td bgcolor='.$bgcolor.'><a class="verde" href="Mfecha.php?idfecha='.$fila['id'].'">'.$fila['fecha'].'</td>
 		<td bgcolor='.$bgcolor.'>'.$fila['descr'].'</td>
-		<td bgcolor='.$bgcolor.'><a class="azul" href="Leventos-fecha.php?idfecha='.$fila[id].'">Eventos registrados</td>';
+		<td bgcolor='.$bgcolor.'><a class="azul" href="Leventos-fecha.php?idfecha='.$fila['id'].'">Eventos registrados</td>';
 		
 		if ($_SESSION['YACOMASVARS']['rootlevel']==1 ) 
 		{
-			print '</td><td bgcolor='.$bgcolor.'><small><a class="rojo" href="Bfecha.php?idfecha='.$fila[id].'" onMouseOver="window.status=\'Eliminar fecha\';return true" onFocus="window.status=\'Eliminar fecha\';return true" onMouseOut="window.status=\'\';return true">Eliminar</a>';
+			print '</td><td bgcolor='.$bgcolor.'><small><a class="rojo" href="Bfecha.php?idfecha='.$fila['id'].'" onMouseOver="window.status=\'Eliminar fecha\';return true" onFocus="window.status=\'Eliminar fecha\';return true" onMouseOut="window.status=\'\';return true">Eliminar</a>';
 		}
 			print '</td></tr><tr><td>'; 
 		print '</tr>';

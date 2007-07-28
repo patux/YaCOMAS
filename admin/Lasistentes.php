@@ -35,13 +35,13 @@ print'
 			$color=1;
 		}
 		print '<tr>
-		<td bgcolor='.$bgcolor.'><a class="azul" href="Vasistente.php?vopc='.$fila[id].' '.$REQUEST_URI.'">'.$fila['nombrep'].' '.$fila['apellidos'].'</td>
-		<td bgcolor='.$bgcolor.'>'.$fila[estado];
+		<td bgcolor='.$bgcolor.'><a class="azul" href="Vasistente.php?vopc='.$fila['id'].' '.$_SERVER['REQUEST_URI'].'">'.$fila['nombrep'].' '.$fila['apellidos'].'</td>
+		<td bgcolor='.$bgcolor.'>'.$fila['estado'];
 		
-		print '</td><td bgcolor='.$bgcolor.'>'.$fila[estudios];
-		print '</td><td bgcolor='.$bgcolor.'>'.$fila[reg_time].'</td>';
+		print '</td><td bgcolor='.$bgcolor.'>'.$fila['estudios'];
+		print '</td><td bgcolor='.$bgcolor.'>'.$fila['reg_time'].'</td>';
 		if ($_SESSION['YACOMASVARS']['rootlevel']==1)
-			print '<td bgcolor='.$bgcolor.'><a class="rojo" href="Basistente.php?idasistente='.$fila[id].'">Eliminar</td>';
+			print '<td bgcolor='.$bgcolor.'><a class="rojo" href="Basistente.php?idasistente='.$fila['id'].'">Eliminar</td>';
 		print '</tr>';
 	}
 	print '</table>';

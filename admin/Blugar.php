@@ -4,7 +4,8 @@
 	beginSession('R');
 	imprimeEncabezado();
 	aplicaEstilo();
-	print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['ponlogin'].'&nbsp;<a class="rojo" href=signout.php>Desconectarme</a></P>';
+	$idlugar=$_GET['idlugar'];
+	print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['rootlogin'].'&nbsp;<a class="rojo" href=signout.php>Desconectarme</a></P>';
 	imprimeCajaTop("100","Eliminar Lugar");
 	print '<p class="yacomas_error">Esta accion eliminara el lugar y todos los eventos registrados en este lugar<br>
 	Los eventos regresaran a status de Ponencia Aceptada, las inscripciones de los asistentes al evento seran eliminadas 
@@ -71,15 +72,15 @@ while ($Ql_evento = mysql_fetch_array($lugarRecords))
 				$bgcolor=$color_renglon2;
 				$color=1;
 			}
-			print '<td bgcolor='.$bgcolor.'><a class="azul" href="Vponencia.php?vopc='.$Qf_event[id_ponente].' '.$Qf_event[id_propuesta].' '.$regresa.'">'.$Qf_event["nombre"].'</a>';
+			print '<td bgcolor='.$bgcolor.'><a class="azul" href="Vponencia.php?vopc='.$Qf_event['id_ponente'].' '.$Qf_event['id_propuesta'].' '.$regresa.'">'.$Qf_event["nombre"].'</a>';
 			retorno();
-			print '<small><a class="rojo" href="Vponente.php?vopc='.$Qf_event[id_ponente].' '.$regresa.'">'.$Qf_event["nombrep"].' '.$Qf_event["apellidos"].'</a></small>';
+			print '<small><a class="rojo" href="Vponente.php?vopc='.$Qf_event['id_ponente'].' '.$regresa.'">'.$Qf_event["nombrep"].' '.$Qf_event["apellidos"].'</a></small>';
 			print '</td><td bgcolor='.$bgcolor.'>'.$Qf_event["fecha"];
 			print '</td><td bgcolor='.$bgcolor.'>'.$Qf_event["hora"].':00 - ';
 			$hfin=$Qf_event["hora"]+$Qf_event["duracion"];
 			print $hfin.':00';
 			print '</td><td bgcolor='.$bgcolor.'>';
-			if ($Qf_event[tpropuesta]=="T")
+			if ($Qf_event['tpropuesta']=="T")
 			{
 				// Checamos cuanta gente esta inscrita a este taller 
 				// Para sacar el total de espacios disponibles todavia para el taller
@@ -91,7 +92,7 @@ while ($Ql_evento = mysql_fetch_array($lugarRecords))
 				$cup_disp=$Qf_event["cupo"] - $ins_taller;
 				print $cup_disp;	
 				print '</td><td bgcolor='.$bgcolor.'>';
-				print '<small><a class="verde" href="Lasistentes-reg.php?vopc='.$Qf_event[id_evento].' '.$regresa.'" onMouseOver="window.status=\'Asistentes registrados\';return true" onFocus="window.status=\'Asistentes registrados\';return true" onMouseOut="window.status=\'\';return true" >Asistentes</a>';
+				print '<small><a class="verde" href="Lasistentes-reg.php?vopc='.$Qf_event['id_evento'].' '.$regresa.'" onMouseOver="window.status=\'Asistentes registrados\';return true" onFocus="window.status=\'Asistentes registrados\';return true" onMouseOut="window.status=\'\';return true" >Asistentes</a>';
 			}
 			else 
 				print '</td><td bgcolor='.$bgcolor.'>';
@@ -108,7 +109,7 @@ while ($Ql_evento = mysql_fetch_array($lugarRecords))
 }
 // Si la forma ya ha sido enviada checamos cada uno de los valores
 // para poder autorizar la insercion del registro
-if ($_POST['submit'] == "Eliminar") {
+if (isset($_POST['submit']) && $_POST['submit'] == "Eliminar") {
   # do some basic error checking
   // Si todos esta bien vamos a borrar el registro 
 
@@ -122,7 +123,7 @@ if ($_POST['submit'] == "Eliminar") {
 	$num_event=0;
 	while ($fila = mysql_fetch_array($result_SEL)) 
 	{
-		$evento[$num_event][id_evento]=$fila[id_evento];
+		$evento[$num_event]['id_evento']=$fila['id_evento'];
 		$num_event++;
 	}
 	mysql_free_result($result_SEL);
@@ -137,18 +138,18 @@ if ($_POST['submit'] == "Eliminar") {
 	for ($i=0; $i < $num_event; $i++ )
 	{
   		// Seleccionamos las propuestas a las que se refieren los eventos 
-  		$query_selectP='SELECT id_propuesta FROM evento WHERE id='.$evento[$i][id_evento];
+  		$query_selectP='SELECT id_propuesta FROM evento WHERE id='.$evento[$i]['id_evento'];
 		$result_SP=  mysql_query($query_selectP) or err("No se pueden seleccionar las propuestas relacionadas al evento para actualiza".mysql_errno($result_SP));
       		$registrosSP=mysql_num_rows($result_SP);
 		$prop= mysql_fetch_array($result_SP);
   		// Actualizamos el status de la propuesta a Aceptada 
-  		$query_actP='UPDATE propuesta SET id_status=5 WHERE id='.$prop[id_propuesta];
+  		$query_actP='UPDATE propuesta SET id_status=5 WHERE id='.$prop['id_propuesta'];
 		$result_AP=  mysql_query($query_actP) or err("No se puede actualizar el status de la propuesta ".mysql_errno($result_AP));
 		// Borra evento
-		$QB_evento =  "DELETE FROM evento WHERE id="."'".$evento[$i][id_evento]."'";
+		$QB_evento =  "DELETE FROM evento WHERE id="."'".$evento[$i]['id_evento']."'";
 		$result_BE=  mysql_query($QB_evento) or err("No se puede eliminar evento ".mysql_errno($result_BE));
 		// Borra inscripcion a el evento 
-		$QB_inscribe =  "DELETE FROM inscribe WHERE id_evento="."'".$evento[$i][id_evento]."'";
+		$QB_inscribe =  "DELETE FROM inscribe WHERE id_evento="."'".$evento[$i]['id_evento']."'";
 		$result_BI=  mysql_query($QB_inscribe) or err("No se puede eliminar inscripcion al evento".mysql_errno($result_BI));
 		// Debug
 	/*	print $query_selectP;
@@ -162,9 +163,10 @@ if ($_POST['submit'] == "Eliminar") {
 		print $QB_hinscripcion;
 		retorno();
 	*/
+		if ($registrosSP != 0) 
+		    mysql_free_result($result_SP);
 	}
-      	if ($registrosSP != 0) 
-		mysql_free_result($result_SP);
+      	
 	// Finalmente borra el lugar
   	$QB_lugar= "DELETE FROM lugar WHERE id="."'".$idlugar."'";
 	$result_BL=  mysql_query($QB_lugar) or err("No se puede eliminar lugar ".mysql_errno($result_BL));
@@ -193,9 +195,9 @@ if ($_POST['submit'] == "Eliminar") {
 // de lo contrario la imprimira para poder introducir los datos si es que todavia no hemos introducido nada
 // o para corregir datos que ya hayamos tratado de introducir
 
-	imprime_valoresOk($idlugar,$REQUEST_URI);
+	imprime_valoresOk($idlugar,$_SERVER['REQUEST_URI']);
 	print'<center>
-		<FORM method="POST" action="'.$REQUEST_URI.'">
+		<FORM method="POST" action="'.$_SERVER['REQUEST_URI'].'">
 		<input type="submit" name="submit" value="Eliminar">&nbsp;&nbsp;
 		<input type="button" value="Cancelar" onClick=location.href="'.$rootpath.'/admin/admin.php?opc=5">
 		</center>

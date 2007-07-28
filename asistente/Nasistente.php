@@ -31,28 +31,28 @@ function imprime_valoresOk() {
 		<tr>
 		<td class="name">Nombre de Usuario: * </td>
 		<td class="resultado">
-		'.$_POST[S_login].'
+		'.$_POST['S_login'].'
 		</td>
 		</tr>
 
 		<tr>
 		<td class="name">Nombre(s): * </td>
 		<td class="resultado">
-		'.stripslashes($_POST[S_nombrep]).'
+		'.stripslashes($_POST['S_nombrep']).'
 		</td>
 		</tr>
 
 		<tr>
 		<td class="name">Apellidos: * </td>
 		<td class="resultado">
-		'.stripslashes($_POST[S_apellidos]).'
+		'.stripslashes($_POST['S_apellidos']).'
 		</td>
 		</tr>
 
 		<tr>
 		<td class="name">Correo Electrónico: *</td>
 		<td class="resultado">
-		'.$_POST[S_mail].'
+		'.$_POST['S_mail'].'
 		</td>
 		</tr>
 
@@ -60,7 +60,7 @@ function imprime_valoresOk() {
 		<td class="name">Sexo: * </td>
 		<td class="resultado">';
 		
-		if ($_POST[C_sexo]=="M")
+		if ($_POST['C_sexo']=="M")
 		    echo "Masculino";
 		else
 		    echo "Femenino";
@@ -72,7 +72,7 @@ function imprime_valoresOk() {
 		<tr>
 		<td class="name">Organización: </td>
 		<td class="resultado">
-		'.stripslashes($_POST[S_org]).'
+		'.stripslashes($_POST['S_org']).'
 		</td>
 		</tr>
 
@@ -80,7 +80,7 @@ function imprime_valoresOk() {
 		<td class="name">Estudios: * </td>
 		<td class="resultado">';
 		
-		$query = 'SELECT * FROM estudios WHERE id="'.$_POST[I_id_estudios].'"';
+		$query = 'SELECT * FROM estudios WHERE id="'.$_POST['I_id_estudios'].'"';
 		$result=mysql_query($query);
 	 	while($fila=mysql_fetch_array($result)) {
 			printf ("%s",$fila["descr"]);
@@ -95,7 +95,7 @@ function imprime_valoresOk() {
 		<td class="name">Tipo de Asistente: *</td>
 		<td class="resultado">';
 		
-		$query = 'SELECT * FROM tasistente WHERE id="'.$_POST[I_id_tasistente].'"';
+		$query = 'SELECT * FROM tasistente WHERE id="'.$_POST['I_id_tasistente'].'"';
 		$result=mysql_query($query);
 	 	while($fila=mysql_fetch_array($result)) {
 			printf ("%s",$fila["descr"]);
@@ -109,7 +109,7 @@ function imprime_valoresOk() {
 		<tr>
 		<td class="name">Ciudad: </td>
 		<td class="resultado">
-		'.$_POST[S_ciudad].'
+		'.$_POST['S_ciudad'].'
 		</td>
 		</tr>
 
@@ -118,7 +118,7 @@ function imprime_valoresOk() {
 		<td class="name">Estado: * </td>
 		<td class="resultado">';
 		
-		$query= "select * from estado where id='".$_POST[I_id_estado]."'";
+		$query= "select * from estado where id='".$_POST['I_id_estado']."'";
 		$result=mysql_query($query);
  		while($fila=mysql_fetch_array($result)) {
 			printf ("%s",$fila["descr"]);
@@ -131,7 +131,7 @@ function imprime_valoresOk() {
 		<tr>
 		<td class="name">Fecha de Nacimiento: </td>
 		<td class="resultado">';
-		printf ("%02d-%02d-%04d",$_POST[I_b_day],$_POST[I_b_month],$_POST[I_b_year]);
+		printf ("%02d-%02d-%04d",$_POST['I_b_day'],$_POST['I_b_month'],$_POST['I_b_year']);
 	print '	
 		</td>
 		</tr>
@@ -142,9 +142,27 @@ function imprime_valoresOk() {
 		</center>';
 
 }
+// Inicializar variables
+if (empty ($_POST['submit']))
+{
+	$_POST['S_login']='';
+	$_POST['S_nombrep']='';
+	$_POST['S_apellidos']='';
+	$_POST['S_mail']='';
+	$_POST['C_sexo']='';
+	$_POST['S_org']='';
+	$_POST['I_id_estudios']='';
+	$_POST['S_ciudad']='';
+	$_POST['I_id_estado']='';
+	$_POST['I_id_tasistente']='';
+	$_POST['I_b_day']='';
+	$_POST['I_b_month']='';
+	$_POST['I_b_year']='';
+
+}
 // Si la forma ya ha sido enviada checamos cada uno de los valores
 // para poder autorizar la insercion del registro
-if ($_POST['submit'] == "Registrarme") {
+if (isset ($_POST['submit']) && $_POST['submit'] == "Registrarme") {
   # do some basic error checking
   $errmsg = "";
   // Verificar si todos los campos obligatorios no estan vacios
@@ -165,7 +183,7 @@ if ($_POST['submit'] == "Registrarme") {
         $errmsg .= "<li>El password debe tener entre 6 y 15 caracteres";
   }
   // Verifica que el password usado no sea igual al login introducido por seguridad
-  elseif ($_POST['_passwd'] == $_POST['S_login']) {
+  elseif ($_POST['S_passwd'] == $_POST['S_login']) {
         $errmsg .= "<li>El password no debe ser igual a tu login";
   }
   // Verifica que los password esten escritos correctamente para verificar que
@@ -193,7 +211,7 @@ if ($_POST['submit'] == "Registrarme") {
 
 // Funcion comentada para no agregar los datos de prueba, una vez que este en produccion hay que descomentarla
 
-   	$f_nac=$_POST[I_b_year].'-'.$_POST[I_b_month].'-'.$_POST[I_b_day];
+   	$f_nac=$_POST['I_b_year'].'-'.$_POST['I_b_month'].'-'.$_POST['I_b_day'];
 	$date=strftime("%Y%m%d%H%M%S");
   	$query = "INSERT INTO asistente (login,passwd,nombrep,apellidos,sexo,mail,ciudad,org,fecha_nac,reg_time,id_estudios,id_tasistente,id_estado) VALUES (".
 		"'".$lowlogin."',".
@@ -230,7 +248,7 @@ if ($_POST['submit'] == "Registrarme") {
 // de lo contrario la imprimira para poder introducir los datos si es que todavia no hemos introducido nada
 // o para corregir datos que ya hayamos tratado de introducir
 	print'
-		<FORM method="POST" action="'.$REQUEST_URI.'">
+		<FORM method="POST" action="'.$_SERVER['REQUEST_URI'].'">
 		<p><i>Campos marcados con un asterisco son obligatorios</i></p>
 		<table width=100%>
 		<tr>

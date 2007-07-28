@@ -16,18 +16,16 @@ $p = mysql_fetch_array($userRecords);
 //
 $userQueryP = 'SELECT * FROM propuesta WHERE id_ponente="'.$idponente.'" AND id_status!=7';
 $userRecordsP = mysql_query($userQueryP) or err("No se pudo listar ponencias".mysql_errno($userRecords));
-$msg='Ponencias de '.$p['nombrep'].' '.$p['apellidos'].'<hr>';
+$msg='Propuestas de '.$p['nombrep'].' '.$p['apellidos'].'<hr>';
 print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['ponlogin'].'&nbsp;<a class="rojo" href=signout.php>Desconectarme</a></P>';
 imprimeCajaTop("100",$msg);
 print '
 	<table border=0 align=center width=100%>
 	<tr>
 	<td bgcolor='.$colortitle.'><b>Ponencia</b></td><td bgcolor='.$colortitle.'><b>Tipo</b></td>
-	<td bgcolor='.$colortitle.'><b>Status</b></td>';
-	if ($fila[id_status] < 5) { 
-		print '<td bgcolor='.$colortitle.'>&nbsp;</td>';
-		print '<td bgcolor='.$colortitle.'>&nbsp;</td>';
-	}
+	<td bgcolor='.$colortitle.'><b>Status</b></td>
+	<td bgcolor='.$colortitle.'>&nbsp;</td>
+	<td bgcolor='.$colortitle.'>&nbsp;</td>';
 	print '</tr>';
 
 	$color=1;
@@ -44,17 +42,17 @@ print '
 			$color=1;
 		}
 		print '<tr>
-		<td bgcolor='.$bgcolor.'><a class="azul" href="Vponencia.php?idponencia='.$fila[id].'">'.$fila["nombre"].'</a>';
+		<td bgcolor='.$bgcolor.'><a class="azul" href="Vponencia.php?idponencia='.$fila['id'].'">'.$fila["nombre"].'</a>';
 		
 	
 		print '</td><td bgcolor='.$bgcolor.'>';
-		if ($fila[tpropuesta]=="C")
+		if ($fila['tpropuesta']=="C")
 		    echo "Conferencia";
 		else
 		    echo "Taller";
 		
 		print '</td><td bgcolor='.$bgcolor.'>';
-		$query = 'SELECT descr FROM prop_status WHERE id="'.$fila[id_status].'"';
+		$query = 'SELECT descr FROM prop_status WHERE id="'.$fila['id_status'].'"';
 		$result=mysql_query($query);
 	 	$fstatus=mysql_fetch_array($result);
 		print $fstatus['descr'];
@@ -62,9 +60,9 @@ print '
 		
 		print '</td>';
 		// El ponente solo puede cancelar propeustas no borradas,canceladas,aceptadas o programadas
-		if ($fila[id_status] < 5) { 
-			print '<td width=50 bgcolor='.$bgcolor.'><a class="verde" href="Mponencia.php?ponencia='.$fila[id].'">Modificar</td>';
-			print '<td width=50 bgcolor='.$bgcolor.'><a class="rojo" href="BCponencia.php?vopc='.$fila[id].' 7">Eliminar</td>';
+		if ($fila['id_status'] < 5) { 
+			print '<td width=50 bgcolor='.$bgcolor.'><a class="verde" href="Mponencia.php?idponencia='.$fila['id'].'">Modificar</td>';
+			print '<td width=50 bgcolor='.$bgcolor.'><a class="rojo" href="BCponencia.php?vopc='.$fila['id'].' 7">Eliminar</td>';
 		}
 		print '</tr>';
 	}

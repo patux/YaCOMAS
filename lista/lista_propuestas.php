@@ -11,8 +11,8 @@ $QSquery = 'SELECT * FROM prop_status ORDER BY ID';
 $resultQS=mysql_query($QSquery);
 $indice=0;
 while ($QSfila=mysql_fetch_array($resultQS)) {
-	$stat_array[$indice][id]=$QSfila[id];
-	$stat_array[$indice][descr]=$QSfila[descr];
+	$stat_array[$indice]['id']=$QSfila['id'];
+	$stat_array[$indice]['descr']=$QSfila['descr'];
 	$indice++;
 }
 mysql_free_result($resultQS);
@@ -60,12 +60,12 @@ print '
 			$color=1;
 		}
 		print '<tr>
-		<td bgcolor='.$bgcolor.'><a class="azul" href="Vponencia.php?vopc='.$fila[id_ponente].' '.$fila[id_ponencia].' '.$REQUEST_URI.'">'.$fila["ponencia"].'</a>';
-		print '<br><small><a class="rojo" href="Vponente.php?vopc='.$fila[id_ponente].' '.$REQUEST_URI.'">'.$fila['nombrep'].' '.$fila['apellidos'].'</a></small>';
+		<td bgcolor='.$bgcolor.'><a class="azul" href="Vponencia.php?vopc='.$fila['id_ponente'].' '.$fila['id_ponencia'].' '.$_SERVER['REQUEST_URI'].'">'.$fila["ponencia"].'</a>';
+		print '<br><small><a class="rojo" href="Vponente.php?vopc='.$fila['id_ponente'].' '.$_SERVER['REQUEST_URI'].'">'.$fila['nombrep'].' '.$fila['apellidos'].'</a></small>';
 		
 	
 		print '</td><td bgcolor='.$bgcolor.'>';
-		if ($fila[tpropuesta]=="C")
+		if ($fila['tpropuesta']=="C")
 		    echo "Conferencia";
 		else
 		    echo "Taller";

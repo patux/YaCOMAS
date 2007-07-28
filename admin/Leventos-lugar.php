@@ -2,6 +2,7 @@
 include "../includes/lib.php";
 include "../includes/conf.inc";
 beginSession('R');
+$idlugar=$_GET['idlugar'];
 $idponente=$_SESSION['YACOMASVARS']['rootid'];
 
 $link=conectaBD();
@@ -10,13 +11,13 @@ $lugarRecords = mysql_query($lugarQueryE) or err("No se pudo listar lugar de eve
 
 imprimeEncabezado();
 aplicaEstilo();
-print '<p class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['asilogin'].'&nbsp;<a class="rojo" href=signout.php>Desconectarme</a></P>';
+print '<p class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['rootlogin'].'&nbsp;<a class="rojo" href=signout.php>Desconectarme</a></P>';
 $msg="Listado de eventos por lugar<br>";
 
 imprimeCajaTop("100",$msg);
 // Inicio datos de Ponencias
 // Ordenadas por dia 
-print '<FORM method="POST" action="'.$REQUEST_URI.'">';
+print '<FORM method="POST" action="'.$_SERVER['REQUEST_URI'].'">';
 while ($Ql_evento = mysql_fetch_array($lugarRecords))
 	{
 		print '<center>';
@@ -66,15 +67,15 @@ while ($Ql_evento = mysql_fetch_array($lugarRecords))
 				$bgcolor=$color_renglon2;
 				$color=1;
 			}
-			print '<td bgcolor='.$bgcolor.'><a class="azul" href="Vponencia.php?vopc='.$Qf_event[id_ponente].' '.$Qf_event[id_propuesta].' '.$REQUEST_URI.'">'.$Qf_event["nombre"].'</a>';
+			print '<td bgcolor='.$bgcolor.'><a class="azul" href="Vponencia.php?vopc='.$Qf_event['id_ponente'].' '.$Qf_event['id_propuesta'].' '.$_SERVER['REQUEST_URI'].'">'.$Qf_event["nombre"].'</a>';
 			retorno();
-			print '<small><a class="rojo" href="Vponente.php?vopc='.$Qf_event[id_ponente].' '.$REQUEST_URI.'">'.$Qf_event["nombrep"].' '.$Qf_event["apellidos"].'</a></small>';
+			print '<small><a class="rojo" href="Vponente.php?vopc='.$Qf_event['id_ponente'].' '.$_SERVER['REQUEST_URI'].'">'.$Qf_event["nombrep"].' '.$Qf_event["apellidos"].'</a></small>';
 			print '</td><td bgcolor='.$bgcolor.'>'.$Qf_event["fecha"];
 			print '</td><td bgcolor='.$bgcolor.'>'.$Qf_event["hora"].':00 - ';
 			$hfin=$Qf_event["hora"]+$Qf_event["duracion"];
 			print $hfin.':00';
 			print '</td><td bgcolor='.$bgcolor.'>';
-			if ($Qf_event[tpropuesta]=="T")
+			if ($Qf_event['tpropuesta']=="T")
 			{
 				// Checamos cuanta gente esta inscrita a este taller 
 				// Para sacar el total de espacios disponibles todavia para el taller
@@ -86,7 +87,7 @@ while ($Ql_evento = mysql_fetch_array($lugarRecords))
 				$cup_disp=$Qf_event["cupo"] - $ins_taller;
 				print $cup_disp;	
 				print '</td><td bgcolor='.$bgcolor.'>';
-				print '<small><a class="verde" href="Lasistentes-reg.php?vopc='.$Qf_event[id_evento].' '.$REQUEST_URI.'" onMouseOver="window.status=\'Asistentes registrados\';return true" onFocus="window.status=\'Asistentes registrados\';return true" onMouseOut="window.status=\'\';return true" >Asistentes</a>';
+				print '<small><a class="verde" href="Lasistentes-reg.php?vopc='.$Qf_event['id_evento'].' '.$_SERVER['REQUEST_URI'].'" onMouseOver="window.status=\'Asistentes registrados\';return true" onFocus="window.status=\'Asistentes registrados\';return true" onMouseOut="window.status=\'\';return true" >Asistentes</a>';
 			}
 			else 
 				print '</td><td bgcolor='.$bgcolor.'>';

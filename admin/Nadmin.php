@@ -16,28 +16,28 @@ function imprime_valoresOk() {
 		<tr>
 		<td class="name">Administrador Login: * </td>
 		<td class="resultado">
-		'.$_POST[S_login].'
+		'.$_POST['S_login'].'
 		</td>
 		</tr>
 
 		<tr>
 		<td class="name">Nombre(s): * </td>
 		<td class="resultado">
-		'.stripslashes($_POST[S_nombrep]).'
+		'.stripslashes($_POST['S_nombrep']).'
 		</td>
 		</tr>
 
 		<tr>
 		<td class="name">Apellidos: * </td>
 		<td class="resultado">
-		'.stripslashes($_POST[S_apellidos]).'
+		'.stripslashes($_POST['S_apellidos']).'
 		</td>
 		</tr>
 		
 		<tr>
 		<td class="name">Correo Electrónico: *</td>
 		<td class="resultado">
-		'.$_POST[S_mail].'
+		'.$_POST['S_mail'].'
 		</td>
 		</tr>
 		
@@ -45,7 +45,7 @@ function imprime_valoresOk() {
 		<td class="name">Tipo de administrador: * </td>
 		<td class="resultado">';
 		
-		$query = 'SELECT * FROM tadmin WHERE id="'.$_POST[I_id_tadmin].'"';
+		$query = 'SELECT * FROM tadmin WHERE id="'.$_POST['I_id_tadmin'].'"';
 		$result=mysql_query($query);
 	 	while($fila=mysql_fetch_array($result)) {
 			printf ("%s",$fila["descr"]);
@@ -63,9 +63,19 @@ function imprime_valoresOk() {
 		</center>';
 
 }
+
+// Inicializar variables
+if (empty ($_POST['submit']))
+{
+	$_POST['S_login']='';
+	$_POST['S_nombrep']='';
+	$_POST['S_apellidos']='';
+	$_POST['S_mail']='';
+	$_POST['I_id_tadmin']='';
+}
 // Si la forma ya ha sido enviada checamos cada uno de los valores
 // para poder autorizar la insercion del registro
-if ($_POST['submit'] == "Registrar") {
+if (isset($_POST['submit']) && $_POST['submit'] == "Registrar") {
   # do some basic error checking
   $errmsg = "";
   // Verificar si todos los campos obligatorios no estan vacios
@@ -84,7 +94,7 @@ if ($_POST['submit'] == "Registrar") {
         $errmsg .= "<li>El password debe tener entre 6 y 15 caracteres";
   }
   // Verifica que el password usado no sea igual al login introducido por seguridad
-  if ($_POST['$_passwd'] == $_POST['S_login']) {
+  if ($_POST['S_passwd'] == $_POST['S_login']) {
         $errmsg .= "<li>El password no debe ser igual al login del administrador";
   }
   // Verifica que los password esten escritos correctamente para verificar que
@@ -140,7 +150,7 @@ else { // Todas las validaciones Ok
 // de lo contrario la imprimira para poder introducir los datos si es que todavia no hemos introducido nada
 // o para corregir datos que ya hayamos tratado de introducir
 	print'
-		<FORM method="POST" action="'.$REQUEST_URI.'">
+		<FORM method="POST" action="'.$_SERVER['REQUEST_URI'].'">
 		<p><i>Campos marcados con un asterisco son obligatorios</i></p>
 		<table width=100%>
 		<tr>

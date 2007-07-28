@@ -8,7 +8,7 @@
 
 	$link=conectaBD();
 	
-	$tok = strtok ($vopc," ");
+	$tok = strtok ($_GET['vopc']," ");
 	$ponencia=$tok;
 	$tok = strtok (" ");
 	$action=$tok;
@@ -20,7 +20,7 @@
 		$verbo1="Eliminar";
 		$verbo2="Eliminada";
 	}
-	imprimeCajaTop("100",$verbo1." Ponencia");
+	imprimeCajaTop("100",$verbo1." Propuesta de Ponencia");
 	print '<hr>';
 
 function imprime_valoresOk() {
@@ -31,7 +31,7 @@ function imprime_valoresOk() {
 		<tr>
 		<td class="name">Nombre de Ponencia: * </td>
 		<td class="resultado">
-		'.$_POST[S_nombreponencia].'
+		'.$_POST['S_nombreponencia'].'
 		</td>
 		</tr>
 
@@ -39,7 +39,7 @@ function imprime_valoresOk() {
 		<td class="name">Nivel: * </td>
 		<td class="resultado">';
 		
-		$query = 'SELECT * FROM prop_nivel WHERE id="'.$_POST[I_id_nivel].'"';
+		$query = 'SELECT * FROM prop_nivel WHERE id="'.$_POST['I_id_nivel'].'"';
 		$result=mysql_query($query);
 	 	while($fila=mysql_fetch_array($result)) {
 			printf ("%s",$fila["descr"]);
@@ -54,7 +54,7 @@ function imprime_valoresOk() {
 		<td class="name">Tipo de Propuesta: * </td>
 		<td class="resultado">';
 		
-		if ($_POST[C_tpropuesta]=="C")
+		if ($_POST['C_tpropuesta']=="C")
 		    echo "Conferencia";
 		else
 		    echo "Taller";
@@ -67,7 +67,7 @@ function imprime_valoresOk() {
 		<td class="name">Orientacion: * </td>
 		<td class="resultado">';
 		
-		$query = 'SELECT * FROM orientacion WHERE id="'.$_POST[I_id_orientacion].'"';
+		$query = 'SELECT * FROM orientacion WHERE id="'.$_POST['I_id_orientacion'].'"';
 		$result=mysql_query($query);
 	 	while($fila=mysql_fetch_array($result)) {
 			printf ("%s",$fila["descr"]);
@@ -81,7 +81,7 @@ function imprime_valoresOk() {
 		<tr>
 		<td class="name">Duracion: * </td>
 		<td class="resultado">';
-		printf ("%02d Hrs",$_POST[I_duracion]);
+		printf ("%02d Hrs",$_POST['I_duracion']);
 	print '	
 		</td>
 		</tr>
@@ -89,7 +89,7 @@ function imprime_valoresOk() {
 		<tr>
 		<td class="name">Resumen: </td>
 		<td class="resultado">
-		'.$_POST[S_resumen].'
+		'.$_POST['S_resumen'].'
 		</td>
 		</tr>
 
@@ -99,7 +99,7 @@ function imprime_valoresOk() {
 }
 // Si la forma ya ha sido enviada checamos cada uno de los valores
 // para poder autorizar la insercion del registro
-if ($_POST['submit'] == "Aceptar") {
+if (isset ($_POST['submit']) && $_POST['submit'] == "Aceptar") {
   # do some basic error checking
   // Si todo esta bien vamos a borrar el registro 
   	if ($action!=7)
@@ -142,7 +142,7 @@ else {
 }
 	imprime_valoresOk();
 	print'<center>
-		<FORM method="POST" action="'.$REQUEST_URI.'">
+		<FORM method="POST" action="'.$_SERVER['REQUEST_URI'].'">
 		<input type="submit" name="submit" value="Aceptar">&nbsp;&nbsp;
 		<input type="button" value="Volver al Listado" onClick=location.href="'.$rootpath.'/ponente/ponente.php?opc=2">
 		</center>

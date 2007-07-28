@@ -16,7 +16,7 @@ global $confName;
 require "header.inc";
 retorno();
 alinearIzq("center"); 
-print '<img src="'.$rootpath.'/images/yacomas.png","237","83" border="0">';
+print '<img src="'.$rootpath.'/images/yacomas.png","287","91" border="0">';
 alinearFin();
 retorno();
 print ("<table border=0 cellpading=0 cellspacing=5 width=100% align=center>");
@@ -67,6 +67,7 @@ function retorno_esp()
 
 function aplicaEstilo() 
 {
+	global $rootpath;
 	print '<link rel=stylesheet href='.$rootpath.'/style1.css type=text/css>';
 }
 //--------------------------------

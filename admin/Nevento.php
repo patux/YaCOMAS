@@ -6,12 +6,12 @@
 	imprimeEncabezado();
 	aplicaEstilo();
 	print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['rootlogin'].'&nbsp;<a class="rojo" href=signout.php>Desconectarme</a></P>';
-	$tok = strtok ($pevento," ");
+	$tok = strtok ($_GET['pevento']," ");
 	$idponencia=$tok;
 	$tok = strtok (" ");
 	$idponente=$tok;
 	$tok = strtok (" ");
-	
+	$regresa='';	
 	while ($tok) {
 		$regresa .=' '.$tok;
 		$tok=strtok(" ");
@@ -30,7 +30,7 @@
 	$userRecords = mysql_query($userQuery) or err("No se pudo checar la propuesta".mysql_errno($userRecords));
 	$p = mysql_fetch_array($userRecords);
 	$registro['S_nombreponencia']=$p['nombre'];
-	$registro['S_nivel']=$p['nivel'];
+	$registro['I_id_nivel']=$p['id_nivel'];
 	$registro['S_resumen']=$p['resumen'];
 	$registro['S_reqtecnicos']=$p['reqtecnicos'];
 	$registro['S_reqasistente']=$p['reqasistente'];
@@ -59,7 +59,7 @@ function imprime_valoresOk($idponencia,$idponente) {
 	$userRecords = mysql_query($userQuery) or err("No se pudo checar la propuesta".mysql_errno($userRecords));
 	$p = mysql_fetch_array($userRecords);
 	$registro['S_nombreponencia']=$p['nombre'];
-	$registro['S_nivel']=$p['nivel'];
+	$registro['I_id_nivel']=$p['id_nivel'];
 	$registro['S_resumen']=$p['resumen'];
 	$registro['S_reqtecnicos']=$p['reqtecnicos'];
 	$registro['S_reqasistente']=$p['reqasistente'];
@@ -70,7 +70,7 @@ function imprime_valoresOk($idponencia,$idponente) {
 	$registro['D_reg_time']=$p['reg_time'];
 	$registro['D_act_time']=$p['act_time'];
 	$registro['I_id_administrador']=$p['id_administrador'];
-	$hora_fin= $_POST[I_hora] + $registro[I_duracion];
+	$hora_fin= $_POST['I_hora'] + $registro['I_duracion'];
 	
     print '	
      		<table width=100%>
@@ -83,14 +83,14 @@ function imprime_valoresOk($idponencia,$idponente) {
 		<tr>
 		<td class="name">Nombre de Ponencia: </td>
 		<td class="resultado">
-		'.$registro[S_nombreponencia].'
+		'.$registro['S_nombreponencia'].'
 		</td>
 		</tr>
 
 		<tr>
 		<td class="name">Nivel:  </td>
 		<td class="resultado">
-		'.stripslashes($registro[S_nivel]).'
+		'.stripslashes($registro['I_id_nivel']).'
 		</td>
 		</tr>
 
@@ -98,7 +98,7 @@ function imprime_valoresOk($idponencia,$idponente) {
 		<td class="name">Tipo de Propuesta: </td>
 		<td class="resultado">';
 		
-		if ($registro[C_tpropuesta]=="C")
+		if ($registro['C_tpropuesta']=="C")
 		    echo "Conferencia";
 		else
 		    echo "Taller";
@@ -111,7 +111,7 @@ function imprime_valoresOk($idponencia,$idponente) {
 		<td class="name">Orientacion: </td>
 		<td class="resultado">';
 		
-		$query = 'SELECT * FROM orientacion WHERE id="'.$registro[I_id_orientacion].'"';
+		$query = 'SELECT * FROM orientacion WHERE id="'.$registro['I_id_orientacion'].'"';
 		$result=mysql_query($query);
 	 	while($fila=mysql_fetch_array($result)) {
 			printf ("%s",$fila["descr"]);
@@ -125,7 +125,7 @@ function imprime_valoresOk($idponencia,$idponente) {
 		<tr>
 		<td class="name">Duracion: </td>
 		<td class="resultado">';
-		printf ("%02d Hrs",$registro[I_duracion]);
+		printf ("%02d Hrs",$registro['I_duracion']);
 	print '	
 		</td>
 		</tr>
@@ -134,7 +134,7 @@ function imprime_valoresOk($idponencia,$idponente) {
 		<td class="name">Fecha evento: </td>
 		<td class="resultado">';
 		
-		$query = 'SELECT * FROM fecha_evento WHERE id="'.$_POST[I_id_fecha].'"';
+		$query = 'SELECT * FROM fecha_evento WHERE id="'.$_POST['I_id_fecha'].'"';
 		$result=mysql_query($query);
 		$fila=mysql_fetch_array($result);
 		print $fila["fecha"];
@@ -148,7 +148,7 @@ function imprime_valoresOk($idponencia,$idponente) {
 		<td class="name">Lugar: </td>
 		<td class="resultado">';
 		
-		$query = 'SELECT * FROM lugar WHERE id="'.$_POST[I_id_lugar].'"';
+		$query = 'SELECT * FROM lugar WHERE id="'.$_POST['I_id_lugar'].'"';
 		$result=mysql_query($query);
 		$fila=mysql_fetch_array($result);
 		print $fila["nombre_lug"];
@@ -160,7 +160,7 @@ function imprime_valoresOk($idponencia,$idponente) {
 		
 		<tr>
 		<td class="name">Hora inicio: </td>
-		<td class="resultado">'.$_POST[I_hora].'
+		<td class="resultado">'.$_POST['I_hora'].'
 		</td>
 		</tr>';
 	print '
@@ -177,9 +177,15 @@ function imprime_valoresOk($idponencia,$idponente) {
 		</center>';
 
 }
+if (empty ($_POST['submit'])) 
+{
+	$_POST['I_id_fecha']='';
+	$_POST['I_id_lugar']='';
+	$_POST['I_hora']='';
+}
 // Si la forma ya ha sido enviada checamos cada uno de los valores
 // para poder autorizar la insercion del registro
-if ($_POST['submit'] == "Registrar") {
+if (isset ($_POST['submit']) && $_POST['submit'] == "Registrar") {
   # do some basic error checking
   $errmsg = "";
   // Verificar si todos los campos obligatorios no estan vacios
@@ -195,16 +201,16 @@ if ($_POST['submit'] == "Registrar") {
         $errmsg .= "<li>La ponencia que elegiste para programar ya ha sido dada de alta;";
       }
   }
-   $Ihora_ini= $_POST[I_hora];
-   $Ihora_fin= $Ihora_ini + $registro[I_duracion];
+   $Ihora_ini= $_POST['I_hora'];
+   $Ihora_fin= $Ihora_ini + $registro['I_duracion'];
   // Despues checamos que la fecha del evento la hora y el dia no este ya ocupado 
   if (empty($errmsg)) {
       for ($v_NO_ocupado=$Ihora_ini;$v_NO_ocupado<$Ihora_fin;$v_NO_ocupado++) 
       {  
       		$userQuery = 'SELECT * FROM evento_ocupa 
       		    		WHERE hora="'.$v_NO_ocupado.'"
-				AND id_fecha="'.$_POST[I_id_fecha].'"
-				AND id_lugar="'.$_POST[I_id_lugar].'"';
+				AND id_fecha="'.$_POST['I_id_fecha'].'"
+				AND id_lugar="'.$_POST['I_id_lugar'].'"';
 		//print $userQuery.'<br>';
         	$userRecords = mysql_query($userQuery) or err("No se pudo checar la propuesta".mysql_errno($userRecords));
        		if (mysql_num_rows($userRecords) != 0) 
@@ -292,14 +298,21 @@ else { // Todas las validaciones Ok
 		<tr>
 		<td class="name">Nombre de Ponencia: </td>
 		<td class="resultado">
-		'.$registro[S_nombreponencia].'
+		'.$registro['S_nombreponencia'].'
 		</td>
 		</tr>
 
 		<tr>
 		<td class="name">Nivel:  </td>
-		<td class="resultado">
-		'.stripslashes($registro[S_nivel]).'
+		<td class="resultado">';
+		
+		$query = 'SELECT * FROM prop_nivel WHERE id="'.$registro['I_id_nivel'].'"';
+		$result=mysql_query($query);
+	 	while($fila=mysql_fetch_array($result)) {
+			printf ("%s",$fila["descr"]);
+  		}
+		mysql_free_result($result);
+	print '
 		</td>
 		</tr>
 
@@ -307,7 +320,7 @@ else { // Todas las validaciones Ok
 		<td class="name">Tipo de Propuesta: </td>
 		<td class="resultado">';
 		
-		if ($registro[C_tpropuesta]=="C")
+		if ($registro['C_tpropuesta']=="C")
 		    echo "Conferencia";
 		else
 		    echo "Taller";
@@ -320,7 +333,7 @@ else { // Todas las validaciones Ok
 		<td class="name">Orientacion: </td>
 		<td class="resultado">';
 		
-		$query = 'SELECT * FROM orientacion WHERE id="'.$registro[I_id_orientacion].'"';
+		$query = 'SELECT * FROM orientacion WHERE id="'.$registro['I_id_orientacion'].'"';
 		$result=mysql_query($query);
 	 	while($fila=mysql_fetch_array($result)) {
 			printf ("%s",$fila["descr"]);
@@ -334,14 +347,14 @@ else { // Todas las validaciones Ok
 		<tr>
 		<td class="name">Duracion: </td>
 		<td class="resultado">';
-		printf ("%02d Hrs",$registro[I_duracion]);
+		printf ("%02d Hrs",$registro['I_duracion']);
 	print '	
 		</td>
 		</tr>
 		</table>';
 	// o para corregir datos que ya hayamos tratado de introducir
 	print'
-		<FORM method="POST" action="'.$REQUEST_URI.'">
+		<FORM method="POST" action="'.$_SERVER['REQUEST_URI'].'">
 		<table width=100%>
 		
 		<tr>
@@ -379,7 +392,7 @@ else { // Todas las validaciones Ok
 	print '
 		></option>';
 		
-		if ($registro[C_tpropuesta]=="C")
+		if ($registro['C_tpropuesta']=="C")
 			$result=mysql_query("select * from lugar where cupo=99999 order by id");
 		else 
 			$result=mysql_query("select * from lugar where cupo!=99999 order by id");

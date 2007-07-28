@@ -4,7 +4,8 @@
 	beginSession('R');
 	imprimeEncabezado();
 	aplicaEstilo();
-	print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['ponlogin'].'&nbsp;<a class="rojo" href=signout.php>Desconectarme</a></P>';
+	$idasistente=$_GET['idasistente'];
+	print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['rootlogin'].'&nbsp;<a class="rojo" href=signout.php>Desconectarme</a></P>';
 	imprimeCajaTop("100","Eliminar Asistente");
 	print '<p class="yacomas_error">Esta accion eliminara el asistente y todas sus inscripciones a talleres</p>';
 	print '<hr>';
@@ -22,7 +23,29 @@ $p = mysql_fetch_array($userRecords);
 // Seleccionamos todos los que no esten eliminados
 // Tal vez podriamos mejorar esta cosa para no depender directamente de que el status siempre sea dado en el codigo
 //
-$userQueryP='SELECT F.fecha, N.descr AS nivel, PO.nombrep, PO.apellidos, P.nombre AS taller, O.descr AS orientacion, EO.hora, P.duracion, L.nombre_lug FROM fecha_evento AS F, ponente AS PO, lugar AS L, orientacion AS O, inscribe AS AI, evento AS E, propuesta AS P, evento_ocupa AS EO, prop_nivel AS N  WHERE EO.id_fecha=F.id AND AI.id_evento=E.id AND E.id_propuesta=P.id AND AI.id_evento=EO.id_evento AND P.id_orientacion=O.id AND EO.id_lugar=L.id AND P.id_ponente=PO.id AND P.id_nivel=N.id AND AI.id_asistente="'.$idasistente.'" GROUP BY AI.id_evento ORDER BY F.fecha, EO.hora';
+$userQueryP='	SELECT 	F.fecha, N.descr AS nivel, PO.nombrep, PO.apellidos, 
+			P.nombre AS taller, O.descr AS orientacion, 
+			EO.hora, P.duracion, L.nombre_lug 
+		FROM 	fecha_evento AS F, 
+			ponente AS PO, 
+			lugar AS L, 
+			orientacion AS O, 
+			inscribe AS AI, 
+			evento AS E, 
+			propuesta AS P, 
+			evento_ocupa AS EO, 
+			prop_nivel AS N  
+		WHERE 	EO.id_fecha=F.id AND 
+			AI.id_evento=E.id AND 
+			E.id_propuesta=P.id AND 
+			AI.id_evento=EO.id_evento AND 
+			P.id_orientacion=O.id AND 
+			EO.id_lugar=L.id AND 
+			P.id_ponente=PO.id AND 
+			P.id_nivel=N.id AND 
+			AI.id_asistente="'.$idasistente.'" 
+		GROUP BY AI.id_evento 
+		ORDER BY F.fecha, EO.hora';
 $userRecordsP = mysql_query($userQueryP) or err("No se pudo listar talleres del asistente".mysql_errno($userRecords));
 // Inicio datos de Ponencias
     print '
@@ -38,7 +61,7 @@ $userRecordsP = mysql_query($userQueryP) or err("No se pudo listar talleres del 
 		<td class="name">Sexo: * </td>
 		<td class="resultado">';
 		
-		if ($p[sexo]=="M")
+		if ($p['sexo']=="M")
 		    echo "Masculino";
 		else
 		    echo "Femenino";
@@ -50,7 +73,7 @@ $userRecordsP = mysql_query($userQueryP) or err("No se pudo listar talleres del 
 		<tr>
 		<td class="name">Organización: </td>
 		<td class="resultado">
-		'.stripslashes($p[org]).'
+		'.stripslashes($p['org']).'
 		</td>
 		</tr>
 
@@ -58,7 +81,7 @@ $userRecordsP = mysql_query($userQueryP) or err("No se pudo listar talleres del 
 		<td class="name">Estudios: * </td>
 		<td class="resultado">';
 		
-		$query = 'SELECT * FROM estudios WHERE id="'.$p[id_estudios].'"';
+		$query = 'SELECT * FROM estudios WHERE id="'.$p['id_estudios'].'"';
 		$result=mysql_query($query);
 	 	while($fila=mysql_fetch_array($result)) {
 			printf ("%s",$fila["descr"]);
@@ -72,7 +95,7 @@ $userRecordsP = mysql_query($userQueryP) or err("No se pudo listar talleres del 
 		<tr>
 		<td class="name">Ciudad: </td>
 		<td class="resultado">
-		'.$p[ciudad].'
+		'.$p['ciudad'].'
 		</td>
 		</tr>
 
@@ -80,7 +103,7 @@ $userRecordsP = mysql_query($userQueryP) or err("No se pudo listar talleres del 
 		<td class="name">Estado: * </td>
 		<td class="resultado">';
 		
-		$query= "select * from estado where id='".$p[id_estado]."'";
+		$query= "select * from estado where id='".$p['id_estado']."'";
 		$result=mysql_query($query);
  		while($fila=mysql_fetch_array($result)) {
 			printf ("%s",$fila["descr"]);
@@ -144,7 +167,7 @@ print '
 }
 // Si la forma ya ha sido enviada checamos cada uno de los valores
 // para poder autorizar la insercion del registro
-if ($_POST['submit'] == "Eliminar") {
+if (isset($_POST['submit']) && $_POST['submit'] == "Eliminar") {
   # do some basic error checking
   // Si todo esta bien vamos a borrar el registro 
   	$query1 = "DELETE FROM asistente WHERE id="."'".$idasistente."'";
@@ -182,7 +205,7 @@ if ($_POST['submit'] == "Eliminar") {
 
 	imprime_valoresOk($idasistente);
 	print'<center>
-		<FORM method="POST" action="'.$REQUEST_URI.'">
+		<FORM method="POST" action="'.$_SERVER['REQUEST_URI'].'">
 		<input type="submit" name="submit" value="Eliminar">&nbsp;&nbsp;
 		<input type="button" value="Cancelar" onClick=location.href="'.$rootpath.'/admin/admin.php?opc=13">
 		</center>

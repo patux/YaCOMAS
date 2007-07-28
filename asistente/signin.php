@@ -2,12 +2,15 @@
 	include "../includes/conf.inc";
 	$link=conectaBD();
 
-$vformar[1] = "lkalskjo24uakd";
 $errmsg = "";
-
+if (empty($_POST['submit']))
+{
+	//Inicializa variables
+	$_POST['S_login']='';	
+}
 // para poder autorizar la insercion del registro
 if (isset ($_POST['submit']) && ($_POST['submit'] == "Iniciar")) {
-  if (!preg_match("/^\w{5,15}$/",$_POST['S_login']) || empty($_POST['S_passwd'])) {
+  if (!preg_match("/^\w{4,15}$/",$_POST['S_login']) || empty($_POST['S_passwd'])) {
   	$errmsg .= "<li>Usuario y/o password no validos. Por favor trate de nuevo";
   }
   else {
@@ -22,7 +25,7 @@ if (isset ($_POST['submit']) && ($_POST['submit'] == "Iniciar")) {
       else {
       	$p = mysql_fetch_array($userRecords);
       	//Checar el password
-       	if ($p['passwd'] != substr(md5($_POST['S_passwd']),0,15)) {
+       	if ($p['passwd'] != substr(md5($_POST['S_passwd']),0,32)) {
         	$errmsg =  ' <span class="err">Usuario y/o Login incorrectos. 
 	       	Por favor intente de nuevo o <a href="reset.php">Presiona aqui para resetear tu password</a>.</span>
 	       	<p><br>';
@@ -41,10 +44,6 @@ if (isset ($_POST['submit']) && ($_POST['submit'] == "Iniciar")) {
 	}
     } 
 }
-else {
-	$vform=$vformar[1];
-}
-
 // Aqui imprimimos la forma
 // Solo deja de imprimirse cuando todos los valores han sido introducidos correctamente
 // de lo contrario la imprimira para poder introducir los datos si es que todavia no hemos introducido nada
@@ -83,12 +82,10 @@ elseif (isset($_GET['e']) && ($_GET['e'] == "exp")) { print '<span class="err">S
 		<input type="submit" name="submit" value="Iniciar">&nbsp;&nbsp;
 		<input type="button" value="Cancelar" onClick=location.href="../">
 		</center>
-		<input type="hidden" name="validform" value="'.$vform.'">
 		</form>
 		<span class="note">Su session caducara despues de 1 hora de inactividad</span>
 		</center>
 		';
-
 imprimeCajaBottom(); 
 imprimePie();
 ?>

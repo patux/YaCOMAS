@@ -4,7 +4,7 @@ include "../includes/conf.inc";
 beginSession('A');
 $idasistente=$_SESSION['YACOMASVARS']['asiid'];
 $link=conectaBD();
-	$tok = strtok ($vact," ");
+	$tok = strtok ($_GET['vact']," ");
 	$idevento=$tok;
 	$tok = strtok (" ");
 	$regresa=$tok;

@@ -10,7 +10,7 @@ $userQuery = 'SELECT nombrep,apellidos FROM administrador WHERE id="'.$idadmin.'
 $userRecords = mysql_query($userQuery) or err("No se pudo checar el login".mysql_errno($userRecords));
 $p = mysql_fetch_array($userRecords);
 $msg='Bienvenido Administrador<br><small>'.$p['nombrep'].' '.$p['apellidos'].'</small><hr>';
-print '<P class="yacomas_login">Administrador: '.$_SESSION['YACOMASVARS']['rootlogin'].'&nbsp;<a class="rojo" href=signout.php>Desconectarme</a></P>';
+print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['rootlogin'].'&nbsp;<a class="rojo" href=signout.php>Desconectarme</a></P>';
 imprimeCajaTop("100",$msg);
 print '<font size=+1 color=#000000 face=arial>
 <a NAME="admin"><a>

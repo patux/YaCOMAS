@@ -1,14 +1,14 @@
 <? 
-	include "../../includes/lib.php";
-	include "../../includes/conf.inc";
-	imprimeEncabezado2();
+	include "../includes/lib.php";
+	include "../includes/conf.inc";
+	imprimeEncabezado();
 	aplicaEstilo();
-	$tok = strtok ($vopc," ");
+	$tok = strtok ($_GET['vopc']," ");
 	$idponente=$tok;
 	$tok = strtok (" ");
 	$idponencia=$tok;
 	$tok = strtok (" ");
-	
+	$regresa='';	
 	while ($tok) {
 		$regresa .=' '.$tok;
 		$tok=strtok(" ");
@@ -46,7 +46,7 @@
 		<tr>
 		<td class="name">Nombre de Ponencia: * </td>
 		<td class="resultado">
-		'.$registro[S_nombreponencia].'
+		'.$registro['S_nombreponencia'].'
 		</td>
 		</tr>
 		
@@ -54,7 +54,7 @@
 		<td class="name">Nivel: * </td>
 		<td class="resultado">';
 		
-		$query = 'SELECT * FROM prop_nivel WHERE id="'.$registro[I_id_nivel].'"';
+		$query = 'SELECT * FROM prop_nivel WHERE id="'.$registro['I_id_nivel'].'"';
 		$result=mysql_query($query);
 	 	while($fila=mysql_fetch_array($result)) {
 			printf ("%s",$fila["descr"]);
@@ -69,7 +69,7 @@
 		<td class="name">Tipo de Propuesta: * </td>
 		<td class="resultado">';
 		
-		if ($registro[C_tpropuesta]=="C")
+		if ($registro['C_tpropuesta']=="C")
 		    echo "Conferencia";
 		else
 		    echo "Taller";
@@ -82,7 +82,7 @@
 		<td class="name">Orientacion: * </td>
 		<td class="resultado">';
 		
-		$query = 'SELECT * FROM orientacion WHERE id="'.$registro[I_id_orientacion].'"';
+		$query = 'SELECT * FROM orientacion WHERE id="'.$registro['I_id_orientacion'].'"';
 		$result=mysql_query($query);
 	 	while($fila=mysql_fetch_array($result)) {
 			printf ("%s",$fila["descr"]);
@@ -96,7 +96,7 @@
 		<tr>
 		<td class="name">Duracion: * </td>
 		<td class="resultado">';
-		printf ("%02d Hrs",$registro[I_duracion]);
+		printf ("%02d Hrs",$registro['I_duracion']);
 	print '	
 		</td>
 		</tr>
@@ -105,7 +105,7 @@
 		<td class="name">Status: * </td>
 		<td class="resultado">';
 		
-		$query = 'SELECT descr FROM prop_status WHERE id="'.$registro[I_id_status].'"';
+		$query = 'SELECT descr FROM prop_status WHERE id="'.$registro['I_id_status'].'"';
 		$result=mysql_query($query);
 	 	while($fila=mysql_fetch_array($result)) {
 			printf ("<b>%s</b>",$fila["descr"]);
@@ -161,8 +161,8 @@
 		<tr>
 		<td class="name">Hora: * </td>
 		<td class="resultado">';
-		$hfin=$detalle_EO[hora] + $registro[I_duracion];		
-		print $detalle_EO[hora].':00 - '.$hfin.':00';
+		$hfin=$detalle_EO['hora'] + $registro['I_duracion'];		
+		print $detalle_EO['hora'].':00 - '.$hfin.':00';
 	print '
 		</td>
 		</tr>';
@@ -179,14 +179,14 @@
 		<tr>
 		<td class="name">Resumen: </td>
 		<td align=justify class="resultado">
-		'.$registro[S_resumen].'
+		'.$registro['S_resumen'].'
 		</td>
 		</tr>
 		
 		<tr>
 		<td class="name">Prerequisitos del Asistente: </td>
 		<td align=justify class="resultado">
-		'.$registro[S_reqasistente].'
+		'.$registro['S_reqasistente'].'
 		</td>
 		</tr>
 		</table>

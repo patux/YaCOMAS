@@ -3,6 +3,7 @@
 	include "../includes/conf.inc";
 	beginSession('R');
 	$idadmin=$_SESSION['YACOMASVARS']['rootid'];
+	$idlugar=$_GET['idlugar'];
 	imprimeEncabezado();
 	aplicaEstilo();
 	print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['rootlogin'].'&nbsp;<a class="rojo" href=signout.php>Desconectarme</a></P>';
@@ -16,21 +17,21 @@ function imprime_valoresOk() {
 		<tr>
 		<td class="name">Nombre: * </td>
 		<td class="resultado">
-		'.$_POST[S_nombre_lug].'
+		'.$_POST['S_nombre_lug'].'
 		</td>
 		</tr>
 
 		<tr>
 		<td class="name">Ubicacion: * </td>
 		<td class="resultado">
-		'.stripslashes($_POST[S_ubicacion]).'
+		'.stripslashes($_POST['S_ubicacion']).'
 		</td>
 		</tr>
 
 		<tr>
 		<td class="name">Cupo: * </td>
 		<td class="resultado">
-		'.$_POST[I_cupo].'
+		'.$_POST['I_cupo'].'
 		</td>
 		</tr>
 
@@ -43,7 +44,7 @@ function imprime_valoresOk() {
 }
 // Si la forma ya ha sido enviada checamos cada uno de los valores
 // para poder autorizar la insercion del registro
-if ($_POST['submit'] == "Actualizar") {
+if (isset ($_POST['submit']) && $_POST['submit'] == "Actualizar") {
   # do some basic error checking
   $errmsg = "";
   // Verificar si todos los campos obligatorios no estan vacios

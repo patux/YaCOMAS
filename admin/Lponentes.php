@@ -6,7 +6,14 @@ imprimeEncabezado();
 aplicaEstilo();
 $link=conectaBD();
 $idadmin=$_SESSION['YACOMASVARS']['rootid'];
-$userQueryP = 'SELECT P.id, P.nombrep, P.apellidos, P.reg_time,  E.descr AS estado,  ES.descr AS estudios FROM ponente AS P, estado AS E, estudios AS ES WHERE P.id_estado=E.id AND P.id_estudios=ES.id ORDER BY E.estado,P.id';
+$userQueryP = '	SELECT 	P.id, P.nombrep, P.apellidos, P.reg_time,  E.descr AS estado,  
+			ES.descr AS estudios 
+		FROM 	ponente AS P, 
+			estado AS E, 
+			estudios AS ES 
+		WHERE 	P.id_estado=E.id AND 
+			P.id_estudios=ES.id 
+		ORDER BY E.estado,P.id';
 $userRecordsP = mysql_query($userQueryP) or err("No se pudo listar Ponentes".mysql_errno($userRecordsP));
 print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['rootlogin'].'&nbsp;<a class="rojo" href=signout.php>Desconectarme</a></P>';
 imprimeCajaTop("100","Listado de ponentes registrados");
@@ -35,13 +42,13 @@ print'
 			$color=1;
 		}
 		print '<tr>
-		<td bgcolor='.$bgcolor.'><a class="azul" href="Vponente.php?vopc='.$fila[id].' '.$REQUEST_URI.'">'.$fila['nombrep'].' '.$fila['apellidos'].'</td>
-		<td bgcolor='.$bgcolor.'>'.$fila[estado];
+		<td bgcolor='.$bgcolor.'><a class="azul" href="Vponente.php?vopc='.$fila['id'].' '.$_SERVER['REQUEST_URI'].'">'.$fila['nombrep'].' '.$fila['apellidos'].'</td>
+		<td bgcolor='.$bgcolor.'>'.$fila['estado'];
 		
-		print '</td><td bgcolor='.$bgcolor.'>'.$fila[estudios];
-		print '</td><td bgcolor='.$bgcolor.'>'.$fila[reg_time].'</td>';
+		print '</td><td bgcolor='.$bgcolor.'>'.$fila['estudios'];
+		print '</td><td bgcolor='.$bgcolor.'>'.$fila['reg_time'].'</td>';
 		if ($_SESSION['YACOMASVARS']['rootlevel']==1)
-			print '<td bgcolor='.$bgcolor.'><a class="rojo" href="Bponente.php?idponente='.$fila[id].'">Eliminar</td>';
+			print '<td bgcolor='.$bgcolor.'><a class="rojo" href="Bponente.php?idponente='.$fila['id'].'">Eliminar</td>';
 		print '</tr>';
 	}
 	print '</table>';

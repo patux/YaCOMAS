@@ -38,32 +38,33 @@ if ($stat_array==0)
 		exit;
 	}	
 
-if ($_POST['submit'] == "Inscribirme") {
+if (isset ($_POST['submit']) && $_POST['submit'] == "Inscribirme") {
   $errmsg = "";
+  $errmsg2 = "";
 // Checamos que los valores introducidos sean validos....
 
 // Primero checamos si los valores elegidos solo son los requeridos 
-	for ($talleres=0, $i=0; $i < $_POST[TalleresOfertados]; $i++) {
-		if (!empty ($_POST[TallerElegido.$i]))
+	for ($talleres=0, $i=0; $i < $_POST['TalleresOfertados']; $i++) {
+		if (!empty ($_POST['TallerElegido'.$i]))
 		{
-			$campos=$_POST[TallerElegido.$i];
+			$campos=$_POST['TallerElegido'.$i];
 			// Separamos los campos para realizar la matriz
 			$tok = strtok ($campos,",");
-			$taller[$talleres][id_fecha]=$tok;
+			$taller[$talleres]['id_fecha']=$tok;
 			$tok = strtok (",");
-			$taller[$talleres][id_evento]=$tok;
+			$taller[$talleres]['id_evento']=$tok;
 			$tok = strtok (",");
-			$taller[$talleres][hora]=$tok;
+			$taller[$talleres]['hora']=$tok;
 			$tok = strtok (",");
-			$taller[$talleres][duracion]=$tok;
+			$taller[$talleres]['duracion']=$tok;
 			$tok = strtok (",");
-			$taller[$talleres][nombre]=$tok;
-			$taller[$talleres][horafin]= $taller[$talleres][hora] + $taller[$talleres][duracion];
+			$taller[$talleres]['nombre']=$tok;
+			$taller[$talleres]['horafin']= $taller[$talleres]['hora'] + $taller[$talleres]['duracion'];
 			$talleres++;
 		}
 			
 	}
-	if ($talleres > $_POST[InscripLibres]) {
+	if ($talleres > $_POST['InscripLibres']) {
 		$errmsg="<li>Solo puede elegir $_POST[InscripLibres] talleres maximo";
 	}
 	if ($talleres < 1 ) {
@@ -77,39 +78,39 @@ if ($_POST['submit'] == "Inscribirme") {
 		// Checamos que no existan cruces entre los talleres elegidos
 		// Creamos los indices
 		for ($r=0,$i=0; $i < $talleres; $i++) 
-			for ($genera=$taller[$i][hora]; $genera <  $taller[$i][horafin]; $genera++,$r++)
+			for ($genera=$taller[$i]['hora']; $genera <  $taller[$i]['horafin']; $genera++,$r++)
 			{
-				$llave[$r]=$taller[$i][id_fecha].$genera;
-				$nomt[$r]=$taller[$i][nombre];
+				$llave[$r]=$taller[$i]['id_fecha'].$genera;
+				$nomt[$r]=$taller[$i]['nombre'];
 			}
 
-		if ($_POST[TalleresInscritos] > 0 ) 
+		if ($_POST['TalleresInscritos'] > 0 ) 
 		{
 			// Realizamos la matriz de talleres inscritos
-			for ($i=0; $i < $_POST[TalleresInscritos]; $i++) {
-				$campos=$_POST[TallerInscrito.$i];
+			for ($i=0; $i < $_POST['TalleresInscritos']; $i++) {
+				$campos=$_POST['TallerInscrito'.$i];
 				// Separamos los campos para realizar la matriz
 				$tok = strtok ($campos,",");
-				$tallerI[$i][id_fecha]=$tok;
+				$tallerI[$i]['id_fecha']=$tok;
 				$tok = strtok (",");
-				$tallerI[$i][id_evento]=$tok;
+				$tallerI[$i]['id_evento']=$tok;
 				$tok = strtok (",");
-				$tallerI[$i][hora]=$tok;
+				$tallerI[$i]['hora']=$tok;
 				$tok = strtok (",");
-				$tallerI[$i][duracion]=$tok;
+				$tallerI[$i]['duracion']=$tok;
 				$tok = strtok (",");
-				$tallerI[$i][nombre]=$tok;
-				$tallerI[$i][horafin]= $tallerI[$i][hora] + $tallerI[$i][duracion];
+				$tallerI[$i]['nombre']=$tok;
+				$tallerI[$i]['horafin']= $tallerI[$i]['hora'] + $tallerI[$i]['duracion'];
 			}
 			// Checamos que no existan cruces entre los talleres elegidos
 			// y los talleres ya inscritos
 			// Creamos los indices de los talleres inscritos
 			for ($z=0; $z < $i; $z++) 
 			{ 
-				for ($genera=$tallerI[$z][hora]; $genera <  $tallerI[$z][horafin]; $genera++,$r++)
+				for ($genera=$tallerI[$z]['hora']; $genera <  $tallerI[$z]['horafin']; $genera++,$r++)
 				{
-					$llave[$r]=$tallerI[$z][id_fecha].$genera;
-					$nomt[$r]=$tallerI[$z][nombre];
+					$llave[$r]=$tallerI[$z]['id_fecha'].$genera;
+					$nomt[$r]=$tallerI[$z]['nombre'];
 				}
 			}
 		}
@@ -150,12 +151,12 @@ if ($_POST['submit'] == "Inscribirme") {
   			$queryI = 'INSERT INTO inscribe(id_asistente,id_evento,reg_time) 
 			  		VALUES ('.
 					$idasistente.','.
-					$taller[$i][id_evento].','.
+					$taller[$i]['id_evento'].','.
 					$date.')';
 			$resultI = mysql_query($queryI) 
 				or err("No se puede insertar taller".mysql_errno($resultI));
 			print '<tr><td class="resultado">'.
-				$taller[$i][nombre].'</tr>';
+				$taller[$i]['nombre'].'</tr>';
 			retorno();
 
 		}
@@ -186,7 +187,7 @@ $msg2='Puedes inscribirte a '.$inscrip_libres.' talleres mas';
 print '<p class="yacomas_error">'.$msg1.'<br>'.$msg2.'</p>';
 
 retorno();
-print '<FORM method="POST" action="'.$REQUEST_URI.'">';
+print '<FORM method="POST" action="'.$_SERVER['REQUEST_URI'].'">';
 // Variable para los indizar los talleres
 $taller=0;
 $tallerI=0;
@@ -223,7 +224,7 @@ while ($Qf_evento = mysql_fetch_array($fechaRecords))
 				P.id_ponente=PO.id AND 
 				EO.id_lugar=L.id AND 
 				P.id_orientacion=O.id AND 
-				EO.id_fecha="'.$Qf_evento[id].'" 
+				EO.id_fecha="'.$Qf_evento['id'].'" 
 				AND P.tpropuesta="T" 
 			GROUP BY id_evento 
 			ORDER BY EO.id_fecha,EO.hora';
@@ -241,9 +242,9 @@ while ($Qf_evento = mysql_fetch_array($fechaRecords))
 				$bgcolor=$color_renglon2;
 				$color=1;
 			}
-			print '<td bgcolor='.$bgcolor.'><a class="azul" href="Vponencia.php?vopc='.$Qf_event[id_ponente].' '.$Qf_event[id_propuesta].' '.$REQUEST_URI.'">'.$Qf_event["nombre"].'</a>';
+			print '<td bgcolor='.$bgcolor.'><a class="azul" href="Vponencia.php?vopc='.$Qf_event['id_ponente'].' '.$Qf_event['id_propuesta'].' '.$_SERVER['REQUEST_URI'].'">'.$Qf_event["nombre"].'</a>';
 			retorno();
-			print '<small><a class="rojo" href="Vponente.php?vopc='.$Qf_event[id_ponente].' '.$REQUEST_URI.'">'.$Qf_event["nombrep"].' '.$Qf_event["apellidos"].'</a></small>';
+			print '<small><a class="rojo" href="Vponente.php?vopc='.$Qf_event['id_ponente'].' '.$_SERVER['REQUEST_URI'].'">'.$Qf_event["nombrep"].' '.$Qf_event["apellidos"].'</a></small>';
 			print '</td><td bgcolor='.$bgcolor.'>'.$Qf_event["descr"];
 			print '</td><td bgcolor='.$bgcolor.'>'.$Qf_event["hora"].':00 - ';
 			$hfin=$Qf_event["hora"]+$Qf_event["duracion"];
@@ -263,18 +264,18 @@ while ($Qf_evento = mysql_fetch_array($fechaRecords))
 			$Qesta_inscrito='SELECT id_evento 
 					 FROM inscribe 
 					 WHERE id_asistente="'.$idasistente.'" AND
-						id_evento="'.$Qf_event[id_evento].'"';
+						id_evento="'.$Qf_event['id_evento'].'"';
       			$inscritoRecords= mysql_query($Qesta_inscrito) or 
 				err("No se pudo checar el login".mysql_errno($inscrito_recors));
 			if (mysql_num_rows($inscritoRecords) !=0) 
 			{
 				print '<img src="'.$rootpath.'/images/checkmark.gif" border=0>';
 
-				$Icampos=$Qf_event[id_fecha].',';
-				$Icampos.=$Qf_event[id_evento].',';
-				$Icampos.=$Qf_event[hora].',';
-				$Icampos.=$Qf_event[duracion].',';
-				$Icampos.=$Qf_event[nombre];
+				$Icampos=$Qf_event['id_fecha'].',';
+				$Icampos.=$Qf_event['id_evento'].',';
+				$Icampos.=$Qf_event['hora'].',';
+				$Icampos.=$Qf_event['duracion'].',';
+				$Icampos.=$Qf_event['nombre'];
 				print '<input type="hidden" name="TallerInscrito'.$tallerI.'" value="'.$Icampos.'">';
 				$tallerI++;
 			}
@@ -285,11 +286,11 @@ while ($Qf_evento = mysql_fetch_array($fechaRecords))
 				// Checar si hay cupo
 				if ($ins_taller < $Qf_event["cupo"])
 				{
-					$Tcampos=$Qf_event[id_fecha].',';
-					$Tcampos.=$Qf_event[id_evento].',';
-					$Tcampos.=$Qf_event[hora].',';
-					$Tcampos.=$Qf_event[duracion].',';
-					$Tcampos.=$Qf_event[nombre];
+					$Tcampos=$Qf_event['id_fecha'].',';
+					$Tcampos.=$Qf_event['id_evento'].',';
+					$Tcampos.=$Qf_event['hora'].',';
+					$Tcampos.=$Qf_event['duracion'].',';
+					$Tcampos.=$Qf_event['nombre'];
 					print '<input type="checkbox" name="TallerElegido'.$taller.'" value="'.$Tcampos.'">';
 					$taller++;
 				}

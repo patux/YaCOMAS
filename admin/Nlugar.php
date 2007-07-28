@@ -16,21 +16,21 @@ function imprime_valoresOk() {
 		<tr>
 		<td class="name">Nombre: * </td>
 		<td class="resultado">
-		'.$_POST[S_nombre_lug].'
+		'.$_POST['S_nombre_lug'].'
 		</td>
 		</tr>
 
 		<tr>
 		<td class="name">Ubicacion: * </td>
 		<td class="resultado">
-		'.stripslashes($_POST[S_ubicacion]).'
+		'.stripslashes($_POST['S_ubicacion']).'
 		</td>
 		</tr>
 
 		<tr>
 		<td class="name">Cupo: * </td>
 		<td class="resultado">
-		'.stripslashes($_POST[I_cupo]).'
+		'.stripslashes($_POST['I_cupo']).'
 		</td>
 		</tr>
 
@@ -41,9 +41,15 @@ function imprime_valoresOk() {
 		</center>';
 
 }
+if (empty ($_POST['submit']))
+{
+	$_POST['S_nombre_lug']='';
+	$_POST['S_ubicacion']='';
+	$_POST['I_cupo']='';
+}
 // Si la forma ya ha sido enviada checamos cada uno de los valores
 // para poder autorizar la insercion del registro
-if ($_POST['submit'] == "Registrar") {
+if (isset ($_POST['submit']) && $_POST['submit'] == "Registrar") {
   # do some basic error checking
   $errmsg = "";
   // Verificar si todos los campos obligatorios no estan vacios
@@ -114,7 +120,7 @@ else { // Todas las validaciones Ok
 // de lo contrario la imprimira para poder introducir los datos si es que todavia no hemos introducido nada
 // o para corregir datos que ya hayamos tratado de introducir
 	print'
-		<FORM method="POST" action="'.$REQUEST_URI.'">
+		<FORM method="POST" action="'.$_SERVER['REQUEST_URI'].'">
 		<p><i>Campos marcados con un asterisco son obligatorios</i></p>
 		<table width=100%>
 

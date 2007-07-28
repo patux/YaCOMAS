@@ -16,14 +16,14 @@ function imprime_valoresOk() {
 		<tr>
 		<td class="name">Fecha evento: * </td>
 		<td class="resultado">';
-		printf ("%02d-%02d-%04d",$_POST[I_e_day],$_POST[I_e_month],$_POST[I_e_year]);
+		printf ("%02d-%02d-%04d",$_POST['I_e_day'],$_POST['I_e_month'],$_POST['I_e_year']);
     print '     </td>
 		</tr>
 
 		<tr>
 		<td class="name">Descripcion: </td>
 		<td class="resultado">
-		'.stripslashes($_POST[S_descr]).'
+		'.stripslashes($_POST['S_descr']).'
 		</td>
 		</tr>
 
@@ -34,9 +34,16 @@ function imprime_valoresOk() {
 		</center>';
 
 }
+if (empty ($_POST['I_e_day']))
+{
+	$_POST['I_e_day']='';
+	$_POST['I_e_month']='';
+	$_POST['I_e_year']='';
+	$_POST['S_descr']='';
+}
 // Si la forma ya ha sido enviada checamos cada uno de los valores
 // para poder autorizar la insercion del registro
-if ($_POST['submit'] == "Registrar") {
+if (isset ($_POST['submit']) && $_POST['submit'] == "Registrar") {
   # do some basic error checking
   $errmsg = "";
   // Verificar si todos los campos obligatorios no estan vacios
@@ -44,7 +51,7 @@ if ($_POST['submit'] == "Registrar") {
 	$errmsg .= "<li>Verifica que los datos obligatorios los hayas introducido correctamente </li>";
   }
   // Si no hay errores verifica que la fecha no este ya dado de alta en la tabla
-  $f_evento=$_POST[I_e_year].'-'.$_POST[I_e_month].'-'.$_POST[I_e_day];
+  $f_evento=$_POST['I_e_year'].'-'.$_POST['I_e_month'].'-'.$_POST['I_e_day'];
   if (empty($errmsg)) {
       $userQuery = 'SELECT * FROM fecha_evento WHERE fecha="'.$f_evento.'"';
       $userRecords = mysql_query($userQuery) or err("No se pudo checar la fecha".mysql_errno($userRecords));
@@ -87,7 +94,7 @@ else { // Todas las validaciones Ok
 // o para corregir datos que ya hayamos tratado de introducir
 		$startyear=strftime("%Y");
 	print'
-		<FORM method="POST" action="'.$REQUEST_URI.'">
+		<FORM method="POST" action="'.$_SERVER['REQUEST_URI'].'">
 		<p><i>Campos marcados con un asterisco son obligatorios</i>
 		<br><small>En caso de que el congreso tenga descripciones especiales para cada dia entonces llenar el campo descripci&oacute;n</small>
 		</p>

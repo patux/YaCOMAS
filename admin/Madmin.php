@@ -16,28 +16,28 @@ function imprime_valoresOk() {
 		<tr>
 		<td class="name">Administrador Login: * </td>
 		<td class="resultado">
-		'.$_POST[S_login].'
+		'.$_POST['S_login'].'
 		</td>
 		</tr>
 
 		<tr>
 		<TD Class="name">Nombre(s): * </td>
 		<td class="resultado">
-		'.stripslashes($_POST[S_nombrep]).'
+		'.stripslashes($_POST['S_nombrep']).'
 		</td>
 		</tr>
 
 		<tr>
 		<td class="name">Apellidos: * </td>
 		<td class="resultado">
-		'.stripslashes($_POST[S_apellidos]).'
+		'.stripslashes($_POST['S_apellidos']).'
 		</td>
 		</tr>
 		
 		<tr>
 		<td class="name">Correo electronico: * </td>
 		<td class="resultado">
-		'.$_POST[S_mail].'
+		'.$_POST['S_mail'].'
 		</td>
 		</tr>
 		
@@ -50,7 +50,7 @@ function imprime_valoresOk() {
 }
 // Si la forma ya ha sido enviada checamos cada uno de los valores
 // para poder autorizar la insercion del registro
-if ($_POST['submit'] == "Modificar") {
+if (isset ($_POST['submit']) && $_POST['submit'] == "Modificar") {
   # do some basic error checking
   $errmsg = "";
   // Verificar si todos los campos obligatorios no estan vacios
@@ -150,7 +150,7 @@ else {
 	$_POST['S_mail']=$p['mail'];
      }
 	print'
-		<FORM method="POST" action="'.$REQUEST_URI.'">
+		<FORM method="POST" action="'.$_SERVER['REQUEST_URI'].'">
 		<p><i>Campos marcados con un asterisco son obligatorios</i></p>
    		<p class="yacomas_msg">Si deja los campos de contraseña vacia seguira usando su misma contraseña</p>
 		<table width=100%>
@@ -158,8 +158,10 @@ else {
 		<tr>
 		<td class="name">Administrador Login: * </td>
 		<td class="input">
-		<input TYPE="text" name="S_login" size="15" 
-		value="'.$_POST['S_login'].'"></td>
+		<input TYPE="text" name="S_login" size="15"';
+//		if ($idadmin==1)
+//			print 'readonly ';
+		print 'value="'.$_POST['S_login'].'"></td>
 		<td> 4 a 15 caracteres
 		</td>
 		</tr>
@@ -167,18 +169,22 @@ else {
 		<tr>
 		<td class="name">Contraseña: * </td>
 		<td class="input">
-		<input type="password" name="S_passwd" size="15" 
-		value=""></td>
+		<input type="password" name="S_passwd" size="15"'; 
+//		if ($idadmin==1)
+//			print 'readonly ';
+		print 'value=""></td>
 		<td> 6 a 15 caracteres
 		</td>
 		</tr>
 
 		<tr>
 		<td class="name">Confirmación de Contraseña: * </td>
-		<td class="input"><input type="password" name="S_passwd2" size="15"
-		value=""></td>
+		<td class="input">
+		<input type="password" name="S_passwd2" size="15"'; 
+//		if ($idadmin==1)
+//			print 'readonly ';
+		print 'value=""></td>
 		<td> 
-
 		</td>
 		</tr>
 

@@ -5,9 +5,10 @@ beginSession('R');
 imprimeEncabezado();
 aplicaEstilo();
 
-$tok = strtok ($vopc," ");
+$tok = strtok ($_GET['vopc']," ");
 $idponente=$tok;
 $tok = strtok (" ");
+$regresa='';
 	while ($tok) {
 		$regresa .=' '.$tok;
 		$tok=strtok(" ");
@@ -42,7 +43,7 @@ imprimeCajaTop("100",$msg);
 		<td class="name">Sexo: * </td>
 		<td class="resultado">';
 		
-		if ($p[sexo]=="M")
+		if ($p['sexo']=="M")
 		    echo "Masculino";
 		else
 		    echo "Femenino";
@@ -54,7 +55,7 @@ imprimeCajaTop("100",$msg);
 		<tr>
 		<td class="name">Organización: </td>
 		<td class="resultado">
-		'.stripslashes($p[org]).'
+		'.stripslashes($p['org']).'
 		</td>
 		</tr>
 
@@ -62,7 +63,7 @@ imprimeCajaTop("100",$msg);
 		<td class="name">Estudios: * </td>
 		<td class="resultado">';
 		
-		$query = 'SELECT * FROM estudios WHERE id="'.$p[id_estudios].'"';
+		$query = 'SELECT * FROM estudios WHERE id="'.$p['id_estudios'].'"';
 		$result=mysql_query($query);
 	 	while($fila=mysql_fetch_array($result)) {
 			printf ("%s",$fila["descr"]);
@@ -76,28 +77,28 @@ imprimeCajaTop("100",$msg);
 		<tr>
 		<td class="name">Titulo: * </td>
 		<td class="resultado">
-		'.stripslashes($p[titulo]).'
+		'.stripslashes($p['titulo']).'
 		</td>
 		</tr>
 
 		<tr>
 		<td class="name">Domicilio: </td>
 		<td class="resultado">
-		'.$p[domicilio].'
+		'.$p['domicilio'].'
 		</td>
 		</tr>
 
 		<tr>
 		<td class="name">Telefono: </td>
 		<td class="resultado">
-		'.chunk_split ($p[telefono], 2).'
+		'.chunk_split ($p['telefono'], 2).'
 		</td>
 		</tr>
 
 		<tr>
 		<td class="name">Ciudad: </td>
 		<td class="resultado">
-		'.$p[ciudad].'
+		'.$p['ciudad'].'
 		</td>
 		</tr>
 
@@ -105,7 +106,7 @@ imprimeCajaTop("100",$msg);
 		<td class="name">Estado: * </td>
 		<td class="resultado">';
 		
-		$query= "select * from estado where id='".$p[id_estado]."'";
+		$query= "select * from estado where id='".$p['id_estado']."'";
 		$result=mysql_query($query);
  		while($fila=mysql_fetch_array($result)) {
 			printf ("%s",$fila["descr"]);
@@ -126,7 +127,7 @@ imprimeCajaTop("100",$msg);
 		<tr>
 		<td class="name">Resumen Curricular: </td>
 		<td align=justify class="resultado">
-		'.$p[resume].'
+		'.$p['resume'].'
 		</td>
 		</tr>
 
@@ -157,16 +158,16 @@ print '
 			$color=1;
 		}
 		print '<tr>
-		<td bgcolor='.$bgcolor.'><a class="azul" href="Vponencia.php?vopc='.$idponente.' '.$fila[id].' '.$REQUEST_URI.'">'.$fila["nombre"].'</a>';
+		<td bgcolor='.$bgcolor.'><a class="azul" href="Vponencia.php?vopc='.$idponente.' '.$fila['id'].' '.$_SERVER['REQUEST_URI'].'">'.$fila["nombre"].'</a>';
 	
 		print '</td><td bgcolor='.$bgcolor.'>';
-		if ($fila[tpropuesta]=="C")
+		if ($fila['tpropuesta']=="C")
 		    echo "Conferencia";
 		else
 		    echo "Taller";
 		
 		print '</td><td bgcolor='.$bgcolor.'>';
-		$query = 'SELECT descr FROM prop_status WHERE id="'.$fila[id_status].'"';
+		$query = 'SELECT descr FROM prop_status WHERE id="'.$fila['id_status'].'"';
 		$result=mysql_query($query);
 	 	$fstatus=mysql_fetch_array($result);
 		print $fstatus['descr'];

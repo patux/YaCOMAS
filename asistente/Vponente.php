@@ -5,9 +5,10 @@ beginSession('A');
 imprimeEncabezado();
 aplicaEstilo();
 
-$tok = strtok ($vopc," ");
+$tok = strtok ($_GET['vopc']," ");
 $idponente=$tok;
 $tok = strtok (" ");
+$regresa='';
 	while ($tok) {
 		$regresa .=' '.$tok;
 		$tok=strtok(" ");
@@ -19,7 +20,7 @@ $userRecords = mysql_query($userQuery) or err("No se pudo checar el ponente".mys
 $p = mysql_fetch_array($userRecords);
 
 $msg='Datos de ponente <br><small>-- '.$p['nombrep'].' '.$p['apellidos'].' --</small><hr>';
-print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['rootlogin'].'&nbsp;<a class="rojo" href=signout.php>Desconectarme</a></P>';
+print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['asilogin'].'&nbsp;<a class="rojo" href=signout.php>Desconectarme</a></P>';
 imprimeCajaTop("100",$msg);
 
 // Inicio datos de Ponencias
@@ -28,7 +29,7 @@ imprimeCajaTop("100",$msg);
 		<tr>
 		<td class="name">Resumen Curricular: </td>
 		<td align=justify class="resultado">
-		'.$p[resume].'
+		'.$p['resume'].'
 		</td>
 		</tr>
 

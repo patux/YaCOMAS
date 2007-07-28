@@ -4,13 +4,13 @@
 	beginSession('R');
 	imprimeEncabezado();
 	aplicaEstilo();
-	$tok = strtok ($vact," ");
+	$tok = strtok ($_GET['vact']," ");
 	$idponente=$tok;
 	$tok = strtok (" ");
 	$idponencia=$tok;
 	$tok = strtok (" ");
 
-	print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['ponlogin'].'&nbsp;<a class="rojo" href=signout.php>Desconectarme</a></P>';
+	print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['rootlogin'].'&nbsp;<a class="rojo" href=signout.php>Desconectarme</a></P>';
 	imprimeCajaTop("100","Cancelar Ponencia");
 	print '<p class="yacomas_error">
 	Esta accion liberara el espacio ocupado en el programa por este evento y le asignara el status de Cancelada
@@ -54,7 +54,7 @@ function imprime_valoresOk($idponente,$idponencia){
 		<tr>
 		<td class="name">Nombre de Ponencia: * </td>
 		<td class="resultado">
-		'.$registro[S_nombreponencia].'
+		'.$registro['S_nombreponencia'].'
 		</td>
 		</tr>
 		
@@ -62,7 +62,7 @@ function imprime_valoresOk($idponente,$idponencia){
 		<td class="name">Nivel: * </td>
 		<td class="resultado">';
 		
-		$query = 'SELECT * FROM prop_nivel WHERE id="'.$registro[I_id_nivel].'"';
+		$query = 'SELECT * FROM prop_nivel WHERE id="'.$registro['I_id_nivel'].'"';
 		$result=mysql_query($query);
 	 	while($fila=mysql_fetch_array($result)) {
 			printf ("%s",$fila["descr"]);
@@ -77,7 +77,7 @@ function imprime_valoresOk($idponente,$idponencia){
 		<td class="name">Tipo de Propuesta: * </td>
 		<td class="resultado">';
 		
-		if ($registro[C_tpropuesta]=="C")
+		if ($registro['C_tpropuesta']=="C")
 		    echo "Conferencia";
 		else
 		    echo "Taller";
@@ -90,7 +90,7 @@ function imprime_valoresOk($idponente,$idponencia){
 		<td class="name">Orientacion: * </td>
 		<td class="resultado">';
 		
-		$query = 'SELECT * FROM orientacion WHERE id="'.$registro[I_id_orientacion].'"';
+		$query = 'SELECT * FROM orientacion WHERE id="'.$registro['I_id_orientacion'].'"';
 		$result=mysql_query($query);
 	 	while($fila=mysql_fetch_array($result)) {
 			printf ("%s",$fila["descr"]);
@@ -104,7 +104,7 @@ function imprime_valoresOk($idponente,$idponencia){
 		<tr>
 		<td class="name">Duracion: * </td>
 		<td class="resultado">';
-		printf ("%02d Hrs",$registro[I_duracion]);
+		printf ("%02d Hrs",$registro['I_duracion']);
 	print '	
 		</td>
 		</tr>
@@ -113,7 +113,7 @@ function imprime_valoresOk($idponente,$idponencia){
 		<td class="name">Status: * </td>
 		<td class="resultado">';
 		
-		$query = 'SELECT descr FROM prop_status WHERE id="'.$registro[I_id_status].'"';
+		$query = 'SELECT descr FROM prop_status WHERE id="'.$registro['I_id_status'].'"';
 		$result=mysql_query($query);
 	 	while($fila=mysql_fetch_array($result)) {
 			printf ("<b>%s</b>",$fila["descr"]);
@@ -125,15 +125,15 @@ function imprime_valoresOk($idponente,$idponencia){
 	
 		<tr>
 		<td class="name">Fecha de registro: * </td>
-		<td class="resultado">'.$registro[D_reg_time].'
+		<td class="resultado">'.$registro['D_reg_time'].'
 		</td>
 		</tr>';
-		$acttime=substr($registro[D_act_time],0,4);	
-		$acttime.='-'.substr($registro[D_act_time],4,2);
-		$acttime.='-'.substr($registro[D_act_time],6,2);
-		$acttime.=' '.substr($registro[D_act_time],8,2);
-		$acttime.=':'.substr($registro[D_act_time],10,2);
-		$acttime.=':'.substr($registro[D_act_time],12,2);
+		$acttime=substr($registro['D_act_time'],0,4);	
+		$acttime.='-'.substr($registro['D_act_time'],4,2);
+		$acttime.='-'.substr($registro['D_act_time'],6,2);
+		$acttime.=' '.substr($registro['D_act_time'],8,2);
+		$acttime.=':'.substr($registro['D_act_time'],10,2);
+		$acttime.=':'.substr($registro['D_act_time'],12,2);
 	print'
 		<tr>
 		<td class="name">Fecha de actualizacion: * </td>
@@ -145,7 +145,7 @@ function imprime_valoresOk($idponente,$idponencia){
 		<td class="name">Actualizado por: * </td>
 		<td class="resultado">';
 		
-		$query = 'SELECT login FROM administrador WHERE id="'.$registro[I_id_administrador].'"';
+		$query = 'SELECT login FROM administrador WHERE id="'.$registro['I_id_administrador'].'"';
 		$result=mysql_query($query);
       		if (mysql_num_rows($result) == 0)
 			print 'Usuario';
@@ -205,8 +205,8 @@ function imprime_valoresOk($idponente,$idponencia){
 		<tr>
 		<td class="name">Hora: * </td>
 		<td class="resultado">';
-		$hfin=$detalle_EO[hora] + $registro[I_duracion];		
-		print $detalle_EO[hora].':00 - '.$hfin.':00';
+		$hfin=$detalle_EO['hora'] + $registro['I_duracion'];		
+		print $detalle_EO['hora'].':00 - '.$hfin.':00';
 	print '
 		</td>
 		</tr>';
@@ -223,21 +223,21 @@ function imprime_valoresOk($idponente,$idponencia){
 		<tr>
 		<td class="name">Resumen: </td>
 		<td align=justify class="resultado">
-		'.$registro[S_resumen].'
+		'.$registro['S_resumen'].'
 		</td>
 		</tr>
 		
 		<tr>
 		<td class="name">Requisitos tecnicos del taller: </td>
 		<td align=justify class="resultado">
-		'.$registro[S_reqtecnicos].'
+		'.$registro['S_reqtecnicos'].'
 		</td>
 		</tr>
 
 		<tr>
 		<td class="name">Prerequisitos del Asistente: </td>
 		<td align=justify class="resultado">
-		'.$registro[S_reqasistente].'
+		'.$registro['S_reqasistente'].'
 		</td>
 		</tr>
 		</table>
@@ -248,7 +248,7 @@ function imprime_valoresOk($idponente,$idponencia){
 }
 // Si la forma ya ha sido enviada checamos cada uno de los valores
 // para poder autorizar la insercion del registro
-if ($_POST['submit'] == "Cancelar") {
+if (isset ($_POST['submit']) && $_POST['submit'] == "Cancelar") {
   # do some basic error checking
   // Si todos esta bien vamos a borrar el registro 
 
@@ -259,15 +259,15 @@ if ($_POST['submit'] == "Cancelar") {
 		err("No se pueden seleccionar los eventos relacionadas la propuesta para eliminarlos".mysql_errno($result_SE));
 	$event= mysql_fetch_array($result_SE);
 	// Borra asisgnaciones de evento en lugar 
-	$QB_evento_ocupa=  "DELETE FROM evento_ocupa WHERE id_evento="."'".$event[id]."'";
+	$QB_evento_ocupa=  "DELETE FROM evento_ocupa WHERE id_evento="."'".$event['id']."'";
 	$result_BEO= mysql_query($QB_evento_ocupa) or 
 		err("No se puede eliminar las inscripciones al eventos de este lugar".mysql_errno($result_BEO));
 	// Borra inscripcion a el evento 
-	$QB_inscribe =  "DELETE FROM inscribe WHERE id_evento="."'".$event[id]."'";
+	$QB_inscribe =  "DELETE FROM inscribe WHERE id_evento="."'".$event['id']."'";
 	$result_BI=  mysql_query($QB_inscribe) or 
 		err("No se puede eliminar inscripcion al evento".mysql_errno($result_BI));
 	// Borra evento
-	$QB_evento =  "DELETE FROM evento WHERE id="."'".$event[id]."'";
+	$QB_evento =  "DELETE FROM evento WHERE id="."'".$event['id']."'";
 	$result_BE=  mysql_query($QB_evento) or 
 		err("No se puede eliminar evento ".mysql_errno($result_BE));
 	mysql_free_result($result_SE);
@@ -315,7 +315,7 @@ if ($_POST['submit'] == "Cancelar") {
 	
 	imprime_valoresOk($idponente,$idponencia);
 	print'<center>
-		<FORM method="POST" action="'.$REQUEST_URI.'">
+		<FORM method="POST" action="'.$_SERVER['REQUEST_URI'].'">
 		<input type="submit" name="submit" value="Cancelar">&nbsp;&nbsp;
 		<input type="button" value="Volver" onClick=location.href="'.$rootpath.'/admin/admin.php?opc=9">
 		</center>

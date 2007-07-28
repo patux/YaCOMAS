@@ -37,20 +37,20 @@ print '
 		<td bgcolor='.$bgcolor.'>'.$fila['apellidos'].'</td>
 		<td bgcolor='.$bgcolor.'>'.$fila['mail'].'</td>
 		<td bgcolor='.$bgcolor.'>';
-		$query = 'SELECT descr FROM tadmin WHERE id="'.$fila[id_tadmin].'"';
+		$query = 'SELECT descr FROM tadmin WHERE id="'.$fila['id_tadmin'].'"';
 		$result=mysql_query($query);
 	 	$ftadmin=mysql_fetch_array($result);
 		print $ftadmin['descr'];
 		mysql_free_result($result);
 		
-		print '</td><td bgcolor='.$bgcolor.'><a class="rojo" href="Badmin.php?admin='.$fila[id].'">Eliminar</td>';
+		print '</td><td bgcolor='.$bgcolor.'><a class="rojo" href="Badmin.php?admin='.$fila['id'].'">Eliminar</td>';
 		print '</tr><tr><td>'; 
 		$QSquery = 'SELECT * FROM tadmin ORDER BY ID'; 
 		$resultQS=mysql_query($QSquery);
 		print '<small>';
 		while ($QSfila=mysql_fetch_array($resultQS)) 
 		{
-			print '| <a class="verde" href="act_admin.php?vact='.$fila[id].' '.$QSfila[id].' '.$REQUEST_URI.'" onMouseOver="window.status=\''.$QSfila[descr].'\';return true" onFocus="window.status=\''.$QSfila[descr].'\';return true" onMouseOut="window.status=\'\';return true">'.$QSfila[descr].' |</a>';
+			print '| <a class="verde" href="act_admin.php?vact='.$fila['id'].' '.$QSfila['id'].' '.$_SERVER['REQUEST_URI'].'" onMouseOver="window.status=\''.$QSfila['descr'].'\';return true" onFocus="window.status=\''.$QSfila['descr'].'\';return true" onMouseOut="window.status=\'\';return true">'.$QSfila['descr'].' |</a>';
 		}
 		mysql_free_result($resultQS);
 		print '</small></td></tr>';

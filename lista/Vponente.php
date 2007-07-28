@@ -1,12 +1,13 @@
 <? 
-include "../../includes/lib.php";
-include "../../includes/conf.inc";
-imprimeEncabezado2();
+include "../includes/lib.php";
+include "../includes/conf.inc";
+imprimeEncabezado();
 aplicaEstilo();
 
-$tok = strtok ($vopc," ");
+$tok = strtok ($_GET['vopc']," ");
 $idponente=$tok;
 $tok = strtok (" ");
+$regresa='';
 	while ($tok) {
 		$regresa .=' '.$tok;
 		$tok=strtok(" ");
@@ -26,7 +27,7 @@ imprimeCajaTop("100",$msg);
 		<tr>
 		<td class="name">Resumen Curricular: </td>
 		<td align=justify class="resultado">
-		'.$p[resume].'
+		'.$p['resume'].'
 		</td>
 		</tr>
 

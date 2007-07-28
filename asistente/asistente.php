@@ -1,5 +1,5 @@
 <?
-		switch ($opc) 
+		switch ($_GET['opc']) 
 		{
 			case 1: include "Masistente.php";
 				break;

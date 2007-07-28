@@ -11,13 +11,13 @@ $fechaRecords = mysql_query($fechaQueryE) or err("No se pudo listar fechas de ev
 
 imprimeEncabezado();
 aplicaEstilo();
-print '<p class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['asilogin'].'&nbsp;<a class="rojo" href=signout.php>Desconectarme</a></P>';
+print '<p class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['rootlogin'].'&nbsp;<a class="rojo" href=signout.php>Desconectarme</a></P>';
 $msg="Listado de eventos<br>";
 
 imprimeCajaTop("100",$msg);
 // Inicio datos de Ponencias
 // Ordenadas por dia 
-print '<FORM method="POST" action="'.$REQUEST_URI.'">';
+print '<FORM method="POST" action="'.$_SERVER['REQUEST_URI'].'">';
 while ($Qf_evento = mysql_fetch_array($fechaRecords))
 	{
 		print '<center>';
@@ -36,7 +36,21 @@ while ($Qf_evento = mysql_fetch_array($fechaRecords))
 			</td><td bgcolor='.$colortitle.'><b>&nbsp;</b></td>
 			</td><td bgcolor='.$colortitle.'><b>&nbsp;</b></td>
 			</tr>';
-		$Qehs= 'SELECT EO.id_lugar, L.cupo, EO.id_fecha, EO.id_evento, E.id_propuesta, P.nombre, P.tpropuesta, EO.hora, P.duracion, P.id_ponente, PO.nombrep, PO.apellidos, L.nombre_lug FROM evento AS E, propuesta AS P, evento_ocupa AS EO, ponente AS PO, lugar AS L  WHERE E.id_propuesta=P.id AND E.id=EO.id_evento AND P.id_ponente=PO.id AND EO.id_lugar=L.id AND EO.id_fecha="'.$Qf_evento[id].'" GROUP BY id_evento ORDER BY EO.id_fecha,EO.hora';
+		$Qehs= 'SELECT 	EO.id_lugar, L.cupo, EO.id_fecha, EO.id_evento, 
+				E.id_propuesta, P.nombre, P.tpropuesta, EO.hora, 
+				P.duracion, P.id_ponente, PO.nombrep, PO.apellidos, L.nombre_lug 
+			FROM 	evento AS E, 
+				propuesta AS P, 
+				evento_ocupa AS EO, 
+				ponente AS PO, 
+				lugar AS L  
+			WHERE 	E.id_propuesta=P.id AND 
+				E.id=EO.id_evento AND 
+				P.id_ponente=PO.id AND 
+				EO.id_lugar=L.id AND 
+				EO.id_fecha="'.$Qf_evento['id'].'" 
+			GROUP BY id_evento 
+			ORDER BY EO.id_fecha,EO.hora';
 		$eventoRecords= mysql_query($Qehs) or err("No se pudo listar eventos de esta fecha".mysql_errno($eventoRecords));
 		$color=1;
 		while ($Qf_event= mysql_fetch_array($eventoRecords))
@@ -51,11 +65,11 @@ while ($Qf_evento = mysql_fetch_array($fechaRecords))
 				$bgcolor=$color_renglon2;
 				$color=1;
 			}
-			print '<td bgcolor='.$bgcolor.'><a class="azul" href="Vponencia.php?vopc='.$Qf_event[id_ponente].' '.$Qf_event[id_propuesta].' '.$REQUEST_URI.'">'.$Qf_event["nombre"].'</a>';
+			print '<td bgcolor='.$bgcolor.'><a class="azul" href="Vponencia.php?vopc='.$Qf_event['id_ponente'].' '.$Qf_event['id_propuesta'].' '.$_SERVER['REQUEST_URI'].'">'.$Qf_event["nombre"].'</a>';
 			retorno();
-			print '<small><a class="rojo" href="Vponente.php?vopc='.$Qf_event[id_ponente].' '.$REQUEST_URI.'">'.$Qf_event["nombrep"].' '.$Qf_event["apellidos"].'</a></small>';
+			print '<small><a class="rojo" href="Vponente.php?vopc='.$Qf_event['id_ponente'].' '.$_SERVER['REQUEST_URI'].'">'.$Qf_event["nombrep"].' '.$Qf_event["apellidos"].'</a></small>';
 			print '</td><td bgcolor='.$bgcolor.'>';
-			if ($Qf_event[tpropuesta]=="C")
+			if ($Qf_event['tpropuesta']=="C")
 		    		echo "Conferencia";
 			else
 		    		echo "Taller";
@@ -64,7 +78,7 @@ while ($Qf_evento = mysql_fetch_array($fechaRecords))
 			print $hfin.':00';
 			print '</td><td bgcolor='.$bgcolor.'>'.$Qf_event["nombre_lug"];
 			print '</td><td bgcolor='.$bgcolor.'>';
-			if ($Qf_event[tpropuesta]=="T")
+			if ($Qf_event['tpropuesta']=="T")
 			{
 				// Checamos cuanta gente esta inscrita a este taller 
 				// Para sacar el total de espacios disponibles todavia para el taller
@@ -76,13 +90,13 @@ while ($Qf_evento = mysql_fetch_array($fechaRecords))
 				$cup_disp=$Qf_event["cupo"] - $ins_taller;
 				print $cup_disp;	
 				print '</td><td bgcolor='.$bgcolor.'>';
-				print '<small><a class="verde" href="Lasistentes-reg.php?vopc='.$Qf_event[id_evento].' '.$REQUEST_URI.'" onMouseOver="window.status=\'Asistentes registrados\';return true" onFocus="window.status=\'Asistentes registrados\';return true" onMouseOut="window.status=\'\';return true" >Asistentes</a>';
+				print '<small><a class="verde" href="Lasistentes-reg.php?vopc='.$Qf_event['id_evento'].' '.$_SERVER['REQUEST_URI'].'" onMouseOver="window.status=\'Asistentes registrados\';return true" onFocus="window.status=\'Asistentes registrados\';return true" onMouseOut="window.status=\'\';return true" >Asistentes</a>';
 			}
 			else 
 				print '</td><td bgcolor='.$bgcolor.'>';
 				
 			if ($_SESSION['YACOMASVARS']['rootlevel']==1 ) 
-				print '</td><td bgcolor='.$bgcolor.'><small><a class="rojo" href="Cevento.php?vact='.$Qf_event[id_ponente].' '.$Qf_event[id_propuesta].'" onMouseOver="window.status=\'Cancelar evento\';return true" onFocus="window.status=\'Cancelar evento\';return true" onMouseOut="window.status=\'\';return true">Cancelar</a>';
+				print '</td><td bgcolor='.$bgcolor.'><small><a class="rojo" href="Cevento.php?vact='.$Qf_event['id_ponente'].' '.$Qf_event['id_propuesta'].'" onMouseOver="window.status=\'Cancelar evento\';return true" onFocus="window.status=\'Cancelar evento\';return true" onMouseOut="window.status=\'\';return true">Cancelar</a>';
 			print '</td></tr>';
 			
 		}

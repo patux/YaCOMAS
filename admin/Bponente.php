@@ -4,7 +4,7 @@
 	beginSession('R');
 	imprimeEncabezado();
 	aplicaEstilo();
-	print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['ponlogin'].'&nbsp;<a class="rojo" href=signout.php>Desconectarme</a></P>';
+	print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['rootlogin'].'&nbsp;<a class="rojo" href=signout.php>Desconectarme</a></P>';
 	imprimeCajaTop("100","Eliminar Ponente");
 	print '<p class="yacomas_error">
 	Esta accion eliminara el ponente y todos sus Ponencias/Eventos registrados 
@@ -51,7 +51,7 @@ $userRecordsP = mysql_query($userQueryP) or err("No se pudo listar ponencias".my
 		<td class="name">Sexo: * </td>
 		<td class="resultado">';
 		
-		if ($p[sexo]=="M")
+		if ($p['sexo']=="M")
 		    echo "Masculino";
 		else
 		    echo "Femenino";
@@ -63,7 +63,7 @@ $userRecordsP = mysql_query($userQueryP) or err("No se pudo listar ponencias".my
 		<tr>
 		<td class="name">Organización: </td>
 		<td class="resultado">
-		'.stripslashes($p[org]).'
+		'.stripslashes($p['org']).'
 		</td>
 		</tr>
 
@@ -71,7 +71,7 @@ $userRecordsP = mysql_query($userQueryP) or err("No se pudo listar ponencias".my
 		<td class="name">Estudios: * </td>
 		<td class="resultado">';
 		
-		$query = 'SELECT * FROM estudios WHERE id="'.$p[id_estudios].'"';
+		$query = 'SELECT * FROM estudios WHERE id="'.$p['id_estudios'].'"';
 		$result=mysql_query($query);
 	 	while($fila=mysql_fetch_array($result)) {
 			printf ("%s",$fila["descr"]);
@@ -85,28 +85,28 @@ $userRecordsP = mysql_query($userQueryP) or err("No se pudo listar ponencias".my
 		<tr>
 		<td class="name">Titulo: * </td>
 		<td class="resultado">
-		'.stripslashes($p[titulo]).'
+		'.stripslashes($p['titulo']).'
 		</td>
 		</tr>
 
 		<tr>
 		<td class="name">Domicilio: </td>
 		<td class="resultado">
-		'.$p[domicilio].'
+		'.$p['domicilio'].'
 		</td>
 		</tr>
 
 		<tr>
 		<td class="name">Telefono: </td>
 		<td class="resultado">
-		'.chunk_split ($p[telefono], 2).'
+		'.chunk_split ($p['telefono'], 2).'
 		</td>
 		</tr>
 
 		<tr>
 		<td class="name">Ciudad: </td>
 		<td class="resultado">
-		'.$p[ciudad].'
+		'.$p['ciudad'].'
 		</td>
 		</tr>
 
@@ -114,7 +114,7 @@ $userRecordsP = mysql_query($userQueryP) or err("No se pudo listar ponencias".my
 		<td class="name">Estado: * </td>
 		<td class="resultado">';
 		
-		$query= "select * from estado where id='".$p[id_estado]."'";
+		$query= "select * from estado where id='".$p['id_estado']."'";
 		$result=mysql_query($query);
  		while($fila=mysql_fetch_array($result)) {
 			printf ("%s",$fila["descr"]);
@@ -135,7 +135,7 @@ $userRecordsP = mysql_query($userQueryP) or err("No se pudo listar ponencias".my
 		<tr>
 		<td class="name">Resumen Curricular: </td>
 		<td align=justify class="resultado">
-		'.$p[resume].'
+		'.$p['resume'].'
 		</td>
 		</tr>
 
@@ -166,16 +166,16 @@ print '
 			$color=1;
 		}
 		print '<tr>
-		<td bgcolor='.$bgcolor.'><a class="azul" href="Vponencia.php?vopc='.$idponente.' '.$fila[id].' '.$regresa.'">'.$fila["nombre"].'</a>';
+		<td bgcolor='.$bgcolor.'><a class="azul" href="Vponencia.php?vopc='.$idponente.' '.$fila['id'].' '.$regresa.'">'.$fila["nombre"].'</a>';
 	
 		print '</td><td bgcolor='.$bgcolor.'>';
-		if ($fila[tpropuesta]=="C")
+		if ($fila['tpropuesta']=="C")
 		    echo "Conferencia";
 		else
 		    echo "Taller";
 		
 		print '</td><td bgcolor='.$bgcolor.'>';
-		$query = 'SELECT descr FROM prop_status WHERE id="'.$fila[id_status].'"';
+		$query = 'SELECT descr FROM prop_status WHERE id="'.$fila['id_status'].'"';
 		$result=mysql_query($query);
 	 	$fstatus=mysql_fetch_array($result);
 		print $fstatus['descr'];
@@ -189,7 +189,7 @@ print '
 }
 // Si la forma ya ha sido enviada checamos cada uno de los valores
 // para poder autorizar la insercion del registro
-if ($_POST['submit'] == "Eliminar") {
+if (isset ($_POST['submit']) && $_POST['submit'] == "Eliminar") {
   # do some basic error checking
   // Si todos esta bien vamos a borrar el registro 
 
@@ -203,7 +203,7 @@ if ($_POST['submit'] == "Eliminar") {
 	$num_prop=0;
 	while ($fila = mysql_fetch_array($result_SPL)) 
 	{
-		$propuesta[$num_prop][id_propuesta]=$fila[id_propuesta];
+		$propuesta[$num_prop]['id_propuesta']=$fila['id_propuesta'];
 		$num_prop++;
 	}
 	mysql_free_result($result_SPL);
@@ -211,22 +211,22 @@ if ($_POST['submit'] == "Eliminar") {
 	for ($i=0; $i < $num_prop; $i++ )
 	{
   		// Seleccionamos los eventos las que se refieren las propuestas 
-  		$query_selectE='SELECT id FROM evento WHERE id_propuesta='.$propuesta[$i][id_propuesta];
+  		$query_selectE='SELECT id FROM evento WHERE id_propuesta='.$propuesta[$i]['id_propuesta'];
 		$result_SE=  mysql_query($query_selectE) or 
 			err("No se pueden seleccionar los eventos relacionadas la propuesta para eliminarlos".mysql_errno($result_SE));
       		if (mysql_num_rows($result_SE) != 0) 
 		{
 			$event= mysql_fetch_array($result_SE);
 			// Borra asisgnaciones de evento en lugar 
-			$QB_evento_ocupa=  "DELETE FROM evento_ocupa WHERE id_evento="."'".$event[id]."'";
+			$QB_evento_ocupa=  "DELETE FROM evento_ocupa WHERE id_evento="."'".$event['id']."'";
 			$result_BEO= mysql_query($QB_evento_ocupa) or 
 				err("No se puede eliminar las inscripciones al eventos de este lugar".mysql_errno($result_BEO));
 			// Borra inscripcion a el evento 
-			$QB_inscribe =  "DELETE FROM inscribe WHERE id_evento="."'".$event[id]."'";
+			$QB_inscribe =  "DELETE FROM inscribe WHERE id_evento="."'".$event['id']."'";
 			$result_BI=  mysql_query($QB_inscribe) or 
 				err("No se puede eliminar inscripcion al evento".mysql_errno($result_BI));
 			// Borra evento
-			$QB_evento =  "DELETE FROM evento WHERE id="."'".$event[id]."'";
+			$QB_evento =  "DELETE FROM evento WHERE id="."'".$event['id']."'";
 			$result_BE=  mysql_query($QB_evento) or 
 				err("No se puede eliminar evento ".mysql_errno($result_BE));
 			mysql_free_result($result_SE);
@@ -277,9 +277,9 @@ if ($_POST['submit'] == "Eliminar") {
 // de lo contrario la imprimira para poder introducir los datos si es que todavia no hemos introducido nada
 // o para corregir datos que ya hayamos tratado de introducir
 
-	imprime_valoresOk($idponente,$REQUEST_URI);
+	imprime_valoresOk($_GET['idponente'],$_SERVER['REQUEST_URI']);
 	print'<center>
-		<FORM method="POST" action="'.$REQUEST_URI.'">
+		<FORM method="POST" action="'.$_SERVER['REQUEST_URI'].'">
 		<input type="submit" name="submit" value="Eliminar">&nbsp;&nbsp;
 		<input type="button" value="Cancelar" onClick=location.href="'.$rootpath.'/admin/admin.php?opc=6">
 		</center>
