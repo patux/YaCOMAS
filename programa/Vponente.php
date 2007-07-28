@@ -2,7 +2,7 @@
 include "../includes/lib.php";
 include "../includes/conf.inc.php";
 imprimeEncabezado();
-aplicaEstilo();
+
 
 $tok = strtok ($_GET['vopc']," ");
 $idponente=$tok;
@@ -25,7 +25,6 @@ imprimeCajaTop("100",$msg);
     print '
      		<table width=100%>
 		<tr>
-		<td class="name">Resumen Curricular: </td>
 		<td align=justify class="resultado">
 		'.$p['resume'].'
 		</td>

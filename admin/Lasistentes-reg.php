@@ -4,7 +4,7 @@ include "../includes/conf.inc.php";
 beginSession('R');
 $idadmin=$_SESSION['YACOMASVARS']['rootid'];
 imprimeEncabezado();
-aplicaEstilo();
+
 
 $tok = strtok ($_GET['vopc']," ");
 $idevento=$tok;

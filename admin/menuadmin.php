@@ -3,7 +3,7 @@ include "../includes/lib.php";
 include "../includes/conf.inc.php";
 beginSession('R');
 imprimeEncabezado();
-aplicaEstilo();
+
 $link=conectaBD();
 $idadmin=$_SESSION['YACOMASVARS']['rootid'];
 $userQuery = 'SELECT nombrep,apellidos FROM administrador WHERE id="'.$idadmin.'"';

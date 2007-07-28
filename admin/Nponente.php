@@ -2,7 +2,7 @@
 	include_once "../includes/lib.php";
 	include_once "../includes/conf.inc.php";
 	imprimeEncabezado();
-	aplicaEstilo();
+	
 	imprimeCajaTop("100","Registro de Ponentes");
 	$link=conectaBD();
 if (!isset($_POST['submit']))

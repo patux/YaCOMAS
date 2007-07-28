@@ -5,7 +5,7 @@
 	$idadmin=$_SESSION['YACOMASVARS']['rootid'];
 	$idlugar=$_GET['idlugar'];
 	imprimeEncabezado();
-	aplicaEstilo();
+	
 	print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['rootlogin'].'&nbsp;<a class="precaucion" href=signout.php>Desconectarme</a></P>';
 	imprimeCajaTop("100","Modificar lugares para para ponencias");
 	$link=conectaBD();

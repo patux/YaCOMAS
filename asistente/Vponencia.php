@@ -3,7 +3,7 @@
 	include_once "../includes/conf.inc.php";
 	beginSession('A');
 	imprimeEncabezado();
-	aplicaEstilo();
+	
 	$tok = strtok ($_GET['vopc']," ");
 	$idponente=$tok;
 	$tok = strtok (" ");

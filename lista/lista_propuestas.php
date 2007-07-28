@@ -2,8 +2,11 @@
 	include "../includes/lib.php";
 	include "../includes/conf.inc.php";
 	imprimeEncabezado();
-	aplicaEstilo();
-	imprimeCajaTop("100","Lista de propuestas enviadas");
+	
+    #imprimeCajaTop("100","Lista de propuestas enviadas");
+?>
+    <center><font face='Arial, Helvetica, sans-serif' size=6>Lista de propuestas enviadas</font></center>
+<?    
 	print '<hr>';
 
 $link=conectaBD();
@@ -86,6 +89,9 @@ print '
 	<input type="button" value="Continuar" onClick=location.href="../">
 	</center>';
 */
-	imprimeCajaBottom(); 
-	imprimePie(); 
+#imprimeCajaBottom(); 
 ?>
+<center><input type="button" value="Regresar" onClick=location.href="../"></center>
+
+
+<?	imprimePie(); ?> 

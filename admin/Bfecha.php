@@ -3,7 +3,7 @@
 	include "../includes/conf.inc.php";
 	beginSession('R');
 	imprimeEncabezado();
-	aplicaEstilo();
+	
 	print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['rootlogin'].'&nbsp;<a class="precaucion" href=signout.php>Desconectarme</a></P>';
 	imprimeCajaTop("100","Eliminar Fecha");
 	print '<p class="yacomas_error">Esta accion eliminara la fecha del programa de eventos y todos los eventos registrados en esta fecha<br>

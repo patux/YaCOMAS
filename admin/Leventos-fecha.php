@@ -9,7 +9,7 @@ $fechaQueryE='SELECT * FROM fecha_evento WHERE id='.$_GET['idfecha'];
 $fechaRecords = mysql_query($fechaQueryE) or err("No se pudo listar fechas de eventos ".mysql_errno($fechaRecords));
 
 imprimeEncabezado();
-aplicaEstilo();
+
 print '<p class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['rootlogin'].'&nbsp;<a class="precaucion" href=signout.php>Desconectarme</a></P>';
 $msg="Listado de eventos por fecha";
 

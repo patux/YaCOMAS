@@ -6,30 +6,21 @@ h1.titulo {
 	margin-top: 0px;
 	padding-top: 10px;
 	font-size: 28px;
+	font-type: arial;
 	color: #003399;
 	border-bottom: 1px dotted #000;
 	margin-bottom: 0.5em;
 }	
 
-h2 {
-	font-size: 16px;
-	color: #6666ff;
+a:link, a:visited {
+        color: #000000;
+        text-decoration: none;
+        font-weight: bold;
 }
-
-h2:hover {
-	font-size: 16px;
-	color: #6666ff;
-}
-
-a {
-    color: #3da8cc;
-    text-decoration: none;
-}
-
 a:hover {
-/*color: #ffbe00;*/
-        color: blue;
-    border-bottom: 1px dotted #3da8cc;
+        color: #ffc20e;
+        text-decoration: none;
+        font-weight: bold;
 }
 
 #top #cintilla {
@@ -108,7 +99,7 @@ a:hover {
 }
 
 #opm a:hover {
-	color: #8eb3d8;ï¿½
+	color: #8eb3d8;·
 }
 #seccion {
 	margin-bottom: 10px;
@@ -218,7 +209,7 @@ td.error {
 }
 td.resultado {
 	width:55%;
-	color:blue;
+	color:darkslategray;
 }
 
 #none {
@@ -241,12 +232,14 @@ tr.rojo td {
 	background: #e57272;
 }
 a.azul {
-	color: #0066cc;
+/*	color: #0066cc;
+*/
+	color: #000000;
 	text-decoration: none;
 }
 
 a.azul:hover {
-	color: #003333;
+	color: #ffc20e;
 	border-bottom: 1px dotted #3da8cc;
 }
 a.rojo {
@@ -259,13 +252,12 @@ a.rojo:hover {
 	border-bottom: 1px dotted #3da8cc;
 }
 a.ponente {
-	color: #000;
+	color: red;
 	text-decoration: none;
 }
 
 a.ponente:hover {
-	color: #fff;
-	border-bottom: 1px dotted #3da8cc;
+	border-bottom: 1px dotted #ffc20e;
 }
 a.precaucion {
 	color: #FF0000;

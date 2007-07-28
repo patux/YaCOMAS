@@ -3,7 +3,7 @@ include_once "../includes/lib.php";
 include_once "../includes/conf.inc.php";
 beginSession('A');
 imprimeEncabezadoR();
-aplicaEstilo();
+
 
 $idasistente=$_SESSION['YACOMASVARS']['asiid'];
 $link=conectaBD();

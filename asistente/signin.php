@@ -50,7 +50,7 @@ if (isset ($_POST['submit']) && ($_POST['submit'] == "Iniciar")) {
 // de lo contrario la imprimira para poder introducir los datos si es que todavia no hemos introducido nada
 // o para corregir datos que ya hayamos tratado de introducir
 imprimeEncabezado();
-aplicaEstilo();
+
 imprimeCajaTop("50","Inicio de Sesion Asistente");
 if (!empty($errmsg)) {
         print $errmsg;

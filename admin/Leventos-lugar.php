@@ -10,7 +10,7 @@ $lugarQueryE='SELECT * FROM lugar WHERE id='.$idlugar;
 $lugarRecords = mysql_query($lugarQueryE) or err("No se pudo listar lugar de eventos ".mysql_errno($lugarRecords));
 
 imprimeEncabezado();
-aplicaEstilo();
+
 print '<p class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['rootlogin'].'&nbsp;<a class="precaucion" href=signout.php>Desconectarme</a></P>';
 $msg="Listado de eventos por lugar<br>";
 

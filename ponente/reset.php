@@ -8,7 +8,7 @@
 	include_once "Mail.php";
 	$link=conectaBD();
 	imprimeEncabezado();
-	aplicaEstilo();
+	
 	imprimeCajaTop("50","Resetear contrase&ntilde;a");
 // Inicializar variables
 if (empty ($_POST['submit']))
@@ -51,7 +51,7 @@ if (isset ($_POST['submit']) && $_POST['submit'] == "Reset") {
 		$errmsg .= "<li>El usuario tecleado no existe";
 		}
   }
-  mysql_free_result($userQuery);
+  mysql_free_result($userRecords);
   // Si hubo error(es) muestra los errores que se acumularon.
   if (!empty($errmsg)) {
       showError($errmsg);
@@ -69,16 +69,18 @@ if (isset ($_POST['submit']) && $_POST['submit'] == "Reset") {
 	$headers["From"]    = $general_mail;
 	$headers["To"]      = $mail_user;
 	$headers["Subject"] = "$conference_name Cambio de contrasenia ponente";
-	$message ="";
+	$message  = "";
 	$message .= "Has solicitado cambio de contrasenia para el usuario: $user\n";
-	$message .= "La nuevo contrasenia es: $npasswd\n\n";
+	$message .= "La nueva contrasenia es: $npasswd\n\n";
+    $message .= "--------------------------------------------------------------\n";
+	$message .= "$conference_link\n";
 	$params["host"] = $smtp; 
 	$params["port"] = "25";
 	$params["auth"] = false;
 	// Create the mail object using the Mail::factory method
-	// $mail_object =& Mail::factory("smtp", $params);
-	
-	// $mail_object->send($recipients, $headers, $message);
+	$mail_object =& Mail::factory("smtp", $params);
+	$mail_object->send($recipients, $headers, $message);
+
   	$query = 'UPDATE ponente SET passwd="'.md5($npasswd).'" 
 			WHERE login="'.$user.'" AND mail="'.$mail_user.'"';
 	// print $npasswd;
@@ -90,8 +92,6 @@ if (isset ($_POST['submit']) && $_POST['submit'] == "Reset") {
 	print 	'Se ha actualizado la contrase&ntilde;a del usuario <b>'.$user.'</b>';
 	retorno();
 	print 	'La nueva contrase&ntilde;a del usuario '.$user.' ha sido enviado a la direcci&oacute;n de correo: <b>'.$mail_user.'</b>'; 
-retorno();
-	print ' Por razones de seguridad desabilitamos el envio de correo en la version de demo';
 retorno();
 	print 	'<p class="yacomas_msg">Es posible que algunos servidores de correo registren el correo como correo no deseado  o spam y no se encuentre en su carpeta INBOX</p>';
 	/////////////////////

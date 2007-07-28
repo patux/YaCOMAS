@@ -3,7 +3,7 @@ include "../includes/lib.php";
 include "../includes/conf.inc.php";
 beginSession('P');
 imprimeEncabezado();
-aplicaEstilo();
+
 $link=conectaBD();
 $idponente=$_SESSION['YACOMASVARS']['ponid'];
 $userQuery = 'SELECT nombrep,apellidos FROM ponente WHERE id="'.$idponente.'"';
@@ -62,10 +62,12 @@ print '
 		
 		print '</td>';
 		// El ponente solo puede cancelar propeustas no borradas,canceladas,aceptadas o programadas
-		if ($fila['id_status'] < 5) { 
-			print '<td width=50 bgcolor='.$bgcolor.'><a class="verde" href="Mponencia.php?idponencia='.$fila['id'].'">Modificar</td>';
-			print '<td width=50 bgcolor='.$bgcolor.'><a class="precaucion" href="BCponencia.php?vopc='.$fila['id'].' 7">Eliminar</td>';
-		}
+		if ($fila['id_status'] < 5)  
+			    print '<td width=50 bgcolor='.$bgcolor.'><a class="precaucion" href="BCponencia.php?vopc='.$fila['id'].' 7">Eliminar</td>';
+            // Tampoco puede modificar ponencias rechazadas
+            if ($fila['id_status'] != 3 || $fila['id_status'] !=6 ) { 
+			    print '<td width=50 bgcolor='.$bgcolor.'><a class="verde" href="Mponencia.php?idponencia='.$fila['id'].'">Modificar</td>';
+		    }
 		print '</tr>';
 	}
 	print '</table>';

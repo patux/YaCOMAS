@@ -15,7 +15,7 @@ $fechaQueryE='SELECT * FROM fecha_evento ORDER BY fecha';
 $fechaRecords = mysql_query($fechaQueryE) or err("No se pudo listar fechas de eventos ".mysql_errno($fechaRecords));
 
 imprimeEncabezado();
-aplicaEstilo();
+
 print '<p class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['asilogin'].'&nbsp;<a class="precaucion" href=signout.php>Desconectarme</a></P>';
 $msg="Listado de eventos<br><small>".$asistente_name." Estos son tus talleres registrados</small>";
 

@@ -4,7 +4,7 @@
 	beginSession('P');
 	$idponente=$_SESSION['YACOMASVARS']['ponid'];
 	imprimeEncabezado();
-	aplicaEstilo();
+	
 	print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['ponlogin'].'&nbsp;<a class="precaucion" href=signout.php>Desconectarme</a></P>';
 	imprimeCajaTop("100","Modificar Informacion de Ponentes");
 	$link=conectaBD();
@@ -289,6 +289,7 @@ print'
 		<FORM method="POST" action="'.$_SERVER['REQUEST_URI'].'">
 		<p><i>Campos marcados con un asterisco son obligatorios</i></p>
    		<p class="yacomas_msg">Si deja los campos de contrase&ntilde;a vacia usara contrase&ntilde;a actual</p>
+        <p class="yacomas_error">Asegurate de escribir bien tus datos personales ya que estos ser&aacute;n tomados para tu constancia de participaci&oacute;n</p>
 		<table width=100%>
 		<tr>
 

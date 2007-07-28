@@ -6,7 +6,7 @@ $link=conectaBD();
  
 
 imprimeEncabezado();
-aplicaEstilo();
+
 $QSquery = 'SELECT * FROM prop_status ORDER BY ID'; 
 $resultQS=mysql_query($QSquery);
 $indice=0;
@@ -24,7 +24,7 @@ mysql_free_result($resultQS);
 //
 $userQueryP ='	SELECT 	P.id AS id_ponencia, P.nombre AS ponencia,PT.descr AS prop_tipo, 
 			P.id_ponente, PO.nombrep, PO.apellidos, S.descr AS status, P.id_status,
-			P.id_administrador
+			P.id_administrador,P.nombreFile
 		FROM 	propuesta AS P, 
 			ponente AS PO, 
 			prop_status AS S, 
@@ -33,19 +33,22 @@ $userQueryP ='	SELECT 	P.id AS id_ponencia, P.nombre AS ponencia,PT.descr AS pro
 			P.id_status=S.id AND 
 			P.id_prop_tipo=PT.id AND
 			id_status < 7 
-		ORDER BY P.id_ponente,P.reg_time';
+		ORDER BY P.id_prop_tipo,P.id_ponente,P.reg_time';
+		//ORDER BY P.id_ponente,P.reg_time';
 
 $userRecordsP = mysql_query($userQueryP) or err("No se pudo listar ponencias".mysql_errno($userRecordsP));
 print '<p class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['rootlogin'].'&nbsp;<a class="precaucion" href=signout.php>Desconectarme</a></P>';
 imprimeCajaTop("100","Listado de ponencias");
-
+retorno();
 // Inicio datos de Ponencias
 print '
-	<table border=0 align=center width=100%>
-	<tr>
-	<td bgcolor='.$colortitle.'><b>Ponencia</b></td><td bgcolor='.$colortitle.'><b>Tipo</b>
-	</td><td bgcolor='.$colortitle.'><b>Status</b></td>
-	</td><td bgcolor='.$colortitle.'><b>Asignado</b></td>
+  	<table border=0 align=center width=100%>
+  	<tr>
+  	</td><td bgcolor='.$colortitle.'><b>Ponencia</b>
+        </td><td bgcolor='.$colortitle.'><b>Tipo</b>
+  	</td><td bgcolor='.$colortitle.'><b>Status</b></td>
+        </td><td bgcolor='.$colortitle.'><b>Archivo</b></td>
+  	</td><td bgcolor='.$colortitle.'><b>Asignado</b></td>
 	</td><td bgcolor='.$colortitle.'><b>&nbsp;</b></td>
 	</tr>';
 	
@@ -73,6 +76,12 @@ print '
 		
 		print '</td><td bgcolor='.$bgcolor.'>';
 		print '<small>'.$fila['status'].'</small>';
+
+		print '</td><td bgcolor='.$bgcolor.'>';
+		if (! empty ($fila['nombreFile']))
+                  print '<img src="'.$fslpath.$rootpath.'/images/checkmark.gif" border=0>';
+                else
+                  print '<small>No</small>';
 	
 		// Una vez que la ponencia fue aceptada (id 5)
 		// La ponencia no se le puede modificar el status ni eliminar 

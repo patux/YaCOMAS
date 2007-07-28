@@ -2,7 +2,7 @@
 include "../includes/lib.php";
 include "../includes/conf.inc.php";
 imprimeEncabezado();
-aplicaEstilo();
+
 
 $tok = strtok ($_GET['vopc']," ");
 $idponente=$tok;

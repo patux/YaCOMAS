@@ -6,7 +6,7 @@ $link=conectaBD();
  
 
 imprimeEncabezado();
-aplicaEstilo();
+
 //
 // Status 5 es Aceptado 
 // Seleccionamos solo las propuestas que hayan sido previamente aceptadas y que no esten programadas 

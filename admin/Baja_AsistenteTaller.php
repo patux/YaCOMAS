@@ -9,7 +9,7 @@ $userQuery = 'SELECT id FROM asistente
 $userRecords = mysql_query($userQuery) or err("No se pudo checar ID del asistente".mysql_errno($userRecords));
       if (mysql_num_rows($userRecords) == 0) {
 	imprimeEncabezado();
-	aplicaEstilo();
+	
 	imprimeCajaTop('100','-- Error --');
       	print '<p class="yacomas_error">El login del asistente no existe, vuelve a intentarlo</p>';
 	print '<center>';
@@ -34,7 +34,7 @@ $fechaQueryE='SELECT * FROM fecha_evento ORDER BY fecha';
 $fechaRecords = mysql_query($fechaQueryE) or err("No se pudo listar fechas de eventos ".mysql_errno($fechaRecords));
 
 imprimeEncabezado();
-aplicaEstilo();
+
 print '<p class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['rootlogin'].'&nbsp;<a class="precaucion" href=signout.php>Desconectarme</a></P>';
 $msg="Listado de eventos<br><small>".$asistente_name." Estos son tus talleres registrados</small>";
 

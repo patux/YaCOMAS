@@ -85,7 +85,7 @@ require_once "header.inc.php";
 retorno();
 alinearIzq("center");
 if ( ! empty ($conference_logo) ) {
-    print '<img src="'.$rootpath.'/images/'.$conference_logo.'" border="0">';
+    print '<a href="'.$conference_link.'"><img src="'.$rootpath.'/images/'.$conference_logo.'" border="0"></a>';
 }
 alinearFin();
 retorno();
@@ -104,7 +104,7 @@ print '<table border=0 width=100%>';
 print '<tr><td width=10%>&nbsp;</td>';
 print '<td width=80% align="center">';
 if ( ! empty ($conference_logo) ) {
-    print '<img src="'.$rootpath.'/images/'.$conference_logo.'" border="0">';
+    print '<a href="'.$conference_link.'"><img src="'.$rootpath.'/images/'.$conference_logo.'" border="0"></a>';
 }
 print '<td width=10% valign="bottom">';
 print '</tr></table>';
@@ -142,11 +142,6 @@ function retorno_esp()
 
 //--------------------------------
 
-function aplicaEstilo() 
-{
-	global $rootpath;
-	print '<link rel=stylesheet href='.$rootpath.'/style1.css type=text/css>';
-}
 //--------------------------------
 function imprimePie()
 {
@@ -156,10 +151,9 @@ function imprimePie()
 //--------------------------------
 function imprimeCaja($percent, $titulo,$texto)
 {
-
+ global $colorBorder;
  print ("<table border=0 cellpading=0 cellspacing=0 width=$percent% align=center>");
-   #print ("<tr><td bgcolor=#911f43>");
-   print ("<tr><td bgcolor=#5F6B8B>");
+   print ("<tr><td bgcolor=$colorBorder>");
       print ("<table border=0 cellpading=1 cellspacing=1 width=100%>");
           print ("<tr><td bgcolor=#FFFFFF><center><font face=arial size=6>$titulo</font></center>
 	<font face=arial size2=><div algin=center><p>$texto</p></td></tr>");
@@ -171,8 +165,9 @@ print("</table>");
 //--------------------------------
 function imprimeCajaTop($percent, $titulo)
 {
+ global $colorBorder;
  print ("<table border=0 cellpading=0 cellspacing=0 width=$percent% align=center>");
-   print ("<tr><td bgcolor=#5F6B8B>");
+   print ("<tr><td bgcolor=$colorBorder>");
       print ("<table border=0 cellpading=1 cellspacing=1 width=100%>");
           print ("<tr><td bgcolor=#FFFFFF><center><font face=arial size=6>$titulo</font></center>");
 	  retorno();
@@ -191,8 +186,9 @@ print("</table>");
 //--------------------------------
 function imprimeCajaTop1($percent, $titulo)
 {
+ global $colorBorder;
  print ("<table border=0 cellpading=0 cellspacing=0 width=$percent% align=center>");
-   print ("<tr><td bgcolor=#5F6B8B>");
+   print ("<tr><td bgcolor=$colorBorder>");
       print ("<table border=0 cellpading=1 cellspacing=1 width=100%>");
           print ("<tr><td bgcolor=#FFFFFF><center><font face=arial size=6>$titulo</font></center>");
       retorno();

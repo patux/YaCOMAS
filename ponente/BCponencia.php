@@ -3,7 +3,7 @@
 	include_once "../includes/conf.inc.php";
 	beginSession('P');
 	imprimeEncabezado();
-	aplicaEstilo();
+	
   	$idponente=$_SESSION['YACOMASVARS']['ponid'];
 	print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['ponlogin'].'&nbsp;<a class="precaucion" href=signout.php>Desconectarme</a></P>';
 
@@ -13,14 +13,8 @@
 	$ponencia=$tok;
 	$tok = strtok (" ");
 	$action=$tok;
-	if ($action!=7) {
-		$verbo1="Cancelar";
-		$verbo2="Cancelada";
-	}
-	else {
-		$verbo1="Eliminar";
-		$verbo2="Eliminada";
-	}
+	$verbo1="Eliminar";
+	$verbo2="Eliminada";
 	imprimeCajaTop("100",$verbo1." Propuesta de Ponencia");
 	print '<hr>';
 
@@ -104,33 +98,16 @@ function imprime_valoresOk() {
 // Si la forma ya ha sido enviada checamos cada uno de los valores
 // para poder autorizar la insercion del registro
 if (isset ($_POST['submit']) && $_POST['submit'] == "Aceptar") {
-  # do some basic error checking
-  // Si todo esta bien vamos a borrar el registro 
-  	if ($action!=7){
-  		$eliminar=0;
-  		$query = "UPDATE propuesta SET id_status='$action' WHERE id="."'".$ponencia."' AND id_ponente='".$idponente."'"; 
-  	}else{
-		$eliminar=1;
-		//Extraemos primero la ruta a eliminar 
-		$rutaSQL="SELECT dirFile from propuesta where (id=".$ponencia.")";
-		$rutaarchivo="";
-		if ($resultaux= mysql_query($rutaSQL)){
-			if ($row=mysql_fetch_row($resultaux)){
-				$rutaarchivo=$row[0];
-			}
-		}
-		$query = 'DELETE FROM propuesta WHERE id='.$ponencia.' AND id_ponente="'.$idponente.'"';
-	}
-		// Para debugear querys
-		//print $query;
-		//
-		$result = mysql_query($query) or err("No se puede eliminar los datos".mysql_errno($result));
-		if (($eliminar==1)&& ($rutaarchivo!="")){
-			if (file_exists($rutaarchivo)){
-//echo "Eliminado...";				
-				unlink($rutaarchivo);
-			}
-		}
+    # do some basic error checking
+    // Si todo esta bien vamos a borrar el registro 
+    // Update Tue Jul 11 13:08:11 PDT 2006 Patux.
+    // Ya no borraremos el registro fisicamente solo cambiaremos su status a eliminada dado que ya no existe la opcion cancelar para el ponente
+    // Esto con fines de tener registros historicas de  todas las ponencias recibidas
+    $query = "UPDATE propuesta SET id_status='$action' WHERE id="."'".$ponencia."' AND id_ponente='".$idponente."'"; 
+    // Para debugear querys
+    //print $query;
+    //
+    $result = mysql_query($query) or err("No se puede eliminar los datos".mysql_errno($result));
  	print '	Tu propuesta ha sido '.$verbo2.'
  		<p>
 		 Si tienes preguntas o no sirve adecuadamente la pagina, por favor contacta a 

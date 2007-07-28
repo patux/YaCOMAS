@@ -3,7 +3,7 @@
 	include "../includes/conf.inc.php";
 	beginSession('R');
 	imprimeEncabezado();
-	aplicaEstilo();
+	
 	$tok = strtok ($_GET['vact']," ");
 	$idponente=$tok;
 	$tok = strtok (" ");

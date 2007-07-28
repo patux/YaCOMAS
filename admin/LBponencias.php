@@ -6,7 +6,7 @@ $link=conectaBD();
  
 
 imprimeEncabezado();
-aplicaEstilo();
+
 // Seleccionamos los status disponibles
 $QSquery = 'SELECT * FROM prop_status ORDER BY ID'; 
 $resultQS=mysql_query($QSquery);

@@ -3,7 +3,7 @@ include_once "../includes/lib.php";
 include_once "../includes/conf.inc.php";
 beginSession('P');
 imprimeEncabezado();
-aplicaEstilo();
+
 $link=conectaBD();
 $idponente=$_SESSION['YACOMASVARS']['ponid'];
 $userQuery = 'SELECT nombrep,apellidos FROM ponente WHERE id="'.$idponente.'"';

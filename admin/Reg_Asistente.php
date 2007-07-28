@@ -9,7 +9,7 @@ $userQuery = 'SELECT id FROM asistente
 $userRecords = mysql_query($userQuery) or err("No se pudo checar ID del asistente".mysql_errno($userRecords));
       if (mysql_num_rows($userRecords) == 0) {
 	imprimeEncabezado();
-	aplicaEstilo();
+	
 	imprimeCajaTop('100','-- Error --');
       	print '<p class="yacomas_error">El login del asistente no existe, vuelve a intentarlo</p>';
 	print '<center>';
@@ -32,7 +32,7 @@ $asistente_name=$p['nombrep'];
 $msg="<br><small>".$asistente_name." Solo puedes tener <br>".$max_inscripcionTA." inscripciones a talleres maximo y <br>".$max_inscripcionTU." inscripciones a tutoriales maximo</small>";
 
 imprimeEncabezado();
-aplicaEstilo();
+
 print '<p class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['rootlogin'].'&nbsp;<a class="precaucion" href=signout.php>Desconectarme</a></P>';
 imprimeCajaTop("100","Listado/Inscripcion a talleres y tutoriales".$msg);
 

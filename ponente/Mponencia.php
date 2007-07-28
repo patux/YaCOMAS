@@ -3,7 +3,7 @@
 	include_once "../includes/conf.inc.php";
 	beginSession('P');
 	imprimeEncabezado();
-	aplicaEstilo();
+	
   	$idponente=$_SESSION['YACOMASVARS']['ponid'];
 	$idponencia=$_GET['idponencia'];
 	print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['ponlogin'].'&nbsp;<a class="precaucion" href=signout.php>Desconectarme</a></P>';
@@ -116,7 +116,9 @@ if (isset($_POST['submit']) && $_POST['submit'] == "Actualizar") {
   $userQuery = 'SELECT * FROM propuesta WHERE id="'.$idponencia.'" AND id_ponente="'.$idponente.'"';
   $userRecords = mysql_query($userQuery) or err("No se pudo checar las ponencia ".mysql_errno($userRecords));
   $p = mysql_fetch_array($userRecords);
-  if ($p['id_status'] > 2 )
+  //if ($p['id_status'] > 2 )
+  // Tal vez vayamos a borrar esta madrinola no se si tenga funcionamiento todavia
+  if ($p['id_status'] == 3 || $p['id_status'] >4)   
   {
   	$_POST['I_id_tipo']=$p['id_prop_tipo'];
 	$_POST['I_duracion']=$p['duracion'];
@@ -179,9 +181,9 @@ if (isset($_POST['submit']) && $_POST['submit'] == "Actualizar") {
                     }
 				    $query.=" WHERE id="."'".$idponencia."' AND id_ponente='".$idponente."'";
 		// Para debugear querys
-		print $query;
+		//print $query;
 		//
-        $result = mysql_query($query) or err("No se puede insertar los datos".mysql_errno($result));
+                $result = mysql_query($query) or err("No se puede insertar los datos".mysql_errno($result));
 		if ((!empty ($fichero['name'])) && (!empty($rutaantigua))){
 			if (file_exists($rutaantigua)){
                 //echo "Eliminado...";				
@@ -294,7 +296,7 @@ else {
 		</td>
 		</tr>';
 
-		if ($p['id_status'] <=2 ) 
+		if ($p['id_status'] <=2 || $p['id_status'] == 4) 
 		{
 			print'	
 				<tr>

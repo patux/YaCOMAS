@@ -1,3 +1,7 @@
+aug 14 2006
+	* Geronimo Orozco
+        * Add mail automated notification in admin/act_ponencia.php
+	* Fixed bug that switched values in resume/reqteq
 nov 27 2005
 	Geronimo Orozco <patux@glo.org.mx>
 	* Add global variable configurations:

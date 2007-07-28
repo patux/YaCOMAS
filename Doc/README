@@ -36,6 +36,8 @@ each Asistente.
 This project is based from the original comas project developed by Consol developer team
 Gunnar &  Mig for more references http://consol.org.mx
 
+IMPORTANT NOTE:
+Edit admin/act_ponencia.php 
 
 SPANISH:
 ==========================================================================
@@ -60,3 +62,6 @@ parte de cada uno de los asistentes.
 --------------------------------------------------------------------------------------
 Este proyecto esta basado en el proyecto comas desarrollado por el equipo de desarrollo del Consol
 Gunnar & Mig para mas informacion http://consol.org.mx
+
+NOTA IMPORTANTE:
+Edita admin/act_ponencia.php 

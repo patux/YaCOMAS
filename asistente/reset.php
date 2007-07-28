@@ -10,7 +10,7 @@
 
 	$link=conectaBD();
 	imprimeEncabezado();
-	aplicaEstilo();
+	
 	imprimeCajaTop("50","Resetear contrase&ntilde;a");
 // Inicializar variables
 if (empty ($_POST['submit']))
@@ -74,14 +74,16 @@ if (isset ($_POST['submit']) && $_POST['submit'] == "Reset") {
 	$headers["Subject"] = "$conference_name Cambio de contrasenia asistente";
 	$message  = "";
 	$message .= "Has solicitado cambio de contrasenia para el usuario: $user\n";
-	$message .= "La nuevo contrasenia es: $npasswd\n\n";
+	$message .= "La nueva contrasenia es: $npasswd\n\n";
+    $message .= "--------------------------------------------------------------\n";
+	$message .= "$conference_link\n";
 	$params["host"] = $smtp; 
 	$params["port"] = "25";
 	$params["auth"] = false;
 	// Create the mail object using the Mail::factory method
-	// $mail_object =& Mail::factory("smtp", $params);
+	$mail_object =& Mail::factory("smtp", $params);
 	
-	// $mail_object->send($recipients, $headers, $message);
+	$mail_object->send($recipients, $headers, $message);
   	$query = 'UPDATE asistente SET passwd="'.md5($npasswd).'" 
 			WHERE login="'.$user.'" AND mail="'.$mail_user.'"';
 	// print $npasswd;
@@ -92,9 +94,7 @@ if (isset ($_POST['submit']) && $_POST['submit'] == "Reset") {
 	$result = mysql_query($query) or err("No se puede actualizar los datos".mysql_errno($result));
 	print 	'Se ha actualizado la contrase&ntilde;a del usuario <b>'.$user.'</b>';
 	retorno();
-	print 	'La nueva contrase&ntilde;a del usuario '.$user.' ha sido enviado a la direccion de correo: <b>'.$mail_user.'</b>'; 
-retorno();
-	print ' Por razones de seguridad desabilitamos el envio de correo en la version de demo';
+	print 	'La nueva contrase&ntilde;a del usuario '.$user.' ha sido enviado a la direcci&oacute;n de correo: <b>'.$mail_user.'</b>'; 
 retorno();
 	print 	'<p class="yacomas_msg">Es posible que algunos servidores de correo registren el correo como correo no deseado  o spam y no se encuentre en su carpeta INBOX</p>';
 	/////////////////////
@@ -129,7 +129,7 @@ retorno();
 		</tr>
 
 		<tr>
-		<td class="name">Correo Electr�nico: *</td>
+		<td class="name">Correo Electr&oacute;nico: *</td>
 		<td class="input"><input type="text" name="S_mail" size="15"
 		value="'.$_POST['S_mail'].'"></td>
 		<td>

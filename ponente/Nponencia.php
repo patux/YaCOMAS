@@ -3,7 +3,7 @@
 	include_once "../includes/conf.inc.php";
 	beginSession('P');
 	imprimeEncabezado();
-	aplicaEstilo();
+	
 	$idponente=$_SESSION['YACOMASVARS']['ponid'];
 	print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['ponlogin'].'&nbsp;<a class="precaucion" href=signout.php>Desconectarme</a></P>';
 	imprimeCajaTop("100","Registro de Propuesta de Ponencias/Talleres");
@@ -187,8 +187,8 @@ if (isset ($_POST['submit']) && $_POST['submit'] == "Registrar") {
 	$query.= ") ".
 	"VALUES (".
 		"'".mysql_escape_string(stripslashes($_POST['S_nombreponencia']))."',".
-		"'".mysql_escape_string(stripslashes($S_trim_reqtecnicos))."',".
 		"'".mysql_escape_string(stripslashes($S_trim_resumen))."',".
+		"'".mysql_escape_string(stripslashes($S_trim_reqtecnicos))."',".
 		"'".mysql_escape_string(stripslashes($S_trim_reqasistente))."',".
 		"'".$_POST['I_id_nivel']."',".
 		"'".$_POST['I_duracion']."',".

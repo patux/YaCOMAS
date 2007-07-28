@@ -3,7 +3,7 @@
 	include "../includes/conf.inc.php";
 	beginSession('P');
 	imprimeEncabezado();
-	aplicaEstilo();
+	
 	$idponente=$_SESSION['YACOMASVARS']['ponid'];
 	$idponencia=$_GET['idponencia'];
 	print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['ponlogin'].'&nbsp;<a class="precaucion" href=signout.php>Desconectarme</a></P>';

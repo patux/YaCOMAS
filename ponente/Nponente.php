@@ -7,7 +7,7 @@
 */
 	include_once "Mail.php";
 	imprimeEncabezado();
-	aplicaEstilo();
+	
 	imprimeCajaTop("100","Registro de Ponentes");
 	$link=conectaBD();
 	$configQuery= 'SELECT status FROM config WHERE id=1';
@@ -268,17 +268,18 @@ if ($_POST['submit'] == "Registrarme") {
 	$headers["To"]      = $mail_user;
 	$headers["Subject"] = "Registro de ponente";
 	$message = "";
-	$message .= "Te has registrado como posible ponente al EVENTO\n";
+	$message .= "Te has registrado como posible ponente al EVENTO $conference_name\n";
 	$message .= "Usuario: $user\n";
 	$message .= "Contrasenia: $passwd_user\n\n";
 	$message .= "---------------------------------------\n";
+	$message .= "$conference_link\n";
 	$params["host"] = $smtp; 
 	$params["port"] = "25";
 	$params["auth"] = false;
 	// Create the mail object using the Mail::factory method
-	// $mail_object =& Mail::factory("smtp", $params);
+	$mail_object =& Mail::factory("smtp", $params);
 	
-	// $mail_object->send($recipients, $headers, $message);
+	$mail_object->send($recipients, $headers, $message);
  	print '	Gracias por darte de alta, ahora ya podras accesar a tu cuenta.<br>
 		Los datos de tu usuario y password han sido enviados al correo que registraste';
 retorno();
@@ -305,6 +306,7 @@ retorno();
 	print'
 		<FORM method="POST" action="'.$_SERVER['REQUEST_URI'].'">
 		<p><i>Campos marcados con un asterisco son obligatorios</i></p>
+        <p class="yacomas_error">Asegurate de escribir bien tus datos personales ya que estos ser&aacute;n tomados para tu constancia de participaci&oacute;n</p>
 		<table width=100%>
 		<tr>
 

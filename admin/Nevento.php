@@ -4,7 +4,7 @@
 	beginSession('R');
 	$idadmin=$_SESSION['YACOMASVARS']['rootid'];
 	imprimeEncabezado();
-	aplicaEstilo();
+	
 	print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['rootlogin'].'&nbsp;<a class="precaucion" href=signout.php>Desconectarme</a></P>';
 	$tok = strtok ($_GET['pevento']," ");
 	$idponencia=$tok;

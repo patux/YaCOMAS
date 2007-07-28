@@ -3,7 +3,7 @@
 	include "../includes/conf.inc.php";
 	beginSession('R');
 	imprimeEncabezado();
-	aplicaEstilo();
+	
 	print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['rootlogin'].'&nbsp;<a class="precaucion" href=signout.php>Desconectarme</a></P>';
 
 	$link=conectaBD();
@@ -40,6 +40,7 @@
 	$registro['D_reg_time']=$p['reg_time'];
 	$registro['D_act_time']=$p['act_time'];
 	$registro['I_id_administrador']=$p['id_administrador'];
+    $registro['S_nombreFile']=$p['nombreFile'];
 	
 	$msg='Ponencia de: <small>'.$ponente_name.'</small>';
 	imprimeCajaTop("100",$msg);
@@ -118,6 +119,18 @@
 			printf ("<b>%s</b>",$fila["descr"]);
   		}
 		mysql_free_result($result);
+        print '	
+		</td>
+		</tr>
+		
+		<tr>
+		<td class="name">Archivo: * </td>
+		<td class="resultado">';
+                if (!empty ($registro['S_nombreFile']))
+                    print '<b>'.$registro['S_nombreFile'].'</b>';
+                else
+                    echo "El ponente no ha enviado ningun archivo";
+		
 	print '	
 		</td>
 		</tr>

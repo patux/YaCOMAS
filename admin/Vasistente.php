@@ -3,7 +3,7 @@ include "../includes/lib.php";
 include "../includes/conf.inc.php";
 beginSession('R');
 imprimeEncabezado();
-aplicaEstilo();
+
 
 $tok = strtok ($_GET['vopc']," ");
 $idasistente=$tok;

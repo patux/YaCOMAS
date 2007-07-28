@@ -3,7 +3,7 @@ include "../includes/lib.php";
 include "../includes/conf.inc.php";
 beginSession('R');
 imprimeEncabezado();
-aplicaEstilo();
+
 $link=conectaBD();
 $idadmin=$_SESSION['YACOMASVARS']['rootid'];
 $userQueryL = 'SELECT * FROM fecha_evento ORDER BY fecha';

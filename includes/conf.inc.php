@@ -1,5 +1,5 @@
 <?
-global $rootpath,$bgcolor,$conference_name,$general_mail,$copyright_author,$copyright_year,$link_author,$conference_logo;
+global $rootpath,$bgcolor,$conference_name,$general_mail,$copyright_author,$copyright_year,$link_author,$conference_logo, $colorBorder;
 // rootpath es usada para decirle a yacomas 
 // cual es el directorio raiz de el sitio web
 // en el que estamos instalando yacomas
@@ -16,23 +16,25 @@ $fslpath='';
 $rootpath='/yacomas';
 // The place where the files from the speakers will be stored   
 // The directory must be created and give the specific permissions in order to apache can write inside that directory
-$archivos = "/var/www/yacomas/documentos/";
+$archivos = "/srv/www/htdocs/yacomas/documentos/";
 // The mail to provide users who have PROBLEMS, WARNINGS with Yacomas.
-$adminmail='admin@nomail.com';
+$adminmail='admin@yourdomain';
 // The mail to provide to all the users, and the mail that will be used to send mails for New account or reset account.
-$general_mail='noreply@nomail.com';
+$general_mail='noreply@yourdomain';
 // The name for the conference where yacomas is used
-$conference_name="Example conference";
+$conference_name="Your conference name";
 // Copyright information customized for the admin of yacomas and the conference that uses it
-$copyright_author="Yacomas author";
+$copyright_author="Your copytright author";
 // Year for the custom copyright information  
-$copyright_year="2005";
+$copyright_year="Your copyright year";
 // Link for the admin of yacomas and the conference that uses it
-$link_author="http://patux.glo.org.mx";
+$link_author="link author";
+// Link for the conference 
+$conference_link="conference url";
 // Image to show at the top-center for yacomas that image should exist into yacomas/images/ directory
-$conference_logo="yacomas.png";
+$conference_logo="conferencelogo.png";
 // Workshops max limit to be used 
-$limite=20; // 
+$limite=100; // 
 // Start and End time for the events 24hrs format 
 $def_hora_ini=8;
 $def_hora_fin=22;
@@ -43,21 +45,22 @@ $max_inscripcionTU=3;
 // Colors and fashion
 /////
 // Background color for the webpage this will be used in all the pages
-$bgcolor='#d2e0ee';
+$bgcolor='#ffffff';
 // Colores de las tablas en los listados
 //$colortitle='#ff9900';
 //$color_renglon1='#ffcc66';
 //$color_renglon2='#ffff99';
 //$colortitle='#7e7ebc';
-$colortitle='#7e7ebc';
-$color_renglon1='#b4b4de';
-$color_renglon2='#ccdff9';
-$color_especiales='#66ccff';
+$colorBorder='#ffc20e';
+$colortitle='#FFCC00';
+$color_renglon1='whitesmoke';
+$color_renglon2='#FFFFCC';
+$color_especiales='limegreen';
 ///////
 //Mail stuff
 ///////
 // The mail that should be used for send emails IP or domain name is valid
-$smtp="your_smpt_name";
+$smtp="your.smpt.domain";
 /******
  * CONSTANTES DE ENTORNO
  */

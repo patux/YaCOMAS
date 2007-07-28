@@ -3,7 +3,7 @@ include "../includes/lib.php";
 include "../includes/conf.inc.php";
 beginSession('R');
 imprimeEncabezado();
-aplicaEstilo();
+
 print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['rootlogin'].'&nbsp;<a class="precaucion" href=signout.php>Desconectarme</a></P>';
 imprimeCajaTop("100","Control de Asistencia");
 retorno();

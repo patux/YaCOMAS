@@ -3,7 +3,7 @@ include "../includes/lib.php";
 include "../includes/conf.inc.php";
 beginSession('R');
 imprimeEncabezado();
-aplicaEstilo();
+
 $link=conectaBD();
 $idadmin=$_SESSION['YACOMASVARS']['rootid'];
 $userQueryCP = 'SELECT 	count(*) AS totPonentes FROM ponente'; 

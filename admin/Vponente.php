@@ -3,7 +3,7 @@ include "../includes/lib.php";
 include "../includes/conf.inc.php";
 beginSession('R');
 imprimeEncabezado();
-aplicaEstilo();
+
 
 $tok = strtok ($_GET['vopc']," ");
 $idponente=$tok;
@@ -145,6 +145,7 @@ print '
 	<tr>
 	<td bgcolor='.$colortitle.'><b>Ponencia</b></td><td bgcolor='.$colortitle.'><b>Tipo</b></td>
 	<td bgcolor='.$colortitle.'><b>Status</b></td>
+	<td bgcolor='.$colortitle.'><b>Archivo</b></td>
 	</tr>';
 
 	$color=1;
@@ -176,7 +177,13 @@ print '
 	 	$fstatus=mysql_fetch_array($result);
 		print $fstatus['descr'];
 		mysql_free_result($result);
-		print '</td></tr>';
+
+		print '</td><td bgcolor='.$bgcolor.'>';
+		if (! empty ($fila['nombreFile']))
+                  print '<img src="'.$fslpath.$rootpath.'/images/checkmark.gif" border=0>';
+                else
+                  print '<small>No</small>
+        </td></tr>';
 		
 	}
 	print '</table>';
