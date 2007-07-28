@@ -9,8 +9,8 @@ print '
 <tr><td bgcolor=#FFFFFF>
 <center><font face=arial size=-2>
 Copyright(c) 
-<a href="http://glo.org.mx/~patux/">
-Yacomas Development team
+<a href="http://patux.glo.org.mx/">
+Geronimo Orozco
 </a>
 <br>
 </font><br><br>

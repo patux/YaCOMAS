@@ -50,6 +50,7 @@ DEPENDENCIAS
 
 INSTALACION:
 ------------
+Descargar YACOMAS: http://patux.glo.org.mx
 
 Descomprimir yacomas-0.x_alpha.tar.gz en un directorio donde apache tenga alcance: 
 ej. /var/www/htdocs/

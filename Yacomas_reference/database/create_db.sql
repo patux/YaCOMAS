@@ -25,7 +25,7 @@ CREATE TABLE administrador (
 -- Default user:   admin
 -- Default passwd: admin
 
-INSERT INTO administrador VALUES (1,'admin',md5('admin','Administrador','Principal','admin-fsl@glo.org.mx',1);
+INSERT INTO administrador VALUES (1,'admin',md5('admin'),'Administrador','Principal','admin-fsl@glo.org.mx',1);
 
 --
 -- Table structure for table 'asistente'

@@ -159,8 +159,8 @@ else {
 		<td class="name">Administrador Login: * </td>
 		<td class="input">
 		<input TYPE="text" name="S_login" size="15"';
-		if ($idadmin==1)
-			print 'readonly ';
+	//	if ($idadmin==1)
+	//		print 'readonly ';
 		print 'value="'.$_POST['S_login'].'"></td>
 		<td> 4 a 15 caracteres
 		</td>
@@ -170,8 +170,8 @@ else {
 		<td class="name">Contraseña: * </td>
 		<td class="input">
 		<input type="password" name="S_passwd" size="15"'; 
-		if ($idadmin==1)
-			print 'readonly ';
+	//	if ($idadmin==1)
+	//		print 'readonly ';
 		print 'value=""></td>
 		<td> 6 a 15 caracteres
 		</td>
@@ -181,8 +181,8 @@ else {
 		<td class="name">Confirmación de Contraseña: * </td>
 		<td class="input">
 		<input type="password" name="S_passwd2" size="15"'; 
-		if ($idadmin==1)
-			print 'readonly ';
+	//	if ($idadmin==1)
+	//		print 'readonly ';
 		print 'value=""></td>
 		<td> 
 		</td>
