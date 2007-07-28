@@ -1,11 +1,11 @@
 <? 
-	include "../includes/lib.php";
-	include "../includes/conf.inc.php";
+	include_once "../includes/lib.php";
+	include_once "../includes/conf.inc.php";
 /*	Debes tener PEAR instalado http://pear.php.net
 	y el modulo basico de Mail
 	http://pear.php.net/package/Mail/download
 */
-	include "Mail.php";
+	include_once "Mail.php";
 
 	imprimeEncabezado();
 	aplicaEstilo();
@@ -33,7 +33,7 @@ function imprime_valoresOk() {
 	include "../includes/conf.inc.php";
 
     print '
-     		<table width=100%>
+     	<table width=100%>
 		<tr>
 		<td class="name">Nombre de Usuario: * </td>
 		<td class="resultado">
@@ -56,7 +56,7 @@ function imprime_valoresOk() {
 		</tr>
 
 		<tr>
-		<td class="name">Correo Electrónico: *</td>
+		<td class="name">Correo Electr&oacute;nico: *</td>
 		<td class="resultado">
 		'.$_POST['S_mail'].'
 		</td>
@@ -65,7 +65,6 @@ function imprime_valoresOk() {
 		<tr>
 		<td class="name">Sexo: * </td>
 		<td class="resultado">';
-		
 		if ($_POST['C_sexo']=="M")
 		    echo "Masculino";
 		else
@@ -76,7 +75,7 @@ function imprime_valoresOk() {
 		</tr>
 
 		<tr>
-		<td class="name">Organización: </td>
+		<td class="name">Organizaci&oacute;n: </td>
 		<td class="resultado">
 		'.stripslashes($_POST['S_org']).'
 		</td>
@@ -209,8 +208,8 @@ if (isset ($_POST['submit']) && $_POST['submit'] == "Registrarme") {
   // Si hubo error(es) muestra los errores que se acumularon.
   if (!empty($errmsg)) {
       showError($errmsg);
-   	print '<p class="yacomas_error">Note que los campos de password han sido borrados<p>';
-  }
+      print '<p class="yacomas_error">Note que los campos de password han sido borrados<p>';
+  }    	
   // Si todo esta bien vamos a darlo de alta
   else { // Todas las validaciones Ok 
  	 // vamos a darlo de alta
@@ -221,7 +220,7 @@ if (isset ($_POST['submit']) && $_POST['submit'] == "Registrarme") {
 	$date=strftime("%Y%m%d%H%M%S");
   	$query = "INSERT INTO asistente (login,passwd,nombrep,apellidos,sexo,mail,ciudad,org,fecha_nac,reg_time,id_estudios,id_tasistente,id_estado) VALUES (".
 		"'".$lowlogin."',".
-	        "'".md5(stripslashes($_POST['S_passwd']))."',".
+	    "'".md5(stripslashes($_POST['S_passwd']))."',".
 		"'".mysql_escape_string(stripslashes($_POST['S_nombrep']))."',".
 		"'".mysql_escape_string(stripslashes($_POST['S_apellidos']))."',".
 		"'".$_POST['C_sexo']."',".
@@ -244,13 +243,13 @@ if (isset ($_POST['submit']) && $_POST['submit'] == "Registrarme") {
 	$mail_user = $_POST['S_mail'];
 	$recipients = $mail_user;
 
-	$headers["From"]    = "staff@yacomas.org.mx";
+	$headers["From"]    = $general_mail;
 	$headers["To"]      = $mail_user;
 	$headers["Subject"] = "Registro de asistente";
 	$message  = "";
 	$message .= "Te has registrado como asistente al \n";
 	$message .= "Usuario: $user\n";
-	$message .= "Contrasenia: $passwd_user\n\n";
+	$message .= "Contrase&ntilde;a: $passwd_user\n\n";
 	$message .= "Puedes inicar sesion en: http://$URL/yacomas/asistente/\n\n\n";
 	$message .= "---------------------------------------\n";
 	$params["host"] = $smtp;
@@ -263,13 +262,13 @@ if (isset ($_POST['submit']) && $_POST['submit'] == "Registrarme") {
  	print '	Gracias por darte de alta, ahora ya podras accesar a tu cuenta.<br>
 		Los datos de tu usuario y password han sido enviados al correo que registraste';
 retorno();
-	print ' Por razones de seguridad desabilitamos el envio de correo en la version de demo';
+	print ' Por razones de seguridad deshabilitamos el enviacute;o de correo ';
 retorno();
 	print 	'<p class="yacomas_msg">Es posible que algunos servidores de correo registren el correo como correo no deseado  o spam y no se encuentre en su carpeta INBOX</p>';
 	print '
  		<p>
-		 Si tienes preguntas o no sirve adecuadamente la pagina, por favor contacta al 
-		 <a href="mailto:patux@glo.org.mx">YACOMAS Developer team</a><br><br>';
+		 Si tienes preguntas o no sirve adecuadamente la p&aacute;gina, por favor contacta a 
+		 <a href="mailto:'.$adminmail.'">Administraci&oacute;n '.$conference_name.'</a><br><br>';
 
  	imprime_valoresOk();
  	imprimeCajaBottom(); 
@@ -298,7 +297,7 @@ retorno();
 		</tr>
 
 		<tr>
-		<td class="name">Contraseña: * </td>
+		<td class="name">Contrase&ntilde;a: * </td>
 		<td class="input">
 		<input type="password" name="S_passwd" size="15" 
 		value=""></td>
@@ -307,7 +306,7 @@ retorno();
 		</tr>
 
 		<tr>
-		<td class="name">Confirmación de Contraseña: * </td>
+		<td class="name">Confirmaci&oacute;n de Contrase&ntilde;a: * </td>
 		<td class="input"><input type="password" name="S_passwd2" size="15"
 		value=""></td>
 		<td> 
@@ -333,7 +332,7 @@ retorno();
 		</tr>
 
 		<tr>
-		<td class="name">Correo Electrónico: *</td>
+		<td class="name">Correo Electr&ntilde;nico: *</td>
 		<td class="input"><input type="text" name="S_mail" size="15"
 		value="'.$_POST['S_mail'].'"></td>
 		<td>
@@ -369,7 +368,7 @@ retorno();
 		</tr>
 
 		<tr>
-		<td class="name">Organización: </td>
+		<td class="name">Organizaci&oacute;n: </td>
 		<td class="input"><input type="text" name="S_org" size="15"
 		value="'.stripslashes($_POST['S_org']).'"></td>
 		</tr>
@@ -491,7 +490,7 @@ retorno();
 
 		</select>
 
-		Año:
+		A&ntilde;o:
 		<select name="I_b_year">
 		<option name="unset" value="0"';
 		if (empty($_POST['I_b_year'])) 

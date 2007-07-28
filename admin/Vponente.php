@@ -36,7 +36,7 @@ imprimeCajaTop("100",$msg);
     print '
      		<table width=100%>
 		<tr>
-		<td class="name">Correo Electrónico: *</td>
+		<td class="name">Correo Electr&oacute;nico: *</td>
 		<td class="resultado">
 		'.$p["mail"].'
 		</td>
@@ -56,7 +56,7 @@ imprimeCajaTop("100",$msg);
 		</tr>
 
 		<tr>
-		<td class="name">Organización: </td>
+		<td class="name">Organizaci&oacute;n: </td>
 		<td class="resultado">
 		'.stripslashes($p['org']).'
 		</td>

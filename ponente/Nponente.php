@@ -1,11 +1,11 @@
 <? 
-	include "../includes/lib.php";
-	include "../includes/conf.inc.php";
+	include_once "../includes/lib.php";
+	include_once "../includes/conf.inc.php";
 /*	Debes tener PEAR instalado http://pear.php.net
 	y el modulo basico de Mail
 	http://pear.php.net/package/Mail/download
 */
-	include "Mail.php";
+	include_once "Mail.php";
 	imprimeEncabezado();
 	aplicaEstilo();
 	imprimeCajaTop("100","Registro de Ponentes");
@@ -18,7 +18,7 @@
 	if ($stat_array==0) {
 		retorno();
 		retorno();
-		print '<p class="yacomas_error">El registro para ponentes se encuentra cerrado.. gracias por tu interes</p>';
+		print '<p class="yacomas_error">El registro para ponentes se encuentra cerrado.. gracias por tu inter&eacute;s</p>';
 		retorno();
 		retorno();
 		print ' <center>
@@ -77,7 +77,7 @@ function imprime_valoresOk() {
 		</tr>
 
 		<tr>
-		<td class="name">Correo Electrónico: *</td>
+		<td class="name">Correo Electr&oacute;nico: *</td>
 		<td class="resultado">
 		'.$_POST['S_mail'].'
 		</td>
@@ -97,7 +97,7 @@ function imprime_valoresOk() {
 		</tr>
 
 		<tr>
-		<td class="name">Organización: </td>
+		<td class="name">Organizaci&oacute;n: </td>
 		<td class="resultado">
 		'.stripslashes($_POST['S_org']).'
 		</td>
@@ -119,7 +119,7 @@ function imprime_valoresOk() {
 		</tr>
 		
 		<tr>
-		<td class="name">Titulo: * </td>
+		<td class="name">T&iacute;tulo: * </td>
 		<td class="resultado">
 		'.stripslashes($_POST['S_titulo']).'
 		</td>
@@ -133,7 +133,7 @@ function imprime_valoresOk() {
 		</tr>
 
 		<tr>
-		<td class="name">Telefono: </td>
+		<td class="name">Tel&eacute;fono: </td>
 		<td class="resultado">
 		'.chunk_split ($_POST['S_telefono'], 2).'
 		</td>
@@ -147,7 +147,7 @@ function imprime_valoresOk() {
 		</tr>
 
 		<tr>
-		<td class="name">Estado: * </td>
+		<td class="name">Estado/Provincia: * </td>
 		<td class="resultado">';
 		
 		$query= "select * from estado where id='".$_POST['I_id_estado']."'";
@@ -264,7 +264,7 @@ if ($_POST['submit'] == "Registrarme") {
 	$mail_user = $_POST['S_mail'];
 	$recipients = $mail_user;
 
-	$headers["From"]    = "staff@yacomas.org.mx";
+	$headers["From"]    = $general_mail;
 	$headers["To"]      = $mail_user;
 	$headers["Subject"] = "Registro de ponente";
 	$message = "";
@@ -282,13 +282,13 @@ if ($_POST['submit'] == "Registrarme") {
  	print '	Gracias por darte de alta, ahora ya podras accesar a tu cuenta.<br>
 		Los datos de tu usuario y password han sido enviados al correo que registraste';
 retorno();
-	print ' Por razones de seguridad desabilitamos el envio de correo en la version de demo';
+	print ' Por razones de seguridad desabilitamos el envio de correo';
 retorno();
 	print 	'<p class="yacomas_msg">Es posible que algunos servidores de correo registren el correo como correo no deseado  o spam y no se encuentre en su carpeta INBOX</p>';
 	print '
  		<p>
-		 Si tienes preguntas o no sirve adecuadamente la pagina, por favor contacta al 
-		 <a href="mailto:patux@glo.org.mx">YACOMAS Developer team</a><br><br>';
+		 Si tienes preguntas o no sirve adecuadamente la pagina, por favor contacta a 
+		 <a href="mailto:'.$adminmail.'">Administraci&oacute;n '.$conference_name.'</a><br><br>';
 
  	imprime_valoresOk();
  	imprimeCajaBottom(); 
@@ -317,7 +317,7 @@ retorno();
 		</tr>
 
 		<tr>
-		<td class="name">Contraseña: * </td>
+		<td class="name">Contrase&ntilde;a: * </td>
 		<td class="input">
 		<input type="password" name="S_passwd" size="15" 
 		value=""></td>
@@ -326,7 +326,7 @@ retorno();
 		</tr>
 
 		<tr>
-		<td class="name">Confirmación de Contraseña: * </td>
+		<td class="name">Confirmaci&oacute;n de Contrase&ntilde;a: * </td>
 		<td class="input"><input type="password" name="S_passwd2" size="15"
 		value=""></td>
 		<td> 
@@ -352,7 +352,7 @@ retorno();
 		</tr>
 
 		<tr>
-		<td class="name">Correo Electrónico: *</td>
+		<td class="name">Correo Electr&oacute;nico: *</td>
 		<td class="input"><input type="text" name="S_mail" size="15"
 		value="'.$_POST['S_mail'].'"></td>
 		<td>
@@ -388,7 +388,7 @@ retorno();
 		</tr>
 
 		<tr>
-		<td class="name">Organización: </td>
+		<td class="name">Organizaci&oacute;n: </td>
 		<td class="input"><input type="text" name="S_org" size="15"
 		value="'.stripslashes($_POST['S_org']).'"></td>
 		</tr>
@@ -419,7 +419,7 @@ retorno();
 		</tr>
 
 		<tr>
-		<td class="name">Titulo:  </td>
+		<td class="name">T&iacute;tulo:  </td>
 		<td class="input"><input type="text" name="S_titulo" size="10"
 		value="'.stripslashes($_POST['S_titulo']).'"></td>
 		<td>
@@ -436,7 +436,7 @@ retorno();
 		
 		
 		<tr>
-		<td class="name">Telefono:  </td>
+		<td class="name">Tel&eacute;fono:  </td>
 		<td class="input"><input type="text" name="S_telefono" size="15"
 		value="'.stripslashes($_POST['S_telefono']).'"></td>
 		<td>
@@ -450,7 +450,7 @@ retorno();
 		</tr>
 
 		<tr>
-		<td class="name">Estado: * </td>
+		<td class="name">Estado/Provincia: * </td>
 
 		<td class="input">
 		<select name="I_id_estado">
@@ -509,7 +509,7 @@ retorno();
 
 		</select>
 
-		Año:
+		A&ntilde;o:
 		<select name="I_b_year">
 		<option name="unset" value="0"';
 		if (empty($_POST['I_b_year'])) 

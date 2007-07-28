@@ -1,6 +1,6 @@
 <?	
-	include "../includes/lib.php";
-	include "../includes/conf.inc.php";
+	include_once "../includes/lib.php";
+	include_once "../includes/conf.inc.php";
 	$link=conectaBD();
 
 $errmsg = "";
@@ -75,7 +75,7 @@ elseif (isset($_GET['e']) && ($_GET['e'] == "exp")) { print '<span class="err">S
 		</tr>
 
 		<tr>
-		<td class="name">Contraseña: </td>
+		<td class="name">Contrase&ntilde;a: </td>
 		<td class="input">
 		<input type="password" name="S_passwd" size="15" 
 		value=""></td>

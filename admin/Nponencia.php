@@ -1,6 +1,6 @@
 <? 
-	include "../includes/lib.php";
-	include "../includes/conf.inc.php";
+	include_once "../includes/lib.php";
+	include_once "../includes/conf.inc.php";
 	beginSession('R');
 	imprimeEncabezado();
 	aplicaEstilo();
@@ -12,7 +12,7 @@ function imprime_valoresOk() {
 	include "../includes/conf.inc.php";
 
     print '
-     		<table width=100%>
+     <table width=100%>
 		<tr>
 		<td class="name">Ponente: * </td>
 		<td class="resultado">
@@ -28,7 +28,7 @@ function imprime_valoresOk() {
 		</tr>
 		
 		<tr>
-		<td class="name">Orientacion: * </td>
+		<td class="name">Orientaci&oacute;n: * </td>
 		<td class="resultado">';
 		
 		$query = 'SELECT * FROM orientacion WHERE id="'.$_POST['I_id_orientacion'].'"';
@@ -74,7 +74,7 @@ function imprime_valoresOk() {
 		</tr>
 
 		<tr>
-		<td class="name">Duracion: * </td>
+		<td class="name">Duraci&oacute;n: * </td>
 		<td class="resultado">';
 		printf ("%02d Hrs",$_POST['I_duracion']);
 	print '	
@@ -89,7 +89,7 @@ function imprime_valoresOk() {
 		</tr>
 		
 		<tr>
-		<td class="name">Requisitos tecnicos de la ponencia: </td> 
+		<td class="name">Requisitos t&eacute;cnicos de la ponencia: </td> 
 		<td align=justify class="resultado">
 		'.$_POST['S_reqtecnicos'].'
 		</td>
@@ -100,9 +100,15 @@ function imprime_valoresOk() {
 		<td align=justify class="resultado">
 		'.$_POST['S_reqasistente'].'
 		</td>
-		</tr>
-
-		</table>
+		</tr>';
+		if ($_FILES["fichero"]["name"]!=""){
+			print '<tr>' .
+			'<td class="name">'.
+			'Fichero enviado: </td>' .
+			'<td align=justify class="resultado">'.$_FILES["fichero"]["name"].''.
+			'</td></tr>';
+		}
+		print'</table>
 		<br>
 		<center>
 		<input type="button" value="Volver al menu" onClick=location.href="'.$fslpath.$rootpath.'/admin/menuadmin.php#ponencias">
@@ -173,29 +179,52 @@ if (isset ($_POST['submit']) && $_POST['submit'] == "Registrar") {
 // Funcion comentada para no agregar los datos de prueba, una vez que este en produccion hay que descomentarla
 	
 	$date=strftime("%Y%m%d%H%M%S");
-  	$query = "INSERT INTO propuesta (nombre,resumen,reqtecnicos,reqasistente,id_nivel,duracion,reg_time,id_ponente,id_prop_tipo,id_orientacion)
-	VALUES (".
+  	$query = "INSERT INTO propuesta (nombre,resumen,reqtecnicos,reqasistente,id_nivel,duracion,reg_time,id_ponente,id_prop_tipo,id_orientacion";
+  	$fichero=$_FILES["fichero"];
+	if (isset($fichero["name"]) && $fichero["name"]!=""){
+		$query.= ",nombreFile";
+		$query.= ",tipoFile";
+		$query.=",dirFile";
+	}
+	$query.= ") ".
+	"VALUES (".
 		"'".mysql_escape_string(stripslashes($_POST['S_nombreponencia']))."',".
-		"'".mysql_escape_string(stripslashes($S_trim_resumen))."',".
 		"'".mysql_escape_string(stripslashes($S_trim_reqtecnicos))."',".
+		"'".mysql_escape_string(stripslashes($S_trim_resumen))."',".
 		"'".mysql_escape_string(stripslashes($S_trim_reqasistente))."',".
 		"'".$_POST['I_id_nivel']."',".
 		"'".$_POST['I_duracion']."',".
 		"'".$date."',".
 		"'".$idponente."',".
 		"'".$_POST['I_id_tipo']."',".
-		"'".$_POST['I_id_orientacion']."'".
-		")";
+		"'".$_POST['I_id_orientacion']."'";
+		//Cambio el nombre del archivo a usuario!nombrefile con eso consigo tener un unico archivo
+		//Si es el mismo nombre es que es de la misma ponencia y usuario...la machaca.
+ 
+
+        $resaux=$_POST['S_login'];
+        //Ok todo correcto recogo el login para aÃadir al fichero
+        $rutafilename=$archivos.$resaux.CARACTERSEPARADOR.$fichero["name"];
+		if (isset($fichero["name"]) && $fichero["name"]!=""){
+			$query.= ",'".stripslashes($fichero["name"])."'";
+			$query.= ",'".stripslashes($fichero["type"])."'";
+			$query.= ",'".stripslashes($rutafilename)."'";
+		}
+		$query.=")";
 		//
 		// Para debugear querys
 		// print $query;
 		//
 		$result = mysql_query($query) or err("No se puede insertar los datos".mysql_errno($result));
- 	print '	Tu propuesta de ponencia ha sido registrada .
+		if (isset($fichero["name"]) && $fichero["name"]!=""){
+            if (!(move_uploaded_file($fichero["tmp_name"],$rutafilename))){
+                die("Imposible copiar fichero");
+            }
+        }
+ 	print 'Propuesta de ponencia ha sido registrada .
  		<p>
-		 Si tienes preguntas o no sirve adecuadamente la pagina, por favor contacta al 
-		 <a href="mailto:patux@glo.org.mx">YACOMAS Developer team</a><br><br>';
-
+		 Si tienes preguntas o no sirve adecuadamente la pagina, por favor contacta a 
+		 <a href="mailto:'.$adminmail.'">Administraci&oacute;n '.$conference_name.'</a><br><br>';
  	imprime_valoresOk();
  	imprimeCajaBottom(); 
  	imprimePie(); 
@@ -209,7 +238,7 @@ if (isset ($_POST['submit']) && $_POST['submit'] == "Registrar") {
 // de lo contrario la imprimira para poder introducir los datos si es que todavia no hemos introducido nada
 // o para corregir datos que ya hayamos tratado de introducir
 	print'
-		<FORM method="POST" action="'.$_SERVER['REQUEST_URI'].'">
+		<FORM method="POST" action="'.$_SERVER['REQUEST_URI'].'" enctype="multipart/form-data">
 		<p><i>Campos marcados con un asterisco son obligatorios</i></p>
 		<table width=100%>
 		<tr>
@@ -227,7 +256,7 @@ if (isset ($_POST['submit']) && $_POST['submit'] == "Registrar") {
 		</tr>
 		
 		<tr>
-		<td class="name">Orientacion : * </td>
+		<td class="name">Orientaci&oacute;n : * </td>
 		<td class="input">
 		<select name="I_id_orientacion">
 		<option name="unset" value="0"';
@@ -303,7 +332,7 @@ if (isset ($_POST['submit']) && $_POST['submit'] == "Registrar") {
 		</td>
 		</tr>
 
-		<td class="name">Duracion (hrs): * </td>
+		<td class="name">Duraci&oacute;n (hrs): * </td>
 		<td class="input">
 		<select name="I_duracion">
 
@@ -329,7 +358,7 @@ if (isset ($_POST['submit']) && $_POST['submit'] == "Registrar") {
 		</tr>
 		
 		<tr>
-		<td class="name">Requisitos tecnicos de la ponencia:<br><small>(Estos son los requisitos que Ud. necesita para impartirla)</small> </td>
+		<td class="name">Requisitos t&eacute;cnicos de la ponencia:<br><small>(Estos son los requisitos que Ud. necesita para impartirla)</small> </td>
 		<td class="input"><textarea name="S_reqtecnicos" cols=60 rows=5>'.stripslashes($_POST['S_reqtecnicos']).'</textarea></td>
 		</tr>
 		
@@ -338,6 +367,10 @@ if (isset ($_POST['submit']) && $_POST['submit'] == "Registrar") {
 		<td class="input"><textarea name="S_reqasistente" cols=60 rows=5>'.stripslashes($_POST['S_reqasistente']).'</textarea></td>
 		</tr>
 
+		<tr>
+		<td class="name">Enviar archivo: </td>
+		<td class="input"><input size="40" type="file" id="fichero" name="fichero"\>
+		</tr>
 		</table>
 		<br>
 		<center>

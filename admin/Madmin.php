@@ -125,8 +125,8 @@ else { // Todas las validaciones Ok
 		$result = mysql_query($query) or err("No se puede insertar los datos".mysql_errno($result));
  	print '	Administrador modificado.
  		<p>
-		 Si tienes preguntas o no sirve adecuadamente la pagina, por favor contacta al 
-		 <a href="mailto:patux@glo.org.mx">YACOMAS Developer team</a><br><br>';
+		 Si tienes preguntas o no sirve adecuadamente la pagina, por favor contacta a 
+		 <a href="mailto:'.$adminmail.'">Administraci&oacute;n '.$conference_name.'</a><br><br>';
 
  	imprime_valoresOk();
  	imprimeCajaBottom(); 
@@ -167,7 +167,7 @@ else {
 		</tr>
 
 		<tr>
-		<td class="name">Contraseña: * </td>
+		<td class="name">Contrase&ntilde;a: * </td>
 		<td class="input">
 		<input type="password" name="S_passwd" size="15"'; 
 	//	if ($idadmin==1)
@@ -178,7 +178,7 @@ else {
 		</tr>
 
 		<tr>
-		<td class="name">Confirmación de Contraseña: * </td>
+		<td class="name">Confirmaci&oacute;n de Contrase&ntilde;a: * </td>
 		<td class="input">
 		<input type="password" name="S_passwd2" size="15"'; 
 	//	if ($idadmin==1)

@@ -271,8 +271,8 @@ else { // Todas las validaciones Ok
 
  	print '	Evento agregado, ahora ya estara disponible para que los asistentes se inscriban (en caso de ser un taller).
  		<p>
-		 Si tienes preguntas o no sirve adecuadamente la pagina, por favor contacta al 
-		 <a href="mailto:patux@glo.org.mx">YACOMAS Developer team</a><br><br>';
+		 Si tienes preguntas o no sirve adecuadamente la pagina, por favor contacta a 
+		 <a href="mailto:'.$adminmail.'">Administraci&oacute;n '.$conference_name.'</a><br><br>';
 
  	imprime_valoresOk($idponencia,$idponente);
  	imprimeCajaBottom(); 

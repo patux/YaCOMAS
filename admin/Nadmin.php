@@ -35,7 +35,7 @@ function imprime_valoresOk() {
 		</tr>
 		
 		<tr>
-		<td class="name">Correo Electrónico: *</td>
+		<td class="name">Correo Electr&oacute;nico: *</td>
 		<td class="resultado">
 		'.$_POST['S_mail'].'
 		</td>
@@ -134,8 +134,8 @@ else { // Todas las validaciones Ok
 		$result = mysql_query($query) or err("No se puede insertar los datos".mysql_errno($result));
  	print '	Administrador agregado, ahora ya podra utilizar la cuenta.
  		<p>
-		 Si tienes preguntas o no sirve adecuadamente la pagina, por favor contacta al 
-		 <a href="mailto:patux@glo.org.mx">YACOMAS Developer team</a><br><br>';
+		 Si tienes preguntas o no sirve adecuadamente la pagina, por favor contacta a 
+		 <a href="mailto:'.$adminmail.'">Administraci&oacute;n '.$conference_name.'</a><br><br>';
 
  	imprime_valoresOk();
  	imprimeCajaBottom(); 
@@ -164,7 +164,7 @@ else { // Todas las validaciones Ok
 		</tr>
 
 		<tr>
-		<td class="name">Contraseña: * </td>
+		<td class="name">Contrase&ntilde;a: * </td>
 		<td class="input">
 		<input type="password" name="S_passwd" size="15" 
 		value=""></td>
@@ -173,7 +173,7 @@ else { // Todas las validaciones Ok
 		</tr>
 
 		<tr>
-		<td class="name">Confirmación de Contraseña: * </td>
+		<td class="name">Confirmaci&oacute;n de Contrase&ntilde;a: * </td>
 		<td class="input"><input type="password" name="S_passwd2" size="15"
 		value=""></td>
 		<td> 
@@ -199,7 +199,7 @@ else { // Todas las validaciones Ok
 		</tr>
 
 		<tr>
-		<td class="name">Correo Electrónico: *</td>
+		<td class="name">Correo Electr&oacute;nico: *</td>
 		<td class="input"><input type="text" name="S_mail" size="15"
 		value="'.$_POST['S_mail'].'"></td>
 		<td>

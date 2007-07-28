@@ -1,5 +1,5 @@
-<?	include "../includes/lib.php";
-	include "../includes/conf.inc.php";
+<?	include_once "../includes/lib.php";
+	include_once "../includes/conf.inc.php";
 	$link=conectaBD();
 
 $errmsg = "";
@@ -16,13 +16,14 @@ if (isset ($_POST['submit']) && ($_POST['submit'] == "Iniciar")) {
   else {
       $lowlogin = strtolower($_POST['S_login']);
       $userQuery = 'SELECT id,login,passwd FROM asistente WHERE login="'.$lowlogin.'"';
+   
       $userRecords = mysql_query($userQuery) or err("No se pudo checar el login".mysql_errno($userRecords));
 
       $rnum=mysql_num_rows($userRecords);
       if ($rnum == 0) { 
       	$errmsg = '<span class="error">No existe ese usuario.  Trate de nuevo.';
       }
-      else {
+      else {	
       	$p = mysql_fetch_array($userRecords);
       	//Checar el password
        	if ($p['passwd'] != substr(md5($_POST['S_passwd']),0,32)) {
@@ -69,7 +70,7 @@ elseif (isset($_GET['e']) && ($_GET['e'] == "exp")) { print '<span class="err">S
 		</tr>
 
 		<tr>
-		<td class="name">Contraseña: </td>
+		<td class="name">Contrase&ntilde;a: </td>
 		<td class="input">
 		<input type="password" name="S_passwd" size="15" 
 		value=""></td>
@@ -81,7 +82,7 @@ elseif (isset($_GET['e']) && ($_GET['e'] == "exp")) { print '<span class="err">S
 		<input type="button" value="Cancelar" onClick=location.href="../">
 		</center>
 		</form>
-		<span class="note">Su session caducara despues de 1 hora de inactividad</span>
+		<span class="note">Su sesi&oacute;n caducara despu&eacute;s de 1 hora de inactividad</span>
 		</center>
 		';
 imprimeCajaBottom(); 

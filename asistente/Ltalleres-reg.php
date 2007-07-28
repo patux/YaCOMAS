@@ -1,6 +1,6 @@
 <? 
-include "../includes/lib.php";
-include "../includes/conf.inc.php";
+include_once "../includes/lib.php";
+include_once "../includes/conf.inc.php";
 beginSession('A');
 $idasistente=$_SESSION['YACOMASVARS']['asiid'];
  
@@ -35,7 +35,7 @@ while ($Qf_evento = mysql_fetch_array($fechaRecords))
 			<table border=0 align=center width=100%>
 			<tr>
 			<td bgcolor='.$colortitle.'><b>Taller/Tutorial</b>
-			</td></td><td bgcolor='.$colortitle.'><b>Orientacion</b>
+			</td></td><td bgcolor='.$colortitle.'><b>Orientaci&oacute;n</b>
 			</td></td><td bgcolor='.$colortitle.'><b>Hora</b>
 			</td></td><td bgcolor='.$colortitle.'><b>Lugar</b>
 			</td><td bgcolor='.$colortitle.'>&nbsp;</td>

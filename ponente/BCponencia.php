@@ -1,6 +1,6 @@
 <? 
-	include "../includes/lib.php";
-	include "../includes/conf.inc.php";
+	include_once "../includes/lib.php";
+	include_once "../includes/conf.inc.php";
 	beginSession('P');
 	imprimeEncabezado();
 	aplicaEstilo();
@@ -68,7 +68,7 @@ function imprime_valoresOk() {
 
 
 		<tr>
-		<td class="name">Orientacion: * </td>
+		<td class="name">Orientaci&oacute;n: * </td>
 		<td class="resultado">';
 		
 		$query = 'SELECT * FROM orientacion WHERE id="'.$_POST['I_id_orientacion'].'"';
@@ -106,18 +106,35 @@ function imprime_valoresOk() {
 if (isset ($_POST['submit']) && $_POST['submit'] == "Aceptar") {
   # do some basic error checking
   // Si todo esta bien vamos a borrar el registro 
-  	if ($action!=7)
+  	if ($action!=7){
+  		$eliminar=0;
   		$query = "UPDATE propuesta SET id_status='$action' WHERE id="."'".$ponencia."' AND id_ponente='".$idponente."'"; 
-	else    
+  	}else{
+		$eliminar=1;
+		//Extraemos primero la ruta a eliminar 
+		$rutaSQL="SELECT dirFile from propuesta where (id=".$ponencia.")";
+		$rutaarchivo="";
+		if ($resultaux= mysql_query($rutaSQL)){
+			if ($row=mysql_fetch_row($resultaux)){
+				$rutaarchivo=$row[0];
+			}
+		}
 		$query = 'DELETE FROM propuesta WHERE id='.$ponencia.' AND id_ponente="'.$idponente.'"';
+	}
 		// Para debugear querys
 		//print $query;
 		//
 		$result = mysql_query($query) or err("No se puede eliminar los datos".mysql_errno($result));
+		if (($eliminar==1)&& ($rutaarchivo!="")){
+			if (file_exists($rutaarchivo)){
+//echo "Eliminado...";				
+				unlink($rutaarchivo);
+			}
+		}
  	print '	Tu propuesta ha sido '.$verbo2.'
  		<p>
-		 Si tienes preguntas o no sirve adecuadamente la pagina, por favor contacta al 
-		 <a href="mailto:patux@glo.org.mx">YACOMAS Developer team</a><br><br>
+		 Si tienes preguntas o no sirve adecuadamente la pagina, por favor contacta a 
+		 <a href="mailto:'.$adminmail.'">Administraci&oacute;n '.$conference_name.'</a><br><br>
 		 <center>
 		 <input type="button" value="Volver a listado" onClick=location.href="'.$fslpath.$rootpath.'/ponente/ponente.php?opc=2">
 		 </center>';

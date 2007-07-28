@@ -7,19 +7,33 @@ print '
 <tr><td bgcolor=#5F6B8B>
 <table border=0 cellpading=1 cellspacing=1 width=100%>
 <tr><td bgcolor=#FFFFFF>
-<center><font face=arial size=-2>
-Copyright(c) 
-<a href="http://patux.glo.org.mx/">
-Geronimo Orozco
+<center>
+<br>
+<a href="http://yacomas.sourceforge.net/" target="blank" title="Created with YACOMAS"><img title="Created with YACOMAS"
+alt="GNU" src="'.$rootpath.'/images/buttons/yacomas-micro.png" border="0" /></a>
+&nbsp;
+<a href="http://www.php.net/" target="blank" title="Pumped through PHP"><img title="Pumped th/rough PHP"
+alt="PHP" src="'.$rootpath.'/images/buttons/php.png" border="0" /></a>
+&nbsp;
+<a href="http://www.mysql.com/products/mysql/" target="blank" title="MySQL under the hood"><img title="MySQL under the hood"
+alt="MySQL" src="'.$rootpath.'/images/buttons/mysql2.gif" border="0" /></a>
+&nbsp;
+<a href="http://www.gnu.org/" target="blank" title="Fueled by GNU software"><img title="Fueled by GNU software"
+alt="GNU" src="'.$rootpath.'/images/buttons/gnu-powered.png" border="0" /></a>
+<br>
+<font face=arial size=-2>
+';
+if ( !empty ($copyright_author) ) {
+    print "Copyrigth (c) $copyright_year, <a href=\"$link_author\">$copyright_author</a>";
+}
+print '
+<br>
+Powered by 
+<a href="http://www.yacomas.sourceforge.net/">
+Yacomas
 </a>
 <br>
-</font><br><br>
-<a href="http://php.net">
-<img src="'.$rootpath.'/images/php-small-trans-light.gif" border=0></a>
-<a href="http://mysql.com">
-<img src="'.$rootpath.'/images/workswithmysql.jpg" border=0></a>
-<a href="http://www.vim.org">
-<img src="'.$rootpath.'/images/anim_written_in_vi.gif" border=0></a><br>
+</font>
 </center>
 </td></tr>
 </table>

@@ -69,8 +69,8 @@ if (isset($_POST['submit']) && $_POST['submit'] == "Eliminar") {
  	print '	El administrador ha sido eliminado.<br>
 		<p class="yacomas_msg">Las propuestas que ha autorizado el mismo han sido asignadas al administrador principal</p>
  		<p>
-		 Si tienes preguntas o no sirve adecuadamente la pagina, por favor contacta al 
-		 <a href="mailto:patux@glo.org.mx">YACOMAS Developer team</a><br><br>
+		 Si tienes preguntas o no sirve adecuadamente la pagina, por favor contacta a 
+		 <a href="mailto:'.$adminmail.'">Administraci&oacute;n '.$conference_name.'</a><br><br>
 		 <center>
 		 <input type="button" value="Volver a listado" onClick=location.href="'.$fslpath.$rootpath.'/admin/admin.php?opc=1">
 		 </center>';

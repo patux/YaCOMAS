@@ -36,7 +36,7 @@ function imprime_valoresOk() {
 		</tr>
 
 		<tr>
-		<td class="name">Correo Electrónico: *</td>
+		<td class="name">Correo Electr&oacute;nico: *</td>
 		<td class="resultado">
 		'.$_POST['S_mail'].'
 		</td>
@@ -56,7 +56,7 @@ function imprime_valoresOk() {
 		</tr>
 
 		<tr>
-		<td class="name">Organización: </td>
+		<td class="name">Organizaci&oacute;n: </td>
 		<td class="resultado">
 		'.stripslashes($_POST['S_org']).'
 		</td>
@@ -78,7 +78,7 @@ function imprime_valoresOk() {
 		</tr>
 		
 		<tr>
-		<td class="name">Titulo: * </td>
+		<td class="name">T&iacute;tulo: * </td>
 		<td class="resultado">
 		'.stripslashes($_POST['S_titulo']).'
 		</td>
@@ -92,7 +92,7 @@ function imprime_valoresOk() {
 		</tr>
 
 		<tr>
-		<td class="name">Telefono: </td>
+		<td class="name">Tel&eacute;fono: </td>
 		<td class="resultado">
 		'.chunk_split ($_POST['S_telefono'], 2).'
 		</td>
@@ -242,8 +242,8 @@ if (isset ($_POST['submit']) && $_POST['submit'] == "Actualizar") {
 	$result = mysql_query($query) or err("No se puede insertar los datos".mysql_errno($result));
  	print $_POST['S_nombrep'].' Has actualizado tus datos .
  		<p>
-		 Si tienes preguntas o no sirve adecuadamente la pagina, por favor contacta al 
-		 <a href="mailto:patux@glo.org.mx">YACOMAS Developer team</a><br><br>';
+		 Si tienes preguntas o no sirve adecuadamente la pagina, por favor contacta a 
+		 <a href="mailto:'.$adminmail.'">Administraci&oacute;n '.$conference_name.'</a><br><br>';
 
  	imprime_valoresOk();
  	imprimeCajaBottom(); 
@@ -288,7 +288,7 @@ else {
 print'
 		<FORM method="POST" action="'.$_SERVER['REQUEST_URI'].'">
 		<p><i>Campos marcados con un asterisco son obligatorios</i></p>
-   		<p class="yacomas_msg">Si deja los campos de contraseña vacia usara contraseña actual</p>
+   		<p class="yacomas_msg">Si deja los campos de contrase&ntilde;a vacia usara contrase&ntilde;a actual</p>
 		<table width=100%>
 		<tr>
 
@@ -301,7 +301,7 @@ print'
 		</tr>
 
 		<tr>
-		<td class="name">Contraseña: * </td>
+		<td class="name">Contrase&ntilde;a: * </td>
 		<td class="input">
 		<input type="password" name="S_passwd" size="15" 
 		value=""></td>
@@ -310,7 +310,7 @@ print'
 		</tr>
 
 		<tr>
-		<td class="name">Confirmación de Contraseña: * </td>
+		<td class="name">Confirmaci&oacute;n de Contrase&ntilde;a: * </td>
 		<td class="input"><input type="password" name="S_passwd2" size="15"
 		value=""></td>
 		<td> 
@@ -336,7 +336,7 @@ print'
 		</tr>
 
 		<tr>
-		<td class="name">Correo Electrónico: *</td>
+		<td class="name">Correo Electr&oacute;nico: *</td>
 		<td class="input"><input type="text" name="S_mail" size="15"
 		value="'.$_POST['S_mail'].'"></td>
 		<td>
@@ -372,7 +372,7 @@ print'
 		</tr>
 
 		<tr>
-		<td class="name">Organización: </td>
+		<td class="name">Organizaci&oacute;n: </td>
 		<td class="input"><input type="text" name="S_org" size="15"
 		value="'.stripslashes($_POST['S_org']).'"></td>
 		</tr>
@@ -403,7 +403,7 @@ print'
 		</tr>
 
 		<tr>
-		<td class="name">Titulo:  </td>
+		<td class="name">T&iacute;tulo:  </td>
 		<td class="input"><input type="text" name="S_titulo" size="10"
 		value="'.stripslashes($_POST['S_titulo']).'"></td>
 		<td>
@@ -420,7 +420,7 @@ print'
 		
 		
 		<tr>
-		<td class="name">Telefono:  </td>
+		<td class="name">Tel&eacute;fono:  </td>
 		<td class="input"><input type="text" name="S_telefono" size="15"
 		value="'.stripslashes($_POST['S_telefono']).'"></td>
 		<td>
@@ -434,7 +434,7 @@ print'
 		</tr>
 
 		<tr>
-		<td class="name">Estado: * </td>
+		<td class="name">Estado/Provincia: * </td>
 
 		<td class="input">
 		<select name="I_id_estado">
@@ -494,7 +494,7 @@ print'
 
 		</select>
 
-		Año:
+		A&ntilde;o:
 		<select name="I_b_year">
 		<option name="unset" value="0"';
 		if (empty($_POST['I_b_year'])) 

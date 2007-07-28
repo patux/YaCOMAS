@@ -261,8 +261,8 @@ if (isset ($_POST['submit']) && $_POST['submit'] == "Eliminar") {
 		para que los asistentes puedan inscribirse a ella
 		</p>
  		<p>
-		 Si tienes preguntas o no sirve adecuadamente la pagina, por favor contacta al 
-		 <a href="mailto:patux@glo.org.mx">YACOMAS Developer team</a><br><br>
+		 Si tienes preguntas o no sirve adecuadamente la pagina, por favor contacta a 
+		 <a href="mailto:'.$adminmail.'">Administraci&oacute;n '.$conference_name.'</a><br><br>
 		 <center>
 		 <input type="button" value="Volver a listado" onClick=location.href="'.$fslpath.$rootpath.'/admin/admin.php?opc=6">
 		 </center>';

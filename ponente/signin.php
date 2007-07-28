@@ -1,5 +1,5 @@
-<?	include "../includes/lib.php";
-	include "../includes/conf.inc.php";
+<?	include_once "../includes/lib.php";
+	include_once "../includes/conf.inc.php";
 	$link=conectaBD();
 
 $errmsg = "";
@@ -74,7 +74,7 @@ elseif (isset($_GET['e']) && ($_GET['e'] == "exp")) { print '<span class="err">S
 		</tr>
 
 		<tr>
-		<td class="name">Contraseña: </td>
+		<td class="name">Contrase&ntilde;a: </td>
 		<td class="input">
 		<input type="password" name="S_passwd" size="15" 
 		value=""></td>
@@ -86,7 +86,7 @@ elseif (isset($_GET['e']) && ($_GET['e'] == "exp")) { print '<span class="err">S
 		<input type="button" value="Cancelar" onClick=location.href="../">
 		</center>
 		</form>
-		<span class="note">Su session caducara despues de 1 hora de inactividad</span>
+		<span class="note">Su sessi&oacute;n caducara despues de 1 hora de inactividad</span>
 		</center>
 		';
 

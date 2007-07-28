@@ -1,6 +1,6 @@
 <? 
-	include "../includes/lib.php";
-	include "../includes/conf.inc.php";
+	include_once "../includes/lib.php";
+	include_once "../includes/conf.inc.php";
 	beginSession('P');
 	imprimeEncabezado();
 	aplicaEstilo();
@@ -24,7 +24,7 @@ function imprime_valoresOk() {
 		</tr>
 		
 		<tr>
-		<td class="name">Orientacion: * </td>
+		<td class="name">Orientaci&oacute;n: * </td>
 		<td class="resultado">';
 		
 		$query = 'SELECT * FROM orientacion WHERE id="'.$_POST['I_id_orientacion'].'"';
@@ -135,17 +135,19 @@ if (isset($_POST['submit']) && $_POST['submit'] == "Actualizar") {
   	$errmsg .= "<li>Solo los talleres y tutoriales pueden ser de mas de 2 horas";
   }
   // Verifica que la ponencia no este dada de alta
+  $rutaantigua="";
   if (empty($errmsg)) {
 	$userQuery = 'SELECT * FROM propuesta WHERE nombre="'.$_POST['S_nombreponencia'].'" and id_ponente="'.$idponente.'"';
  	$userRecords = mysql_query($userQuery) or err("No se pudo checar las ponencia ".mysql_errno($userRecords));
   	$p = mysql_fetch_array($userRecords);
       	if (mysql_num_rows($userRecords) != 0) {
-		if ($p['id'] != $idponencia) 
-		{ 
-			//print $p['id'].' '.$ponencia;
-  			$p = mysql_fetch_array($userRecords);
-        		$errmsg .= "<li>El nombre que elegiste para la ponencia ya lo has dado de alta";
-		}
+			if ($p['id'] != $idponencia){
+  				$p = mysql_fetch_array($userRecords);
+        			$errmsg .= "<li>El nombre que elegiste para la ponencia ya lo has dado de alta";
+			}else{
+				//print "id: ".$p['id'].' '.$ponencia;
+				$rutaantigua=$p['dirFile'];
+			}
       	}
   }
   // Si hubo error(es) muestra los errores que se acumularon.
@@ -158,6 +160,7 @@ if (isset($_POST['submit']) && $_POST['submit'] == "Actualizar") {
 
 // Funcion comentada para no agregar los datos de prueba, una vez que este en produccion hay que descomentarla
 
+    $fichero=$_FILES["fichero"];
   	$query = "UPDATE  propuesta SET nombre="."'".mysql_escape_string(stripslashes($_POST['S_nombreponencia']))."',
 				    resumen="."'".mysql_escape_string(stripslashes($S_trim_resumen))."',
 				    reqtecnicos="."'".mysql_escape_string(stripslashes($S_trim_reqtecnicos))."',
@@ -165,16 +168,35 @@ if (isset($_POST['submit']) && $_POST['submit'] == "Actualizar") {
 				    id_nivel ="."'".$_POST['I_id_nivel']."',
 				    id_prop_tipo="."'".$_POST['I_id_tipo']."',
 				    duracion="."'".$_POST['I_duracion']."',
-				    id_orientacion="."'".$_POST['I_id_orientacion']."'
-				    WHERE id="."'".$idponencia."' AND id_ponente='".$idponente."'";
+				    id_orientacion="."'".$_POST['I_id_orientacion']."'";
+                    if (isset($fichero['name']) && $fichero['name']!=""){
+                        // The loginname of the user are registered in the SESSION 
+                        $resaux=$_SESSION['YACOMASVARS']['ponlogin'];
+                        $rutafilename=$archivos.$resaux.CARACTERSEPARADOR.$fichero["name"];
+                        $query.= ",nombreFile='".stripslashes($fichero["name"])."'";
+                        $query.= ",tipoFile='".stripslashes($fichero["type"])."'";
+                        $query.= ",dirFile='".stripslashes($rutafilename)."'";
+                    }
+				    $query.=" WHERE id="."'".$idponencia."' AND id_ponente='".$idponente."'";
 		// Para debugear querys
-		//print $query;
+		print $query;
 		//
-		$result = mysql_query($query) or err("No se puede insertar los datos".mysql_errno($result));
- 	print '	Tu propuesta de ponencia ha sido actualizada .
+        $result = mysql_query($query) or err("No se puede insertar los datos".mysql_errno($result));
+		if ((!empty ($fichero['name'])) && (!empty($rutaantigua))){
+			if (file_exists($rutaantigua)){
+                //echo "Eliminado...";				
+                unlink($rutaantigua);
+            }
+        }
+        if (!empty ($fichero['name'])) {
+            if (!(move_uploaded_file($fichero["tmp_name"],$rutafilename))){
+                die("Imposible copiar fichero");
+            };
+        }
+        print '	Tu propuesta de ponencia ha sido actualizada .
  		<p>
-		 Si tienes preguntas o no sirve adecuadamente la pagina, por favor contacta al 
-		 <a href="mailto:patux@glo.org.mx">YACOMAS Developer team</a><br><br>';
+		 Si tienes preguntas o no sirve adecuadamente la pagina, por favor contacta a 
+		 <a href="mailto:'.$adminmail.'">Administraci&oacute;n '.$conference_name.'</a><br><br>';
 
  	imprime_valoresOk();
  	imprimeCajaBottom(); 
@@ -210,7 +232,7 @@ else {
 	//mysql_free_result($p);
 }
 	print'
-		<FORM method="POST" action="'.$_SERVER['REQUEST_URI'].'">
+		<FORM method="POST" action="'.$_SERVER['REQUEST_URI'].'" enctype="multipart/form-data">
 		<p><i>Campos marcados con un asterisco son obligatorios</i></p>
 		<table width=100%>
 		<tr>
@@ -336,7 +358,10 @@ else {
 		<td class="name">Prerequisitos para el asistente: *</td>
 		<td class="input"><textarea name="S_reqasistente" cols=60 rows=5>'.stripslashes($_POST['S_reqasistente']).'</textarea></td>
 		</tr>
-		
+		<tr>
+		<td class="name">Cambiar archivo: </td>
+		<td class="input"><input size="40" type="file" id="fichero" name="fichero"\>
+		</tr>		
 		<br>
 		</table>
 		<center>

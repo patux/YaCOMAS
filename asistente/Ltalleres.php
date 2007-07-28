@@ -1,6 +1,6 @@
 <? 
-include "../includes/lib.php";
-include "../includes/conf.inc.php";
+include_once "../includes/lib.php";
+include_once "../includes/conf.inc.php";
 beginSession('A');
 $idasistente=$_SESSION['YACOMASVARS']['asiid'];
 
@@ -19,7 +19,7 @@ imprimeCajaTop("100","Listado/Inscripcion a talleres y tutoriales".$msg);
 
 
 // Checamos si el registro a nuevos talleres esta abierto
-$configQuery= 'SELECT status FROM config WHERE id=4';
+$configQuery= 'SELECT status FROM config WHERE id='.LTALLERESREG;
 $resultCQ=mysql_query($configQuery);
 $CQfila=mysql_fetch_array($resultCQ);
 $stat_array=$CQfila["status"];
@@ -28,7 +28,7 @@ if ($stat_array==0)
 	{
 		retorno();
 		retorno();
-		print '<p class="yacomas_error">La inscripcion a talleres se encuentra cerrada.. </p>';
+		print '<p class="yacomas_error">La inscripci&oacute;n a talleres se encuentra cerrada.. </p>';
 		retorno();
 		retorno();
 		print ' <center>
@@ -221,14 +221,13 @@ $TUinscritos=$tot_TU_reg["count(*)"];
 // Ordenadas por dia 
 $inscrip_TA_libres=$max_inscripcionTA-$TAinscritos;
 $inscrip_TU_libres=$max_inscripcionTU-$TUinscritos;
-$msg0='-- Recuerda cumplir los prerequisitos para ingresar a talleres y tutoriales -- <br>Para ver informacion sobre algun tema o ponente haz clik en el el nombre de taller o tutorial que sea de tu interes ';
+$msg0='-- Recuerda cumplir los prerequisitos para ingresar a talleres y tutoriales -- <br>Para ver informaci&oacute;n sobre algun tema o ponente haz clik en el el nombre de taller o tutorial que sea de tu interes ';
 $msg1='Actualmente estas inscrito en '.$TAinscritos.' talleres y '.$TUinscritos.' tutoriales';
 retorno();
 $msg1.='<br>Puedes inscribirte a '.$inscrip_TA_libres.' talleres y '.$inscrip_TU_libres.' tutoriales mas';
-$msg2='El numero a la derecha del taller indica los lugares diponibles.<br>Si este numero es 0 indica cupo lleno, si este numero es negativo indica "sobrecupo".<br>En Ambos casos el checkbox para permitir la inscripcion al mismo no aparecera';
-$msg3='No puedo inscribirme a ningun taller que hago ?<br>Ve a la seccion de <a href="'.$fslpath.'/pufs.php">preguntas frecuentes</a>';
+$msg2='El n&uacute;mero a la derecha del taller indica los lugares diponibles.<br>Si este n&uacute;mero es 0 indica cupo lleno, si este n&uacute;mero es negativo indica "sobrecupo".<br>En Ambos casos el checkbox para permitir la inscripci&oacute;n al mismo no aparecera';
 print '<p class="yacomas_msg">'.$msg0.'<br></p>';
-print '<p class="yacomas_error">'.$msg2.'<br><br>'.$msg3.'</p>';
+print '<p class="yacomas_error">'.$msg2.'<br><br></p>';
 retorno();
 print '<FORM method="POST" action="'.$_SERVER['REQUEST_URI'].'">';
 // Variable para los indizar los talleres
@@ -246,7 +245,7 @@ while ($Qf_evento = mysql_fetch_array($fechaRecords))
 			<table border=0 align=center width=100%>
 			<tr>
 			<td bgcolor='.$colortitle.'><b>Taller/Tutorial</b>
-			</td></td><td bgcolor='.$colortitle.'><b>Orientacion</b>
+			</td></td><td bgcolor='.$colortitle.'><b>Orientaci&oacute;n</b>
 			</td></td><td bgcolor='.$colortitle.'><b>Hora</b>
 			</td></td><td bgcolor='.$colortitle.'><b>Lugar</b>
 			</td><td bgcolor='.$colortitle.'><b>Disp</b></td>

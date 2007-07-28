@@ -1,6 +1,6 @@
 <? 
-include "../includes/lib.php";
-include "../includes/conf.inc.php";
+include_once "../includes/lib.php";
+include_once "../includes/conf.inc.php";
 beginSession('A');
 imprimeEncabezado();
 aplicaEstilo();
@@ -16,7 +16,7 @@ $regresa='';
 
 $link=conectaBD();
 $userQuery = 'SELECT nombrep, apellidos, resume FROM ponente WHERE id="'.$idponente.'"';
-$userRecords = mysql_query($userQuery) or err("No se pudo checar el ponente".mysql_errno($userRecords));
+$userRecords = mysql_query($userQuery) or err("No se pudo comprobar el ponente".mysql_errno($userRecords));
 $p = mysql_fetch_array($userRecords);
 
 $msg='Datos de ponente <br><small>-- '.$p['nombrep'].' '.$p['apellidos'].' --</small><hr>';

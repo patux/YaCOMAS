@@ -1,5 +1,5 @@
 <?
-include "../includes/lib.php";
+include_once "../includes/lib.php";
 
 beginSession('A');
 session_unset();

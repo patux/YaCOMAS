@@ -1,11 +1,12 @@
 <?
+include_once "../includes/conf.inc.php";
 		switch ($_GET['opc']) 
 		{
-			case 1:include "Nponencia.php";
+			case NPONENCIA:include "Nponencia.php";
 				break;
-			case 2:include "Lponencias.php";
+			case PROPUESTAENV:include "Lponencias.php";
 				break;
-			case 3: include "Mponente.php";
+			case MPONENTE: include "Mponente.php";
 				break;
 		}	
 ?>

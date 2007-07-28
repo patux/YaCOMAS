@@ -77,8 +77,8 @@ else { // Todas las validaciones Ok
 		$result = mysql_query($query) or err("No se puede insertar los datos".mysql_errno($result));
  	print '	Fecha para evento agregado, ahora ya podra asignarlo a cualquier propuesta aceptada.
  		<p>
-		 Si tienes preguntas o no sirve adecuadamente la pagina, por favor contacta al 
-		 <a href="mailto:patux@glo.org.mx">YACOMAS Developer team</a><br><br>';
+		 Si tienes preguntas o no sirve adecuadamente la pagina, por favor contacta a 
+		 <a href="mailto:'.$adminmail.'">Administraci&oacute;n '.$conference_name.'</a><br><br>';
 
  	imprime_valoresOk();
  	imprimeCajaBottom(); 
@@ -135,7 +135,7 @@ else { // Todas las validaciones Ok
 
 		</select>
 
-		Año:
+		A&ntilde;o:
 		<select name="I_e_year">
 		<option name="unset" value="0"';
 		if (empty($_POST['I_e_year'])) 

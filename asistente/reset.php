@@ -1,12 +1,12 @@
 <?
-	include "../includes/lib.php";
-	include "../includes/conf.inc.php";
+	include_once "../includes/lib.php";
+	include_once "../includes/conf.inc.php";
 /*	Debes tener PEAR instalado http://pear.php.net
 	y el modulo basico de Mail
 	http://pear.php.net/package/Mail/download
 */
 
-	include "Mail.php";
+	include_once "Mail.php";
 
 	$link=conectaBD();
 	imprimeEncabezado();
@@ -69,9 +69,9 @@ if (isset ($_POST['submit']) && $_POST['submit'] == "Reset") {
 	/////////////////////
 	$recipients = $mail_user;
 
-	$headers["From"]    = "staff@fsl.glo.org.mx";
+	$headers["From"]    = $general_mail;
 	$headers["To"]      = $mail_user;
-	$headers["Subject"] = "YACOMAS Cambio de contrasenia asistente";
+	$headers["Subject"] = "$conference_name Cambio de contrasenia asistente";
 	$message  = "";
 	$message .= "Has solicitado cambio de contrasenia para el usuario: $user\n";
 	$message .= "La nuevo contrasenia es: $npasswd\n\n";
@@ -129,7 +129,7 @@ retorno();
 		</tr>
 
 		<tr>
-		<td class="name">Correo Electrónico: *</td>
+		<td class="name">Correo Electrï¿½nico: *</td>
 		<td class="input"><input type="text" name="S_mail" size="15"
 		value="'.$_POST['S_mail'].'"></td>
 		<td>

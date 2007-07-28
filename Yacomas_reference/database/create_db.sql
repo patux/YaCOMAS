@@ -158,25 +158,25 @@ INSERT INTO estado VALUES (11,'Guanajuato');
 INSERT INTO estado VALUES (12,'Guerrero');
 INSERT INTO estado VALUES (13,'Hidalgo');
 INSERT INTO estado VALUES (14,'Jalisco');
-INSERT INTO estado VALUES (15,'México');
-INSERT INTO estado VALUES (16,'Michoacán');
+INSERT INTO estado VALUES (15,'M&eacute;xico');
+INSERT INTO estado VALUES (16,'Michoac&aacute;n');
 INSERT INTO estado VALUES (17,'Morelos');
 INSERT INTO estado VALUES (18,'Nayarit');
-INSERT INTO estado VALUES (19,'Nuevo León');
+INSERT INTO estado VALUES (19,'Nuevo Le&oacute;n');
 INSERT INTO estado VALUES (20,'Oaxaca');
 INSERT INTO estado VALUES (21,'Puebla');
-INSERT INTO estado VALUES (22,'Querétaro');
+INSERT INTO estado VALUES (22,'Quer&eacute;taro');
 INSERT INTO estado VALUES (23,'Quintana Roo');
-INSERT INTO estado VALUES (24,'San Luis Potosí');
+INSERT INTO estado VALUES (24,'San Luis Potos&iacute;');
 INSERT INTO estado VALUES (25,'Sinaloa');
 INSERT INTO estado VALUES (26,'Sonora');
 INSERT INTO estado VALUES (27,'Tabasco');
 INSERT INTO estado VALUES (28,'Tamaulipas');
 INSERT INTO estado VALUES (29,'Tlaxcala');
 INSERT INTO estado VALUES (30,'Veracruz');
-INSERT INTO estado VALUES (31,'Yucatán');
+INSERT INTO estado VALUES (31,'Yucat&aacute;n');
 INSERT INTO estado VALUES (32,'Zacatecas');
-INSERT INTO estado VALUES (33,'Fuera de México');
+INSERT INTO estado VALUES (33,'Fuera de M&eacute;xico');
 
 --
 -- Table structure for table 'estudios'
@@ -193,9 +193,9 @@ CREATE TABLE estudios (
 --
 
 INSERT INTO estudios VALUES (1,'Ninguno');
-INSERT INTO estudios VALUES (2,'Técnico');
+INSERT INTO estudios VALUES (2,'T&eacute;cnico');
 INSERT INTO estudios VALUES (3,'Licenciatura');
-INSERT INTO estudios VALUES (4,'Maestría');
+INSERT INTO estudios VALUES (4,'Maestr&iacute;a');
 INSERT INTO estudios VALUES (5,'Doctorado');
 INSERT INTO estudios VALUES (6,'Otro');
 
@@ -390,6 +390,9 @@ CREATE TABLE propuesta (
   id_status int(10) unsigned NOT NULL default '1',
   reg_time datetime NOT NULL default '0000-00-00 00:00:00',
   act_time timestamp(14) NOT NULL,
+  nombreFile VARCHAR(100),
+  tipoFile VARCHAR(25),
+  dirFile VARCHAR(255),
   PRIMARY KEY  (id,id_ponente,id_administrador,id_orientacion,id_status,id_prop_tipo)
 ) TYPE=MyISAM;
 

@@ -1,6 +1,6 @@
 <? 
-	include "../includes/lib.php";
-	include "../includes/conf.inc.php";
+	include_once "../includes/lib.php";
+	include_once "../includes/conf.inc.php";
 	beginSession('A');
 	imprimeEncabezado();
 	aplicaEstilo();
@@ -85,7 +85,7 @@
 
 
 		<tr>
-		<td class="name">Orientacion: * </td>
+		<td class="name">Orientaci&oacute;n: * </td>
 		<td class="resultado">';
 		
 		$query = 'SELECT * FROM orientacion WHERE id="'.$registro['I_id_orientacion'].'"';
@@ -100,7 +100,7 @@
 		</tr>
 		
 		<tr>
-		<td class="name">Duracion: * </td>
+		<td class="name">Duraci&oacute;n: * </td>
 		<td class="resultado">';
 		printf ("%02d Hrs",$registro['I_duracion']);
 	print '	

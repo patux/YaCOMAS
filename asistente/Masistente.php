@@ -1,6 +1,6 @@
 <? 
-	include "../includes/lib.php";
-	include "../includes/conf.inc.php";
+	include_once "../includes/lib.php";
+	include_once "../includes/conf.inc.php";
 	beginSession('A');
 	$idasistente=$_SESSION['YACOMASVARS']['asiid'];
 	imprimeEncabezado();
@@ -13,7 +13,7 @@ function imprime_valoresOk() {
 	include "../includes/conf.inc.php";
 
     print '
-     		<table width=100%>
+     	<table width=100%>
 		<tr>
 		<td class="name">Nombre de Usuario: * </td>
 		<td class="resultado">
@@ -36,7 +36,7 @@ function imprime_valoresOk() {
 		</tr>
 
 		<tr>
-		<td class="name">Correo Electrónico: *</td>
+		<td class="name">Correo Electr&oacute;nico: *</td>
 		<td class="resultado">
 		'.$_POST['S_mail'].'
 		</td>
@@ -56,7 +56,7 @@ function imprime_valoresOk() {
 		</tr>
 
 		<tr>
-		<td class="name">Organización: </td>
+		<td class="name">Organizaci&oacute;n: </td>
 		<td class="resultado">
 		'.stripslashes($_POST['S_org']).'
 		</td>
@@ -140,7 +140,7 @@ if (isset ($_POST['submit']) && $_POST['submit'] == "Actualizar") {
 	$errmsg .= "<li>Verifica que los datos obligatorios los hayas introducido correctamente </li>";
   }
   if (!preg_match("/.+\@.+\..+/",$_POST['S_mail'])) {     		
-  	$errmsg .= "<li>El correo electronico tecleado no es valido";
+  	$errmsg .= "<li>El correo electronico tecleado no es v&aacute;lido";
   }
   if (!empty($_POST['S_passwd'])) 
   	{
@@ -223,8 +223,8 @@ if (isset ($_POST['submit']) && $_POST['submit'] == "Actualizar") {
 	$result = mysql_query($query) or err("No se puede actualizar los datos".mysql_errno($result));
  	print $_POST['S_nombrep'].' Has actualizado tus datos .
  		<p>
-		 Si tienes preguntas o no sirve adecuadamente la pagina, por favor contacta al 
-		 <a href="mailto:patux@glo.org.mx">YACOMAS Developer team</a><br><br>';
+		 Si tienes preguntas o no sirve adecuadamente la p&aacute;gina, por favor contacta a 
+		 <a href="mailto:'.$adminmail.'">Administraci&oacute;n '.$conference_name.'</a><br><br>';
 
  	imprime_valoresOk();
  	imprimeCajaBottom(); 
@@ -265,7 +265,7 @@ else {
 print'
 		<FORM method="POST" action="'.$_SERVER['REQUEST_URI'].'">
 		<p><i>Campos marcados con un asterisco son obligatorios</i></p>
-   		<p class="yacomas_msg">Si deja los campos de contraseña vacia usara contraseña actual</p>
+   		<p class="yacomas_msg">Si deja los campos de contrase&ntilde;a vac&iacute;a usara contrase&ntilde;a actual</p>
 		<table width=100%>
 		<tr>
 
@@ -278,7 +278,7 @@ print'
 		</tr>
 
 		<tr>
-		<td class="name">Contraseña: * </td>
+		<td class="name">Contrase&ntilde;a: * </td>
 		<td class="input">
 		<input type="password" name="S_passwd" size="15" 
 		value=""></td>
@@ -287,7 +287,7 @@ print'
 		</tr>
 
 		<tr>
-		<td class="name">Confirmación de Contraseña: * </td>
+		<td class="name">Confirmaci&oacute;n de Contrase&ntilde;a: * </td>
 		<td class="input"><input type="password" name="S_passwd2" size="15"
 		value=""></td>
 		<td> 
@@ -313,7 +313,7 @@ print'
 		</tr>
 
 		<tr>
-		<td class="name">Correo Electrónico: *</td>
+		<td class="name">Correo Electr&oacute;nico: *</td>
 		<td class="input"><input type="text" name="S_mail" size="15"
 		value="'.$_POST['S_mail'].'"></td>
 		<td>
@@ -349,7 +349,7 @@ print'
 		</tr>
 
 		<tr>
-		<td class="name">Organización: </td>
+		<td class="name">Organizaci&oacute;n: </td>
 		<td class="input"><input type="text" name="S_org" size="15"
 		value="'.stripslashes($_POST['S_org']).'"></td>
 		</tr>
@@ -471,7 +471,7 @@ print'
 
 		</select>
 
-		Año:
+		A&ntilde;o:
 		<select name="I_b_year">
 		<option name="unset" value="0"';
 		if (empty($_POST['I_b_year'])) 

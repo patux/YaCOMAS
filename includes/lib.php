@@ -1,5 +1,5 @@
 <?
-include "conf.inc.php";
+include_once "conf.inc.php";
 function send_mail($myname, $myemail, $contactname, $contactemail, $subject, $message, $bcc) {
 	$headers .= "MIME-Version: 1.0\n";
 	$headers .= "Content-type: text/html; charset=iso-8859-1\n";
@@ -50,18 +50,18 @@ $salida = strftime($formato,  $fecha);
 	    // reemplazo di'as
 	    $salida = ereg_replace("Monday","Lunes",$salida);
 	    $salida = ereg_replace("Tuesday","Martes",$salida);
-	    $salida = ereg_replace("Wednesday","Miercoles",$salida);
+	    $salida = ereg_replace("Wednesday","Mi&eacute;rcoles",$salida);
 	    $salida = ereg_replace("Thursday","Jueves",$salida);
 	    $salida = ereg_replace("Friday","Viernes",$salida);
-	    $salida = ereg_replace("Saturday","Sábado",$salida);
+	    $salida = ereg_replace("Saturday","S&aacute;bado",$salida);
 	    $salida = ereg_replace("Sunday","Domingo",$salida);
 	    // reemplazo dias cortos
 	    $salida = ereg_replace("Mon","Lun",$salida);
 	    $salida = ereg_replace("Tue","Mar",$salida);
-	    $salida = ereg_replace("Wed","Mié",$salida);
+	    $salida = ereg_replace("Wed","Mie",$salida);
 	    $salida = ereg_replace("Thu","Jue",$salida);
 	    $salida = ereg_replace("Fri","Vie",$salida);
-	    $salida = ereg_replace("Sat","Sáb",$salida);
+	    $salida = ereg_replace("Sat","Sab",$salida);
 	    $salida = ereg_replace("Sun","Dom",$salida);
 	    // reemplazo cuando es 1 de algun mes
 	    $salida = ereg_replace(" 01 de "," 1&deg; de ",$salida);
@@ -81,10 +81,12 @@ function showError($errmsg) {
 function imprimeEncabezado()
 {
 global $confName;
-require "header.inc.php";
+require_once "header.inc.php";
 retorno();
-alinearIzq("center"); 
-print '<img src="'.$rootpath.'/images/yacomas.png","287","91" border="0">';
+alinearIzq("center");
+if ( ! empty ($conference_logo) ) {
+    print '<img src="'.$rootpath.'/images/'.$conference_logo.'" border="0">';
+}
 alinearFin();
 retorno();
 print ("<table border=0 cellpading=0 cellspacing=5 width=100% align=center>");
@@ -95,13 +97,15 @@ retorno();
 //--------------------------------
 function imprimeEncabezadoR()
 {
-require "header.inc.php";
+require_once "header.inc.php";
 retorno();
 alinearIzq("center"); 
 print '<table border=0 width=100%>';
 print '<tr><td width=10%>&nbsp;</td>';
 print '<td width=80% align="center">';
-muestraImagen("$rootpath/images/yacomas.png","287","91");
+if ( ! empty ($conference_logo) ) {
+    print '<img src="'.$rootpath.'/images/'.$conference_logo.'" border="0">';
+}
 print '<td width=10% valign="bottom">';
 print '</tr></table>';
 alinearFin();
@@ -111,11 +115,6 @@ print ("<td valign=top>");
 retorno();
 }
 //--------------------------------
-function muestraImagen($path,$ancho,$alto)
-{
- print ("<img src=$path width=$ancho heigth=$alto>");
-//--------------------------------
-}
 //--------------------------------
 function alinearIzq($pos)
 {
@@ -126,13 +125,6 @@ function alinearIzq($pos)
 function alinearFin()
 {
  print ("</div>");
-}
-//--------------------------------
-
-//--------------------------------
-function imprimeTitulo($titulo)
-{
-  print ("<center><font size=+3 color=#000000 face=arial>$titulo</font></center>");
 }
 //--------------------------------
 
@@ -218,7 +210,7 @@ print("</table>");
 function conectaBD()
 {
 include "db.inc.php";
-  if(!($link=mysql_pconnect($dbhost,$dbuser,$dbpwd)))
+   if(!($link=mysql_pconnect($dbhost,$dbuser,$dbpwd)))
    {
     print("No se puede hacer la conexion a la Base de Datos");
     exit();
@@ -282,6 +274,46 @@ function beginSession($tipo) {
 			exit;
 		}
 	}
-	$_SESSION['YACOMASVARS'][$last] = time();
 }
+function verificaForm($id_tipo_usuario, $tabla){
+		   // Verificar si todos los campos obligatorios no estan vacios
+		  $errmsg="";
+		  if (empty($_POST['S_login']) || empty($_POST['S_nombrep']) || empty($_POST['S_apellidos']) ||
+		    	empty($_POST['C_sexo']) || empty($_POST['I_id_estudios']) || empty($_POST[$id_tipo_usuario]) || 
+			empty($_POST['I_id_estado'])) { 
+			$errmsg .= "<li>Verifica que los datos obligatorios los hayas introducido correctamente </li>";
+		  }
+		  if (!preg_match("/.+\@.+\..+/",$_POST['S_mail'])) {     		
+		  	$errmsg .= "<li>El correo electronico tecleado no es valido";
+		  }
+		  // Verifica que el login sea de al menos 4 caracteres
+		  if (!preg_match("/^\w{4,15}$/",$_POST['S_login'])) {
+		        $errmsg .= "<li>El login que elijas debe tener entre 4 y 15 caracteres";
+		  }
+		  // Verifica que el password sea de al menos 6 caracteres
+		  if (!preg_match("/^.{6,15}$/",$_POST['S_passwd'])) {
+		        $errmsg .= "<li>El password debe tener entre 6 y 15 caracteres";
+		  }
+		  // Verifica que el password usado no sea igual al login introducido por seguridad
+		  elseif ($_POST['S_passwd'] == $_POST['S_login']) {
+		        $errmsg .= "<li>El password no debe ser igual a tu login";
+		  }
+		  // Verifica que los password esten escritos correctamente para verificar que
+		  // la persona introducjo correcamente el password que eligio.
+		  if ($_POST['S_passwd'] != $_POST['S_passwd2']) {
+		        $errmsg .= "<li>Los passwords no concuerdan";
+		  }
+		  // Si no hay errores verifica que el login no este ya dado de alta en la tabla
+		  if (empty($errmsg)) {
+		      $lowlogin = strtolower($_POST['S_login']);
+		      $userQuery = 'SELECT * FROM '.$tabla.' WHERE login="'.$lowlogin.'"';
+		      $userRecords = mysql_query($userQuery) or err("No se pudo checar el login".mysql_errno($userRecords));
+		      if (mysql_num_rows($userRecords) != 0) {
+		        $errmsg .= "<li>El usuario que elegiste ya ha sido tomado; por favor elige otro";
+		      }
+		  }
+		  return $errmsg;
+		  // Si hubo error(es) muestra los errores que se acumularon.
+}	
+	$_SESSION['YACOMASVARS'][$last] = time();
 ?>
