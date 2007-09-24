@@ -34,7 +34,7 @@ Powered by
 Yacomas
 </a>
 -
-<a href="mailto:patux@patux.net">Report a bug</a>
+<a href="http://sourceforge.net/tracker/?func=add&group_id=129703&atid=715607">Report a bug</a>
 <br>
 </font>
 </center>
