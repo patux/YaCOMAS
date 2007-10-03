@@ -14,12 +14,11 @@ print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['asilogin'].'&
 imprimeCajaTop("100",$msg);
 print '<hr>';
 retorno();
-print '<font size=+1 color=#000000 face=arial>
+print '
+<font size=+1 color=#000000 face=arial>
 <a href="asistente.php?opc='.MASISTENTE.'">Modificar mis datos</a> <br><br>
 <a href="asistente.php?opc='.LEVENTOS.'">Listar eventos programados</a> <br><br>
-';
-//<a href="asistente.php?opc='.LTALLERES.'">Listar/Inscribirme a talleres y tutoriales</a> <br><br>
-print ' 
+<a href="asistente.php?opc='.LTALLERES.'">Listar/Inscribirme a talleres y tutoriales</a> <br><br>
 <a href="asistente.php?opc='.LTALLERESREG.'">Listar/Darme de baja de talleres y tutoriales registrados</a> <br><br>
 <a href="asistente.php?opc='.HOJAREGISTRO.'">Imprimir hoja de registro</a><br><br>
 ';
