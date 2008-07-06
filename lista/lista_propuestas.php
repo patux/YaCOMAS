@@ -1,4 +1,4 @@
-<? 
+<?php  
 	include "../includes/lib.php";
 	include "../includes/conf.inc.php";
 	imprimeEncabezado();
@@ -6,7 +6,7 @@
     #imprimeCajaTop("100","Lista de propuestas enviadas");
 ?>
     <center><font face='Arial, Helvetica, sans-serif' size=6>Lista de propuestas enviadas</font></center>
-<?    
+<?php     
 	print '<hr>';
 
 $link=conectaBD();
@@ -94,4 +94,4 @@ print '
 <center><input type="button" value="Regresar" onClick=location.href="../"></center>
 
 
-<?	imprimePie(); ?> 
+<?php 	imprimePie(); ?> 

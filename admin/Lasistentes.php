@@ -1,4 +1,4 @@
-<? 
+<?php  
 include "../includes/lib.php";
 include "../includes/conf.inc.php";
 beginSession('R');
@@ -46,7 +46,7 @@ retorno();
 ?>
 	<!-- Flechas de página -->
 	<center>
-	<?   
+	<?php    
 	print '<INPUT type="hidden" name="desde" value="0">';
 	if( $I_totAsistentes > REG_POR_PAGINA ){
 		if( $desde > 0 ){   ?>
@@ -54,26 +54,26 @@ retorno();
 			onClick="document.forms[0].elements['desde'].value=0; marcarFrm.submit(); return false;"  
 			onmouseout="window.status='';return true;"><img src="../images/first.gif" border=0></a>
 			<a href="" onmouseover="window.status='P&aacute;gina anterior'; return true;"
-			onClick="document.forms[0].elements['desde'].value=<? print $desde - REG_POR_PAGINA; ?>;
+			onClick="document.forms[0].elements['desde'].value=<?php  print $desde - REG_POR_PAGINA; ?>;
 			marcarFrm.submit(); return false;" onmouseout="window.status=''; return true;"><img src="../images/prev.gif" border=0></a>
-		<?       }  ?>
-<?        	if( ($I_totAsistentes-$desde) > REG_POR_PAGINA ) {   ?>
+		<?php        }  ?>
+<?php         	if( ($I_totAsistentes-$desde) > REG_POR_PAGINA ) {   ?>
 			<a href="" onmouseover="window.status='Siguiente p&aacute;gina'; return true;"
-			onClick="document.forms[0].elements['desde'].value=<? print $desde + REG_POR_PAGINA; ?>; 
+			onClick="document.forms[0].elements['desde'].value=<?php  print $desde + REG_POR_PAGINA; ?>; 
 			marcarFrm.submit(); return false;" onmouseout="window.status=''; return true;"><img src="../images/next.gif" border=0></a>
 			<a href="" onmouseover="window.status='&Uacute;ltima p&aacute;gina'; return true;"
-			onClick="document.forms[0].elements['desde'].value=<? 
+			onClick="document.forms[0].elements['desde'].value=<?php  
 							if ($I_totAsistentes > REG_POR_PAGINA)
 								echo floor(($I_totAsistentes/REG_POR_PAGINA)) * 100; 
 							else
 								echo 0;
 							?>; marcarFrm.submit(); 
 			return false;"><img src="../images/last.gif" onmouseout="window.status=''; return true;" border=0></a>
-		<?      }   
+		<?php       }   
 	   }  
 	?>
 	</center>
-	<?
+	<?php 
 print'
 	<table border=0 align=center width=100%>
 	<tr>
@@ -114,7 +114,7 @@ print'
 	?>
 	<!-- Flechas de página -->
 	<center>
-	<?   
+	<?php    
 	print '<FORM name="marcarFrm" action="'.$_SERVER['REQUEST_URI'].'" method="POST">';
 	print '<INPUT type="hidden" name="desde" value="0">';
 	if( $I_totAsistentes > REG_POR_PAGINA ){
@@ -123,27 +123,27 @@ print'
 			onClick="document.forms[0].elements['desde'].value=0; marcarFrm.submit(); return false;"  
 			onmouseout="window.status='';return true;"><img src="../images/first.gif" border=0></a>
 			<a href="" onmouseover="window.status='P&aacute;gina anterior'; return true;"
-			onClick="document.forms[0].elements['desde'].value=<? print $desde - REG_POR_PAGINA; ?>;
+			onClick="document.forms[0].elements['desde'].value=<?php  print $desde - REG_POR_PAGINA; ?>;
 			marcarFrm.submit(); return false;" onmouseout="window.status=''; return true;"><img src="../images/prev.gif" border=0></a>
-		<?       }  ?>
-<?        	if( ($I_totAsistentes-$desde) > REG_POR_PAGINA ) {   ?>
+		<?php        }  ?>
+<?php         	if( ($I_totAsistentes-$desde) > REG_POR_PAGINA ) {   ?>
 			<a href="" onmouseover="window.status='Siguiente p&aacute;gina'; return true;"
-			onClick="document.forms[0].elements['desde'].value=<? print $desde + REG_POR_PAGINA; ?>; 
+			onClick="document.forms[0].elements['desde'].value=<?php  print $desde + REG_POR_PAGINA; ?>; 
 			marcarFrm.submit(); return false;" onmouseout="window.status=''; return true;"><img src="../images/next.gif" border=0></a>
 			<a href="" onmouseover="window.status='&Uacute;ltima p&aacute;gina'; return true;"
-			onClick="document.forms[0].elements['desde'].value=<? 
+			onClick="document.forms[0].elements['desde'].value=<?php  
 							if ($I_totAsistentes > REG_POR_PAGINA)
 								echo floor(($I_totAsistentes/REG_POR_PAGINA)) * 100; 
 							else
 								echo 0;
 							?>; marcarFrm.submit(); 
 			return false;"><img src="../images/last.gif" onmouseout="window.status=''; return true;" border=0></a>
-		<?      }   
+		<?php       }   
 	   }  
 	?>
 	</form>
 	</center>
-	<?
+	<?php 
 	print '<center>
 	<input type="button" value="Volver al menu" onClick=location.href="'.$fslpath.$rootpath.'/admin/menuadmin.php#ponencias">
 	</center>';

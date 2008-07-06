@@ -1,13 +1,13 @@
 -- We create the database and the user that is gonna be permissions to use it
 
-DROP DATABASE dbname; 
--- CREATE DATABASE fsldb;
+-- DROP DATABASE yacomas_db; 
+CREATE DATABASE yacomas_db;
 GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,DROP
-ON fsldb.* TO 'dbuser'@'your.db.host' IDENTIFIED BY 'dbpwd';
+ON yacomas_db.* TO 'yacomas_user'@'yacomas_dbhost' IDENTIFIED BY 'yacomas_pwd';
 
 -- We start to create all the tables
 
-USE dbname;
+USE yacomas_db;
 
 CREATE TABLE administrador (
   id int(10) unsigned NOT NULL auto_increment,

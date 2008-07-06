@@ -45,7 +45,7 @@ Conferencias Magistrales
 Las conferencias magistrales ser&aacute;n impartidas por profesionales de la tecnolog&aacute;a de la informaci&oacute;n de alto nivel, lideres de opini&oacute;n o desarrolladores destacados de la comunidad del software libre.
 
 En las conferencias magistrales se expondr&aacute;n los temas o t&oacute;picos que vayan de acuerdo al hilo central del evento.
-<?
+<?php 
 retorno();
 retorno();
 imprimeCajaBottom();

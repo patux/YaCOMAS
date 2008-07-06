@@ -1,4 +1,4 @@
-<?
+<?php 
 		switch ($_GET['opc']) 
 		{
 			case 'C': include "config.php";

@@ -1,4 +1,4 @@
-<?
+<?php 
 global $rootpath,$bgcolor,$conference_name,$general_mail,$copyright_author,$copyright_year,$link_author,$conference_logo, $colorBorder;
 // rootpath es usada para decirle a yacomas 
 // cual es el directorio raiz de el sitio web
@@ -30,9 +30,9 @@ $copyright_year="Your copyright year";
 // Link for the admin of yacomas and the conference that uses it
 $link_author="link author";
 // Link for the conference 
-$conference_link="conference url";
+$conference_link="http://yourhost/yacomas";
 // Image to show at the top-center for yacomas that image should exist into yacomas/images/ directory
-$conference_logo="conferencelogo.png";
+$conference_logo="yacomas.png";
 // Workshops max limit to be used 
 $limite=100; // 
 // Start and End time for the events 24hrs format 

@@ -1,4 +1,4 @@
-<?	include_once "../includes/lib.php";
+<?php 	include_once "../includes/lib.php";
 	include_once "../includes/conf.inc.php";
 	$link=conectaBD();
 

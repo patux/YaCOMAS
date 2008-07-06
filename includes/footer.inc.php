@@ -1,4 +1,4 @@
-<?
+<?php 
 include "conf.inc.php";
 
 print '

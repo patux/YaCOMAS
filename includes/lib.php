@@ -1,4 +1,4 @@
-<?
+<?php 
 include_once "conf.inc.php";
 function send_mail($myname, $myemail, $contactname, $contactemail, $subject, $message, $bcc) {
 	$headers .= "MIME-Version: 1.0\n";

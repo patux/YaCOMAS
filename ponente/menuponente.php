@@ -1,4 +1,4 @@
-<? 
+<?php  
 include_once "../includes/lib.php";
 include_once "../includes/conf.inc.php";
 beginSession('P');

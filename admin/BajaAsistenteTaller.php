@@ -1,4 +1,4 @@
-<? 
+<?php  
 include "../includes/lib.php";
 include "../includes/conf.inc.php";
 beginSession('R');

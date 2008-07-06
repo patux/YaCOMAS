@@ -1,4 +1,4 @@
-<?
+<?php 
 	include_once "includes/conf.inc.php";
 	include_once "includes/lib.php";
 	imprimeEncabezado();
@@ -44,4 +44,4 @@ print '
  #imprimeCajaBottom(); 
  ?>
  
-<?imprimePie();?> 
+<?php imprimePie();?> 

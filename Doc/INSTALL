@@ -65,7 +65,7 @@ a) Creacion de la BD.
 	yacomas_db
 	yacomas_user
 	yacomas_pwd
-	yacomas_host
+	yacomas_dbhost
 
 	Despues de esto cree la BD de la siguiente manera
 	mysql -u root -p < create_fsl.sql
@@ -82,6 +82,7 @@ b) Configuracion de yacomas
 		$dbuser
 		$dbpwd
 		$dbhost
+
 	2) Asegurarse de que el archivo httpd.conf contenga lo siguiente como minimo:
 		DirectoryIndex index.php
 	3) Directorio de trabajo
