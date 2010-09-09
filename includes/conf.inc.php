@@ -58,6 +58,14 @@ $color_renglon2='#9dc4d7';
 $color_especiales='limegreen';
 
 ///////
+// Image Uploader Stuff
+///////
+$image_ponente_allow      = true;
+$image_ponente_max_width  = '240';
+$image_ponente_dest       = '../fotos/ponentes/';
+$image_ponente_default    = '../images/missing_ponente.png';
+
+///////
 //Aceptadas/Detalles Requeridos/No aceptada/ Por Aceptar 
 ///////
 
@@ -108,6 +116,7 @@ define (NPONENTE, 1);
 define (NPONENCIA,1);
 define (PROPUESTAENV,2);
 define (MPONENTE,3);
+define (MPONENTEFOTO,4);
 // Nomenclatura de ficheros
 define (CARACTERSEPARADOR,"-"); //Cada fichero tendrá la siguiente nomenclatura
 					   // <ruta><idusuario><CARACTERSEPARADOR><nombrefichero>

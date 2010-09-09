@@ -17,8 +17,12 @@ retorno();
 print '<font size=+1 color=#000000 face=arial>
 <a href="ponente.php?opc='.NPONENCIA.'">Enviar propuesta de ponencia</a> <br><br>
 <a href="ponente.php?opc='.PROPUESTAENV.'">Listar propuestas enviadas</a> <br><br>
-<a href="ponente.php?opc='.MPONENTE.'">Modificar mis datos</a> <br><br>
-</font>';
+<a href="ponente.php?opc='.MPONENTE.'">Modificar mis datos</a> <br><br>';
+
+if ($image_ponente_allow ) {
+  print '<a href="ponente.php?opc='.MPONENTEFOTO.'">Subir/Cambiar mi foto</a><br><br>';
+}
+print '</font>';
 
 imprimeCajaBottom();
 imprimePie();?>

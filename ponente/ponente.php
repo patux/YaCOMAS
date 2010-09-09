@@ -8,5 +8,7 @@ include_once "../includes/conf.inc.php";
 				break;
 			case MPONENTE: include "Mponente.php";
 				break;
+			case MPONENTEFOTO: include "Mfoto.php";
+        break;
 		}	
 ?>
