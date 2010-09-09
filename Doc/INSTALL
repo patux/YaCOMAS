@@ -1,4 +1,4 @@
-Yacomas version 0.3-alpha
+Yacomas version 0.3.5-alpha
 -------------------
 ENGLISH
 -------------------
@@ -52,7 +52,7 @@ INSTALACION:
 ------------
 Descargar YACOMAS: http://patux.glo.org.mx
 
-Descomprimir yacomas-0.x_alpha.tar.gz en un directorio donde apache tenga alcance: 
+Descomprimir yacomas-0.x.y_alpha.tar.gz en un directorio donde apache tenga alcance: 
 ej. /var/www/htdocs/
 $ tar -xvzf yacomas-0.1-alpha.tar.gz 
 .
@@ -129,4 +129,4 @@ Admin user: admin
 Admin pass: admin
 
 ==========
-$Id: INSTALL,v 0.3-alpha Thu Nov 25 16:38:13 CST 2004 patux Exp $
+$Id$

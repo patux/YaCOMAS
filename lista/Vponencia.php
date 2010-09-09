@@ -38,17 +38,11 @@
 	$registro['I_id_administrador']=$p['id_administrador'];
 
 	
-	$msg='Ponencia de: <small>'.$ponente_name.'</small>';
+    $msg=$registro['S_nombreponencia'];
 	imprimeCajaTop("100",$msg);
 	print '<hr>';
     print '
      		<table width=100%>
-		<tr>
-		<td class="name">Nombre de Ponencia: * </td>
-		<td class="resultado">
-		'.$registro['S_nombreponencia'].'
-		</td>
-		</tr>
 		
 		<tr>
 		<td class="name">Nivel: * </td>

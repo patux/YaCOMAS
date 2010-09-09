@@ -51,11 +51,37 @@ $bgcolor='#ffffff';
 //$color_renglon1='#ffcc66';
 //$color_renglon2='#ffff99';
 //$colortitle='#7e7ebc';
-$colorBorder='#ffc20e';
-$colortitle='#FFCC00';
-$color_renglon1='whitesmoke';
-$color_renglon2='#FFFFCC';
+$colorBorder='#39708a';
+$colortitle='#39708a';
+$color_renglon1='#cce0ea';
+$color_renglon2='#9dc4d7';
 $color_especiales='limegreen';
+
+///////
+//Aceptadas/Detalles Requeridos/No aceptada/ Por Aceptar 
+///////
+
+$prop_detalles_requeridos =             
+    "Your speach to notify the speaker that a conference need details to be properly evaluated,
+    add as many lines as you want
+    \n\n\n";
+$prop_rechazada=             
+    "Your speach to notify the speaker that a conference was not accepted,
+    add as many lines as you want
+    \n\n\n";
+$prop_por_aceptar=             
+    "Your speach to notify the speaker that a conference is about to be acceptet but need something(your call),
+    add as many lines as you want
+    \n\n\n";
+$prop_aceptada =             
+    "Your speach to notify the speaker that a conference was accepted,
+    add as many lines as you want
+    \n\n\n";
+$prop_cancelada=             
+    "Your speach to notify the speaker that a conference was canceled by an admin because your given reason, 
+    add as many lines as you want
+    \n\n\n";
+
 ///////
 //Mail stuff
 ///////

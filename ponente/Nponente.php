@@ -270,7 +270,8 @@ if ($_POST['submit'] == "Registrarme") {
 	$message = "";
 	$message .= "Te has registrado como posible ponente al EVENTO $conference_name\n";
 	$message .= "Usuario: $user\n";
-	$message .= "Contrasenia: $passwd_user\n\n";
+	$message .= "Contrase&ntilde;a: $passwd_user\n\n";
+    $message .= "Puedes inicar sesion en: http://$URL$rootpath\n\n\n";
 	$message .= "---------------------------------------\n";
 	$message .= "$conference_link\n";
 	$params["host"] = $smtp; 

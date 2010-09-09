@@ -47,12 +47,13 @@ $userRecordsP = mysql_query($userQueryP) or err("No se pudo listar propuestas".m
 print '
 	<table border=0 align=center width=100%>
 	<tr>
-	<td bgcolor='.$colortitle.'><b>Ponencia</b></td><td bgcolor='.$colortitle.'><b>Tipo</b>
-	</td><td bgcolor='.$colortitle.'><b>Status</b></td>
+	<td bgcolor='.$colortitle.'><font color=white><b>Ponencia</b></font></td><td bgcolor='.$colortitle.'><font color=white><b>Tipo</b></font>
+	</td><td bgcolor='.$colortitle.'><font color=white><b>Status</b></font></td>
 	</tr>';
 	
 
 	$color=1;
+    $propuestas=0;
 	while ($fila = mysql_fetch_array($userRecordsP))
 	{
 		if ($color==1) 
@@ -67,7 +68,7 @@ print '
 		}
 		print '<tr>
 		<td bgcolor='.$bgcolor.'><a class="azul" href="Vponencia.php?vopc='.$fila['id_ponente'].' '.$fila['id_ponencia'].' '.$_SERVER['REQUEST_URI'].'">'.$fila["ponencia"].'</a>';
-		print '<br><small><a class="ponente" href="Vponente.php?vopc='.$fila['id_ponente'].' '.$_SERVER['REQUEST_URI'].'">'.$fila['nombrep'].' '.$fila['apellidos'].'</a></small>';
+		 print '<br><small><a class="ponente" href="Vponente.php?vopc='.$fila['id_ponente'].' '.$_SERVER['REQUEST_URI'].'">'.$fila['nombrep'].' '.$fila['apellidos'].'</a></small>';
 		
 	
 		print '</td><td bgcolor='.$bgcolor.'>';
@@ -80,11 +81,18 @@ print '
 		// A menos que sea el administrador principal 
 		print '</td>';
 		print '</tr>';
+        $propuestas++;
 		
 	}
+    retorno();
+    print '<tr><td align=right>';
+?>
+    <font face='Arial, Helvetica, sans-serif' size=4><? echo $propuestas ?> propuestas enviadas</font></center>
+<?    
+    print '</td></tr>';
 	print '</table>';
-	retorno();
-	retorno();
+    retorno();
+    retorno();
 /*	print '<center>
 	<input type="button" value="Continuar" onClick=location.href="../">
 	</center>';

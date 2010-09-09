@@ -250,7 +250,7 @@ if (isset ($_POST['submit']) && $_POST['submit'] == "Registrarme") {
 	$message .= "Te has registrado como asistente al $conference_name\n";
 	$message .= "Usuario: $user\n";
 	$message .= "Contrase&ntilde;a: $passwd_user\n\n";
-	$message .= "Puedes inicar sesion en: http://$URL/yacomas/asistente/\n\n\n";
+	$message .= "Puedes inicar sesion en: http://$URL$rootpath\n\n\n";
 	$message .= "---------------------------------------\n";
 	$message .= "$conference_link\n";
 	$params["host"] = $smtp;
@@ -340,7 +340,7 @@ retorno();
 		</tr>
 
 		<tr>
-		<td class="name">Correo Electr&ntilde;nico: *</td>
+		<td class="name">Correo Electr&oacute;nico: *</td>
 		<td class="input"><input type="text" name="S_mail" size="15"
 		value="'.$_POST['S_mail'].'"></td>
 		<td>

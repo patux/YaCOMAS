@@ -25,7 +25,7 @@ alt="GNU" src="'.$rootpath.'/images/buttons/gnu-powered.png" border="0" /></a>
 <font face=arial size=-2>
 ';
 if ( !empty ($copyright_author) ) {
-    print "Copyrigth (c) $copyright_year, <a href=\"$link_author\">$copyright_author</a>";
+    print "Copyright (c) $copyright_year, <a href=\"$link_author\">$copyright_author</a>";
 }
 print '
 <br>
@@ -34,7 +34,7 @@ Powered by
 Yacomas
 </a>
 -
-<a href="http://sourceforge.net/tracker/?func=add&group_id=129703&atid=715607">Report a bug</a>
+<a href="mailto:patux@patux.net">Report a bug</a>
 <br>
 </font>
 </center>

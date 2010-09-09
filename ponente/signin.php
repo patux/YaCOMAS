@@ -35,7 +35,6 @@ if (isset ($_POST['submit']) && ($_POST['submit'] == "Iniciar")) {
 	else {  # We have a winner!
 	        # begin session
 		session_start();
-		session_register("YACOMASVARS");
 		$_SESSION['YACOMASVARS']['ponlogin'] = $lowlogin;
 		$_SESSION['YACOMASVARS']['ponid'] = $p['id'];
 		$_SESSION['YACOMASVARS']['ponlast'] = time();

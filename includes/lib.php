@@ -226,8 +226,7 @@ function beginSessionP() {
 	$_SESSION['YACOMASVARS']['ponlast'] = time();
 }
 function beginSession($tipo) {
-        session_start();
-	session_register("YACOMASVARS");
+    session_start();
 	switch ($tipo)
 	{
 		case 'P': 

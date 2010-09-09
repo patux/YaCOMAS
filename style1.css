@@ -18,7 +18,7 @@ a:link, a:visited {
         font-weight: bold;
 }
 a:hover {
-        color: #ffc20e;
+        color: #39708a;
         text-decoration: none;
         font-weight: bold;
 }
@@ -99,7 +99,7 @@ a:hover {
 }
 
 #opm a:hover {
-	color: #8eb3d8;·
+	color: #8eb3d8;
 }
 #seccion {
 	margin-bottom: 10px;
@@ -239,7 +239,7 @@ a.azul {
 }
 
 a.azul:hover {
-	color: #ffc20e;
+	color: #39708a;
 	border-bottom: 1px dotted #3da8cc;
 }
 a.rojo {
@@ -252,7 +252,7 @@ a.rojo:hover {
 	border-bottom: 1px dotted #3da8cc;
 }
 a.ponente {
-	color: red;
+	color: darkblue;
 	text-decoration: none;
 }
 
@@ -298,3 +298,16 @@ p.yacomas_login{
 	margin-top: 0;
 	margin-bottom: 0;
 }
+#message{
+  width: 200px;
+  margin: auto;
+  padding:5px;
+  color:white;
+  text-align:center;
+}
+  #message.info {
+    background: #000077;
+  }
+  #message.error {
+    background: #770000;
+  }

@@ -37,19 +37,19 @@ $link=conectaBD();
     switch ($idstatus) 
     {
         // Detalles requeridos
-	    case 2: $additional = "Your personal message \n\n";
+	    case 2: $additional = $prop_detalles_requeridos;
             break;
         // Rechazada
-	    case 3: $additional = "Your personal message \n\n";
+	    case 3: $additional = $prop_rechazada;
             break;
         // Por aceptar
-	    case 4: $additional = "Your personal message \n\n";
+	    case 4: $additional = $prop_por_aceptar;
             break;
         // Aceptada
-	    case 5: $additional = "Your personal message \n\n";
+	    case 5: $additional = $prop_aceptada;
             break;
         // Cancelada
-	    case 6: $additional = "Your personal message \n\n";
+	    case 6: $additional = $prop_cancelada;
             break;
     }		
 	/////////////////////
