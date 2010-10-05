@@ -11,7 +11,7 @@ print '
         <meta HTTP-EQUIV="Content-Type" content="text/html; charset=ISO-8859-1">
         <meta NAME="description" CONTENT="'.$conference_name.'">
         <meta NAME="keywords" CONTENT="Hispalinux,hipalinux,festival,software,libre,software libre,festival de software libre,2010,FSL,linux,gnu,gpl,openbsd,freebsd,netbsd,gnu/linux">
-        <meta NAME="author" CONTENT="Patux & Kako)">
+        <meta NAME="author" CONTENT="Patux)">
         <meta NAME="copyright" CONTENT="Copyrigth Geronimo Orozco (Patux)">
         <meta NAME="audience" CONTENT="All">
         <meta NAME="distribution" content="Global">
