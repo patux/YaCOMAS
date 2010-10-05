@@ -300,11 +300,11 @@ class Planner {
     if ($rows > 1) {
       $string .= " rowspan=\"$rows\"";
     }
-    $string .= ">";
+    $string .= "><a name=\"".$event['event_id']."\"></a>";
     if (!$empty) {
       $string .= '<a href="Vponencia.php?vopc='.$event['person_id'] . ' '
       . $event['event_id'] . ' ' 
-      . $_SERVER['REQUEST_URI']. '"';
+      . $_SERVER['REQUEST_URI']. '#top"';
       $string .="<span class=\"event\">".nl2br(htmlentities($event['event_name']))."</span><br>" 
                 ."<span class=\"person\">".htmlentities($event['person_name'])."</span></a>";
     } else {

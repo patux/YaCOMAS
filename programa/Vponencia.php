@@ -44,7 +44,7 @@
 	//$msg='Ponencia: <small>'.$registro['S_nombreponencia'].'</small>';
 	imprimeCajaTop("100",$msg);
 
-	print '<hr>';
+	print '<a href="#top"></a><hr>';
 	 ?>
   <p id="foto_frame" style="float:left">
   <img src="<?php echo $foto?>" alt="Foto"/>
@@ -203,8 +203,8 @@
 		} else {
 		  echo '<p>Ninguno.</p>';
 		}
-		echo '<center>
-		<br><big><a class="boton" href="'.$regresa.'" onMouseOver="window.status=\'Volver\';return true" onFocus="window.status=\'Volver\';return true" onMouseOut="window.status=\'\';return true">[ Volver ]</a></big>
+	echo '<center>
+		<br><big><a class="boton" href="'.$regresa.'#'.$idponencia.'" onMouseOver="window.status=\'Volver\';return true" onFocus="window.status=\'Volver\';return true" onMouseOut="window.status=\'\';return true">[ Volver ]</a></big>
 		</center>';
 
 imprimeCajaBottom(); 
