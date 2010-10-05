@@ -255,8 +255,15 @@ class Planner {
   public function createCalendar($date_id){
     $events = $this->_events[$date_id];
     $hour = $this->getStartHour($date_id);
-    $string = "<table class=\"planner\">\n<tr><th>Hora</th>";
     $columns = count($this->_rooms[$date_id]);
+    $width_room = round(96 / $columns);
+    $width_time = 100 - ($width_room * $columns);
+    $string = "<table class=\"planner\">\n<colgroup><col width=".$width_time."%>";
+    for($i=0; $i<$columns; $i++) {
+        $string .= "<col width=".$width_room."%>";
+    }
+    $string .= "</colgroup><tbody>"; 
+    $string .="<tr><th>Hora</th>";
     foreach($this->_rooms[$date_id] AS $room) {
       $string .="<th>{$room['place_name']}</th>";
     }
@@ -278,7 +285,7 @@ class Planner {
       $string .= "</tr>\n";
       $hour++;
     }
-    $string .= "</table>\n";
+    $string .= "</tbody></table>\n";
     return $string;
   }
   
@@ -298,7 +305,7 @@ class Planner {
       $string .= '<a href="Vponencia.php?vopc='.$event['person_id'] . ' '
       . $event['event_id'] . ' ' 
       . $_SERVER['REQUEST_URI']. '"';
-      $string .="<span class=\"event\">".htmlentities($event['event_name']) ."</span><br>" 
+      $string .="<span class=\"event\">".nl2br(htmlentities($event['event_name']))."</span><br>" 
                 ."<span class=\"person\">".htmlentities($event['person_name'])."</span></a>";
     } else {
       $string .= "&nbsp;";

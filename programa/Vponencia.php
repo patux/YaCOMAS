@@ -49,7 +49,7 @@
   <p id="foto_frame" style="float:left">
   <img src="<?php echo $foto?>" alt="Foto"/>
   </p>
-  <h1><?php echo $registro['S_nombreponencia'] ?></h1>
+  <h1><?php echo nl2br($registro['S_nombreponencia']) ?></h1>
   <h2><?php echo $ponente_name ?></h2>
   <h3>Resume:</h3>
   <p><?php echo htmlentities($resume)?></p>
@@ -191,9 +191,9 @@
 	// Aqui comienzan los resumenes
 	print'
 		<hr style="clear:both">
-    <h3>Resumen:</h3>';
+    <h3>Descripci&oacute;n:</h3>';
 		if ( !empty($registro['S_resumen']) ) {
-      echo '<p>'.htmlentities($registro['S_resumen']).'.</p>';
+      echo '<p>'.nl2br(htmlentities($registro['S_resumen'])).'.</p>';
     } else {
       echo '<p>Ninguno.</p>';
     }
