@@ -34,3 +34,4 @@ retorno();
 echo $Planner->createLegend();
 imprimeCajaBottom();
 imprimePie();
+?>
