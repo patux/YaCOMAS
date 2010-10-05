@@ -35,8 +35,21 @@ print '
  ademas de mantenerte informado del evento.</p>
  <p><a href="'.$fslpath.$rootpath.'/lista/">Lista preliminar de ponencias</a>
  <br/>
- Aqu&iacute; ver&aacute;s las propuestas ponencias que han sido enviadas, y el status en el que se encuentran dichas ponencias.</p>
-<p><a href="'.$fslpath.$rootpath.'/modalidades/">Modalidades de participacion en la peticion de ponencias</a>
+ Aqu&iacute; ver&aacute;s las propuestas ponencias que han sido enviadas, y el status en el que se encuentran dichas ponencias.</p>';
+ print '<p><a href="'.$fslpath.$rootpath.'/aceptadas/">Lista de ponencias aceptadas</a>
+ <br/>
+ Aqu&iacute; ver&aacute;s las ponencias que han sido aceptadas, y que formaran parte del programa final del FSL Vallarta 2010.</p>
+ ';
+ print '<p><a href="'.$fslpath.$rootpath.'/programa/">Agenda de actividades</a>
+ <br/>
+ Aqu&iacute; ver&aacute;s los eventos y ponencias con las que cuenta el '.$conference_name.' </p>';
+ print '
+ <p><a href="'.$fslpath.$rootpath.'/speakers/">Ponentes que participan en '.$conference_name.'</a>
+ <br />
+ Aqu&iacute; ver&aacute;s los ponentes que formarn parte del FSL Vallarta 2010.</p>
+ ';
+ print '
+ <p><a href="'.$fslpath.$rootpath.'/modalidades/">Modalidades de participacion en la peticion de ponencias</a>
  Modalidades de las ponencias que encontraras en el evento!
  <br />
  ';
