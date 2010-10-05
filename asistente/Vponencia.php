@@ -1,7 +1,6 @@
-<?php  
-	include_once "../includes/lib.php";
-	include_once "../includes/conf.inc.php";
-	beginSession('A');
+<?php 
+	include "../includes/lib.php";
+	include "../includes/conf.inc.php";
 	imprimeEncabezado();
 	
 	$tok = strtok ($_GET['vopc']," ");
@@ -14,16 +13,17 @@
 		$regresa .=' '.$tok;
 		$tok=strtok(" ");
 	}
-	$idasistente=$_SESSION['YACOMASVARS']['asiid'];
-	print '<P class="yacomas_login">Login: '.$_SESSION['YACOMASVARS']['asilogin'].'&nbsp;<a class="precaucion" href=signout.php>Desconectarme</a></P>';
 
 	$link=conectaBD();
 	$userQuery = 
-	'SELECT nombrep, apellidos FROM ponente  
+	'SELECT nombrep, apellidos, resume FROM ponente  
 		WHERE id="'.$idponente.'"';
 	$userRecords = mysql_query($userQuery) or err("No se pudo checar el ponente".mysql_errno($userRecords));
 	$p = mysql_fetch_array($userRecords);
 	$ponente_name=$p['nombrep'].' '.$p['apellidos'];
+	$resume = $p['resume'];
+	$foto = (file_exists("{$image_ponente_dest}foto_{$idponente}.jpeg"))?"{$image_ponente_dest}foto_$idponente.jpeg":$image_ponente_default;
+	
 	$userQuery =
 	'SELECT * FROM propuesta 
 		WHERE id="'.$idponencia.'" AND id_ponente="'.$idponente.'"';
@@ -41,11 +41,21 @@
 	$registro['I_id_administrador']=$p['id_administrador'];
 
 	
-	$msg='Ponencia de: <small>'.$ponente_name.'</small>';
+	//$msg='Ponencia: <small>'.$registro['S_nombreponencia'].'</small>';
 	imprimeCajaTop("100",$msg);
-	print '<hr>';
+
+	print '<a href="#top"></a><hr>';
+	 ?>
+  <p id="foto_frame" style="float:left">
+  <img src="<?php echo $foto?>" alt="Foto"/>
+  </p>
+  <h1><?php echo nl2br($registro['S_nombreponencia']) ?></h1>
+  <h2><?php echo $ponente_name ?></h2>
+  <h3>Resume:</h3>
+  <p><?php echo htmlentities($resume)?></p>
+  <?php 
     print '
-     		<table width=100%>
+    <table>
 		<tr>
 		<td class="name">Nombre de Ponencia: * </td>
 		<td class="resultado">
@@ -85,7 +95,7 @@
 
 
 		<tr>
-		<td class="name">Orientaci&oacute;n: * </td>
+		<td class="name">Orientacion: * </td>
 		<td class="resultado">';
 		
 		$query = 'SELECT * FROM orientacion WHERE id="'.$registro['I_id_orientacion'].'"';
@@ -100,7 +110,7 @@
 		</tr>
 		
 		<tr>
-		<td class="name">Duraci&oacute;n: * </td>
+		<td class="name">Duracion: * </td>
 		<td class="resultado">';
 		printf ("%02d Hrs",$registro['I_duracion']);
 	print '	
@@ -180,27 +190,22 @@
 		
 	// Aqui comienzan los resumenes
 	print'
-		<hr>
-     		<table width=100%>
-		<tr>
-		<td class="name">Resumen: </td>
-		<td align=justify class="resultado">
-		'.$registro['S_resumen'].'
-		</td>
-		</tr>
-		
-		<tr>
-		<td class="name">Prerequisitos del Asistente: </td>
-		<td align=justify class="resultado">
-		'.$registro['S_reqasistente'].'
-		</td>
-		</tr>
-		</table>
-		<br>
-		<center>
-		<br><big><a class="boton" href="'.$regresa.'" onMouseOver="window.status=\'Volver\';return true" onFocus="window.status=\'Volver\';return true" onMouseOut="window.status=\'\';return true">[ Volver ]</a></big>
+		<hr style="clear:both">
+    <h3>Descripci&oacute;n:</h3>';
+		if ( !empty($registro['S_resumen']) ) {
+      echo '<p>'.nl2br(htmlentities($registro['S_resumen'])).'.</p>';
+    } else {
+      echo '<p>Ninguno.</p>';
+    }
+		echo '<h3>Prerequisitos del Asistente:</h3>';
+		if ( !empty($registro['S_reqasistente']) ) {
+		  echo '<p>'.htmlentities($registro['S_reqasistente']).'.</p>';
+		} else {
+		  echo '<p>Ninguno.</p>';
+		}
+	echo '<center>
+		<br><big><a class="boton" href="'.$regresa.'#'.$idponencia.'" onMouseOver="window.status=\'Volver\';return true" onFocus="window.status=\'Volver\';return true" onMouseOut="window.status=\'\';return true">[ Volver ]</a></big>
 		</center>';
-
 imprimeCajaBottom(); 
 imprimePie(); 
 ?>

@@ -4,7 +4,7 @@ include_once "../includes/conf.inc.php";
 		{
 			case MASISTENTE: include "Masistente.php";
 				break;
-			case LEVENTOS: include "Leventos.php";
+			case LEVENTOS: include "planner.php";
 				break;
 			case LTALLERES: include "Ltalleres.php";
 				break;
