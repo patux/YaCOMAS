@@ -30,41 +30,41 @@ function strftime_caste($formato, $fecha){
 // $fecha: tiemestamp correspondiente a la fecha y hora que se quiere mostrar
 $salida = strftime($formato,  $fecha);
 	    // reemplazo meses  
-	    $salida = str_replace("January","Enero",$salida);
-	    $salida = str_replace("February","Febrero",$salida);
-	    $salida = str_replace("March","Marzo",$salida);
-	    $salida = str_replace("April","Abril",$salida);
-	    $salida = str_replace("May","Mayo",$salida);
-	    $salida = str_replace("June","Junio",$salida);
-	    $salida = str_replace("July","Julio",$salida);
-	    $salida = str_replace("August","Agosto",$salida);
-	    $salida = str_replace("September","Septiembre",$salida);
-	    $salida = str_replace("October","Octubre",$salida);
-	    $salida = str_replace("November","Noviembre",$salida);
-	    $salida = str_replace("December","Diciembre",$salida);
+	    $salida = ereg_replace("January","Enero",$salida);
+	    $salida = ereg_replace("February","Febrero",$salida);
+	    $salida = ereg_replace("March","Marzo",$salida);
+	    $salida = ereg_replace("April","Abril",$salida);
+	    $salida = ereg_replace("May","Mayo",$salida);
+	    $salida = ereg_replace("June","Junio",$salida);
+	    $salida = ereg_replace("July","Julio",$salida);
+	    $salida = ereg_replace("August","Agosto",$salida);
+	    $salida = ereg_replace("September","Septiembre",$salida);
+	    $salida = ereg_replace("October","Octubre",$salida);
+	    $salida = ereg_replace("November","Noviembre",$salida);
+	    $salida = ereg_replace("December","Diciembre",$salida);
             // reemplazo meses cortos
-	    $salida = str_replace("Jan","ene",$salida);
-	    $salida = str_replace("Apr","abr",$salida);
-	    $salida = str_replace("Aug","ago",$salida);
-	    $salida = str_replace("Dec","dic",$salida);
+	    $salida = ereg_replace("Jan","ene",$salida);
+	    $salida = ereg_replace("Apr","abr",$salida);
+	    $salida = ereg_replace("Aug","ago",$salida);
+	    $salida = ereg_replace("Dec","dic",$salida);
 	    // reemplazo di'as
-	    $salida = str_replace("Monday","Lunes",$salida);
-	    $salida = str_replace("Tuesday","Martes",$salida);
-	    $salida = str_replace("Wednesday","Mi&eacute;rcoles",$salida);
-	    $salida = str_replace("Thursday","Jueves",$salida);
-	    $salida = str_replace("Friday","Viernes",$salida);
-	    $salida = str_replace("Saturday","S&aacute;bado",$salida);
-	    $salida = str_replace("Sunday","Domingo",$salida);
+	    $salida = ereg_replace("Monday","Lunes",$salida);
+	    $salida = ereg_replace("Tuesday","Martes",$salida);
+	    $salida = ereg_replace("Wednesday","Mi&eacute;rcoles",$salida);
+	    $salida = ereg_replace("Thursday","Jueves",$salida);
+	    $salida = ereg_replace("Friday","Viernes",$salida);
+	    $salida = ereg_replace("Saturday","S&aacute;bado",$salida);
+	    $salida = ereg_replace("Sunday","Domingo",$salida);
 	    // reemplazo dias cortos
-	    $salida = str_replace("Mon","Lun",$salida);
-	    $salida = str_replace("Tue","Mar",$salida);
-	    $salida = str_replace("Wed","Mie",$salida);
-	    $salida = str_replace("Thu","Jue",$salida);
-	    $salida = str_replace("Fri","Vie",$salida);
-	    $salida = str_replace("Sat","Sab",$salida);
-	    $salida = str_replace("Sun","Dom",$salida);
+	    $salida = ereg_replace("Mon","Lun",$salida);
+	    $salida = ereg_replace("Tue","Mar",$salida);
+	    $salida = ereg_replace("Wed","Mie",$salida);
+	    $salida = ereg_replace("Thu","Jue",$salida);
+	    $salida = ereg_replace("Fri","Vie",$salida);
+	    $salida = ereg_replace("Sat","Sab",$salida);
+	    $salida = ereg_replace("Sun","Dom",$salida);
 	    // reemplazo cuando es 1 de algun mes
-	    $salida = str_replace(" 01 de "," 1&deg; de ",$salida);
+	    $salida = ereg_replace(" 01 de "," 1&deg; de ",$salida);
 	    return $salida;
 	    } // fin strftime_caste
 //--------------------------------
@@ -205,15 +205,14 @@ print("</table>");
 //-------------------------------
 function conectaBD()
 {
-    include "db.inc.php";
+include "db.inc.php";
    if(!($link=mysql_pconnect($dbhost,$dbuser,$dbpwd)))
    {
     print("No se puede hacer la conexion a la Base de Datos");
     exit();
    }
-   mysql_query("SET NAMES iso-8859-1", $link);
    mysql_select_db($dbname) or die (mysql_error());
-   return $link;
+
 }
 //--------------------------------
 function beginSessionP() {

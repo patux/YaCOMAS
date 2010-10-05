@@ -16,14 +16,11 @@
 
 	$link=conectaBD();
 	$userQuery = 
-	'SELECT nombrep, apellidos, resume FROM ponente  
+	'SELECT nombrep, apellidos FROM ponente  
 		WHERE id="'.$idponente.'"';
 	$userRecords = mysql_query($userQuery) or err("No se pudo checar el ponente".mysql_errno($userRecords));
 	$p = mysql_fetch_array($userRecords);
 	$ponente_name=$p['nombrep'].' '.$p['apellidos'];
-	$resume = $p['resume'];
-	$foto = (file_exists("{$image_ponente_dest}foto_{$idponente}.jpeg"))?"{$image_ponente_dest}foto_$idponente.jpeg":$image_ponente_default;
-	
 	$userQuery =
 	'SELECT * FROM propuesta 
 		WHERE id="'.$idponencia.'" AND id_ponente="'.$idponente.'"';
@@ -41,21 +38,11 @@
 	$registro['I_id_administrador']=$p['id_administrador'];
 
 	
-	//$msg='Ponencia: <small>'.$registro['S_nombreponencia'].'</small>';
+	$msg='Ponencia de: <small>'.$ponente_name.'</small>';
 	imprimeCajaTop("100",$msg);
-
 	print '<hr>';
-	 ?>
-  <p id="foto_frame" style="float:left">
-  <img src="<?php echo $foto?>" alt="Foto"/>
-  </p>
-  <h1><?php echo $registro['S_nombreponencia'] ?></h1>
-  <h2><?php echo $ponente_name ?></h2>
-  <h3>Resume:</h3>
-  <p><?php echo htmlentities($resume)?></p>
-  <?php 
     print '
-    <table>
+     		<table width=100%>
 		<tr>
 		<td class="name">Nombre de Ponencia: * </td>
 		<td class="resultado">
@@ -190,20 +177,24 @@
 		
 	// Aqui comienzan los resumenes
 	print'
-		<hr style="clear:both">
-    <h3>Resumen:</h3>';
-		if ( !empty($registro['S_resumen']) ) {
-      echo '<p>'.htmlentities($registro['S_resumen']).'.</p>';
-    } else {
-      echo '<p>Ninguno.</p>';
-    }
-		echo '<h3>Prerequisitos del Asistente:</h3>';
-		if ( !empty($registro['S_reqasistente']) ) {
-		  echo '<p>'.htmlentities($registro['S_reqasistente']).'.</p>';
-		} else {
-		  echo '<p>Ninguno.</p>';
-		}
-		echo '<center>
+		<hr>
+     		<table width=100%>
+		<tr>
+		<td class="name">Resumen: </td>
+		<td align=justify class="resultado">
+		'.$registro['S_resumen'].'
+		</td>
+		</tr>
+		
+		<tr>
+		<td class="name">Prerequisitos del Asistente: </td>
+		<td align=justify class="resultado">
+		'.$registro['S_reqasistente'].'
+		</td>
+		</tr>
+		</table>
+		<br>
+		<center>
 		<br><big><a class="boton" href="'.$regresa.'" onMouseOver="window.status=\'Volver\';return true" onFocus="window.status=\'Volver\';return true" onMouseOut="window.status=\'\';return true">[ Volver ]</a></big>
 		</center>';
 
