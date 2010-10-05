@@ -1,3 +1,3 @@
 <?php 
-	include "programa_preliminar.php";
+	include "planner.php";
 ?>
