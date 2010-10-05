@@ -1,4 +1,4 @@
-<? 
+<?php 
 include "../includes/lib.php";
 include "../includes/conf.inc.php";
 imprimeEncabezado();
@@ -68,7 +68,7 @@ for ($i = 0; $i < count($ponente_array); $i++)
 		<h2><?php echo $ponente_name ?>
 		<br /><small><?php echo $ciudad.' '.$estado ?></small></h2>
 		<img src="<?php echo $foto ?>" align="right" alt="<?php echo $ponente_name ?>"/>		
-		<p class="ponente"]><? print $resume ?></p>
+		<p class="ponente"]><?php print $resume ?></p>
 		</div>
 		<?php
 	}
@@ -120,7 +120,7 @@ for ($i = 0; $i < count($ponente_array); $i++)
 		<h2><?php echo $ponente_name ?>
 		<br /><small><?php echo $ciudad.' '.$estado ?></small></h2>
 		<img src="<?php echo $foto ?>" align="right" alt="<?php echo $ponente_name ?>"/>		
-		<p class="ponente"]><? print $resume ?></p>
+		<p class="ponente"]><?php print $resume ?></p>
 		</div>
 		<?php
 	}

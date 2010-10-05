@@ -1,4 +1,4 @@
-<? 
+<?php 
 	include "../includes/lib.php";
 	include "../includes/conf.inc.php";
 	imprimeEncabezado();
@@ -6,7 +6,7 @@
     #imprimeCajaTop("100","Lista de propuestas enviadas");
 ?>
     <center><font face='Arial, Helvetica, sans-serif' size=6>Lista de propuestas aceptadas</font></center>
-<?    
+<?php    
 	print '<hr>';
 
 $link=conectaBD();
@@ -87,8 +87,7 @@ print '
     retorno();
     print '<tr><td align=right>';
 ?>
-<!--    <font face='Arial, Helvetica, sans-serif' size=4><? echo $propuestas ?> propuestas aceptadas</font></center> -->
-<?    
+<?php    
     print '</td></tr>';
 	print '</table>';
     retorno();

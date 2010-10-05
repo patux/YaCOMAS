@@ -87,17 +87,12 @@ print '
     retorno();
     print '<tr><td align=right>';
 ?>
-    <font face='Arial, Helvetica, sans-serif' size=4><? echo $propuestas ?> propuestas enviadas</font></center>
-<?    
+    <font face='Arial, Helvetica, sans-serif' size=4><?php echo $propuestas ?> propuestas enviadas</font></center>
+<?php    
     print '</td></tr>';
 	print '</table>';
     retorno();
     retorno();
-/*	print '<center>
-	<input type="button" value="Continuar" onClick=location.href="../">
-	</center>';
-*/
-#imprimeCajaBottom(); 
 ?>
 <center><input type="button" value="Regresar" onClick=location.href="../"></center>
 
