@@ -34,10 +34,10 @@ $userQueryPM = 'SELECT 	e.descr as estado, p.id, p.login, p.ciudad,
 					p.nombrep, p.apellidos, p.resume
 			FROM 	ponente as p, estado as e 
 			WHERE p.id IN (SELECT DISTINCT id_ponente 
-							FROM propuesta 
-                            WHERE id_status=8 
-                            AND  id_prop_tipo=100) 
-						AND p.id_estado = e.id';
+					FROM propuesta 
+ 		                        WHERE id_status=8 
+                		        AND  id_prop_tipo=100) 
+				AND p.id_estado = e.id';
 $userRecordsPM = mysql_query($userQueryPM) or err("No se pudo listar ponentes magistrales".mysql_errno($userRecordsPM));
 $i = 0;
 while ($fila = mysql_fetch_array($userRecordsPM))
@@ -85,15 +85,15 @@ $userQueryP = 'SELECT 	e.descr as estado, p.id, p.ciudad,
 					p.nombrep, p.apellidos, p.resume
 			FROM 	ponente as p, estado as e 
 			WHERE p.id IN (SELECT DISTINCT id_ponente 
-							FROM propuesta 
-							WHERE id_status=8 
+					FROM propuesta 
+					WHERE id_status=8 
                             AND  id_prop_tipo<100) 
                        AND p.id NOT IN 
                           (SELECT DISTINCT id_ponente 
                             FROM propuesta
                             WHERE id_status=8
                             AND id_prop_tipo=100)
-						AND p.id_estado = e.id';
+			AND p.id_estado = e.id';
 $userRecordsP = mysql_query($userQueryP) or err("No se pudo listar ponentes".mysql_errno($userRecordsP));
 $i = 0;
 while ($fila = mysql_fetch_array($userRecordsP))
