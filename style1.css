@@ -198,6 +198,14 @@ p.yacomas_msg {
   text-align: center;
 }
 
+p.ponente {
+  margin-top: 0px;
+  padding-top: 10px;
+  font-size: 18px;
+  font-type: arial;
+  text-align: justyfy;
+}
+
 table.name {        
   width: 30%;
 }

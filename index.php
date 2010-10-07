@@ -2,7 +2,7 @@
 	include_once "includes/conf.inc.php";
 	include_once "includes/lib.php";
 	imprimeEncabezado();
-    #imprimeCajaTop("100","Registro");
+    imprimeCajaTop("100","Registro $conference_name<hr>");
 
 
 print " 
@@ -54,7 +54,7 @@ print '
  <br />
  ';
 
- #imprimeCajaBottom(); 
+imprimeCajaBottom(); 
  ?>
  
 <?php imprimePie();?> 
