@@ -195,12 +195,13 @@ if (isset ($_POST['submit']) && $_POST['submit'] == "Eliminar") {
   // Si todos esta bien vamos a borrar el registro 
 
   	// Seleccionamos las propuestas que estan registrados por el ponente 
+    $idponente = $_GET['idponente'];
   	$QB_selectEL='SELECT id AS id_propuesta FROM propuesta WHERE id_ponente='.$idponente;
 	// Debug
 	// print $QB_selectEL;
 	// retorno();
 
-	$result_SPL=  mysql_query($QB_selectEL) or err("No se pueden seleccionar propuestas del ponente".mysql_errno($result_SPL));
+	$result_SPL=  mysql_query($QB_selectEL) or err("No se pueden seleccionar propuestas del ponente $idponente".mysql_errno($result_SPL));
 	$num_prop=0;
 	while ($fila = mysql_fetch_array($result_SPL)) 
 	{
