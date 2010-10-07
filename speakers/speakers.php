@@ -52,7 +52,8 @@ while ($fila = mysql_fetch_array($userRecordsPM))
 	}
 mysql_free_result($userRecordsPM);
 
-shuffle($ponente_array);
+if (!empty($ponente_array))
+    shuffle($ponente_array);
 for ($i = 0; $i < count($ponente_array); $i++)
 	{
 		$login = $ponente_array[$i]['login'];
@@ -108,7 +109,8 @@ while ($fila = mysql_fetch_array($userRecordsP))
 	}
 mysql_free_result($userRecordsP);
 
-shuffle($ponente_array);
+if (!empty($ponente_array))
+    shuffle($ponente_array);
 for ($i = 0; $i < count($ponente_array); $i++)
 	{
 		$login = $ponente_array[$i]['login'];
