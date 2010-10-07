@@ -11,7 +11,7 @@ print '
 <center>
 <br>
 <a href="http://yacomas.sourceforge.net/" target="_blank" title="Created with YACOMAS"><img title="Created with YACOMAS"
-alt="GNU" src="'.$rootpath.'/images/buttons/yacomas-micro.png" border="0" /></a>
+alt="YaCOMAS" src="'.$rootpath.'/images/buttons/yacomas-micro.png" border="0" /></a>
 &nbsp;
 <a href="http://www.php.net/" target="blank" title="Pumped through PHP"><img title="Pumped th/rough PHP"
 alt="PHP" src="'.$rootpath.'/images/buttons/php.png" border="0" /></a>
