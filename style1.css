@@ -325,11 +325,14 @@ p.yacomas_login{
 /** Planner**/
 table.planner td, table.planner th  {
   -moz-border-radius:3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
   text-align:center;
   padding:2px;
 }
 table.planner td .person {
   font-style:italic;
+  font-weight:normal
 }
 table.planner td .event {
   font-weight:bolder;
