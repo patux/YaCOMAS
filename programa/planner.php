@@ -12,8 +12,7 @@ imprimeEncabezado();
 
 $msg="Programa oficial de ponencias<br>$conference_name
   <br><small><small>*Programa sujeto a cambios*</small></small>";
-imprimeCajaTop("100",$msg);
-
+print '<center><h1>'.$msg.'</h1></center>';
 print '<p class="yacomas_msg">Para ver informacion adicional de la ponencia o del ponente haz click en cualquiera de ellos</a><hr>';
 retorno();
 
@@ -32,6 +31,7 @@ foreach ($dates AS $date_id => $date) {
 }
 retorno();
 echo $Planner->createLegend();
-imprimeCajaBottom();
+retorno();
+retorno();
 imprimePie();
 ?>
