@@ -12,9 +12,10 @@ $fila1=mysql_fetch_array ($userRecordsCA);
 $I_totAsistentes=$fila1['totAsistentes'];
 mysql_free_result ($userRecordsCA);
 define("REG_POR_PAGINA",100);
-if (empty($_POST['desde'])) {
+if (empty($_POST['desde'])) 
 	$desde=0;
-}
+else
+    $desde = $_POST['desde'];
 $userQueryA = 'SELECT 	A.login,A.id, A.nombrep, A.apellidos, 
 			A.reg_time,  E.descr AS estado,  
 			ES.descr AS estudios 
