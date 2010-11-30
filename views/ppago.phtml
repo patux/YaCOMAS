@@ -1,0 +1,57 @@
+<h2 style="float:right"><?php echo "FSL Vallarta Recibo: " . $Pago->id . " || "; echo date('d/m/Y', strtotime($Pago->act_time))?></h2>
+<h2 style="float:left"><?php echo $Asistente->nombrep." ". $Asistente->apellidos ?></h2>
+<center><h2 style="color:red"><?php echo ($Pago->pagado == 1)?"Recibo pagado":"Recibo no pagado"; ?></h2></center>
+<hr/>
+
+
+<div id="cuotas_form">
+<?php 
+	$CuotasForm = new Decorator($Pago, 'cuotasform');
+	echo $CuotasForm->getString();
+?>
+<h3 id="subtotal_cuotas">SubTotal Inscripciones: $ <?php echo $Pago->getTotalCuotas(false)?></h3>
+<form>
+	<label for="porc_descuento">Descuento:</label>
+	<input type="text" name="porc_descuento" id="porc_descuento" size="3" value="<?php echo (!isset($Pago->porc_descuento))?'0':$Pago->porc_descuento;?>" onchange="xajax_guardarDescuento(xajax.$('id_pago').value, xajax.$('porc_descuento').value);"/> %
+</form>
+<h3 id="total_descuento">Total Descuento: $ <?php echo  ceil($Pago->getTotalCuotas(false) - $Pago->getTotalCuotas())  ?></h3>
+<h3 id="total_cuotas">Total Inscripciones: $ <?php echo $Pago->getTotalCuotas()?></h3>
+</div>
+
+
+<div id="hospedajes_form">
+<?php
+	$HospedajesForm = new Decorator($Pago, 'hospedajesform');
+	echo $HospedajesForm->getString();
+?>
+<h3 id="total_hospedajes">Total Hospedajes: $ <?php echo $Pago->getTotalHospedajes()?></h3>
+</div>
+<hr/>
+
+<form action="" id="pago_form">
+	<input type="hidden" id="id_pago" name="id_pago" value="<?php echo $Pago->getId()?>"/>
+	<h3 id="total">Total: $ <?php echo $Pago->getTotal()?></h3>
+	<?php echo FormHelper::createRadio('Tipo de Pago', 'tpago', array('Efectivo' => 'Efectivo', 'Voucher'=>'Voucher', 'Ambos'=>'Ambos'), $Pago->tpago, 'Efectivo'); ?><br/>
+	<label for="no_baucher">Número de Voucher:</label>
+	<input type="text" name="no_voucher" id="no_voucher" value="<?php echo $Pago->no_voucher?>"/><br/>
+	<label for="comentarios">Comentarios:</label><br/>
+	<textarea name="comentarios" id="comentarios"><?php echo $Pago->comentarios?> </textarea><br/>
+	<input type="button" onclick="xajax_guardarPago(xajax.getFormValues('pago_form'))" value="Guardar"/>
+</form>
+<hr/>
+
+<h2>Factura</h2>
+<div id="factura_container">
+<?php
+	if($Factura->getId()!=0 ) {
+		$FacturaDetail = new Decorator($Factura, 'facturadetail');
+		$FacturaDetail->assign('id_pago', $Pago->getId());
+		echo $FacturaDetail->getString();
+	} else {
+		?><input type="button" onclick="xajax_editarFactura(<?php echo $Pago->getId() ?>)" value="Crear Factura"/><?php 
+	}
+?>
+</div>
+<hr/>
+<input type="button" onclick="parent.location='admin.php?opc=20&amp;tab=3&amp;id=<?php echo $Pago->id_responsable?>'" value="Ver Recibo"/>
+<input type="button" onclick="xajax_abrirEliminarPago(<?php echo $Pago->getId()?>);" value="Eliminar Pago"/>

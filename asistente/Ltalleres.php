@@ -10,7 +10,6 @@ $userQuery = 'SELECT nombrep FROM asistente
 $userRecords = mysql_query($userQuery) or err("No se pudo checar el asistente".mysql_errno($userRecords));
 $p = mysql_fetch_array($userRecords);
 $asistente_name=stripslashes($p['nombrep']);
-$msg="<br><small>".stripslashes($asistente_name)." Solo puedes tener <br>".$max_inscripcionTA." inscripciones a talleres maximo y <br>".$max_inscripcionTU." inscripciones a tutoriales maximo</small>";
 
 imprimeEncabezado();
 
@@ -212,6 +211,7 @@ $QTUinscritos='	SELECT 	count(*)
 			E.id_propuesta=P.id AND
 			P.id_prop_tipo=PT.id AND
 			P.id_prop_tipo=51 AND
+			P.id_prop_tipo=52 AND
 			I.id_asistente="'.$idasistente.'"';
 $inscritosTURecord= mysql_query($QTUinscritos) or err("No se pudo listar talleres inscritos evento".mysql_errno($inscritosTURecord));
 //print $QTUinscritos;
@@ -221,7 +221,7 @@ $TUinscritos=$tot_TU_reg["count(*)"];
 // Ordenadas por dia 
 $inscrip_TA_libres=$max_inscripcionTA-$TAinscritos;
 $inscrip_TU_libres=$max_inscripcionTU-$TUinscritos;
-$msg0='-- Recuerda cumplir los prerequisitos para ingresar a talleres y tutoriales -- <br>Para ver informaci&oacute;n sobre algun tema o ponente haz clik en el el nombre de taller o tutorial que sea de tu interes ';
+$msg0='-- Recuerda cumplir los prerequisitos para ingresar a talleres -- <br>Para ver informaci&oacute;n sobre algun tema o ponente haz clik en el el nombre de taller o tutorial que sea de tu interes ';
 $msg1='Actualmente estas inscrito en '.$TAinscritos.' talleres y '.$TUinscritos.' tutoriales';
 retorno();
 $msg1.='<br>Puedes inscribirte a '.$inscrip_TA_libres.' talleres y '.$inscrip_TU_libres.' tutoriales mas';

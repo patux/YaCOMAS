@@ -39,6 +39,12 @@
 				break;
 			case 19: include "BajaAsistenteTaller.php";
 				break;
+			case 20: include "Pagos.php";
+				break;
+			case 21: include "Caja.php";
+				break;
+			case 22: include "Grupos.php";
+				break;
 			default: include "signin.php";
 				break;
 		}	

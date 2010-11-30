@@ -1,0 +1,28 @@
+<?php  
+imprimeEncabezado();
+if ( $_GET['opc'] == 20 )
+	imprimeCajaTop("100","Administración de Pagos");
+if ( $_GET['opc'] == 21 )
+	imprimeCajaTop("100","Control de Caja ");
+	if ( $_GET['opc'] == 22 )
+  imprimeCajaTop("100","Grupos ");
+retorno();
+echo "<ul class=\"pagos_menu\">\n";
+foreach($tabs AS $option => $tab) {
+	if ($option != $tab_option) {
+		echo "<li><a href=\"admin.php?opc=". $_GET['opc'] . "&tab=$option\">{$tabs[$option][1]}</a></li>\n";
+	} else {
+		echo "<li class=\"active\"><strong>{$tabs[$option][1]}</strong></li>\n";
+	}
+}
+echo "</ul>\n";
+retorno();
+echo "<div class=\"pagos_content\">";
+echo $_template_content_;
+echo "</div>";
+retorno();
+print '<center>
+	<input type="button" value="Volver a menu" onClick=location.href="menuadmin.php#pagos">
+	</center>';
+imprimeCajaBottom();
+imprimePie();

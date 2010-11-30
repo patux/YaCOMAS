@@ -57,6 +57,14 @@ if ($_SESSION['YACOMASVARS']['rootlevel']<3){
 	print '<a href="admin.php?opc=13">Listado de Asistentes</a> <br><br>';
 	}
 print '<a href="admin.php?opc=15">Control de Asistencias</a> <br><br>';
+print '<hr>
+<a NAME="pagos"><a>
+<H2>Pagos</H2>';
+if ($_SESSION['YACOMASVARS']['rootlevel']<3){ 
+	print '<a href="admin.php?opc=20">Administraci&oacute;n de  Pagos</a> <br><br>';
+	print '<a href="admin.php?opc=21">Control de Caja</a> <br><br>';
+	print '<a href="admin.php?opc=22">A&ntilde;adir Asistentes a Pagos</a> <br><br>';
+	}
 print '</font>';
 imprimeCajaBottom();
 retorno_esp();

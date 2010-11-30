@@ -1,13 +1,13 @@
 -- We create the database and the user that is gonna be permissions to use it
 
--- DROP DATABASE yacomas_db; 
-CREATE DATABASE yacomas_db;
+DROP DATABASE IF EXIST dbname; 
+CREATE DATABASE fslyacomas;
 GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,DROP
-ON yacomas_db.* TO 'yacomas_user'@'yacomas_dbhost' IDENTIFIED BY 'yacomas_pwd';
+ON fslyacomas.* TO 'yacomas'@'localhost' IDENTIFIED BY 'fslsamocay';
 
 -- We start to create all the tables
 
-USE yacomas_db;
+USE fslyacomas;
 
 CREATE TABLE administrador (
   id int(10) unsigned NOT NULL auto_increment,
@@ -34,7 +34,7 @@ INSERT INTO administrador VALUES (1,'admin',md5('admin'),'Administrador','Princi
 
 CREATE TABLE asistente (
   id int(10) unsigned NOT NULL auto_increment,
-  login varchar(15) NOT NULL default '',
+  login varchar(50) NOT NULL default '',
   passwd varchar(32) NOT NULL default '',
   nombrep varchar(50) NOT NULL default '',
   apellidos varchar(50) NOT NULL default '',
@@ -49,7 +49,8 @@ CREATE TABLE asistente (
   id_estudios int(10) unsigned NOT NULL default '0',
   id_tasistente int(10) unsigned NOT NULL default '0',
   id_estado int(10) unsigned NOT NULL default '0',
-  PRIMARY KEY  (id,login,id_estudios,id_tasistente,id_estado)
+  id_pago int(10) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY  (id,login,id_estudios,id_tasistente,id_estado,id_pago)
 ) TYPE=MyISAM;
 
 --
@@ -430,8 +431,119 @@ CREATE TABLE tasistente (
 -- Dumping data for table 'tasistente'
 --
 
-INSERT INTO tasistente VALUES (1,'Estudiante');
-INSERT INTO tasistente VALUES (2,'Academico');
-INSERT INTO tasistente VALUES (3,'Empresa');
-INSERT INTO tasistente VALUES (4,'Externo');
+INSERT INTO tasistente VALUES (1,'Estudiante/Docente/Academico UdG');
+INSERT INTO tasistente VALUES (2,'Estudiante/Docente/Academico Otra Universidad');
+INSERT INTO tasistente VALUES (3,'Publico General');
 
+--
+-- Table structure for table 'tcuota'
+--
+
+CREATE TABLE tcuota (
+  id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  descr varchar(100) DEFAULT NULL,
+  costo decimal(5,2) unsigned NOT NULL DEFAULT '0.00',
+  PRIMARY KEY (id)
+) TYPE=MyISAM;
+
+--
+-- Dumping data for table `tcuota`
+--
+
+INSERT INTO tcuota VALUES (1,'Estudiantes/Docentes/Personal UdG A-15 Oct','100.00'),
+                          (2,'Estudiantes/Docentes/Personal UdG D-15 Oct','150.00'),
+                          (3,'Estudiantes/Docentes Otra Universidad A-15 Oct','150.00'),
+                          (4,'Estudiantes/Docentes Otra Universidad D-15 Oct','200.00'),
+                          (5,'Publico General A-15 Oct','250.00'),
+                          (6,'Publico General D-15 Oct','300.00'),
+                          (7,'Inscripcion de Cortesia','0.00');
+
+--
+-- Table structure for table `thospedaje`
+--
+
+CREATE TABLE thospedaje (
+  id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  descr varchar(100) DEFAULT NULL,
+  costo decimal(15,2) unsigned NOT NULL DEFAULT '0.00',
+  PRIMARY KEY (id)
+) TYPE=MyISAM;
+
+--
+-- Dumping data for table `thospedaje`
+--
+
+INSERT INTO thospedaje VALUES (1,'Sencilla Plan Americano','1033.33'),
+                              (2,'Sencilla Todo Incluido','1333.33'),
+                              (3,'Doble Plan Americano','533.33'),
+                              (4,'Doble Todo Incluido','833.33'),
+                              (5,'Triple Plan Americano','483.33'),
+                              (6,'Triple Todo Incluido','733.33'),
+                              (7,'Cuadruple Plan Americano','433.33'),
+                              (8,'Cuadruple Todo Incluido','666.66');
+
+--
+-- Table structure for table `inscripcionp`
+--
+
+CREATE TABLE inscripcionp (
+  id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  id_pago int(10) unsigned NOT NULL DEFAULT '0',
+  id_tcuota int(10) unsigned NOT NULL DEFAULT '0',
+  no_personas int(10) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (id)
+) TYPE=MyISAM;
+
+--
+-- Table structure for table `hospedajep`
+--
+
+CREATE TABLE hospedajep (
+  id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  id_pago int(10) unsigned NOT NULL DEFAULT '0',
+  id_thospedaje int(10) unsigned NOT NULL DEFAULT '0',
+  no_personas int(10) unsigned NOT NULL DEFAULT '0',
+  no_noches int(10) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (id)
+) TYPE=MyISAM;
+
+
+--
+-- Table structure for table `pago`
+--
+
+CREATE TABLE pago (
+  id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  id_responsable int(10) unsigned NOT NULL DEFAULT '0',
+  id_factura int(10) unsigned NOT NULL DEFAULT '0',
+  tpago varchar(10) NOT NULL DEFAULT 'Efectivo',
+  no_voucher varchar(15) NOT NULL DEFAULT '',
+  monto_cuotas decimal(15,2) unsigned NOT NULL DEFAULT '0.00',
+  monto_hospedaje decimal(15,2) unsigned NOT NULL DEFAULT '0.00',
+  monto_neto decimal(15,2) unsigned NOT NULL DEFAULT '0.00',
+  porc_descuento tinyint(4) DEFAULT '0',
+  fecha_pago datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  pagado tinyint(4) DEFAULT '0',
+  comentarios text,
+  act_time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id)
+) TYPE=MyISAM;
+
+--
+-- Table structure for table `factura`
+--
+
+CREATE TABLE factura (
+  id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  rfc varchar(13) NOT NULL DEFAULT '',
+  razonsocial varchar(255) NOT NULL DEFAULT '',
+  direccion varchar(255) NOT NULL DEFAULT '',
+  colonia varchar(255) NOT NULL DEFAULT '',
+  telefono varchar(12) NOT NULL DEFAULT '',
+  cp varchar(10) NOT NULL DEFAULT '',
+  PRIMARY KEY (id)
+) TYPE=MyISAM;
+
+--
+--
+--

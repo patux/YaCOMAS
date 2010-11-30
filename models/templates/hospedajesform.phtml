@@ -1,0 +1,14 @@
+<h2>Hospedajes</h2>
+<?php if(!$lectura) { ?>
+<input type="button" onclick="xajax_editarHospedaje('0', '<?php echo $DAO->getId()?>')" value="Añadir Hospedaje"/>
+<?php }?>
+<ul id="hospedajes">
+<?php
+	$hospedajes = $DAO->getHospedajes();
+	foreach($hospedajes AS $Hospedaje) {
+		$Content = new Decorator($Hospedaje, 'hospedajeli');
+		$Content->assign('lectura', $lectura);
+		echo "<li id=\"hospedaje_{$Hospedaje->getId()}\">" . $Content->getString() . "</li>";
+	} 
+?>
+</ul>

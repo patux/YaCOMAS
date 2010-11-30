@@ -1,0 +1,5 @@
+<?php echo "<strong>".$DAO->getDescr()."</strong>: $DAO->no_personas personas x $".$DAO->getCosto()." = \$" . $DAO->no_personas * $DAO->getCosto(); ?>
+<?php if(!$lectura) { ?>
+<input type="button" onclick="xajax_editarCuota('<?php echo $DAO->getId()?>', '<?php echo $DAO->id_pago?>')" value="Editar"/>
+<input type="button" onclick="xajax_eliminarCuota('<?php echo $DAO->getId()?>')" value="Eliminar"/>
+<?php }?>

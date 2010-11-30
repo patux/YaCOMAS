@@ -1,0 +1,56 @@
+<h2 style="float:right"><?php echo "FSL Vallarta Recibo: " . $Pago->id . " || "; echo date('d/m/Y', strtotime($Pago->act_time))?></h2>
+<h2 style="float:left"><?php echo $Asistente->nombrep." ". $Asistente->apellidos ?></h2>
+<center><h2 style="color:red"><?php echo ($Pago->pagado == 1)?"Recibo pagado":"Recibo no pagado"; ?></h2></center>
+<hr style="clear:both"/>
+
+<div id="cuotas_form">
+<?php 
+	$CuotasForm = new Decorator($Pago, 'cuotasform');
+	$CuotasForm->assign('lectura', true);
+	echo $CuotasForm->getString();
+?>
+<h3 id="porc_descuento">Descuento: <?php echo $Pago->porc_descuento;?>%</h3>
+<h3 id="total_cuotas">Total Inscripciones: $ <?php echo $Pago->getTotalCuotas()?></h3>
+</div>
+
+<div id="hospedajes_form">
+<?php
+	$HospedajesForm = new Decorator($Pago, 'hospedajesform');
+	$HospedajesForm->assign('lectura', true);
+	echo $HospedajesForm->getString();
+?>
+<h3 id="total_hospedajes">Total Hospedajes: $ <?php echo $Pago->getTotalHospedajes()?></h3>
+</div>
+<hr/>
+<h3 id="tpago">Tipo de Pago: <?php echo $Pago->tpago?></h3>
+<h3 id="total">Total: $ <?php echo $Pago->getTotal()?></h3>
+<h3 id="nobaoucher">Número de Voucher: <?php echo $Pago->no_baucher?></h3>	
+<hr/>
+<?php if ( $Factura->getId()!=0 ) {?>
+<h2>Factura</h2>
+<div id="factura_container">
+<?php
+	$FacturaDetail = new Decorator($Factura, 'facturadetail');
+	$FacturaDetail->assign('id_pago', $Pago->getId());
+	$FacturaDetail->assign('lectura', true);
+	echo $FacturaDetail->getString();
+?>
+</div>
+<?php }?>
+<hr/>
+<?php
+if ($_GET['opc'] == 20)  
+{
+	?>
+<input type="button" onclick="parent.location='admin.php?opc=20&amp;tab=2&amp;id=<?php echo $Pago->id_responsable?>'" value="Editar Recibo"/>
+<input type="button" onclick="xajax_abrirEliminarPago(<?php echo $Pago->getId()?>);" value="Eliminar Pago"/>
+<?php 
+}
+
+if ($_GET['opc'] == 21)  
+{
+	?>
+<input type="button" onclick="xajax_abrirConfirmarPago(<?php echo $Pago->getId()?>);" value="Confirmar Pago"/>
+<?php 
+}
+?>

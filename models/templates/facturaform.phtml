@@ -1,0 +1,11 @@
+<form action="" method="post" name="factura_form" id="factura_form">
+	<input type="hidden" name="id_factura" id="id_factura" value="<?php echo $DAO->getId() ?>"/>
+  <label for="razonsocial">Razón Social:*</label><input type="text" name="razonsocial" size="30" id="razonsocial" value="<?php echo $DAO->razonsocial?>"/><br/>
+	<label for="rfc">RFC:*</label><input type="text" name="rfc" id="rfc" value="<?php echo $DAO->rfc?>"/><br/>
+	<label for="direccion">Dirección:*</label><input type="text" name="direccion" size="30" id="direccion" value="<?php echo $DAO->direccion?>"/><br/>
+	<label for="colonia">Colonia: </label><input type="text" name="colonia" size="20" id="colonia" value="<?php echo $DAO->colonia?>"/><br/>
+	<label for="telefono">Telefono: </label><input type="text" name="telefono" size="15" id="telefono" value="<?php echo $DAO->telefono?>"/><br/>
+	<label for="cp">Código Postal: </label><input type="text" name="cp" id="cp" value="<?php echo $DAO->cp?>"/><br/>
+	<input type="button" onclick="xajax_guardarFactura(xajax.getFormValues('factura_form'), <?php echo $id_pago ?>)" value="Guardar"/>
+  <input type="button" onclick="xajax_cancelarEditarFactura(<?php echo $id_pago ?>)" value="Cancelar"/>
+</form>

@@ -306,7 +306,8 @@ class Planner {
       . $event['event_id'] . ' ' 
       . $_SERVER['REQUEST_URI']. '#top"';
       $string .="<span class=\"event\">".nl2br(htmlentities($event['event_name']))."</span><br>" 
-                ."<span class=\"person\">".htmlentities($event['person_name'])."</span></a>";
+                ."<span class=\"person\">".htmlentities($event['person_name'])."<br>"
+                ."<small>".htmlentities($event['type_name'])."</small></span></a>";
     } else {
       $string .= "&nbsp;";
     }

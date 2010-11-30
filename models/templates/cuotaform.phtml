@@ -1,0 +1,15 @@
+<?php
+	$DbConnection = DbConnection::getInstance();
+	$sql="SELECT id, concat(descr, ' $',costo) AS descr FROM tcuota;";
+	$cuotas = $DbConnection->getAssoc($sql);
+?>
+<form action="" name="cuota_form_<?php echo $DAO->getId() ?>" id="cuota_form_<?php echo $DAO->getId() ?>">
+	<input type="hidden" name="id_inscripcionp" id="id_inscripcionp" value="<?php echo $DAO->getId() ?>"/>
+	<input type="hidden" name="id_pago" id="id_pago" value="<?php echo $DAO->id_pago ?>"/>	
+	<?php
+		echo FormHelper::createSelect('Tipo de Inscripción:', 'id_tcuota', $cuotas, $DAO->id_tcuota, 2);
+	?><br/>
+	<label for="no_personas">Personas:</label> <input type="text" name="no_personas" id="no_personas" value="<?php echo (!isset($DAO->no_personas ))?1:$DAO->no_personas;?>"/>
+	<input type="button" onclick="xajax_guardarCuota(xajax.getFormValues('cuota_form_<?php echo $DAO->getId() ?>'))" value="Guardar"/>
+	<input type="button" onclick="xajax_cancelarEditarCuota('<?php echo $DAO->getId() ?>')" value="Cancelar"/>
+</form>

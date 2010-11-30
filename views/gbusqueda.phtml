@@ -1,0 +1,18 @@
+<form action="#" name="search_form">
+<p>
+<label for="apellido">Apellido:</label>
+<input id="apellido" name="apellido" type="text" onkeyup="xajax_buscarAsistente(xajax.$('apellido').value)"/>
+<?php if ( $_GET['opc'] == 20 )
+   {
+   ?>
+	<input type="button" onclick="parent.location='admin.php?opc=20&amp;tab=1&amp;id=0'" value="Asistente No Registrado"/>
+	<?php
+	}
+	?>
+</p>
+</form>
+
+<div id="results_table">
+<strong>Los resultados aparecerán a partir del 3er caracter que teclees.</strong>
+
+</div>

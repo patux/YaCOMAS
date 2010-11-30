@@ -1,0 +1,7 @@
+<?php
+  $asistentes = $DAO->getAsistentes();
+  foreach($asistentes AS $Asistente) {
+    $AsistenteLi=new Decorator($Asistente, 'asistenteli');
+    echo "<li id=\"asistente_$Asistente->id\">". $AsistenteLi->getString()."</li>\n";
+  } 
+?>

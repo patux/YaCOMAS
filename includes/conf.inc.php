@@ -121,5 +121,9 @@ define (MPONENTEFOTO,4);
 define (CARACTERSEPARADOR,"-"); //Cada fichero tendrá la siguiente nomenclatura
 					   // <ruta><idusuario><CARACTERSEPARADOR><nombrefichero>
 					   // Ejemplo /var/www/yacomas/documentos/1-prueba.pdf
-
+					   
+if ( defined('TO_ROOT') ) {
+	include_once TO_ROOT . "/includes/Autoloader.php";
+	Autoloader::registerAutoload();
+}
 ?>

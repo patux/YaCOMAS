@@ -18,8 +18,6 @@ print '
 <font size=+1 color=#000000 face=arial>
 <a href="asistente.php?opc='.MASISTENTE.'">Modificar mis datos</a> <br><br>
 <a href="asistente.php?opc='.LEVENTOS.'">Agenda de Actividades</a> <br><br>
-<a href="asistente.php?opc='.LTALLERES.'">Listar/Inscribirme a talleres y tutoriales</a> <br><br>
-<a href="asistente.php?opc='.LTALLERESREG.'">Listar/Darme de baja de talleres y tutoriales registrados</a> <br><br>
 <a href="asistente.php?opc='.HOJAREGISTRO.'">Imprimir hoja de registro</a><br><br>
 ';
 //print '<hr>';

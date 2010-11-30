@@ -10,6 +10,11 @@ imprimeEncabezado();
     clear: both;
     
   }
+  p.ponente {
+  margin-left: 0.12em; /* Put some space between the text and the image. */
+  margin-right: 0.12em; /* Put some space between the text and the image. */
+  text-align: justify; text-justify: newspaper;
+  } 
 
   .fsl-speaker img
   {
@@ -34,10 +39,11 @@ $userQueryPM = 'SELECT 	e.descr as estado, p.id, p.login, p.ciudad,
 					p.nombrep, p.apellidos, p.resume
 			FROM 	ponente as p, estado as e 
 			WHERE p.id IN (SELECT DISTINCT id_ponente 
-					FROM propuesta 
- 		                        WHERE id_status=8 
-                		        AND  id_prop_tipo=100) 
-				AND p.id_estado = e.id';
+							FROM propuesta 
+                            WHERE id_status=8
+                            AND   id_prop_tipo=100
+                            AND p.id != 69) 
+						AND p.id_estado = e.id';
 $userRecordsPM = mysql_query($userQueryPM) or err("No se pudo listar ponentes magistrales".mysql_errno($userRecordsPM));
 $i = 0;
 while ($fila = mysql_fetch_array($userRecordsPM))
@@ -61,7 +67,7 @@ for ($i = 0; $i < count($ponente_array); $i++)
 		$ponente_name = $ponente_array[$i]['ponente_name'];		
 		$ciudad = $ponente_array[$i]['ciudad'];
 		$estado = $ponente_array[$i]['estado'];
-		$resume = $ponente_array[$i]['resume'];
+		$resume = htmlspecialchars($ponente_array[$i]['resume']);
 		$foto = (file_exists("{$image_ponente_dest}foto_{$idponente}.jpeg"))?"{$image_ponente_dest}foto_$idponente.jpeg":$image_ponente_default;	
 		?>
 		<div class="fsl-speaker">
@@ -82,19 +88,18 @@ for ($i = 0; $i < count($ponente_array); $i++)
 
 <?php
 // Normal speakers
-$userQueryP = 'SELECT 	e.descr as estado, p.id, p.ciudad,
+$userQueryP = 'SELECT 	e.descr as estado, p.id, p.login, p.ciudad,
 					p.nombrep, p.apellidos, p.resume
 			FROM 	ponente as p, estado as e 
 			WHERE p.id IN (SELECT DISTINCT id_ponente 
-					FROM propuesta 
-					WHERE id_status=8 
-                            AND  id_prop_tipo<100) 
-                       AND p.id NOT IN 
-                          (SELECT DISTINCT id_ponente 
-                            FROM propuesta
-                            WHERE id_status=8
-                            AND id_prop_tipo=100)
-			AND p.id_estado = e.id';
+							FROM propuesta 
+							WHERE id_status=8 
+                            AND   id_prop_tipo<100) 
+                        AND p.id NOT IN (SELECT DISTINCT id_ponente
+                             FROM propuesta
+                             WHERE id_status=8
+                             AND id_prop_tipo=100)
+						AND p.id_estado = e.id';
 $userRecordsP = mysql_query($userQueryP) or err("No se pudo listar ponentes".mysql_errno($userRecordsP));
 $i = 0;
 while ($fila = mysql_fetch_array($userRecordsP))
@@ -127,7 +132,7 @@ for ($i = 0; $i < count($ponente_array); $i++)
 		<h2><?php echo $ponente_name ?>
 		<br /><small><?php echo $ciudad.' '.$estado ?></small></h2>
 		<img src="<?php echo $foto ?>" align="right" alt="<?php echo $ponente_name ?>"/>		
-		<p class="ponente"><?php print $resume ?></p>
+		<p class="ponente" align="justify" ><? print $resume ?></p>
 		</div>
 		<?php
 	}

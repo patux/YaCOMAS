@@ -19,12 +19,18 @@ print '
         <meta HTTP-EQUIV="Reply-to" CONTENT="'.$general_mail.'">
         <meta NAME="revisit-after" CONTENT="1 days">
         <link rel="SHORTCUT ICON" href="'.$rootpath.'/images/favicon.ico"> 
-        <link rel="icon" href="'.$rootpath.'/images/favicon.ico"">
-
-</head>
+        <link rel="icon" href="'.$rootpath.'/images/favicon.ico"">';
+		?><script type="text/javascript" src="<?php echo $rootpath.'/includes/functions.js' ?>"></script><?php
+if( defined('TO_ROOT') ) {
+	global $xajax;
+	if( isset($xajax) ) {
+		$xajax->printJavascript(TO_ROOT."/vendors/xajax/");
+	}
+}
+print '</head>
 
 <link rel="stylesheet" href="'.$rootpath.'/style1.css" type="text/css">
 
 ';
-print ' <body bgcolor="'.$bgcolor.'" link="#a6a141"> ';
+print ' <body bgcolor="'.$bgcolor.'" link="#a6a141" onload="focus_on_first()"> ';
 ?>

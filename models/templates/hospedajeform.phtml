@@ -1,0 +1,16 @@
+<?php
+	$DbConnection = DbConnection::getInstance();
+	$sql="SELECT id, concat(descr, ' $',costo) AS descr FROM thospedaje;";
+	$hospedajes = $DbConnection->getAssoc($sql);
+?>
+<form action="" name="hospedaje_form_<?php echo $DAO->getId() ?>" id="hospedaje_form_<?php echo $DAO->getId() ?>">
+	<input type="hidden" name="id_hospedajep" id="id_hospedajep" value="<?php echo $DAO->getId() ?>"/>
+	<input type="hidden" name="id_pago" id="id_pago" value="<?php echo $DAO->id_pago ?>"/>	
+	<?php
+		echo FormHelper::createSelect('Tipo de Hospedaje:', 'id_thospedaje', $hospedajes,$DAO->id_thospedaje);
+	?><br/>
+	<label for="no_personas">Personas:</label> <input type="text" name="no_personas" id="no_personas" value="<?php echo (!isset($DAO->no_personas ))?1:$DAO->no_personas; ?>"/>
+	<label for="no_noches">Noches:</label> <input type="text" name="no_noches" id="no_noches" value="<?php echo(!isset($DAO->no_noches ))?3:$DAO->no_noches; ?>"/>
+	<input type="button" onclick="xajax_guardarHospedaje(xajax.getFormValues('hospedaje_form_<?php echo $DAO->getId() ?>'))" value="Guardar"/>
+	<input type="button" onclick="xajax_cancelarEditarHospedaje('<?php echo $DAO->getId() ?>')" value="Cancelar"/>
+</form>

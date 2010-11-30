@@ -1,0 +1,24 @@
+<div id="modal_dialog_shadow" class="hidden"></div>
+<div id="modal_dialog" class="hidden"></div>
+<h2> Datos del Responsable</h2>
+<strong>Nombre:</strong> <?php echo "$Responsable->apellidos $Responsable->nombreP" ?><br/>
+<strong>Correo:</strong> <?php echo $Responsable->mail ?><br/>
+<strong>Ciudad:</strong> <?php echo $Responsable->ciudad ?><br/>
+
+<h2> Datos del Pago</h2>
+<strong>Monto Cuotas:</strong> $<?php echo $Pago->monto_cuotas ?><br/>
+<strong>Monto Hospedaje:</strong> $<?php echo $Pago->monto_hospedaje ?><br/>
+<strong>Monto Neto:</strong> $<?php echo $Pago->monto_neto ?><br/>
+<strong>Descuento:</strong> <?php echo $Pago->porc_descuento ?>%<br/>
+<strong>Pagado:</strong> <?php echo ($Pago->pagado=='1')?'Sí':'No'; ?><br/>
+<strong>Comentarios:</strong> <?php echo $Pago->comentarios ?><br/>
+
+<h2>Asistentes en el grupo</h2>
+<input type="button" onclick="xajax_abrirDialogoAnadirAsistente(<?php echo $Pago->getId()?>)" value="Añadir Asistente" />
+<input type="button" onclick="xajax_abrirDialogoNuevoAsistente(<?php echo $Pago->getId()?>)" value="Asistente no Registrado" />
+<ul id="asistentes_list">
+<?php
+  $AsistentesLi = new Decorator($Pago, 'asistentesli');
+  echo $AsistentesLi->getString(); 
+?>
+</ul>

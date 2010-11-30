@@ -48,7 +48,7 @@
     <p>
       <label for="foto">Selecciona la foto para subir:</label>
       <input type="file" size="32" name="mi_foto" id="mi_foto" value=""/><br/>
-      La foto se convertirá a jpeg y se escalará a un ancho de <?php echo $image_ponente_max_width ?>px.
+      La foto se convertir&aacute; a jpeg y se escalar&aacute; a un ancho de <?php echo $image_ponente_max_width ?>px.
       <input type="submit" name="submit" value="Subir"><br/>
     </p>
    </form>

@@ -203,8 +203,9 @@ p.ponente {
   padding-top: 10px;
   font-size: 18px;
   font-type: arial;
-  text-align: justyfy;
-}
+  margin-left: 0.4em; /* Put some space between the text and the image. */
+  margin-right: 0.4em; /* Put some space between the text and the image. */
+} 
 
 table.name {        
   width: 30%;
@@ -332,7 +333,7 @@ table.planner td, table.planner th  {
 }
 table.planner td .person {
   font-style:italic;
-  font-weight:normal
+  font-weight:normal;
 }
 table.planner td .event {
   font-weight:bolder;
@@ -376,3 +377,82 @@ td.type_examen {
 td.type_platica_informal {
  background-color: #EF2929; /*Scarlet Red*/
 }
+#results_table table {
+  width:100%;
+  border:1px solid black;
+  border-collapse: collapse;
+  }
+#results_table td {
+  border:1px solid black;
+  }
+#results_table tr:hover {
+  background:gray;
+  color:white;
+  }
+.pagos_menu {
+  list-style: none;
+  display:block;
+  margin:0px;
+  padding:0px;
+  }
+.pagos_content {
+  clear:both;
+  border:5px solid gray;
+  padding:5px;
+  }
+  .pagos_menu li.active{
+  background-color:gray;
+  color:white;
+  }
+  
+.pagos_menu li {
+  display:block;
+  
+  float:left;
+  background-color:black;
+  color:white;
+  padding:5px;
+  -webkit-border-top-left-radius: 5px;
+  -webkit-border-top-right-radius: 5px;
+  -moz-border-radius-topleft: 5px;
+  -moz-border-radius-topright: 5px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  margin-left:2px
+  
+}
+.pagos_menu li a {
+  color:gray;
+  
+}
+.pagos_menu li a:hover {
+  text-decoration: underline;
+  color:white;
+}
+#modal_dialog.hidden, #modal_dialog_shadow.hidden {
+	display:none;
+	}
+#modal_dialog.visible {
+  position: fixed;
+  width:700px;
+  top: 30px;
+  left: 50%;
+  z-index:1000;
+  margin-left: -350px;
+	border:1px solid black;
+	background:white;
+	padding:5px;
+	-moz-border-radius:5px;
+}
+#modal_dialog_shadow.visible {
+  position:fixed;
+  top:0px;
+  left:0px;
+  width:100%;
+  height:100%;
+  background:black;
+  z-index:999;
+  filter:alpha(opacity=60);
+  -moz-opacity:0.6;
+  -khtml-opacity: 0.6;
+  opacity: 0.6;

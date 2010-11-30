@@ -241,7 +241,7 @@ else {
 
 		<td class="name">Nombre de Ponencia: * </td>
 		<td class="input">
-		<input TYPE="text" name="S_nombreponencia" size="50" maxlength="150" 
+		<input TYPE="text" name="S_nombreponencia" size="50" maxlength="250" 
 		value="'.$_POST['S_nombreponencia'].'"></td>
 		</tr>
 		

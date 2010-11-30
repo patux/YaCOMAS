@@ -280,7 +280,7 @@ while ($Qf_evento = mysql_fetch_array($fechaRecords))
 				P.id_orientacion=O.id AND 
 				P.id_prop_tipo=PT.id AND
 				EO.id_fecha="'.$Qf_evento['id'].'"  AND
-				P.id_prop_tipo>=50 AND
+				P.id_prop_tipo=50 AND
 				P.id_prop_tipo<100
 			GROUP BY id_evento 
 			ORDER BY EO.id_fecha,EO.hora';

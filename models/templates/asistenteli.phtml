@@ -1,0 +1,4 @@
+<?php echo "<strong>$DAO->apellidos $DAO->nombrep</strong>" ?>
+<?php if(!$lectura && !$DAO->getPago()) { ?>
+<input type="button" onclick="xajax_eliminarAsistente('<?php echo $DAO->getId()?>')" value="Remover"/>
+<?php }?>

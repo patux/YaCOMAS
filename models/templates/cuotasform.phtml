@@ -1,0 +1,14 @@
+<h2>Inscripciones</h2>
+<?php if(!$lectura) { ?>
+<input type="button" onclick="xajax_editarCuota('0', '<?php echo $DAO->id?>')" value="Añadir Inscripcion"/>
+<?php } ?>
+<ul id="cuotas">
+<?php
+	$cuotas = $DAO->getCuotas();
+	foreach($cuotas AS $Cuota) {
+		$Content = new Decorator($Cuota, 'cuotali');
+		$Content->assign('lectura', $lectura);
+		echo "<li id=\"cuota_{$Cuota->getId()}\">" . $Content->getString() . "</li>";
+	} 
+?>
+</ul>

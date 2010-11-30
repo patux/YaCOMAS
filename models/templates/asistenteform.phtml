@@ -1,0 +1,18 @@
+<h2>Añadir Asistente No Registrado</h2>
+<?php extract($DAO->getAllData())?>
+<form action="" id="asistente_form">
+<p>
+  <input type="hidden" name="id" id="id" value="<?php echo $DAO->getId() ?>"/>
+  <input type="hidden" name="id_pago" id="id_pago" value="<?php echo $id_pago?>"/>
+  <label for="nombrep">Nombre:*</label> <input type="text" size="30" name="nombrep" id="nombrep" value="<?php echo $nombrep ?>"/><br/>
+  <label for="apellidos">Apellidos:*</label> <input type="text" size="30"name="apellidos" id="apellidos" value="<?php echo $apellidos ?>"/><br/>
+  <label for="mail">Correo:*</label> <input type="text" size="30" name="mail" id="mail" value="<?php echo $mail ?>"/><br/>
+  <?php echo FormHelper::createRadio('Sexo:*', 'sexo', array('M'=>'Masculino','F'=>'Femenino'), $sexo, 'M'); ?><br/>  
+  <?php echo FormHelper::createSelect('Estudios:*', 'id_estudios', $estudios, $id_estudios); ?><br/>
+  <?php echo FormHelper::createSelect('Estado:*', 'id_estado', $estados, $id_estado); ?><br/>
+  <label for="ciudad">Ciudad:</label> <input type="text" size="30" name="ciudad" id="ciudad" value="<?php echo $ciudad ?>"/><br/>
+  <?php echo FormHelper::createSelect('Edad:*', 'edad', $edades, $edad, 0); ?><br/>
+  <input type="button" onclick="hideModal();" value="Cancelar"/>
+  <input type="button" onclick="xajax_guardarAsistente(xajax.getFormValues('asistente_form'))" value="Guardar"/>
+</p>
+</form>

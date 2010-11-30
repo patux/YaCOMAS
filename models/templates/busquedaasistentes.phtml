@@ -1,0 +1,7 @@
+<h2>Busqueda de Asistentes:</h2>
+<label for="apellido">Buscar por Apellidos:</label> <input type="text" name="apellido" id="apellido" onkeyup="xajax_buscarAsistentePorPago(xajax.$('apellido').value, <?php echo $DAO->getId() ?>)"/><br/>
+<div id="results_table">
+  <strong>Los resultados aparecerán a partir del 3er caracter que teclees.</strong>
+</div>
+<br/>
+<input type="button" onclick="hideModal();" value="Cerrar" />
