@@ -1,0 +1,259 @@
+<mockup version="1.0" skin="sketch" measuredW="1463" measuredH="1140" mockupW="1393" mockupH="1130">
+  <controls>
+    <control controlID="52" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="180" y="0" w="1024" h="1130" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>A%20Web%20Page%0Ahttp%3A//</text>
+        <verticalScrollbar>true</verticalScrollbar>
+      </controlProperties>
+    </control>
+    <control controlID="53" controlTypeID="com.balsamiq.mockups::Canvas" x="186" y="72" w="998" h="507" measuredW="100" measuredH="70" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0.25</backgroundAlpha>
+        <borderStyle>none</borderStyle>
+        <color>7317724</color>
+      </controlProperties>
+    </control>
+    <control controlID="54" controlTypeID="__group__" x="214" y="71" w="942" h="1031" measuredW="942" measuredH="1031" zOrder="2" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="36" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="42" h="1031" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="54">
+          <controlProperties>
+            <backgroundAlpha>0.25</backgroundAlpha>
+            <borderStyle>none</borderStyle>
+            <color>11776947</color>
+          </controlProperties>
+        </control>
+        <control controlID="37" controlTypeID="com.balsamiq.mockups::Canvas" x="60" y="0" w="42" h="1031" measuredW="100" measuredH="70" zOrder="1" locked="false" isInGroup="54">
+          <controlProperties>
+            <backgroundAlpha>0.25</backgroundAlpha>
+            <borderStyle>none</borderStyle>
+            <color>11776947</color>
+          </controlProperties>
+        </control>
+        <control controlID="38" controlTypeID="com.balsamiq.mockups::Canvas" x="120" y="0" w="42" h="1031" measuredW="100" measuredH="70" zOrder="2" locked="false" isInGroup="54">
+          <controlProperties>
+            <backgroundAlpha>0.25</backgroundAlpha>
+            <borderStyle>none</borderStyle>
+            <color>11776947</color>
+          </controlProperties>
+        </control>
+        <control controlID="39" controlTypeID="com.balsamiq.mockups::Canvas" x="180" y="0" w="42" h="1031" measuredW="100" measuredH="70" zOrder="3" locked="false" isInGroup="54">
+          <controlProperties>
+            <backgroundAlpha>0.25</backgroundAlpha>
+            <borderStyle>none</borderStyle>
+            <color>11776947</color>
+          </controlProperties>
+        </control>
+        <control controlID="40" controlTypeID="com.balsamiq.mockups::Canvas" x="240" y="0" w="42" h="1031" measuredW="100" measuredH="70" zOrder="4" locked="false" isInGroup="54">
+          <controlProperties>
+            <backgroundAlpha>0.25</backgroundAlpha>
+            <borderStyle>none</borderStyle>
+            <color>11776947</color>
+          </controlProperties>
+        </control>
+        <control controlID="41" controlTypeID="com.balsamiq.mockups::Canvas" x="300" y="0" w="42" h="1031" measuredW="100" measuredH="70" zOrder="5" locked="false" isInGroup="54">
+          <controlProperties>
+            <backgroundAlpha>0.25</backgroundAlpha>
+            <borderStyle>none</borderStyle>
+            <color>11776947</color>
+          </controlProperties>
+        </control>
+        <control controlID="42" controlTypeID="com.balsamiq.mockups::Canvas" x="360" y="0" w="42" h="1031" measuredW="100" measuredH="70" zOrder="6" locked="false" isInGroup="54">
+          <controlProperties>
+            <backgroundAlpha>0.25</backgroundAlpha>
+            <borderStyle>none</borderStyle>
+            <color>11776947</color>
+          </controlProperties>
+        </control>
+        <control controlID="43" controlTypeID="com.balsamiq.mockups::Canvas" x="420" y="0" w="42" h="1031" measuredW="100" measuredH="70" zOrder="7" locked="false" isInGroup="54">
+          <controlProperties>
+            <backgroundAlpha>0.25</backgroundAlpha>
+            <borderStyle>none</borderStyle>
+            <color>11776947</color>
+          </controlProperties>
+        </control>
+        <control controlID="44" controlTypeID="com.balsamiq.mockups::Canvas" x="480" y="0" w="42" h="1031" measuredW="100" measuredH="70" zOrder="8" locked="false" isInGroup="54">
+          <controlProperties>
+            <backgroundAlpha>0.25</backgroundAlpha>
+            <borderStyle>none</borderStyle>
+            <color>11776947</color>
+          </controlProperties>
+        </control>
+        <control controlID="45" controlTypeID="com.balsamiq.mockups::Canvas" x="540" y="0" w="42" h="1031" measuredW="100" measuredH="70" zOrder="9" locked="false" isInGroup="54">
+          <controlProperties>
+            <backgroundAlpha>0.25</backgroundAlpha>
+            <borderStyle>none</borderStyle>
+            <color>11776947</color>
+          </controlProperties>
+        </control>
+        <control controlID="46" controlTypeID="com.balsamiq.mockups::Canvas" x="600" y="0" w="42" h="1031" measuredW="100" measuredH="70" zOrder="10" locked="false" isInGroup="54">
+          <controlProperties>
+            <backgroundAlpha>0.25</backgroundAlpha>
+            <borderStyle>none</borderStyle>
+            <color>11776947</color>
+          </controlProperties>
+        </control>
+        <control controlID="47" controlTypeID="com.balsamiq.mockups::Canvas" x="660" y="0" w="42" h="1031" measuredW="100" measuredH="70" zOrder="11" locked="false" isInGroup="54">
+          <controlProperties>
+            <backgroundAlpha>0.25</backgroundAlpha>
+            <borderStyle>none</borderStyle>
+            <color>11776947</color>
+          </controlProperties>
+        </control>
+        <control controlID="48" controlTypeID="com.balsamiq.mockups::Canvas" x="720" y="0" w="42" h="1031" measuredW="100" measuredH="70" zOrder="12" locked="false" isInGroup="54">
+          <controlProperties>
+            <backgroundAlpha>0.25</backgroundAlpha>
+            <borderStyle>none</borderStyle>
+            <color>11776947</color>
+          </controlProperties>
+        </control>
+        <control controlID="49" controlTypeID="com.balsamiq.mockups::Canvas" x="780" y="0" w="42" h="1031" measuredW="100" measuredH="70" zOrder="13" locked="false" isInGroup="54">
+          <controlProperties>
+            <backgroundAlpha>0.25</backgroundAlpha>
+            <borderStyle>none</borderStyle>
+            <color>11776947</color>
+          </controlProperties>
+        </control>
+        <control controlID="50" controlTypeID="com.balsamiq.mockups::Canvas" x="840" y="0" w="42" h="1031" measuredW="100" measuredH="70" zOrder="14" locked="false" isInGroup="54">
+          <controlProperties>
+            <backgroundAlpha>0.25</backgroundAlpha>
+            <borderStyle>none</borderStyle>
+            <color>11776947</color>
+          </controlProperties>
+        </control>
+        <control controlID="51" controlTypeID="com.balsamiq.mockups::Canvas" x="900" y="0" w="42" h="1031" measuredW="100" measuredH="70" zOrder="15" locked="false" isInGroup="54">
+          <controlProperties>
+            <backgroundAlpha>0.25</backgroundAlpha>
+            <borderStyle>none</borderStyle>
+            <color>11776947</color>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="60" controlTypeID="com.balsamiq.mockups::TabBar" x="256" y="112" w="858" h="529" measuredW="568" measuredH="100" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>false</bold>
+        <selectedIndex>1</selectedIndex>
+        <text>-Buscar-%2C%20Agregar%20Asistentes%20Nuevos%2C%20Agregar%20Quitar%20Asistentes%20Existentes</text>
+      </controlProperties>
+    </control>
+    <control controlID="80" controlTypeID="com.balsamiq.mockups::HRule" x="256" y="164" w="858" h="-1" measuredW="100" measuredH="5" zOrder="4" locked="false" isInGroup="-1"/>
+    <control controlID="82" controlTypeID="com.balsamiq.mockups::Label" x="266" y="139" w="-1" h="-1" measuredW="198" measuredH="25" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Pago%3A%20XXXXXXXXXXXXXXXXX</text>
+      </controlProperties>
+    </control>
+    <control controlID="89" controlTypeID="com.balsamiq.mockups::StickyNote" x="1242" y="26" w="208" h="276" measuredW="109" measuredH="123" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>El%20campo%20Estado%20debe%20ser%20igual%20al%20ultimo%20asistente%20agregado%2C%20para%20agregar%20velocidad%20de%20captura%2C%0Atipicamente%20los%20miembros%20de%20pago%20pertenecen%20al%20mismo%20estado%2C%20pero%20puede%20variar.%0A%20</text>
+      </controlProperties>
+    </control>
+    <control controlID="90" controlTypeID="com.balsamiq.mockups::DataGrid" x="294" y="322" w="801" h="227" measuredW="404" measuredH="88" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Nombre%20%5E%2C%20Correo%2C%20Estado%0ALopez%20Hernandez%20Mangano%2C%20bar@foo.com%2C%20Aguascalientes%0APerez%20Gomez%20Fulano%2C%20foo@bar.com%2C%20Aguascalientes</text>
+        <verticalScrollbar>true</verticalScrollbar>
+      </controlProperties>
+    </control>
+    <control controlID="95" controlTypeID="com.balsamiq.mockups::Label" x="294" y="295" w="-1" h="-1" measuredW="166" measuredH="25" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Listado%20Miembros%20de%20Pago</text>
+      </controlProperties>
+    </control>
+    <control controlID="99" controlTypeID="com.balsamiq.mockups::Label" x="297" y="226" w="-1" h="-1" measuredW="66" measuredH="25" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Nombre%20*</text>
+      </controlProperties>
+    </control>
+    <control controlID="100" controlTypeID="com.balsamiq.mockups::TextInput" x="294" y="251" w="165" h="-1" measuredW="79" measuredH="29" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="101" controlTypeID="com.balsamiq.mockups::Label" x="471" y="226" w="-1" h="-1" measuredW="74" measuredH="25" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Apellidos%20*</text>
+      </controlProperties>
+    </control>
+    <control controlID="102" controlTypeID="com.balsamiq.mockups::TextInput" x="459" y="251" w="165" h="-1" measuredW="79" measuredH="29" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="103" controlTypeID="com.balsamiq.mockups::Label" x="651" y="226" w="-1" h="-1" measuredW="59" measuredH="25" zOrder="13" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Correo%20*</text>
+      </controlProperties>
+    </control>
+    <control controlID="104" controlTypeID="com.balsamiq.mockups::TextInput" x="624" y="251" w="165" h="-1" measuredW="79" measuredH="29" zOrder="14" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="107" controlTypeID="com.balsamiq.mockups::PointyButton" x="1041" y="250" w="-1" h="-1" measuredW="71" measuredH="28" zOrder="15" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Agregar</text>
+      </controlProperties>
+    </control>
+    <control controlID="109" controlTypeID="com.balsamiq.mockups::ComboBox" x="848" y="255" w="-1" h="-1" measuredW="63" measuredH="25" zOrder="16" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Edad</text>
+      </controlProperties>
+    </control>
+    <control controlID="110" controlTypeID="com.balsamiq.mockups::Label" x="848" y="226" w="-1" h="-1" measuredW="68" measuredH="25" zOrder="17" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>true</bold>
+        <text>Su%20edad%20*</text>
+      </controlProperties>
+    </control>
+    <control controlID="111" controlTypeID="com.balsamiq.mockups::Label" x="789" y="226" w="-1" h="-1" measuredW="49" measuredH="25" zOrder="18" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Sexo%20*</text>
+      </controlProperties>
+    </control>
+    <control controlID="112" controlTypeID="com.balsamiq.mockups::ComboBox" x="789" y="255" w="46" h="-1" measuredW="44" measuredH="25" zOrder="19" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>M</text>
+      </controlProperties>
+    </control>
+    <control controlID="113" controlTypeID="com.balsamiq.mockups::StickyNote" x="60" y="20" w="109" h="282" measuredW="109" measuredH="123" zOrder="20" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Edad%3A%0AMenor%20de%2015%0A15%20a%2018%20a%F1os%0A19%20a%2024%20%0A25%20a%2030%0A31%20a%2035%0A36%20a%2040%0A41%20a%2045%0A46%20a%2050%0A51%20a%2055%0AMas%20de%2055%20a%F1os%0ANo%20aplica</text>
+      </controlProperties>
+    </control>
+    <control controlID="114" controlTypeID="com.balsamiq.mockups::ComboBox" x="918" y="255" w="-1" h="-1" measuredW="124" measuredH="25" zOrder="21" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Aguascalientes</text>
+      </controlProperties>
+    </control>
+    <control controlID="115" controlTypeID="com.balsamiq.mockups::Label" x="957" y="226" w="-1" h="-1" measuredW="60" measuredH="25" zOrder="22" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>true</bold>
+        <text>Estado%20*</text>
+      </controlProperties>
+    </control>
+    <control controlID="116" controlTypeID="com.balsamiq.mockups::StickyNote" x="1242" y="322" w="208" h="243" measuredW="109" measuredH="123" zOrder="23" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>El%20campo%20login%20sera%20el%20email%0AEl%20campo%20passwd%20sera%20el%20md5%20de%20apellido%20en%20minusculas%0AEl%20campo%20Tipo%20Asistente%20es%205%20%28La%20db%20se%20taistente%20se%20debe%20modificar%20previamente%29%20%0A5%2C%20FSL%0AEstudios%20sera%20Ninguno%20%280%29</text>
+      </controlProperties>
+    </control>
+    <control controlID="117" controlTypeID="com.balsamiq.mockups::Title" x="373" y="64" w="-1" h="-1" measuredW="638" measuredH="62" zOrder="24" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>A%F1adir%20Quitar%20Asistentes%20a%20Pago</text>
+      </controlProperties>
+    </control>
+    <control controlID="118" controlTypeID="com.balsamiq.mockups::Button" x="957" y="572" w="117" h="30" measuredW="80" measuredH="28" zOrder="25" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Terminar</text>
+      </controlProperties>
+    </control>
+    <control controlID="119" controlTypeID="com.balsamiq.mockups::Arrow" x="1089" y="579" w="161" h="23" measuredW="150" measuredH="100" zOrder="26" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="120" controlTypeID="com.balsamiq.mockups::StickyNote" x="1250" y="551" w="203" h="123" measuredW="109" measuredH="123" zOrder="27" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Click%20terminar%20y%20ya%20puede%20seleccionar%20otro%20pago%20para%20editar%20o%20salir.</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>

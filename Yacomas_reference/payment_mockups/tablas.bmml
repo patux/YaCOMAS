@@ -1,0 +1,199 @@
+<mockup version="1.0" skin="sketch" measuredW="1577" measuredH="704" mockupW="1476" mockupH="685">
+  <controls>
+    <control controlID="4" controlTypeID="__group__" x="91" y="25" w="219" h="138" measuredW="219" measuredH="138" zOrder="0" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::TitleWindow" x="0" y="0" w="219" h="138" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="4">
+          <controlProperties>
+            <text>TCuota</text>
+            <verticalScrollbar>false</verticalScrollbar>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Paragraph" x="8" y="42" w="110" h="63" measuredW="200" measuredH="140" zOrder="1" locked="false" isInGroup="4">
+          <controlProperties>
+            <text>id%20%28PK%29%0Adescr%0Acosto</text>
+          </controlProperties>
+        </control>
+        <control controlID="2" controlTypeID="com.balsamiq.mockups::Paragraph" x="111" y="42" w="93" h="63" measuredW="200" measuredH="140" zOrder="2" locked="false" isInGroup="4">
+          <controlProperties>
+            <text>int%0Avarchar%28255%29%0Afloat%289.2%29</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="5" controlTypeID="com.balsamiq.mockups::DataGrid" x="335" y="25" w="-1" h="-1" measuredW="398" measuredH="208" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>1%2C%20Estudiantes/Docentes/Personal%20UdG%20A-15%20Oct%2C%20100.00%0A2%2C%20Estudiantes/Docentes/Personal%20UdG%20D-15%20Oct%2C%20150.00%0A3%2C%20Estudiantes/Docentes%20Otras%20Univ.%20A-15%20Oct%2C%20150.00%0A4%2C%20Estudiantes/Docentes%20Otras%20Univ.%20D-15%20Oct%2C%20200.00%0A5%2C%20Publico%20General%20A-15%20Oct%2C%20250.00%0A6%2C%20Publico%20General%20D-15%20Oct%2C%20300.00%0A7%2C%20Cortesia%2C%200.00</text>
+      </controlProperties>
+    </control>
+    <control controlID="7" controlTypeID="__group__" x="94" y="247" w="219" h="136" measuredW="219" measuredH="136" zOrder="2" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::TitleWindow" x="0" y="0" w="219" h="136" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="7">
+          <controlProperties>
+            <text>THospedaje</text>
+            <verticalScrollbar>false</verticalScrollbar>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Paragraph" x="8" y="42" w="110" h="64" measuredW="200" measuredH="140" zOrder="1" locked="false" isInGroup="7">
+          <controlProperties>
+            <text>id%20%28PK%29%0Adescr%0Acosto</text>
+          </controlProperties>
+        </control>
+        <control controlID="2" controlTypeID="com.balsamiq.mockups::Paragraph" x="111" y="42" w="93" h="64" measuredW="200" measuredH="140" zOrder="2" locked="false" isInGroup="7">
+          <controlProperties>
+            <text>int%0Avarchar%28255%29%0Afloat%289.2%29</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="8" controlTypeID="com.balsamiq.mockups::DataGrid" x="335" y="247" w="-1" h="-1" measuredW="272" measuredH="238" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>1%2C%20Sencilla%20Plan%20Americano%2C%201033.33%0A2%2C%20Sencilla%20Todo%20Incluido%2C%201333.33%0A3%2C%20Doble%20Plan%20Americano%2C%20533.33%0A4%2C%20Doble%20Todo%20Incluido%2C%20833.33%0A5%2C%20Tripe%20Plan%20Americano%2C%20483.33%0A6%2C%20Tripe%20Todo%20Incluido%2C%20733.33%0A7%2C%20Cuadruple%20Plan%20Americano%2C%20433.33%0A8%2C%20Cuadruple%20Todo%20Incluido%2C%20666.66</text>
+      </controlProperties>
+    </control>
+    <control controlID="9" controlTypeID="__group__" x="91" y="493" w="219" h="105" measuredW="219" measuredH="105" zOrder="4" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::TitleWindow" x="0" y="0" w="219" h="105" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="9">
+          <controlProperties>
+            <text>TAsistente</text>
+            <verticalScrollbar>false</verticalScrollbar>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Paragraph" x="8" y="36" w="110" h="51" measuredW="200" measuredH="140" zOrder="1" locked="false" isInGroup="9">
+          <controlProperties>
+            <text>id%20%28PK%29%0Adescr</text>
+          </controlProperties>
+        </control>
+        <control controlID="2" controlTypeID="com.balsamiq.mockups::Paragraph" x="102" y="36" w="93" h="45" measuredW="200" measuredH="140" zOrder="2" locked="false" isInGroup="9">
+          <controlProperties>
+            <text>int%0Avarchar%28255%29</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="10" controlTypeID="com.balsamiq.mockups::DataGrid" x="335" y="500" w="-1" h="-1" measuredW="106" measuredH="148" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>1%2C%20Estudiante%0A2%2C%20Academico%0A3%2C%20Empresa%0A4%2C%20Externo%0A5%2C%20FSL</text>
+      </controlProperties>
+    </control>
+    <control controlID="11" controlTypeID="com.balsamiq.mockups::StickyNote" x="452" y="499" w="147" h="173" measuredW="109" measuredH="123" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Solo%20agregamos%20el%20tipo%205%2C%0Aque%20sera%20el%20default%20al%20%0Adar%20de%20alta%20nuevos%0Aasistentes</text>
+      </controlProperties>
+    </control>
+    <control controlID="12" controlTypeID="__group__" x="861" y="10" w="219" h="147" measuredW="219" measuredH="147" zOrder="7" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::TitleWindow" x="0" y="0" w="219" h="147" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="12">
+          <controlProperties>
+            <text>InscripcionP</text>
+            <verticalScrollbar>false</verticalScrollbar>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Paragraph" x="8" y="41" w="110" h="91" measuredW="200" measuredH="140" zOrder="1" locked="false" isInGroup="12">
+          <controlProperties>
+            <text>id%20%28PK%29%0Aid_pago%0Aid_tcuota%0Ano_personas</text>
+          </controlProperties>
+        </control>
+        <control controlID="2" controlTypeID="com.balsamiq.mockups::Paragraph" x="111" y="41" w="93" h="85" measuredW="200" measuredH="140" zOrder="2" locked="false" isInGroup="12">
+          <controlProperties>
+            <text>int%0Aint%0Aint%0Aint</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="13" controlTypeID="__group__" x="1119" y="9" w="219" h="176" measuredW="219" measuredH="176" zOrder="8" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::TitleWindow" x="0" y="0" w="219" h="176" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="13">
+          <controlProperties>
+            <text>HospedajeP</text>
+            <verticalScrollbar>false</verticalScrollbar>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Paragraph" x="8" y="42" w="110" h="107" measuredW="200" measuredH="140" zOrder="1" locked="false" isInGroup="13">
+          <controlProperties>
+            <text>id%20%28PK%29%0Aid_pago%0Aid_hospedaje%0Ano_personas%0Ano_noches</text>
+          </controlProperties>
+        </control>
+        <control controlID="2" controlTypeID="com.balsamiq.mockups::Paragraph" x="111" y="42" w="93" h="107" measuredW="200" measuredH="140" zOrder="2" locked="false" isInGroup="13">
+          <controlProperties>
+            <text>int%0Aint%0Aint%0Aint%0Aint</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="14" controlTypeID="__group__" x="642" y="233" w="219" h="294" measuredW="219" measuredH="294" zOrder="9" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::TitleWindow" x="0" y="0" w="219" h="294" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="14">
+          <controlProperties>
+            <text>Pago</text>
+            <verticalScrollbar>false</verticalScrollbar>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Paragraph" x="15" y="48" w="110" h="206" measuredW="200" measuredH="140" zOrder="1" locked="false" isInGroup="14">
+          <controlProperties>
+            <text>id%20%28PK%29%0Aid_responsable%0Aid_factura%0Atipo_pago%0Ano_baucher%0Amonto_neto%0Adescuento%0Afecha_pago%0Apagado%0Afecha_pagado</text>
+          </controlProperties>
+        </control>
+        <control controlID="2" controlTypeID="com.balsamiq.mockups::Paragraph" x="118" y="48" w="93" h="213" measuredW="200" measuredH="140" zOrder="2" locked="false" isInGroup="14">
+          <controlProperties>
+            <text>int%0Aint%0Aint%0Avarchar%2810%29%0Avarchar%20%2815%29%0Afloat%20%289%2C2%29%0Atinyint%284%29%0Adatetime%0Atinyint%284%29%0Atimestamp</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="15" controlTypeID="__group__" x="941" y="222" w="219" h="131" measuredW="219" measuredH="131" zOrder="10" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::TitleWindow" x="0" y="0" w="219" h="131" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="15">
+          <controlProperties>
+            <text>Asistente</text>
+            <verticalScrollbar>false</verticalScrollbar>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Paragraph" x="8" y="42" w="110" h="74" measuredW="200" measuredH="140" zOrder="1" locked="false" isInGroup="15">
+          <controlProperties>
+            <text>id%20%28PK%29%0Aid_pago%0Alogin</text>
+          </controlProperties>
+        </control>
+        <control controlID="2" controlTypeID="com.balsamiq.mockups::Paragraph" x="111" y="42" w="93" h="74" measuredW="200" measuredH="140" zOrder="2" locked="false" isInGroup="15">
+          <controlProperties>
+            <text>int%0Aint%0Avarchar%2810%29</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="16" controlTypeID="com.balsamiq.mockups::Arrow" x="787" y="275" w="146" h="10" measuredW="150" measuredH="100" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <direction>bottom</direction>
+      </controlProperties>
+    </control>
+    <control controlID="17" controlTypeID="com.balsamiq.mockups::StickyNote" x="902" y="353" w="597" h="309" measuredW="109" measuredH="123" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>*%20Cada%20pago%20tiene%20un%20responsable%20%28id_asistente%29%20%0A*%20El%20pago%20puede%20tener%201%20o%20varios%20asistentes%2C%20pero%20solo%20tiene%20un%20responsable.%0A*%20Factura%20es%200%20si%20el%20grupo%20no%20requirio%20factura%0A*%20Posibles%20valores%20de%20tipo_pago%20%28baucher%2C%20efectivo%2C%20ambos%29%0A*%20El%20numero%20de%20baucher%20si%20aplica%20el%20pago%20y%20si%20se%20capturo%20de%20lo%20contrario%20vacio%0A*%20Descuento%20sera%20guardado%20en%20porcentaje%20para%20aplicar%20al%20monto_neto%20%2810%2C15%2C50%2C100%20etc%29.%0A*%20fecha_pago%20%28Fecha/hora%20de%20que%20el%20pago%20fue%20generado%29%0A*%20pagado%20%28Bandera%20de%20estado%20del%20pago%20%28default%200-No%20Pagado%29%20en%20caja%20se%20Actualiza%20a%20%281-Pagado%20o%200-No%20pagado%29%0A*%20fecha_pagado%20%28timestamp%29%20se%20actualizara%20automaticamente%20cuando%20se%20actualize%20la%20bandera%20a%20pagado%20o%20no%20pagado.</text>
+      </controlProperties>
+    </control>
+    <control controlID="18" controlTypeID="__group__" x="668" y="527" w="219" h="167" measuredW="219" measuredH="167" zOrder="13" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::TitleWindow" x="0" y="0" w="219" h="167" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="18">
+          <controlProperties>
+            <text>Factura</text>
+            <verticalScrollbar>false</verticalScrollbar>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Paragraph" x="8" y="32" w="110" h="113" measuredW="200" measuredH="140" zOrder="1" locked="false" isInGroup="18">
+          <controlProperties>
+            <text>id%20%28PK%29%0Arfc%0ARazonSocial%0ADireccion%0ACodPostal</text>
+          </controlProperties>
+        </control>
+        <control controlID="2" controlTypeID="com.balsamiq.mockups::Paragraph" x="111" y="32" w="93" h="113" measuredW="200" measuredH="140" zOrder="2" locked="false" isInGroup="18">
+          <controlProperties>
+            <text>int%0Avarchar%2813%29%0Avarchar%28255%29%0Avarchar%28255%29%0Avarchar%2810%29</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="19" controlTypeID="com.balsamiq.mockups::StickyNote" x="1168" y="215" w="399" h="126" measuredW="109" measuredH="123" zOrder="14" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>A%20la%20tabla%20asistente%20se%20modifica%3A%0A*%20login%20a%2050%20caracteres%20para%20aceptar%20correoE%20como%20login%0ASe%20agrega%20id_grupo%20%28default%20a%200%29%20no%20pertenece%20a%20ningun%20grupo</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>
