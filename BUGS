@@ -1,5 +1,4 @@
 BUGs
-- enter al agregar pago te lleva a agregar admin	 	
 - Arreglar bug seleccionar en pagos/caja	 	
 - Eliminacion de asistente debe tambien eliminar sus pagos, y su pertenencia a grupos
 - Arreglar el bug de que un asistente que pertenece a un pago se le puede asignar otro nuevo pago y ser el encargado de ese pago. 

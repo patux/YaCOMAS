@@ -25,13 +25,13 @@ print '
  <p>
  <a href="'.$fslpath.$rootpath.'/asistente/index.php?opc=';
  print NASISTENTE;
- print '">Registro de asistentes
+ print '">Pre-registro de asistentes
  </a>
  &nbsp;
  <a href="'.$fslpath.$rootpath.'/asistente/">Accede a tu cuenta
  </a>
  <br/>
- Es necesario tu registro, mediante el cual podr&aacute;s realizar preinscripci&oacute;n al al congreso y  talleres
+ Es necesario tu pre-registro, mediante el cual podr&aacute;s realizar preinscripci&oacute;n al al congreso y  talleres
  ademas de mantenerte informado del evento.</p>
  <p><a href="'.$fslpath.$rootpath.'/lista/">Lista preliminar de ponencias</a>
  <br/>

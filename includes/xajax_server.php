@@ -475,7 +475,7 @@ function abrirDialogoNuevoAsistente($id_pago) {
   
   $edades=array(
     10 => 'Menor de 15',
-    16 => '15 a 18 años',
+    16 => '15 a 18',
     22 => '19 a 24',
     28 => '25 a 30',
     33 => '31 a 35',
@@ -483,7 +483,7 @@ function abrirDialogoNuevoAsistente($id_pago) {
     43 => '41 a 45',
     48 => '46 a 50',
     53 => '51 a 55',
-    60 => 'Mas de 55 años',
+    60 => 'Mas de 55',
     0  => 'No aplica',
   );
   

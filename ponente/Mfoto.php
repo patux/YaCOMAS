@@ -43,8 +43,7 @@
   <p id="foto_frame" style="float:left">
   <img src="<?php echo $foto . $random ?>" alt="Foto"/>
   </p>
-  
-  <form name="image_upload" enctype="multipart/form-data" action="ponente.php?opc=<?php echo MPONENTEFOTO ?>" method="post">
+   <form name="image_upload" enctype="multipart/form-data" action="ponente.php?opc=<?php echo MPONENTEFOTO ?>" method="post">
     <p>
       <label for="foto">Selecciona la foto para subir:</label>
       <input type="file" size="32" name="mi_foto" id="mi_foto" value=""/><br/>

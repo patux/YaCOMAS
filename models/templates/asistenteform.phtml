@@ -1,6 +1,6 @@
 <h2>Añadir Asistente No Registrado</h2>
 <?php extract($DAO->getAllData())?>
-<form action="" id="asistente_form">
+<form action="" id="asistente_form" onKeyPress="return noEnter(event)">
 <p>
   <input type="hidden" name="id" id="id" value="<?php echo $DAO->getId() ?>"/>
   <input type="hidden" name="id_pago" id="id_pago" value="<?php echo $id_pago?>"/>

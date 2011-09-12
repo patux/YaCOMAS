@@ -51,6 +51,7 @@ if ($_SESSION['YACOMASVARS']['rootlevel']<3)
 if ($_SESSION['YACOMASVARS']['rootlevel']<3) 
 	print '<a href="admin.php?opc=8">Registro de Evento</a> <br><br>';
 print '<a href="admin.php?opc=9">Listado de Eventos</a> <br><br>';
+print '<a href="admin.php?opc=10">Listado de Ponencias Programadas</a> <br><br>';
 if ($_SESSION['YACOMASVARS']['rootlevel']<3){ 
 	print '<a href="admin.php?opc=18">Inscripcion de Asistente a talleres y tutoriales</a> <br><br>';
 	print '<a href="admin.php?opc=19">Baja Talleres y Tutoriales de un Asistente</a> <br><br>';

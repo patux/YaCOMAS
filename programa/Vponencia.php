@@ -206,7 +206,6 @@
 	echo '<center>
 		<br><big><a class="boton" href="'.$regresa.'#'.$idponencia.'" onMouseOver="window.status=\'Volver\';return true" onFocus="window.status=\'Volver\';return true" onMouseOut="window.status=\'\';return true">[ Volver ]</a></big>
 		</center>';
-
 imprimeCajaBottom(); 
 imprimePie(); 
 ?>

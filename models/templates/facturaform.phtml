@@ -1,4 +1,4 @@
-<form action="" method="post" name="factura_form" id="factura_form">
+<form action="" method="post" name="factura_form" id="factura_form" onKeyPress="return noEnter(event)">
 	<input type="hidden" name="id_factura" id="id_factura" value="<?php echo $DAO->getId() ?>"/>
   <label for="razonsocial">Razón Social:*</label><input type="text" name="razonsocial" size="30" id="razonsocial" value="<?php echo $DAO->razonsocial?>"/><br/>
 	<label for="rfc">RFC:*</label><input type="text" name="rfc" id="rfc" value="<?php echo $DAO->rfc?>"/><br/>

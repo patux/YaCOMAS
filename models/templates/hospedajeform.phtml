@@ -3,7 +3,7 @@
 	$sql="SELECT id, concat(descr, ' $',costo) AS descr FROM thospedaje;";
 	$hospedajes = $DbConnection->getAssoc($sql);
 ?>
-<form action="" name="hospedaje_form_<?php echo $DAO->getId() ?>" id="hospedaje_form_<?php echo $DAO->getId() ?>">
+<form action="" name="hospedaje_form_<?php echo $DAO->getId() ?>" id="hospedaje_form_<?php echo $DAO->getId() ?>" onKeyPress="return noEnter(event)">
 	<input type="hidden" name="id_hospedajep" id="id_hospedajep" value="<?php echo $DAO->getId() ?>"/>
 	<input type="hidden" name="id_pago" id="id_pago" value="<?php echo $DAO->id_pago ?>"/>	
 	<?php

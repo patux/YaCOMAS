@@ -3,7 +3,7 @@
 	$sql="SELECT id, concat(descr, ' $',costo) AS descr FROM tcuota;";
 	$cuotas = $DbConnection->getAssoc($sql);
 ?>
-<form action="" name="cuota_form_<?php echo $DAO->getId() ?>" id="cuota_form_<?php echo $DAO->getId() ?>">
+<form action="" name="cuota_form_<?php echo $DAO->getId() ?>" id="cuota_form_<?php echo $DAO->getId() ?>" onKeyPress="return noEnter(event)">
 	<input type="hidden" name="id_inscripcionp" id="id_inscripcionp" value="<?php echo $DAO->getId() ?>"/>
 	<input type="hidden" name="id_pago" id="id_pago" value="<?php echo $DAO->id_pago ?>"/>	
 	<?php

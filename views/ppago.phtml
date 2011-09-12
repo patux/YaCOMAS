@@ -10,7 +10,7 @@
 	echo $CuotasForm->getString();
 ?>
 <h3 id="subtotal_cuotas">SubTotal Inscripciones: $ <?php echo $Pago->getTotalCuotas(false)?></h3>
-<form>
+<form onKeyPress="return noEnter(event)">
 	<label for="porc_descuento">Descuento:</label>
 	<input type="text" name="porc_descuento" id="porc_descuento" size="3" value="<?php echo (!isset($Pago->porc_descuento))?'0':$Pago->porc_descuento;?>" onchange="xajax_guardarDescuento(xajax.$('id_pago').value, xajax.$('porc_descuento').value);"/> %
 </form>
@@ -28,7 +28,7 @@
 </div>
 <hr/>
 
-<form action="" id="pago_form">
+<form action="" id="pago_form" onKeyPress="return noEnter(event)">
 	<input type="hidden" id="id_pago" name="id_pago" value="<?php echo $Pago->getId()?>"/>
 	<h3 id="total">Total: $ <?php echo $Pago->getTotal()?></h3>
 	<?php echo FormHelper::createRadio('Tipo de Pago', 'tpago', array('Efectivo' => 'Efectivo', 'Voucher'=>'Voucher', 'Ambos'=>'Ambos'), $Pago->tpago, 'Efectivo'); ?><br/>

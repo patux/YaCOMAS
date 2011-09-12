@@ -270,8 +270,7 @@ if ($_POST['submit'] == "Registrarme") {
 	$message = "";
 	$message .= "Te has registrado como posible ponente al EVENTO $conference_name\n";
 	$message .= "Usuario: $user\n";
-	$message .= "Contrase&ntilde;a: $passwd_user\n\n";
-    $message .= "Puedes inicar sesion en: http://$URL$rootpath\n\n\n";
+	$message .= "Password: $passwd_user\n\n";
 	$message .= "---------------------------------------\n";
 	$message .= "$conference_link\n";
 	$params["host"] = $smtp; 
@@ -290,7 +289,6 @@ if ($_POST['submit'] == "Registrarme") {
  	print '	Gracias por darte de alta, ahora ya podras accesar a tu cuenta.<br>
 		Los datos de tu usuario y password han sido enviados al correo que registraste';
 retorno();
-	print ' Por razones de seguridad desabilitamos el envio de correo';
 retorno();
 	print 	'<p class="yacomas_msg">Es posible que algunos servidores de correo registren el correo como correo no deseado  o spam y no se encuentre en su carpeta INBOX</p>';
 	print '

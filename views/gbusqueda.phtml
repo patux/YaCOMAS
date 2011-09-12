@@ -1,4 +1,4 @@
-<form action="#" name="search_form">
+<form action="#" name="search_form" onKeyPress="return noEnter(event)">
 <p>
 <label for="apellido">Apellido:</label>
 <input id="apellido" name="apellido" type="text" onkeyup="xajax_buscarAsistente(xajax.$('apellido').value)"/>

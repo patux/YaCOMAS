@@ -23,6 +23,8 @@
 				break;
 			case 9: include "Leventos.php";
 				break;
+			case 10: include "Lponencias-programadas.php";
+				break;
 			case 11: include "Nfecha.php";
 				break;
 			case 12: include "Lfecha.php";

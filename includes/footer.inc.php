@@ -5,9 +5,9 @@ print '
 </td></tr></table><br><br>
 <table border=0 cellpading=0 cellspacing=0 width=100%>
 <!---<tr><td bgcolor='.$colorBorder.'>!--->
-<tr><td bgcolor=#FFFFFF>
+<tr><td bgcolor='.$bgcolor.'>
 <table border=0 cellpading=1 cellspacing=1 width=100%>
-<tr><td bgcolor=#FFFFFF>
+<tr><td bgcolor='.$bgcolor.'>
 <center>
 <br>
 <a href="http://yacomas.sourceforge.net/" target="_blank" title="Created with YACOMAS"><img title="Created with YACOMAS"

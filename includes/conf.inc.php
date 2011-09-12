@@ -72,23 +72,23 @@ $image_ponente_default    = '../images/missing_ponente.png';
 $prop_detalles_requeridos =             
     "Your speach to notify the speaker that a conference need details to be properly evaluated,
     add as many lines as you want
-    \n\n\n";
+    \n\n";
 $prop_rechazada=             
     "Your speach to notify the speaker that a conference was not accepted,
     add as many lines as you want
-    \n\n\n";
+    \n\n";
 $prop_por_aceptar=             
     "Your speach to notify the speaker that a conference is about to be acceptet but need something(your call),
     add as many lines as you want
-    \n\n\n";
+    \n\n";
 $prop_aceptada =             
     "Your speach to notify the speaker that a conference was accepted,
     add as many lines as you want
-    \n\n\n";
+    \n\n";
 $prop_cancelada=             
     "Your speach to notify the speaker that a conference was canceled by an admin because your given reason, 
     add as many lines as you want
-    \n\n\n";
+    \n\n";
 
 ///////
 //Mail stuff

@@ -22,7 +22,7 @@ $View->assign('estados', $estados);
 
 $edades=array(
 	10 => 'Menor de 15',
-	16 => '15 a 18 años',
+	16 => '15 a 18',
 	22 => '19 a 24',
 	28 => '25 a 30',
 	33 => '31 a 35',
@@ -30,7 +30,7 @@ $edades=array(
 	43 => '41 a 45',
 	48 => '46 a 50',
 	53 => '51 a 55',
-	60 => 'Mas de 55 años',
+	60 => 'Mas de 55',
 	0  => 'No aplica',
 );
 if($id==0 || $data['fecha_nac']=="0000-00-00" || is_null($data['fecha_nac'])){

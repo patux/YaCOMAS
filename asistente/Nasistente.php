@@ -269,7 +269,6 @@ if (isset ($_POST['submit']) && $_POST['submit'] == "Registrarme") {
  	print '	Gracias por darte de alta, ahora ya podras accesar a tu cuenta.<br>
 		Los datos de tu usuario y password han sido enviados al correo que registraste';
 retorno();
-	print ' Por razones de seguridad deshabilitamos el enviacute;o de correo ';
 retorno();
 	print 	'<p class="yacomas_msg">Es posible que algunos servidores de correo registren el correo como correo no deseado  o spam y no se encuentre en su carpeta INBOX</p>';
 	print '
