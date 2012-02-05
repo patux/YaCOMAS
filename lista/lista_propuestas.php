@@ -41,7 +41,8 @@ $userQueryP ='	SELECT 	P.id AS id_ponencia,
 			P.id_status=S.id AND 
 			P.id_prop_tipo=PT.id AND
 			id_status != 7 
-		ORDER BY P.id_prop_tipo,P.id_ponente,P.reg_time';
+		ORDER BY P.id_prop_tipo,P.reg_time';
+		//ORDER BY P.id_prop_tipo,P.id_ponente,P.reg_time';
 $userRecordsP = mysql_query($userQueryP) or err("No se pudo listar propuestas".mysql_errno($userRecordsP));
 // Inicio datos de Ponencias
 print '

@@ -1,7 +1,7 @@
 <?php
 $id =(empty($_GET['id']))?0:(int)$_GET['id'];
-if ($id!=0) {
-  header('admin.php?opc=22');
+if ($id == 0) {
+  header('location: admin.php?opc=22');
 }
 
 $Responsable = new AsistenteModel($id);

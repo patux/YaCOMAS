@@ -16,56 +16,62 @@ print '<font size=+1 color=#000000 face=arial>
 <a NAME="admin"><a>
 <H2>Administraci&oacute;n</H2>
 ';
-if ($_SESSION['YACOMASVARS']['rootlevel']==1) {
+if ($_SESSION['YACOMASVARS']['rootlevel'] == 1) {
 	print '<a href="admin.php?opc=C">Configuraci&oacute;n</a> <br><br>';
 	print '<a href="admin.php?opc=0">Agregar administrador</a> <br><br>';
 	print '<a href="admin.php?opc=1">Listar administradores</a> <br><br>';
 	print '<a href="admin.php?opc=2">Listar ponencias eliminadas</a> <br><br>';
 }
 print '
-<a href="admin.php?opc=3">Modificar mis datos</a> <br><br>
-<hr>';
-if ($_SESSION['YACOMASVARS']['rootlevel']<3)
+<a href="admin.php?opc=3">Modificar mis datos</a> <br><br>';
+if ($_SESSION['YACOMASVARS']['rootlevel'] == 1)
 	print '
+    <hr>
 	<a NAME="lugares"><a>
 	<H2>Lugares y Fechas</H2>
 	<a href="admin.php?opc=4">Registrar Lugar para ponencias</a> <br><br>
 	<a href="admin.php?opc=5">Listado de Lugares para ponencias</a> <br><br>
 	<a href="admin.php?opc=11">Registrar fecha </a> <br><br>
 	<a href="admin.php?opc=12">Listado de Fechas </a> <br><br>
-	<hr>';
-print '
+	<hr>
 <a NAME="ponencias"><a>
 <H2>Ponencias y Ponentes</H2>';
-if ($_SESSION['YACOMASVARS']['rootlevel']<3)
+if ($_SESSION['YACOMASVARS']['rootlevel'] == 1)
 	print '
 		<a href="admin.php?opc=16">Agregar Ponente</a> <br><br>
 		<a href="admin.php?opc=17">Agregar Ponencia</a> <br><br>
 		';
+if ($_SESSION['YACOMASVARS']['rootlevel'] < 4)
 	print '
 <a href="admin.php?opc=6">Listado de Ponentes</a> <br><br>
 <a href="admin.php?opc=7">Listado de Ponencias</a> <br><br>
 <hr>
 <a NAME="eventos"><a>
 <H2>Eventos y Asistentes</H2>';
-if ($_SESSION['YACOMASVARS']['rootlevel']<3) 
+if ($_SESSION['YACOMASVARS']['rootlevel'] == 1) 
 	print '<a href="admin.php?opc=8">Registro de Evento</a> <br><br>';
-print '<a href="admin.php?opc=9">Listado de Eventos</a> <br><br>';
-print '<a href="admin.php?opc=10">Listado de Ponencias Programadas</a> <br><br>';
-if ($_SESSION['YACOMASVARS']['rootlevel']<3){ 
+if ($_SESSION['YACOMASVARS']['rootlevel'] < 4){ 
+    print '<a href="admin.php?opc=9">Listado de Eventos</a> <br><br>';
+    print '<a href="admin.php?opc=10">Listado de Ponencias Programadas</a> <br><br>';
+}
+if ($_SESSION['YACOMASVARS']['rootlevel'] == 1){ 
 	print '<a href="admin.php?opc=18">Inscripcion de Asistente a talleres y tutoriales</a> <br><br>';
 	print '<a href="admin.php?opc=19">Baja Talleres y Tutoriales de un Asistente</a> <br><br>';
 	print '<a href="admin.php?opc=13">Listado de Asistentes</a> <br><br>';
 	}
+if ($_SESSION['YACOMASVARS']['rootlevel'] < 4) 
 print '<a href="admin.php?opc=15">Control de Asistencias</a> <br><br>';
 print '<hr>
 <a NAME="pagos"><a>
 <H2>Pagos</H2>';
-if ($_SESSION['YACOMASVARS']['rootlevel']<3){ 
-	print '<a href="admin.php?opc=20">Administraci&oacute;n de  Pagos</a> <br><br>';
+if ($_SESSION['YACOMASVARS']['rootlevel'] == 1 || $_SESSION['YACOMASVARS']['rootlevel']  > 3 ) 
+	print '<a href="admin.php?opc=20">Administraci&oacute;n de Recibos</a> <br><br>';
+if ($_SESSION['YACOMASVARS']['rootlevel'] == 1 || $_SESSION['YACOMASVARS']['rootlevel']  == 5 ) 
 	print '<a href="admin.php?opc=21">Control de Caja</a> <br><br>';
-	print '<a href="admin.php?opc=22">A&ntilde;adir Asistentes a Pagos</a> <br><br>';
-	}
+if ($_SESSION['YACOMASVARS']['rootlevel'] == 1 || $_SESSION['YACOMASVARS']['rootlevel'] > 3) 
+    print '<a href="admin.php?opc=22">A&ntilde;adir Asistentes a Grupo</a> <br><br>';
+if ($_SESSION['YACOMASVARS']['rootlevel'] == 1 || $_SESSION['YACOMASVARS']['rootlevel'] == 5 ) 
+    print '<a href="admin.php?opc=23">Listado de Recibos</a> <br><br>';
 print '</font>';
 imprimeCajaBottom();
 retorno_esp();

@@ -1,6 +1,6 @@
 <form action="#" name="search_form" onKeyPress="return noEnter(event)">
 <p>
-<label for="apellido">Apellido:</label>
+<label for="apellido">Apellido/Pago:</label>
 <input id="apellido" name="apellido" type="text" onkeyup="xajax_buscarAsistente(xajax.$('apellido').value)"/>
 <?php if ( $_GET['opc'] == 20 )
    {
@@ -13,6 +13,6 @@
 </form>
 
 <div id="results_table">
-<strong>Los resultados aparecerán a partir del 3er caracter que teclees.</strong>
+<strong>Los resultados aparecerán a partir del 3er caracter que teclees o si es un número.</strong>
 
 </div>

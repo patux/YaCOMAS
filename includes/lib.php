@@ -220,7 +220,7 @@ function beginSessionP() {
         session_start();
 	session_register("YACOMASVARS");
 	if (empty($_SESSION['YACOMASVARS']['ponlogin']) || empty($_SESSION['YACOMASVARS']['ponid']) || 
-	   ((time() - $_SESSION['YACOMASVARS']['ponlast']) > (60*60))) {    # 1 hour exp.
+	   ((time() - $_SESSION['YACOMASVARS']['ponlast']) > (60*60*24))) {    # 6 hour exp.
 		header("Location: signin.php?e=exp");
 		exit;
 	}

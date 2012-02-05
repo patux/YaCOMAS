@@ -43,8 +43,8 @@ include "../includes/conf.inc.php";
 $link=conectaBD();
 // Normal speakers
 $userQueryP = 'SELECT 	e.descr as estado, p.login, p.id, p.ciudad,
-					p.nombrep, p.apellidos, p.resume
-			FROM 	ponente as p, estado as e 
+					p.nombrep, p.apellidos, p.resume,p.org
+			FROM 	ponente as p, estado as e
 			WHERE p.id in (SELECT DISTINCT id_ponente 
 							FROM propuesta 
 							WHERE id_status=8 
@@ -65,7 +65,9 @@ $login = $fila[1];
 $idponente = $fila[2];
 $ciudad = $fila[3];
 $ponente_name = $fila[4] . ' ' . $fila[5];
+$resume2 = $fila[6];
 $resume_words = str_word_count ($fila[6],1);
+$org = $fila[7];
 $nwords = count($resume_words);
 $resume = '';	   
 if ( $nwords > $resume_words_limit) 
@@ -83,9 +85,10 @@ mysql_free_result($userRecordP);
 		<a name="<?php echo $login ?>"></a>
 
 		<h2><?php echo $ponente_name ?>
-		<br /><small><?php echo $ciudad.' '.$estado ?></small></h2>
+        <?php echo (!empty($org) ? "<br /><small>$org<br />" :'<br /><small>') ?>
+        <?php echo (!empty($ciudad) ? $ciudad.', ':' ').$estado ?></small></h2>
 		<img src="<?php echo $foto ?>" align="center" width="150" alt="<?php echo $ponente_name ?>"/>		
-		<p class="ponente" align="justify"><? print $resume ?></p>
+		<p class="ponente" align="justify"><? print $resume2 ?></p>
 		</div>
 </body>
 </html>

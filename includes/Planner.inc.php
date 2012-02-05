@@ -88,7 +88,7 @@ class Planner {
        */
       $sql = "SELECT  EO.id_lugar AS place_id, L.nombre_lug AS place_name ,
                 E.id_propuesta AS event_id, P.nombre AS event_name,
-                P.id_ponente AS person_id, concat(PO.nombrep, ' ', PO.apellidos) AS person_name, 
+                P.id_ponente AS person_id, concat(PO.nombrep, ' ', PO.apellidos) AS person_name, PO.org,  
                 EO.hora AS start, EO.hora + P.duracion AS end, P.duracion AS duration,
                 P.id_prop_tipo AS type, PT.descr AS type_name
               FROM  evento AS E, 
@@ -127,7 +127,7 @@ class Planner {
        */
       $sql = "SELECT  EO.id_lugar AS place_id, L.nombre_lug AS place_name ,
                 E.id_propuesta AS event_id, P.nombre AS event_name,
-                P.id_ponente AS person_id, concat(PO.nombrep, ' ', PO.apellidos) AS person_name, 
+                P.id_ponente AS person_id, concat(PO.nombrep, ' ', PO.apellidos) AS person_name, PO.org, 
                 EO.hora AS start, EO.hora + P.duracion AS end, P.duracion AS duration,
                 P.id_prop_tipo AS type, PT.descr AS type_name
               FROM  evento AS E, 
@@ -306,7 +306,8 @@ class Planner {
       . $event['event_id'] . ' ' 
       . $_SERVER['REQUEST_URI']. '#top"';
       $string .="<span class=\"event\">".nl2br(htmlentities($event['event_name']))."</span><br>" 
-                ."<span class=\"person\">".htmlentities($event['person_name'])."<br>"
+                ."<span class=\"person\">".htmlentities($event['person_name'].(!empty($event['org']) ? ', '.$event['org']:''))."<br>"
+                //."<span class=\"person\">".htmlentities($event['person_name'])."<br>"
                 ."<small>".htmlentities($event['type_name'])."</small></span></a>";
     } else {
       $string .= "&nbsp;";

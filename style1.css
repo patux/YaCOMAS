@@ -201,7 +201,7 @@ p.yacomas_msg {
 p.ponente {
   margin-top: 0px;
   padding-top: 10px;
-  font-size: 18px;
+  font-size: 16px;
   font-type: arial;
   margin-left: 0.4em; /* Put some space between the text and the image. */
   margin-right: 0.4em; /* Put some space between the text and the image. */
@@ -326,8 +326,8 @@ p.yacomas_login{
 /** Planner**/
 table.planner td, table.planner th  {
   -moz-border-radius:3px;
-  -webkit-border-radius: 3px;
-  border-radius: 3px;
+  -webkit-border-radius: 3px; 
+  border-radius: 3px; 
   text-align:center;
   padding:2px;
 }
@@ -340,42 +340,42 @@ table.planner td .event {
 }
 
 table.planner th {
-  background-color: #EEEEEC; /*Aluminium*/ 
+  background-color: #B7C3D0; 
 }
 table.planner td.time {
-  background-color: #EEEEEC; /*Aluminium*/ 
+  background-color: #B7C3D0; 
 }
 td.type_empty {
   background-color: #EEEEEC; /*Aluminium*/
 }
 
 td.type_evento_organizacion {
- background-color:#729FCF; /*Skyblue*/
+ background-color:#9999cc; 
 
 }
 
 td.type_conferencia_magistral {
- background-color:#8AE234; /*verde*/
+ background-color:#c0c0c0; 
 }
 
 td.type_conferencia {
- background-color:#FCE94F; /*Butter*/
+ background-color:#e6e6ff; 
 }
 
 td.type_taller {
- background-color:#FCAF3E; /*Orange*/
+ background-color:#9999ff;
 }
 
 td.type_tutorial {
- background-color:#AD7FA8; /*Plum*/
+ background-color:#99ccff; 
 }
 
 td.type_examen {
- background-color:#E9B96E; /*Chocolate*/
+ background-color: #7171C6; 
 }
 
 td.type_platica_informal {
- background-color: #EF2929; /*Scarlet Red*/
+ background-color:#ccccff ; 
 }
 #results_table table {
   width:100%;

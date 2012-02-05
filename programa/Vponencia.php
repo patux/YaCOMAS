@@ -16,11 +16,12 @@
 
 	$link=conectaBD();
 	$userQuery = 
-	'SELECT nombrep, apellidos, resume FROM ponente  
+	'SELECT nombrep, apellidos, org, resume FROM ponente  
 		WHERE id="'.$idponente.'"';
 	$userRecords = mysql_query($userQuery) or err("No se pudo checar el ponente".mysql_errno($userRecords));
 	$p = mysql_fetch_array($userRecords);
 	$ponente_name=$p['nombrep'].' '.$p['apellidos'];
+    $organizacion = $p['org'];
 	$resume = $p['resume'];
 	$foto = (file_exists("{$image_ponente_dest}foto_{$idponente}.jpeg"))?"{$image_ponente_dest}foto_$idponente.jpeg":$image_ponente_default;
 	
@@ -50,9 +51,10 @@
   <img src="<?php echo $foto?>" alt="Foto"/>
   </p>
   <h1><?php echo nl2br($registro['S_nombreponencia']) ?></h1>
-  <h2><?php echo $ponente_name ?></h2>
+  <h2><?php echo $ponente_name,(!empty($organizacion) ? ', '.$organizacion:'') ?></h2>
   <h3>Resume:</h3>
-  <p><?php echo htmlentities($resume)?></p>
+  <!-- <p><?php echo htmlentities($resume)?></p> -->
+  <p><?php echo $resume ?></p>
   <?php 
     print '
     <table>

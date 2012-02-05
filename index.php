@@ -33,7 +33,7 @@ print '
  <br/>
  Es necesario tu pre-registro, mediante el cual podr&aacute;s realizar preinscripci&oacute;n al al congreso y  talleres
  ademas de mantenerte informado del evento.</p>
- <p><a href="'.$fslpath.$rootpath.'/lista/">Lista preliminar de ponencias</a>
+ <p><a href="'.$fslpath.$rootpath.'/lista/">Lista preliminar de propuestas</a>
  <br/>
  Aqu&iacute; ver&aacute;s las propuestas ponencias que han sido enviadas, y el status en el que se encuentran dichas ponencias.</p>';
  print '<p><a href="'.$fslpath.$rootpath.'/aceptadas/">Lista de ponencias aceptadas</a>

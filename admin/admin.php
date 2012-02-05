@@ -47,6 +47,8 @@
 				break;
 			case 22: include "Grupos.php";
 				break;
+			case 23: include "Lpagos.php";
+				break;
 			default: include "signin.php";
 				break;
 		}	

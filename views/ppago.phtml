@@ -26,18 +26,20 @@
 ?>
 <h3 id="total_hospedajes">Total Hospedajes: $ <?php echo $Pago->getTotalHospedajes()?></h3>
 </div>
-<hr/>
 
 <form action="" id="pago_form" onKeyPress="return noEnter(event)">
 	<input type="hidden" id="id_pago" name="id_pago" value="<?php echo $Pago->getId()?>"/>
 	<h3 id="total">Total: $ <?php echo $Pago->getTotal()?></h3>
 	<?php echo FormHelper::createRadio('Tipo de Pago', 'tpago', array('Efectivo' => 'Efectivo', 'Voucher'=>'Voucher', 'Ambos'=>'Ambos'), $Pago->tpago, 'Efectivo'); ?><br/>
-	<label for="no_baucher">Número de Voucher:</label>
+	<label for="no_baucher">Monto del Voucher:</label>
 	<input type="text" name="no_voucher" id="no_voucher" value="<?php echo $Pago->no_voucher?>"/><br/>
 	<label for="comentarios">Comentarios:</label><br/>
 	<textarea name="comentarios" id="comentarios"><?php echo $Pago->comentarios?> </textarea><br/>
+    <br />
+    <br />
 	<input type="button" onclick="xajax_guardarPago(xajax.getFormValues('pago_form'))" value="Guardar"/>
 </form>
+<hr/>
 <hr/>
 
 <h2>Factura</h2>

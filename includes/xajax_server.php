@@ -10,34 +10,38 @@ function buscarAsistente($apellido){
 	$DbConnection = DbConnection::getInstance();
 	
 	$apellido = mysql_real_escape_string($apellido);
-	if ( strlen($apellido)>=3 ) {
-		
-		if ( $_GET['opc'] == 20  ) 
-			$sql="SELECT id, concat(apellidos, ' ', nombrep) AS nombre, ciudad, mail
-			FROM asistente
-			WHERE apellidos LIKE '%$apellido%'";
-		if ( $_GET['opc'] == 21 )
-			$sql="SELECT a.id, concat(a.apellidos, ' ', a.nombrep) AS nombre, a.ciudad, a.mail
-			FROM asistente AS a, pago AS p
-			WHERE apellidos LIKE '%$apellido%' 
-			AND p.id_responsable=a.id";
-		if ( $_GET['opc'] == 22 )
-      $sql="SELECT a.id, concat(a.apellidos, ' ', a.nombrep) AS nombre, a.ciudad, a.mail
-      FROM asistente AS a, pago AS p
-      WHERE apellidos LIKE '%$apellido%' 
-      AND p.id_responsable=a.id";
-		  
+	if ( strlen($apellido)>=3 || is_numeric($apellido)) {
+        if ( $_GET['opc'] == 20  ) 
+            if (is_numeric($apellido))
+                $sql="SELECT id, concat(apellidos, ' ', nombrep) AS nombre, ciudad, mail, id_pago 
+                FROM asistente
+                WHERE id_pago='$apellido'";
+            else 
+                $sql="SELECT id, concat(apellidos, ' ', nombrep) AS nombre, ciudad, mail, id_pago
+                FROM asistente
+                WHERE apellidos LIKE '$apellido%'";
+        else if ( $_GET['opc'] == 21 || $_GET['opc'] == 22 ) 
+            if (is_numeric($apellido)) 
+                $sql="SELECT a.id, concat(a.apellidos, ' ', a.nombrep) AS nombre, a.ciudad, a.mail, id_pago
+                FROM asistente AS a, pago AS p
+                WHERE id_pago='$apellido' 
+                AND p.id_responsable=a.id";
+            else
+                $sql="SELECT a.id, concat(a.apellidos, ' ', a.nombrep) AS nombre, a.ciudad, a.mail, id_pago
+                FROM asistente AS a, pago AS p
+                WHERE apellidos LIKE '$apellido%'
+                AND p.id_responsable=a.id";
 		$asistentes = $DbConnection->getAll($sql);
 		
 		$string = '';
 		if( is_array($asistentes)) {
-			$string .= "<table><tr><th></th><th>Nombre</th><th>Ciudad</th><th>Correo</th></tr>\n";
+			$string .= "<table><tr><th></th><th>Nombre</th><th>Ciudad</th><th>Correo</th><th>Pago</th></tr>\n";
 			foreach($asistentes AS $asistente) {
 				extract($asistente);
 				$string.= "<tr><td><a href=\"admin.php?opc=";
 				$string.=$_GET['opc']; 
 				$string.="&amp;tab=1&amp;id=$id\">Seleccionar</a></td>
-				<td>$nombre</td><td>$ciudad</td><td>$mail</td>
+				<td>$nombre</td><td>$ciudad</td><td>$mail</td><td>$id_pago</td>
 				</tr>\n";
 			}
 			$string .="</table>";
@@ -46,7 +50,7 @@ function buscarAsistente($apellido){
 			$Response->assign('results_table', 'innerHTML', '<strong>No hay ningún resultado para su búsqueda.</strong>');
 		}
 	} else {
-		$Response->assign('results_table', 'innerHTML', '<strong>Los resultados aparecerán a partir del 3er caracter que teclees.</strong>');
+		$Response->assign('results_table', 'innerHTML', '<strong>Los resultados aparecerán a partir del 3er caracter que teclees o si es un número.</strong>');
 	}
 	
 	return $Response;
@@ -61,7 +65,7 @@ function buscarAsistentePorPago($apellido, $id_pago){
     
     $sql="SELECT id, concat(apellidos, ' ', nombrep) AS nombre, ciudad, mail
         FROM asistente
-        WHERE apellidos LIKE '%$apellido%'
+        WHERE apellidos LIKE '$apellido%'
         AND id_pago=0";
     $asistentes = $DbConnection->getAll($sql);
     
@@ -81,7 +85,7 @@ function buscarAsistentePorPago($apellido, $id_pago){
       $Response->assign('results_table', 'innerHTML', '<strong>No hay ningún resultado para su búsqueda.</strong>');
     }
   } else {
-    $Response->assign('results_table', 'innerHTML', '<strong>Los resultados aparecerán a partir del 3er caracter que teclees.</strong>');
+    $Response->assign('results_table', 'innerHTML', '<strong>Los resultados aparecerán a partir del 3er caracter que teclees o si es un número.</strong>');
   }
   
   return $Response;
@@ -377,7 +381,7 @@ function cancelarEditarFactura($id_pago){
 
 function abrirEliminarPago($id_pago){
   $Response = new xajaxResponse();
-  $Response->confirmCommands(1, '¿Realmente Desea Eliminar el Pago?');
+  $Response->confirmCommands(1, 'ï¿½Realmente Desea Eliminar el Pago?');
   $Response->script('xajax_realmenteEliminarPago('.$id_pago.')');
   return $Response;
 }
@@ -395,7 +399,7 @@ function realmenteEliminarPago($id_pago) {
 
 function abrirConfirmarPago($id_pago){
   $Response = new xajaxResponse();
-  $Response->confirmCommands(1, '¿Confirmar el Pago?');
+  $Response->confirmCommands(1, 'Confirmar el Pago?');
   $Response->script('xajax_realmenteConfirmarPago('.$id_pago.')');
   return $Response;
 }
@@ -405,8 +409,9 @@ function realmenteConfirmarPago($id_pago) {
   $Pago = new PagoModel((int)$id_pago);
   $Pago->pagado = 1;
   $Pago->save();
-  
-  $Response->redirect('admin.php?opc=21');
+  $Pago->load();
+
+  $Response->redirect('admin.php?opc=21&tab=1&id='.$Pago->id_responsable);
   return $Response;
 }
 

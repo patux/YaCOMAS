@@ -14,7 +14,7 @@ $link=conectaBD();
 				  id_administrador="."'".$_SESSION['YACOMASVARS']['rootid']."'
 			   WHERE id="."'".$idponencia."'";
 	$actualiza_registro= mysql_query($Query_actualiza) or err("No se pudo actualizar la ponencia".mysql_errno($actualiza_registro));
-    $QUERY="SELECT P.id AS id_ponencia, P.nombre AS ponencia, PT.descr AS prop_tipo, P.id_ponente, PO.nombrep, PO.apellidos, S.descr AS
+    $QUERY="SELECT P.id AS id_ponencia, P.nombre AS ponencia, P.duracion as duracion, PT.descr AS prop_tipo, P.id_ponente, PO.nombrep, PO.apellidos, S.descr AS
         STATUS , P.id_status, PO.mail
         FROM propuesta AS P, ponente AS PO, prop_status AS S, prop_tipo AS PT
         WHERE P.id_ponente = PO.id
@@ -25,6 +25,7 @@ $link=conectaBD();
 	$p = mysql_fetch_array($result);
     $S_nombreponencia=$p['ponencia'];
     $S_prop_tipo=$p['prop_tipo'];
+    $I_duracion=$p['duracion'];
     $S_nombreponente=$p['nombrep'];
     $S_apellidos=$p['apellidos'];
     $S_status=$p['STATUS'];
@@ -32,6 +33,8 @@ $link=conectaBD();
     mysql_free_result($result);
     $PONENTE="$S_nombreponente $S_apellidos";
     $PONENCIA=$S_nombreponencia;
+    $TIPO=$S_prop_tipo;
+    $DURACION=$I_duracion;
     $STATUS=$S_status;
 
     switch ($idstatus) 
@@ -67,6 +70,7 @@ Hola $PONENTE
 El motivo de este correo (generado automaticamente) es notificarte que el Comite Academico reviso la propuesta de ponencia que enviaste con el titulo:
 
 \"$PONENCIA\"
+($TIPO), $DURACION hrs
 
 El estado actual de esta ponencia es:
 

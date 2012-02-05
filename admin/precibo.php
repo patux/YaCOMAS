@@ -21,7 +21,11 @@ if ($Pago === false){
 	if($Factura === false) {
 		$Factura = new FacturaModel(0);
 	}
-}	
+}
+
+$asistentes = $Pago->getAsistentes();
+
 $View->assign('Asistente', $Asistente);
+$View->assign('asistentes', $asistentes);
 $View->assign('Pago', $Pago);
 $View->assign('Factura', $Factura);

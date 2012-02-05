@@ -21,10 +21,28 @@
 ?>
 <h3 id="total_hospedajes">Total Hospedajes: $ <?php echo $Pago->getTotalHospedajes()?></h3>
 </div>
+<hr style="clear:both"/>
+
+<h2>Asistentes</h2>
+<div id="asistentes">
+<ul>
+<?php
+    foreach($asistentes AS $Asistente_agregado) {
+      echo "<li>$Asistente_agregado->nombrep $Asistente_agregado->apellidos</li>\n";
+    }
+?>
+</ul>
+<h3 id="tasistentes">Total de Asistentes: <?=count($asistentes)?></h3>
+</div>
+
 <hr/>
 <h3 id="tpago">Tipo de Pago: <?php echo $Pago->tpago?></h3>
-<h3 id="total">Total: $ <?php echo $Pago->getTotal()?></h3>
-<h3 id="nobaoucher">Número de Voucher: <?php echo $Pago->no_baucher?></h3>	
+<h3 id="nobaoucher">Monto del Voucher: <?php echo $Pago->no_voucher ?></h3>
+<div>
+  <strong>Comentarios:</strong><br/>
+  <pre><?php echo $Pago->comentarios?></pre>
+</div>
+<h3 id="total" style="font-size: 26pt;">Total: $ <?php echo $Pago->getTotal()?></h3>
 <hr/>
 <?php if ( $Factura->getId()!=0 ) {?>
 <h2>Factura</h2>
@@ -38,6 +56,8 @@
 </div>
 <?php }?>
 <hr/>
+
+
 <?php
 if ($_GET['opc'] == 20)  
 {

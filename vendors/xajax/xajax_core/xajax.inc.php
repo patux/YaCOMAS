@@ -27,6 +27,7 @@
 	Default character encoding used by both the <xajax> and
 	<xajaxResponse> classes.
 */
+define ('XAJAX_DEFAULT_CHAR_ENCODING', 'ISO-8859-1' );
 if (!defined ('XAJAX_DEFAULT_CHAR_ENCODING')) define ('XAJAX_DEFAULT_CHAR_ENCODING', 'utf-8');
 
 /*

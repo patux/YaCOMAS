@@ -35,14 +35,14 @@ imprimeCajaTop("100",$msg);
 <?php
 $link=conectaBD();
 // Magistral speakers
-$userQueryPM = 'SELECT 	e.descr as estado, p.id, p.login, p.ciudad,
+$userQueryPM = 'SELECT 	e.descr as estado, p.id, p.login, p.ciudad, p.org,
 					p.nombrep, p.apellidos, p.resume
 			FROM 	ponente as p, estado as e 
 			WHERE p.id IN (SELECT DISTINCT id_ponente 
 							FROM propuesta 
                             WHERE id_status=8
                             AND   id_prop_tipo=100
-                            AND p.id != 69) 
+                        )
 						AND p.id_estado = e.id';
 $userRecordsPM = mysql_query($userQueryPM) or err("No se pudo listar ponentes magistrales".mysql_errno($userRecordsPM));
 $i = 0;
@@ -51,6 +51,7 @@ while ($fila = mysql_fetch_array($userRecordsPM))
 		$ponente_array[$i]['login'] = $fila['login'];
 		$ponente_array[$i]['id'] = $fila['id'];
 		$ponente_array[$i]['ponente_name'] = $fila['nombrep'] . ' ' . $fila['apellidos'];
+		$ponente_array[$i]['org'] = $fila['org'];
 		$ponente_array[$i]['ciudad'] = $fila['ciudad'];
 		$ponente_array[$i]['estado'] = $fila['estado'];
 		$ponente_array[$i]['resume'] = $fila['resume'];
@@ -65,6 +66,7 @@ for ($i = 0; $i < count($ponente_array); $i++)
 		$login = $ponente_array[$i]['login'];
 		$idponente = $ponente_array[$i]['id'];
 		$ponente_name = $ponente_array[$i]['ponente_name'];		
+        $org = $ponente_array[$i]['org'];
 		$ciudad = $ponente_array[$i]['ciudad'];
 		$estado = $ponente_array[$i]['estado'];
 		$resume = htmlspecialchars($ponente_array[$i]['resume']);
@@ -72,7 +74,7 @@ for ($i = 0; $i < count($ponente_array); $i++)
 		?>
 		<div class="fsl-speaker">
 		<a name="<?php echo $login ?>"></a>
-		<h2><?php echo $ponente_name ?>
+		<h2><?php echo $ponente_name.(!empty($org) ? ', '.$org:'') ?>
 		<br /><small><?php echo $ciudad.' '.$estado ?></small></h2>
 		<img src="<?php echo $foto ?>" align="right" alt="<?php echo $ponente_name ?>"/>		
 		<p class="ponente"><?php print $resume ?></p>
@@ -88,7 +90,7 @@ for ($i = 0; $i < count($ponente_array); $i++)
 
 <?php
 // Normal speakers
-$userQueryP = 'SELECT 	e.descr as estado, p.id, p.login, p.ciudad,
+$userQueryP = 'SELECT 	e.descr as estado, p.id, p.login, p.ciudad, p.org,
 					p.nombrep, p.apellidos, p.resume
 			FROM 	ponente as p, estado as e 
 			WHERE p.id IN (SELECT DISTINCT id_ponente 
@@ -102,11 +104,13 @@ $userQueryP = 'SELECT 	e.descr as estado, p.id, p.login, p.ciudad,
 						AND p.id_estado = e.id';
 $userRecordsP = mysql_query($userQueryP) or err("No se pudo listar ponentes".mysql_errno($userRecordsP));
 $i = 0;
+unset($ponente_array);
 while ($fila = mysql_fetch_array($userRecordsP))
 	{
 		$ponente_array[$i]['login'] = $fila['login'];
 		$ponente_array[$i]['id'] = $fila['id'];
 		$ponente_array[$i]['ponente_name'] = $fila['nombrep'] . ' ' . $fila['apellidos'];
+		$ponente_array[$i]['org'] = $fila['org'];
 		$ponente_array[$i]['ciudad'] = $fila['ciudad'];
 		$ponente_array[$i]['estado'] = $fila['estado'];
 		$ponente_array[$i]['resume'] = $fila['resume'];
@@ -121,6 +125,7 @@ for ($i = 0; $i < count($ponente_array); $i++)
 		$login = $ponente_array[$i]['login'];
 		$idponente = $ponente_array[$i]['id'];
 		$ponente_name = $ponente_array[$i]['ponente_name'];		
+        $org = $ponente_array[$i]['org'];
 		$ciudad = $ponente_array[$i]['ciudad'];
 		$estado = $ponente_array[$i]['estado'];
 		$resume = $ponente_array[$i]['resume'];
@@ -129,9 +134,9 @@ for ($i = 0; $i < count($ponente_array); $i++)
 		<div class="fsl-speaker">
 		<a name="<?php echo $login ?>"></a>
 
-		<h2><?php echo $ponente_name ?>
+		<h2><?php echo $ponente_name.(!empty($org) ? ', '.$org:'') ?>
 		<br /><small><?php echo $ciudad.' '.$estado ?></small></h2>
-		<img src="<?php echo $foto ?>" align="right" alt="<?php echo $ponente_name ?>"/>		
+		<img src="<?php echo $foto ?>" align="right" alt="<?php echo $ponente_name.(!empty($org) ? ', '.$org:'') ?>"/>		
 		<p class="ponente" align="justify" ><? print $resume ?></p>
 		</div>
 		<?php

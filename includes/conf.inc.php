@@ -45,7 +45,8 @@ $max_inscripcionTU=3;
 // Colors and fashion
 /////
 // Background color for the webpage this will be used in all the pages
-$bgcolor='#ffffff';
+//$bgcolor='#ffffff';
+$bgcolor='#EFEFEF';
 // Colores de las tablas en los listados
 //$colortitle='#ff9900';
 //$color_renglon1='#ffcc66';
@@ -55,7 +56,7 @@ $colorBorder='#39708a';
 $colortitle='#39708a';
 $color_renglon1='#cce0ea';
 $color_renglon2='#9dc4d7';
-$color_especiales='limegreen';
+$color_especiales='#98AFC7';
 
 ///////
 // Image Uploader Stuff
