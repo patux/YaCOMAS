@@ -41,7 +41,7 @@ function buscarAsistente($apellido){
 				$string.= "<tr><td><a href=\"admin.php?opc=";
 				$string.=$_GET['opc']; 
 				$string.="&amp;tab=1&amp;id=$id\">Seleccionar</a></td>
-				<td>$nombre</td><td>$ciudad</td><td>$mail</td><td>$id_pago</td>
+				<td>$nombre</td><td>$ciudad</td><td>$mail</td><td bgcolor=" . ($id_pago > 0 ? "\"#B0F27E\"" : "\"#FFFFFF\"")  . ">$id_pago</td>
 				</tr>\n";
 			}
 			$string .="</table>";
