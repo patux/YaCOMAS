@@ -1,4 +1,4 @@
-﻿/**
+/**
  * translation for: xajax v.x.x
  * @version: 1.0.0
  * @author: mic <info@joomx.com>

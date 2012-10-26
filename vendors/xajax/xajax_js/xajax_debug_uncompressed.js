@@ -15,7 +15,8 @@
 /*
 	@package xajax
 	@version $Id: xajax_debug_uncompressed.js 327 2007-02-28 16:55:26Z calltoconstruct $
-	@copyright Copyright (c) 2005-2006 by Jared White & J. Max Wilson
+	@copyright Copyright (c) 2005-2007 by Jared White & J. Max Wilson
+	@copyright Copyright (c) 2008-2009 by Joseph Woolley, Steffen Konerow, Jared White  & J. Max Wilson
 	@license http://www.xajaxproject.org/bsd_license.txt BSD License
 */
 
@@ -35,7 +36,7 @@ try
 		xajax.debug = {}
 
 	/*
-		String: workId
+		String: xajax.debug.workId
 		
 		Stores a 'unique' identifier for this session so that an existing debugging
 		window can be detected, else one will be created.
@@ -43,14 +44,14 @@ try
 	xajax.debug.workId = 'xajaxWork'+ new Date().getTime();
 
 	/*
-		String: windowSource
+		String: xajax.debug.windowSource
 		
 		The default URL that is given to the debugging window upon creation.
 	*/
 	xajax.debug.windowSource = 'about:blank';
 
 	/*
-		String: windowID
+		String: xajax.debug.windowID
 		
 		A 'unique' name used to identify the debugging window that is attached
 		to this xajax session.
@@ -104,7 +105,7 @@ try
 	*/
 
 	/*
-		Array: text
+		Array: xajax.debug.text
 	*/
 	xajax.debug.text = [];
 	xajax.debug.text[100] = 'WARNING: ';
@@ -137,7 +138,7 @@ try
 	xajax.debug.text[127] = 'INITIALIZING REQUEST OBJECT';
 
 	/*
-		Array: exceptions
+		Array: xajax.debug.exceptions
 	*/
 	xajax.debug.exceptions = [];
 	xajax.debug.exceptions[10001] = 'Invalid response XML: The response contains an unknown tag: {data}.';
@@ -152,7 +153,10 @@ try
 	xajax.debug.exceptions[10010] = 'Invalid request: Missing function object parameter.';
 
 	/*
-		Function: getExceptionText
+		Function: xajax.debug.getExceptionText
+		
+		Parameters:
+		e - (object): Exception
 	*/
 	xajax.debug.getExceptionText = function(e) {
 		if ('undefined' != typeof e.code) {
@@ -175,11 +179,13 @@ try
 	}
 
 	/*
-		Function: writeMessage
+		Function: xajax.debug.writeMessage
 		
 		Output a debug message to the debug window if available or send to an
 		alert box.  If the debug window has not been created, attempt to 
 		create it.
+		
+		Parameters:
 		
 		text - (string):  The text to output.
 		
@@ -234,10 +240,13 @@ try
 	}
 
 	/*
-		Function: prepareDebugText
+		Function: xajax.debug.prepareDebugText
 		
 		Convert special characters to their HTML equivellents so they
 		will show up in the <xajax.debug.window>.
+		
+		Parameters:
+			text - (string): Debug text
 	*/
 	xajax.debug.prepareDebugText = function(text) {
 		try {
@@ -269,7 +278,7 @@ try
 	}
 
 	/*
-		Function: executeCommand
+		Function: xajax.debug.executeCommand
 		
 		Catch any exceptions that are thrown by a response command handler
 		and display a message in the debugger.
@@ -306,13 +315,18 @@ try
 	}
 
 	/*
-		Function: parseAttributes
+		Function: xajax.parseAttributes
 		
 		Catch any exception thrown during the parsing of response
 		command attributes and display an appropriate debug message.
 		
 		This is a wrapper around the standard <xajax.parseAttributes>
 		function.
+		
+		Parameters:
+			child - (object): Childnode
+			obj - (object): Object
+			
 	*/
 	xajax.debug.parseAttributes = xajax.parseAttributes;
 	xajax.parseAttributes = function(child, obj) {
@@ -335,12 +349,16 @@ try
 
 
 	/*
-		Function: $
+		Function: xajax.tools.$
 		
 		Catch any exceptions thrown while attempting to locate an
 		HTML element by it's unique name.
 		
 		This is a wrapper around the standard <xajax.tools.$> function.
+		
+		Parameters:
+		sId - (string): Element ID or name
+		
 	*/
 	xajax.debug.$ = xajax.tools.$;
 	xajax.tools.$ = function(sId) {
@@ -359,7 +377,7 @@ try
 	}
 
 	/*
-		Function: _objectToXML
+		Function: xajax.tools._objectToXML
 		
 		Generate a message indicating that a javascript object is
 		being converted to xml.  Indicate the max depth and size.  Then
@@ -368,6 +386,11 @@ try
 		
 		This is a wrapper around the standard <xajax.tools._objectToXML>
 		function.
+		
+		Parameters:
+			obj - (object): 
+			guard - (object): 
+			
 	*/
 	xajax.debug._objectToXML = xajax.tools._objectToXML;
 	xajax.tools._objectToXML = function(obj, guard) {
@@ -396,7 +419,7 @@ try
 	}
 
 	/*
-		Function: _internalSend
+		Function: xajax._internalSend
 		
 		Generate a message indicating that the xajax request is
 		about the be sent to the server.
@@ -425,7 +448,7 @@ try
 	}
 
 	/*
-		Function: submitRequest
+		Function: xajax.submitRequest
 		
 		Generate a message indicating that a request is ready to be 
 		submitted; providing the URL and the function being invoked.
@@ -471,7 +494,7 @@ try
 	}
 
 	/*
-		Function: initializeRequest
+		Function: xajax.initializeRequest
 		
 		Generate a message indicating that the request object is
 		being initialized.
@@ -495,7 +518,7 @@ try
 	}
 
 	/*
-		Function: processParameters
+		Function: xajax.processParameters
 		
 		Generate a message indicating that the request object is
 		being populated with the parameters provided.
@@ -526,7 +549,7 @@ try
 	}
 
 	/*
-		Function: prepareRequest
+		Function: xajax.prepareRequest
 		
 		Generate a message indicating that the request is being
 		prepared.  This may occur more than once for a request
@@ -550,7 +573,7 @@ try
 	}
 
 	/*
-		Function: call
+		Function: xajax.call
 		
 		Validates that a function name was provided, generates a message 
 		indicating that a xajax call is starting and sets a flag in the
@@ -586,7 +609,7 @@ try
 	}
 
 	/*
-		Function: request
+		Function: xajax.request
 		
 		Validates that a function name was provided, generates a message 
 		indicating that a xajax request is starting and sets a flag in the
@@ -622,7 +645,7 @@ try
 	}
 
 	/*
-		Function: getResponseProcessor
+		Function: xajax.getResponseProcessor
 		
 		Generate an error message when no reponse processor is available
 		to process the type of response returned from the server.
@@ -660,7 +683,7 @@ try
 	}
 
 	/*
-		Function: responseReceived
+		Function: xajax.responseReceived
 		
 		Generate a message indicating that a response has been received
 		from the server; provide some statistical data regarding the
@@ -723,7 +746,7 @@ try
 	}
 
 	/*
-		Function: completeRequest
+		Function: xajax.completeResponse
 		
 		Generate a message indicating that the request has completed
 		and provide some statistics regarding the request and response.
@@ -751,7 +774,7 @@ try
 	}
 
 	/*
-		Function: getRequestObject
+		Function: xajax.tools.getRequestObject
 		
 		Generate a message indicating that the request object is 
 		being initialized.
@@ -777,7 +800,7 @@ try
 	}
 
 	/*
-		Function: assign
+		Function: xajax.dom.assign
 		
 		Catch any exceptions thrown during the assignment and 
 		display an error message.
@@ -828,7 +851,7 @@ try
 	}
 
 	/*
-		Boolean: isLoaded
+		Boolean: xajax.debug.isLoaded
 		
 		true - indicates that the debugging module is loaded
 	*/

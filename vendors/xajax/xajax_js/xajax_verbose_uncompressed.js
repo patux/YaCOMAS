@@ -13,7 +13,8 @@
 /*
 	@package xajax
 	@version $Id: xajax_verbose_uncompressed 327 2007-02-28 16:55:26Z calltoconstruct $
-	@copyright Copyright (c) 2005-2006 by Jared White & J. Max Wilson
+	@copyright Copyright (c) 2005-2007 by Jared White & J. Max Wilson
+	@copyright Copyright (c) 2008-2009 by Joseph Woolley, Steffen Konerow, Jared White  & J. Max Wilson
 	@license http://www.xajaxproject.org/bsd_license.txt BSD License
 */
 
@@ -32,10 +33,13 @@ try {
 	xajax.debug.verbose = {}
 
 	/*
-		Function: expandObject
+		Function: xajax.debug.verbose.expandObject
 		
 		Generate a debug message expanding all the first level
 		members found therein.
+		
+		
+		Parameters:
 		
 		obj - (object):  The object to be enumerated.
 		
@@ -72,9 +76,11 @@ try {
 	}
 	
 	/*
-		Function: makeFunction
+		Function: xajax.debug.verbose.makeFunction
 		
 		Generate a wrapper function around the specified function.
+		
+		Parameters:
 		
 		obj - (object):  The object that contains the function to be
 			wrapped.
@@ -128,10 +134,12 @@ try {
 	}
 	
 	/*
-		Function: hook
+		Function: xajax.debug.verbose.hook
 		
 		Generate a wrapper function around each of the functions
 		contained within the specified object.
+		
+		Parameters: 
 		
 		x - (object):  The object to be scanned.
 		base - (string):  The base reference to be prepended to the

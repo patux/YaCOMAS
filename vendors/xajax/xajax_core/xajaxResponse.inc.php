@@ -13,7 +13,8 @@
 /*
 	@package xajax
 	@version $Id: xajaxResponse.inc.php 361 2007-05-24 12:48:14Z calltoconstruct $
-	@copyright Copyright (c) 2005-2006 by Jared White & J. Max Wilson
+	@copyright Copyright (c) 2005-2007 by Jared White & J. Max Wilson
+	@copyright Copyright (c) 2008-2009 by Joseph Woolley, Steffen Konerow, Jared White  & J. Max Wilson
 	@license http://www.xajaxproject.org/bsd_license.txt BSD License
 */
 
@@ -115,6 +116,8 @@ class xajaxResponse
 		Overrides the default character encoding (or the one specified in the
 		constructor) to the specified character encoding.
 		
+		Parameters:
+		
 		sCharacterEncoding - (string):  The encoding method to use for this response.
 		
 		See also, <xajaxResponse->xajaxResponse>()
@@ -134,6 +137,8 @@ class xajaxResponse
 		
 		Convert special characters to their HTML equivellent automatically
 		(only works if the mb_string extension is available).
+		
+		Parameters:
 		
 		bOption - (boolean):  Convert special characters
 		
@@ -158,6 +163,8 @@ class xajaxResponse
 		Optionally, if you use PHP 5, you can pass just the plugin name as the
 		first argument and the plugin object will be returned.  You can then
 		access the methods of the plugin directly.
+		
+		Parameters:
 		
 		sName - (string):  Name of the plugin.
 		sFunction - (string, optional):  The name of the method to call.
@@ -212,6 +219,8 @@ class xajaxResponse
 		Magic function for PHP 5.  Used to permit plugins to be called as if they
 		where native members of the xajaxResponse instance.
 		
+		Parameters:
+		
 		sPluginName - (string):  The name of the plugin.
 		
 		Returns:
@@ -232,12 +241,14 @@ class xajaxResponse
 		number of response commands following this one, will be
 		skipped.
 		
+		Parameters:
+		
 		iCmdNumber - (integer):  The number of commands to skip upon cancel.
 		sMessage - (string):  The message to display to the user.
 		
 		Returns:
 		
-		object - The xajaxResponse object.
+		object : The xajaxResponse object.
 	*/
 	function confirmCommands($iCmdNumber, $sMessage)
 	{
@@ -256,17 +267,16 @@ class xajaxResponse
 		Response command indicating that the specified value should be 
 		assigned to the given element's attribute.
 		
+		Parameters:
+		
 		sTarget - (string):  The id of the html element on the browser.
 		sAttribute - (string):  The property to be assigned.
 		sData - (string):  The value to be assigned to the property.
 		
 		Returns:
 		
-		object - The <xajaxResponse> object.
+		object : The <xajaxResponse> object.
 		
-		Example:
-		
-		$objResponse->assign("contentDiv", "innerHTML", "Some Text");
 	*/
 	function assign($sTarget,$sAttribute,$sData)
 	{
@@ -286,13 +296,15 @@ class xajaxResponse
 		Response command that indicates the specified data should be appended
 		to the given element's property.
 		
+		Parameters:
+		
 		sTarget - (string):  The id of the element to be updated.
 		sAttribute - (string):  The name of the property to be appended to.
 		sData - (string):  The data to be appended to the property.
 		
 		Returns:
 		
-		object - The <xajaxResponse> object.
+		object : The <xajaxResponse> object.
 	*/
 	function append($sTarget,$sAttribute,$sData)
 	{	
@@ -312,13 +324,15 @@ class xajaxResponse
 		Response command to prepend the specified value onto the given
 		element's property.
 		
+		Parameters:
+		
 		sTarget - (string):  The id of the element to be updated.
 		sAttribute - (string):  The property to be updated.
 		sData - (string):  The value to be prepended.
 		
 		Returns:
 		
-		object - The <xajaxResponse> object.
+		object : The <xajaxResponse> object.
 	*/
 	function prepend($sTarget,$sAttribute,$sData)
 	{
@@ -337,6 +351,8 @@ class xajaxResponse
 		
 		Replace a specified value with another value within the given
 		element's property.
+		
+		Parameters:
 		
 		sTarget - (string):  The id of the element to update.
 		sAttribute - (string):  The property to be updated.
@@ -364,6 +380,8 @@ class xajaxResponse
 		Response command used to clear the specified property of the 
 		given element.
 		
+		Parameters:
+		
 		sTarget - (string):  The id of the element to be updated.
 		sAttribute - (string):  The property to be clared.
 		
@@ -388,12 +406,14 @@ class xajaxResponse
 		member of the request.  The object is referenced using the 'this' keyword
 		in the sAttribute parameter.
 		
+		Parameters:
+		
 		sAttribute - (string):  The property to be updated.
 		sData - (string):  The value to assign.
 		
 		Returns:
 		
-		object - The <xajaxResponse> object.
+		object : The <xajaxResponse> object.
 	*/
 	function contextAssign($sAttribute, $sData)
 	{
@@ -414,12 +434,14 @@ class xajaxResponse
 		member of the request.  The object is referenced using the 'this' keyword
 		in the sAttribute parameter.
 		
+		Parameters:
+		
 		sAttribute - (string):  The member to be appended to.
 		sData - (string):  The value to append.
 		
 		Returns:
 		
-		object - The <xajaxResponse> object.
+		object : The <xajaxResponse> object.
 	*/
 	function contextAppend($sAttribute, $sData)
 	{
@@ -440,12 +462,14 @@ class xajaxResponse
 		current request.  The object is access via the 'this' keyword in the
 		sAttribute parameter.
 		
+		Parameters:
+		
 		sAttribute - (string):  The member to be updated.
 		sData - (string):  The value to be prepended.
 		
 		Returns:
 		
-		object - The <xajaxResponse> object.
+		object : The <xajaxResponse> object.
 	*/
 	function contextPrepend($sAttribute, $sData)
 	{
@@ -466,11 +490,13 @@ class xajaxResponse
 		keyword and can be used to update a javascript object specified
 		by context in the request parameters.
 		
+		Parameters:
+		
 		sAttribute - (string):  The member to be cleared.
 		
 		Returns:
 		
-		object - The <xajaxResponse> object.
+		object : The <xajaxResponse> object.
 	*/
 	function contextClear($sAttribute)
 	{
@@ -485,11 +511,13 @@ class xajaxResponse
 		
 		Response command that is used to display an alert message to the user.
 		
+		Parameters:
+		
 		sMsg - (string):  The message to be displayed.
 		
 		Returns:
 		
-		object - The <xajaxResponse> object.
+		object : The <xajaxResponse> object.
 	*/
 	function alert($sMsg)
 	{
@@ -517,13 +545,15 @@ class xajaxResponse
 		Response command that causes the browser to navigate to the specified
 		URL.
 		
+		Parameters:
+		
 		sURL - (string):  The relative or fully qualified URL.
 		iDelay - (integer, optional):  Number of seconds to delay before
 			the redirect occurs.
 			
 		Returns:
 		
-		object - The <xajaxResponse> object.
+		object : The <xajaxResponse> object.
 	*/
 	function redirect($sURL, $iDelay=0)
 	{
@@ -585,11 +615,13 @@ class xajaxResponse
 		call.  To construct a variable that will be accessable globally, even
 		after the script has executed, leave off the 'var' keyword.
 		
+		Parameters:
+		
 		sJS - (string):  The script to execute.
 		
 		Returns:
 		
-		object - The <xajaxResponse> object.
+		object : The <xajaxResponse> object.
 	*/
 	function script($sJS)
 	{
@@ -607,12 +639,14 @@ class xajaxResponse
 		Response command that indicates that the specified javascript
 		function should be called with the given (optional) parameters.
 		
+		Parameters:
+		
 		arg1 - (string):  The name of the function to call.
-		arg2 .. argn - arguments to be passed to the function.
+		arg2 .. argn : arguments to be passed to the function.
 		
 		Returns:
 		
-		object - The <xajaxResponse> object.
+		object : The <xajaxResponse> object.
 	*/
 	function call() {
 		$aArgs = func_get_args();
@@ -631,11 +665,13 @@ class xajaxResponse
 		
 		Response command used to remove an element from the document.
 		
+		Parameters:
+		
 		sTarget - (string):  The id of the element to be removed.
 		
 		Returns:
 		
-		object - The <xajaxResponse> object.
+		object : The <xajaxResponse> object.
 	*/
 	function remove($sTarget)
 	{
@@ -652,6 +688,8 @@ class xajaxResponse
 		
 		Response command used to create a new element on the browser.
 		
+		Parameters:
+		
 		sParent - (string):  The id of the parent element.
 		sTag - (string):  The tag name to be used for the new element.
 		sId - (string):  The id to assign to the new element.
@@ -660,7 +698,7 @@ class xajaxResponse
 			
 		Returns:
 		
-		object - The <xajaxResponse> object.
+		object : The <xajaxResponse> object.
 	*/
 	function create($sParent, $sTag, $sId, $sType=null)
 	{
@@ -690,6 +728,8 @@ class xajaxResponse
 		Response command used to insert a new element just prior to the specified
 		element.
 		
+		Parameters:
+		
 		sBefore - (string):  The element used as a reference point for the 
 			insertion.
 		sTag - (string):  The tag to be used for the new element.
@@ -697,7 +737,7 @@ class xajaxResponse
 		
 		Returns:
 		
-		object - The <xajaxResponse> object.
+		object : The <xajaxResponse> object.
 	*/
 	function insert($sBefore, $sTag, $sId)
 	{
@@ -717,6 +757,8 @@ class xajaxResponse
 		Response command used to insert a new element after the specified
 		one.
 		
+		Parameters:
+		
 		sAfter - (string):  The id of the element that will be used as a reference
 			for the insertion.
 		sTag - (string):  The tag name to be used for the new element.
@@ -724,7 +766,7 @@ class xajaxResponse
 		
 		Returns:
 		
-		object - The <xajaxResponse> object.
+		object : The <xajaxResponse> object.
 	*/
 	function insertAfter($sAfter, $sTag, $sId)
 	{
@@ -743,6 +785,8 @@ class xajaxResponse
 		
 		Response command used to create an input element on the browser.
 		
+		Parameters:
+		
 		sParent - (string):  The id of the parent element.
 		sType - (string):  The type of the new input element.
 		sName - (string):  The name of the new input element.
@@ -750,7 +794,7 @@ class xajaxResponse
 		
 		Returns:
 		
-		object - The <xajaxResponse> object.
+		object : The <xajaxResponse> object.
 	*/
 	function createInput($sParent, $sType, $sName, $sId)
 	{
@@ -771,6 +815,8 @@ class xajaxResponse
 		Response command used to insert a new input element preceeding the
 		specified element.
 		
+		Parameters:
+		
 		sBefore - (string):  The id of the element to be used as the reference
 			point for the insertion.
 		sType - (string):  The type of the new input element.
@@ -779,7 +825,7 @@ class xajaxResponse
 		
 		Returns:
 		
-		object - The <xajaxResponse> object.
+		object : The <xajaxResponse> object.
 	*/
 	function insertInput($sBefore, $sType, $sName, $sId)
 	{
@@ -800,6 +846,8 @@ class xajaxResponse
 		Response command used to insert a new input element after the 
 		specified element.
 		
+		Parameters:
+		
 		sAfter - (string):  The id of the element that is to be used
 			as the insertion point for the new element.
 		sType - (string):  The type of the new input element.
@@ -808,7 +856,7 @@ class xajaxResponse
 		
 		Returns:
 		
-		object - The <xajaxResponse> object.
+		object : The <xajaxResponse> object.
 	*/
 	function insertInputAfter($sAfter, $sType, $sName, $sId)
 	{
@@ -828,13 +876,15 @@ class xajaxResponse
 		
 		Response command used to set an event handler on the browser.
 		
+		Parameters:
+		
 		sTarget - (string):  The id of the element that contains the event.
 		sEvent - (string):  The name of the event.
 		sScript - (string):  The javascript to execute when the event is fired.
 		
 		Returns:
 		
-		object - The <xajaxResponse> object.
+		object : The <xajaxResponse> object.
 	*/
 	function setEvent($sTarget,$sEvent,$sScript)
 	{
@@ -848,6 +898,27 @@ class xajaxResponse
 			);
 	}
 	
+
+	/*
+		Function: addEvent
+		
+		Response command used to set an event handler on the browser.
+		
+		Parameters:
+		
+		sTarget - (string):  The id of the element that contains the event.
+		sEvent - (string):  The name of the event.
+		sScript - (string):  The javascript to execute when the event is fired.
+		
+		Returns:
+		
+		object : The <xajaxResponse> object.
+		
+		Note:
+		
+		This function is depreciated and will be removed in a future version. 
+		Use <setEvent> instead.
+	*/	
 	function addEvent($sTarget,$sEvent,$sScript)
 	{
 		return $this->setEvent(
@@ -861,6 +932,8 @@ class xajaxResponse
 		Function: addHandler
 		
 		Response command used to install an event handler on the specified element.
+		
+		Parameters:
 		
 		sTarget - (string):  The id of the element.
 		sEvent - (string):  The name of the event to add the handler to.
@@ -889,6 +962,8 @@ class xajaxResponse
 		
 		Response command used to remove an event handler from an element.
 		
+		Parameters:
+		
 		sTarget - (string):  The id of the element.
 		sEvent - (string):  The name of the event.
 		sHandler - (string):  The javascript function that is called when the 
@@ -896,7 +971,7 @@ class xajaxResponse
 			
 		Returns:
 		
-		object - The <xajaxResponse> object.
+		object : The <xajaxResponse> object.
 	*/
 	function removeHandler($sTarget,$sEvent,$sHandler)
 	{
@@ -914,6 +989,8 @@ class xajaxResponse
 		
 		Response command used to construct a javascript function on the browser.
 		
+		Parameters:
+		
 		sFunction - (string):  The name of the function to construct.
 		sArgs - (string):  Comma separated list of parameter names.
 		sScript - (string):  The javascript code that will become the body of the
@@ -921,7 +998,7 @@ class xajaxResponse
 			
 		Returns:
 		
-		object - The <xajaxResponse> object.
+		object : The <xajaxResponse> object.
 	*/
 	function setFunction($sFunction, $sArgs, $sScript)
 	{
@@ -941,6 +1018,8 @@ class xajaxResponse
 		Response command used to construct a wrapper function around
 		and existing javascript function on the browser.
 		
+		Parameters:
+		
 		sFunction - (string):  The name of the existing function to wrap.
 		sArgs - (string):  The comma separated list of parameters for the function.
 		aScripts - (array):  An array of javascript code snippets that will
@@ -952,7 +1031,7 @@ class xajaxResponse
 			
 		Returns:
 		
-		object - The <xajaxResponse> object.
+		object : The <xajaxResponse> object.
 	*/
 	function wrapFunction($sFunction, $sArgs, $aScripts, $sReturnValueVariable)
 	{
@@ -972,6 +1051,8 @@ class xajaxResponse
 		
 		Response command used to load a javascript file on the browser.
 		
+		Parameters:
+		
 		sFileName - (string):  The relative or fully qualified URI of the 
 			javascript file.
 	
@@ -980,7 +1061,7 @@ class xajaxResponse
 			
 		Returns:
 		
-		object - The <xajaxResponse> object.
+		object : The <xajaxResponse> object.
 	*/
 	function includeScript($sFileName, $sType = null, $sId = null)
 	{
@@ -1004,6 +1085,8 @@ class xajaxResponse
 		Response command used to include a javascript file on the browser
 		if it has not already been loaded.
 		
+		Parameters:
+		
 		sFileName - (string):  The relative for fully qualified URI of the
 			javascript file.
 
@@ -1011,7 +1094,7 @@ class xajaxResponse
 			
 		Returns:
 		
-		object - The <xajaxResponse> object.
+		object : The <xajaxResponse> object.
 	*/
 	function includeScriptOnce($sFileName, $sType = null, $sId = null)
 	{
@@ -1036,6 +1119,8 @@ class xajaxResponse
 		file on the browser.  Optionally, you can call a javascript function
 		just prior to the file being unloaded (for cleanup).
 		
+		Parameters:
+		
 		sFileName - (string):  The relative or fully qualified URI of the
 			javascript file.
 		sUnload - (string):  Name of a javascript function to call prior
@@ -1043,7 +1128,7 @@ class xajaxResponse
 			
 		Returns:
 		
-		object - The <xajaxResponse> object.
+		object : The <xajaxResponse> object.
 	*/
 	function removeScript($sFileName, $sUnload = '') {
 		$this->addCommand(
@@ -1063,6 +1148,8 @@ class xajaxResponse
 		the specified CSS file on the browser.  This will cause the
 		browser to load and apply the style sheet.
 		
+		Parameters:
+		
 		sFileName - (string):  The relative or fully qualified URI of
 			the css file.
 	
@@ -1070,7 +1157,7 @@ class xajaxResponse
 		
 		Returns:
 		
-		object - The <xajaxResponse> object.
+		object : The <xajaxResponse> object.
 	*/
 	function includeCSS($sFileName, $sMedia = null)
 	{
@@ -1093,12 +1180,14 @@ class xajaxResponse
 		unload the style sheet, effectively removing the style
 		changes it caused.
 		
+		Parameters:
+		
 		sFileName - (string):  The relative or fully qualified URI
 			of the css file.
 		
 		Returns:
 		
-		object - The <xajaxResponse> object.
+		object : The <xajaxResponse> object.
 	*/
 	function removeCSS($sFileName, $sMedia = null)
 	{
@@ -1126,13 +1215,15 @@ class xajaxResponse
 		of the response until the CSS files, included previously, are
 		loaded.
 		
+		Parameters:
+		
 		iTimeout - (integer):  The number of 1/10ths of a second to pause
 			before timing out and continuing with the execution of the
 			response commands.
 			
 		Returns:
 		
-		object - The <xajaxResponse> object.
+		object : The <xajaxResponse> object.
 	*/
 	function waitForCSS($iTimeout = 600) {
 		$sData = "";
@@ -1155,6 +1246,8 @@ class xajaxResponse
 		will continue to monitor the specified condition and, when it evaulates
 		to true, will continue processing response commands.
 		
+		Parameters:
+		
 		script - (string):  A piece of javascript code that evaulates to true 
 			or false.
 		tenths - (integer):  The number of 1/10ths of a second to wait before
@@ -1163,7 +1256,7 @@ class xajaxResponse
 		
 		Returns:
 		
-		object - The <xajaxResponse> object.
+		object : The <xajaxResponse> object.
 	*/
 	function waitFor($script, $tenths) {
 		return $this->addCommand(
@@ -1184,12 +1277,14 @@ class xajaxResponse
 		the specified delay, xajax will continue execution of the 
 		response commands.
 		
+		Parameters:
+		
 		tenths - (integer):  The number of 1/10ths of a second to
 			sleep.
 		
 		Returns:
 		
-		object - The <xajaxResponse> object.
+		object : The <xajaxResponse> object.
 	*/
 	function sleep($tenths) {
 		$this->addCommand(
@@ -1210,11 +1305,13 @@ class xajaxResponse
 		obtain this value immediately as the return value of the
 		<xajax.call> function.
 		
+		Parameters:
+		
 		value - (mixed):  Any value.
 		
 		Returns:
 		
-		object - The <xajaxResponse> object.
+		object : The <xajaxResponse> object.
 	*/
 	function setReturnValue($value) {
 		$this->returnValue = $this->_encodeArray($value);
@@ -1229,7 +1326,7 @@ class xajaxResponse
 		
 		Returns:
 		
-		string - The content type.
+		string : The content type.
 	*/
 	function getContentType()
 	{
@@ -1255,7 +1352,7 @@ class xajaxResponse
 		
 		Returns:
 		
-		string - The textual representation of the response commands.
+		string : The textual representation of the response commands.
 	*/
 	function printOutput()
 	{
@@ -1295,7 +1392,7 @@ class xajaxResponse
 		
 		Returns:
 		
-		integer - The number of commands in the response.
+		integer : The number of commands in the response.
 	*/
 	function getCommandCount()
 	{
@@ -1307,6 +1404,8 @@ class xajaxResponse
 		
 		Merges the response commands from the specified <xajaxResponse>
 		object with the response commands in this <xajaxResponse> object.
+		
+		Parameters:
 		
 		mCommands - (object):  <xajaxResponse> object.
 		bBefore - (boolean):  Add the new commands to the beginning 
@@ -1356,6 +1455,8 @@ class xajaxResponse
 		
 		Adds a response command that is generated by a plugin.
 		
+		Parameters:
+		
 		objPlugin - (object):  A reference to a plugin object.
 		aAttributes - (array):  Array containing the attributes for this
 			response command.
@@ -1363,7 +1464,7 @@ class xajaxResponse
 		
 		Returns:
 		
-		object - The <xajaxResponse> object.
+		object : The <xajaxResponse> object.
 	*/
 	function addPluginCommand($objPlugin, $aAttributes, $mData)
 	{
@@ -1377,13 +1478,15 @@ class xajaxResponse
 		Add a response command to the array of commands that will
 		be sent to the browser.
 		
+		Parameters:
+		
 		aAttributes - (array):  Associative array of attributes that
 			will describe the command.
 		mData - (mixed):  The data to be associated with this command.
 		
 		Returns:
 		
-		object - The <xajaxResponse> command.
+		object : The <xajaxResponse> command.
 	*/
 	function addCommand($aAttributes, $mData)
 	{
@@ -1447,6 +1550,8 @@ class xajaxResponse
 		
 		Prints an XML representation of the command.
 		
+		Parameters:
+		
 		aAttributes - (array):  Associative array of attributes for this
 			command.
 	*/
@@ -1485,6 +1590,8 @@ class xajaxResponse
 		for inclusion in the response to the browser.  Arrays
 		sent via this method will be converted into a javascript
 		array on the browser.
+		
+		Parameters:
 		
 		mArray - (array):  Array to be converted.
 	*/
@@ -1562,11 +1669,13 @@ class xajaxResponse
 		This could be overridden to allow for transport encodings other than
 		XML.
 		
+		Parameters:
+		
 		sData - (string):  The data to be escaped.
 		
 		Returns:
 		
-		string - The escaped data.
+		string : The escaped data.
 	*/
 	function _printEscapedString_XML(&$sData)
 	{
@@ -1662,11 +1771,13 @@ class xajaxResponse
 		be sent to the browser.  This can be thought of as the opposite of
 		<xajaxRequestProcessorPlugin->_parseObjXml>.
 		
+		Parameters:
+		
 		mData - (mixed):  The data to be evaluated.
 		
 		Returns:
 		
-		mixed - The object constructed from the data.
+		mixed : The object constructed from the data.
 	*/
 	function _encodeArray(&$mData) {
 		if ('object' === gettype($mData))

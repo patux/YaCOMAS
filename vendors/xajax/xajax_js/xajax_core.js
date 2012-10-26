@@ -99,7 +99,7 @@ xajax.tools._getFormValues=function(aFormValues,children,submitDisabledElements,
 xajax.tools._getFormValues(aFormValues,child.childNodes,submitDisabledElements,prefix);xajax.tools._getFormValue(aFormValues,child,submitDisabledElements,prefix);}
 }
 xajax.tools._getFormValue=function(aFormValues,child,submitDisabledElements,prefix){if(!child.name)
-return;if(child.disabled)
+return;if('PARAM'==child.tagName)return;if(child.disabled)
 if(true==child.disabled)
 if(false==submitDisabledElements)
 return;if(prefix!=child.name.substring(0,prefix.length))
@@ -130,7 +130,7 @@ obj.data=xajax.tools._enforceDataType(obj.data);}
 xajax.tools.xml.processFragment=function(xmlNode,seq,oRet,oRequest){var xx=xajax;var xt=xx.tools;while(xmlNode){if('cmd'==xmlNode.nodeName){var obj={};obj.fullName='*unknown*';obj.sequence=seq;obj.request=oRequest;obj.context=oRequest.context;xt.xml.parseAttributes(xmlNode,obj);xt.xml.parseChildren(xmlNode,obj);xt.queue.push(xx.response,obj);}else if('xjxrv'==xmlNode.nodeName){oRet=xt._nodeToObject(xmlNode.firstChild);}else if('debugmsg'==xmlNode.nodeName){}else
 throw{code:10004,data:xmlNode.nodeName}
 ++seq;xmlNode=xmlNode.nextSibling;}
-}
+return oRet;}
 xajax.tools.queue={}
 xajax.tools.queue.create=function(size){return{start:0,
 size:size,
@@ -159,7 +159,7 @@ xajax.tools.queue.pushFront=function(theQ,obj){xajax.tools.queue.rewind(theQ);th
 xajax.tools.queue.pop=function(theQ){var next=theQ.start;if(next==theQ.end)
 return null;next++;if(next > theQ.size)
 next=0;var obj=theQ.commands[theQ.start];delete theQ.commands[theQ.start];theQ.start=next;return obj;}
-xajax.responseProcessor={};xajax.responseProcessor.xml=function(oRequest){var xx=xajax;var xt=xx.tools;var xcb=xx.callback;var gcb=xcb.global;var lcb=oRequest.callback;var oRet=oRequest.returnValue;if(xt.arrayContainsValue(xx.responseSuccessCodes,oRequest.request.status)){xcb.execute([gcb,lcb],'onSuccess',oRequest);var seq=0;if(oRequest.request.responseXML){var responseXML=oRequest.request.responseXML;if(responseXML.documentElement){oRequest.status.onProcessing();var child=responseXML.documentElement.firstChild;xt.xml.processFragment(child,seq,oRet,oRequest);}
+xajax.responseProcessor={};xajax.responseProcessor.xml=function(oRequest){var xx=xajax;var xt=xx.tools;var xcb=xx.callback;var gcb=xcb.global;var lcb=oRequest.callback;var oRet=oRequest.returnValue;if(xt.arrayContainsValue(xx.responseSuccessCodes,oRequest.request.status)){xcb.execute([gcb,lcb],'onSuccess',oRequest);var seq=0;if(oRequest.request.responseXML){var responseXML=oRequest.request.responseXML;if(responseXML.documentElement){oRequest.status.onProcessing();var child=responseXML.documentElement.firstChild;oRet=xt.xml.processFragment(child,seq,oRet,oRequest);}
 }
 var obj={};obj.fullName='Response Complete';obj.sequence=seq;obj.request=oRequest;obj.context=oRequest.context;obj.cmd='rcmplt';xt.queue.push(xx.response,obj);if(null==xx.response.timeout)
 xt.queue.process(xx.response);}else if(xt.arrayContainsValue(xx.responseRedirectCodes,oRequest.request.status)){xcb.execute([gcb,lcb],'onRedirect',oRequest);window.location=oRequest.request.getResponseHeader('location');xx.completeResponse(oRequest);}else if(xt.arrayContainsValue(xx.responseErrorsForAlert,oRequest.request.status)){xcb.execute([gcb,lcb],'onFailure',oRequest);xx.completeResponse(oRequest);}
@@ -260,9 +260,9 @@ xajax.forms.getInput=function(type,name,id){if('undefined'==typeof window.addEve
 }else{xajax.forms.getInput=function(type,name,id){var oDoc=xajax.config.baseDocument;var Obj=oDoc.createElement('input');Obj.setAttribute('type',type);Obj.setAttribute('name',name);Obj.setAttribute('id',id);return Obj;}
 }
 return xajax.forms.getInput(type,name,id);}
-xajax.forms.createInput=function(command){command.fullName='createInput';var objParent=command.id;var sType=args.type;var sName=args.data;var sId=args.prop;if('string'==typeof objParent)
-objParent=xajax.$(objParent);var target=xajax.forms.getInput(sType,sName,sId);if(objParent&&target)
-objParent.appendChild(target);return true;}
+xajax.forms.createInput=function(command){command.fullName='createInput';var objParent=command.id;var sType=command.type;var sName=command.data;var sId=command.prop;if('string'==typeof objParent)
+objParent=xajax.$(objParent);var target=xajax.forms.getInput(sType,sName,sId);if(objParent&&target){objParent.appendChild(target);}
+return true;}
 xajax.forms.insertInput=function(command){command.fullName='insertInput';var objSibling=command.id;var sType=command.type;var sName=command.data;var sId=command.prop;if('string'==typeof objSibling)
 objSibling=xajax.$(objSibling);var target=xajax.forms.getInput(sType,sName,sId);if(target&&objSibling&&objSibling.parentNode)
 objSibling.parentNode.insertBefore(target,objSibling);return true;}
