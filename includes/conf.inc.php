@@ -16,7 +16,7 @@ $fslpath='';
 $rootpath='/yacomas';
 // The place where the files from the speakers will be stored   
 // The directory must be created and give the specific permissions in order to apache can write inside that directory
-$archivos = "/srv/www/htdocs/yacomas/documentos/";
+$archivos = "/www/yacomas/documentos/";
 // The mail to provide users who have PROBLEMS, WARNINGS with Yacomas.
 $adminmail='admin@yourdomain';
 // The mail to provide to all the users, and the mail that will be used to send mails for New account or reset account.
