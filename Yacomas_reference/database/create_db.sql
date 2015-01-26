@@ -19,7 +19,7 @@
 -- Current Database: `yacomas_db`
 --
 
-DROP DATABASE IF EXIST yacomas_db; 
+DROP DATABASE IF EXISTS yacomas_db; 
 CREATE DATABASE yacomas_db;
 GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,DROP
 ON yacomas_db.* TO 'yacomas_user'@'localhost' IDENTIFIED BY 'yacomas_pwd';
@@ -205,7 +205,7 @@ CREATE TABLE `estado` (
 
 LOCK TABLES `estado` WRITE;
 /*!40000 ALTER TABLE `estado` DISABLE KEYS */;
-INSERT INTO `estado` VALUES (1,'Aguascalientes'),(2,'Baja California'),(3,'Baja California Sur'),(4,'Campeche'),(5,'Chiapas'),(6,'Chihuahua'),(7,'Coahuila'),(8,'Colima'),(9,'Distrito Federal'),(10,'Durango'),(11,'Guanajuato'),(12,'Guerrero'),(13,'Hidalgo'),(14,'Jalisco'),(15,'M&eacute;xico'),(16,'Michoac&aacute;n'),(17,'Morelos'),(18,'Nayarit'),(19,'Nuevo Le&oacute;n'),(20,'Oaxaca'),(21,'Puebla'),(22,'Quer&eacute;taro'),(23,'Quintana Roo'),(24,'San Luis Potos&iacute;'),(25,'Sinaloa'),(26,'Sonora'),(27,'Tabasco'),(28,'Tamaulipas'),(29,'Tlaxcala'),(30,'Veracruz'),(31,'Yucat&aacute;n'),(32,'Zacatecas'),(33,'Fuera de M&eacute;xico'));
+INSERT INTO `estado` VALUES (1,'Aguascalientes'),(2,'Baja California'),(3,'Baja California Sur'),(4,'Campeche'),(5,'Chiapas'),(6,'Chihuahua'),(7,'Coahuila'),(8,'Colima'),(9,'Distrito Federal'),(10,'Durango'),(11,'Guanajuato'),(12,'Guerrero'),(13,'Hidalgo'),(14,'Jalisco'),(15,'M&eacute;xico'),(16,'Michoac&aacute;n'),(17,'Morelos'),(18,'Nayarit'),(19,'Nuevo Le&oacute;n'),(20,'Oaxaca'),(21,'Puebla'),(22,'Quer&eacute;taro'),(23,'Quintana Roo'),(24,'San Luis Potos&iacute;'),(25,'Sinaloa'),(26,'Sonora'),(27,'Tabasco'),(28,'Tamaulipas'),(29,'Tlaxcala'),(30,'Veracruz'),(31,'Yucat&aacute;n'),(32,'Zacatecas'),(33,'Fuera de M&eacute;xico');
 /*!40000 ALTER TABLE `estado` ENABLE KEYS */;
 UNLOCK TABLES;
 
